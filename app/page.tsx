@@ -1,65 +1,169 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRightIcon } from "lucide-react";
+import { HomeFaq } from "@/components/home-faq";
+import { GradientText } from "@/components/gradient-text";
+import { Reveal } from "@/components/reveal";
+import { buttonVariants } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { getAllPosts } from "@/lib/blog";
+import { cn } from "@/lib/utils";
 
-export default function Home() {
+export default function HomePage() {
+  const posts = getAllPosts().slice(0, 3);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="flex flex-col">
+      <section className="relative overflow-hidden border-b border-border/50">
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-35%,rgba(99,102,241,0.16),transparent_55%),radial-gradient(ellipse_70%_50%_at_100%_0%,rgba(14,165,233,0.1),transparent_50%)]"
+          aria-hidden
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+        <div className="relative mx-auto flex max-w-6xl flex-col gap-12 px-4 py-20 sm:gap-16 sm:px-6 sm:py-28 lg:flex-row lg:items-center lg:gap-16">
+          <Reveal className="flex-1 space-y-8" distance={28}>
+            <p className="text-sm font-semibold tracking-wide text-muted-foreground uppercase">
+              For students & developers
+            </p>
+            <h1 className="font-heading text-balance text-4xl font-semibold tracking-tight sm:text-5xl lg:text-[3.35rem] lg:leading-[1.08]">
+              Ship software from{" "}
+              <GradientText className="font-semibold">clear specs</GradientText>{" "}
+              — not vague tickets.
+            </h1>
+            <p className="max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-[1.125rem]">
+              Spec driven development (SDD) means defining behavior and acceptance before you code yourself into a
+              corner. Learn the ideas, vocabulary, and a practical workflow you can use on real projects.
+            </p>
+            <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
+              <Link
+                href="/course"
+                className={cn(
+                  buttonVariants({ size: "lg" }),
+                  "inline-flex h-12 gap-2 rounded-full px-8 text-base shadow-md shadow-primary/15"
+                )}
+              >
+                View course
+                <ArrowRightIcon className="size-4" />
+              </Link>
+              <Link
+                href="/glossary"
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "lg" }),
+                  "h-12 rounded-full border-border/80 px-8 text-base justify-center sm:min-w-[10rem]"
+                )}
+              >
+                Open glossary
+              </Link>
+            </div>
+          </Reveal>
+          <Reveal className="relative w-full shrink-0 lg:max-w-lg" delay={0.08} distance={24}>
+            <div className="relative aspect-[5/4] w-full overflow-hidden rounded-[2rem] border border-border/60 bg-card shadow-xl shadow-foreground/5 ring-1 ring-foreground/[0.04]">
+              <Image
+                src="/images/hero-placeholder.svg"
+                alt="Abstract placeholder illustration for spec driven development"
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 1024px) 100vw, 33vw"
+              />
+            </div>
+          </Reveal>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </section>
+
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-20 px-4 py-20 sm:gap-28 sm:px-6 sm:py-28">
+        <Reveal>
+          <HomeFaq />
+        </Reveal>
+
+        <section className="space-y-8">
+          <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="space-y-3">
+              <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
+                From the <GradientText className="font-semibold">blog</GradientText>
+              </h2>
+              <p className="max-w-prose text-lg text-muted-foreground">
+                Short reads on SDD — new posts added as we grow the library.
+              </p>
+            </div>
+            <Link
+              href="/blog"
+              className={cn(
+                buttonVariants({ variant: "ghost", size: "lg" }),
+                "self-start rounded-full sm:self-auto"
+              )}
+            >
+              All articles
+              <ArrowRightIcon className="size-4" />
+            </Link>
+          </Reveal>
+          <ul className="grid gap-6 md:grid-cols-3">
+            {posts.map(({ meta }, i) => (
+              <li key={meta.slug}>
+                <Reveal delay={i * 0.06} distance={16}>
+                  <Card className="h-full rounded-3xl border-border/70 shadow-sm ring-1 ring-foreground/[0.03] transition-shadow hover:shadow-md">
+                    <CardHeader className="gap-3">
+                      <time
+                        className="text-xs font-semibold tracking-wide text-muted-foreground uppercase"
+                        dateTime={meta.date}
+                      >
+                        {new Date(meta.date).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </time>
+                      <CardTitle className="font-heading text-lg leading-snug">
+                        <Link href={`/blog/${meta.slug}`} className="hover:text-primary">
+                          {meta.title}
+                        </Link>
+                      </CardTitle>
+                      <CardDescription className="line-clamp-3 text-[15px] leading-relaxed">
+                        {meta.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <Link
+                        href={`/blog/${meta.slug}`}
+                        className="inline-flex text-sm font-semibold text-primary underline-offset-4 hover:underline"
+                      >
+                        Read article
+                      </Link>
+                    </CardContent>
+                  </Card>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <Reveal>
+          <section className="rounded-[2rem] border border-border/60 bg-gradient-to-br from-muted/50 via-background to-muted/30 px-8 py-12 shadow-sm ring-1 ring-foreground/[0.04] sm:px-10 sm:py-14">
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              <div className="space-y-3">
+                <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">Video library</h2>
+                <p className="max-w-xl text-lg text-muted-foreground">
+                  Curated talks and explainers — watch without leaving the site.
+                </p>
+              </div>
+              <Link
+                href="/videos"
+                className={cn(
+                  buttonVariants({ variant: "secondary", size: "lg" }),
+                  "h-12 rounded-full px-8 text-base shrink-0"
+                )}
+              >
+                Browse videos
+              </Link>
+            </div>
+          </section>
+        </Reveal>
+      </div>
     </div>
   );
 }
