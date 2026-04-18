@@ -9,7 +9,8 @@ Read in this order:
    - [spec-home.md](./spec-home.md)
    - [spec-glossary.md](./spec-glossary.md)
    - [spec-blog.md](./spec-blog.md)
-   - [spec-videos.md](./spec-videos.md)
+   - [spec-videos.md](./spec-videos.md) — MVP
+   - [spec-videos-v2-v3.md](./spec-videos-v2-v3.md) — videos roadmap (DB, suggest, TTL, favorites)
    - [spec-course.md](./spec-course.md)
 
 Implementation should satisfy **spec-main**, **spec-design-layout**, **spec-workflow-ci** (where applicable), and each relevant feature spec.
