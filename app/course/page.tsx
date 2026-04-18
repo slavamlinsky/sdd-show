@@ -11,6 +11,7 @@ import { CourseFaq } from "@/components/course-faq";
 import { CourseLeadForm } from "@/components/course-lead-form";
 import { GradientText } from "@/components/gradient-text";
 import { Reveal } from "@/components/reveal";
+import { SectionBackdrop } from "@/components/section-backdrop";
 import { buttonVariants } from "@/components/ui/button";
 import { keywordsForPage } from "@/lib/seo-keywords";
 import { cn } from "@/lib/utils";
@@ -136,8 +137,9 @@ export default function CoursePage() {
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-        <div className="grid gap-8 md:grid-cols-3 md:gap-10">
+      <section className="relative mx-auto w-full max-w-6xl overflow-hidden px-4 py-20 sm:px-6 sm:py-28">
+        <SectionBackdrop tone="rose" heightClass="h-[min(480px,60vh)]" />
+        <div className="relative grid gap-8 md:grid-cols-3 md:gap-10">
           {[
             {
               icon: SparklesIcon,

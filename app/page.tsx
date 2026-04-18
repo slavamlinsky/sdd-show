@@ -3,8 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 import { HomeFaq } from "@/components/home-faq";
+import { HomePillars } from "@/components/home-pillars";
 import { GradientText } from "@/components/gradient-text";
 import { Reveal } from "@/components/reveal";
+import { SectionBackdrop } from "@/components/section-backdrop";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -84,10 +86,15 @@ export default function HomePage() {
         </div>
       </section>
 
+      <HomePillars />
+
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-20 px-4 py-20 sm:gap-28 sm:px-6 sm:py-28">
-        <Reveal>
-          <HomeFaq />
-        </Reveal>
+        <section className="relative overflow-hidden rounded-[2rem] border border-border/40 py-8 sm:py-10">
+          <SectionBackdrop tone="emerald" heightClass="h-[min(420px,55vh)]" />
+          <Reveal className="relative px-2 sm:px-4">
+            <HomeFaq />
+          </Reveal>
+        </section>
 
         <section className="space-y-8">
           <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -151,7 +158,7 @@ export default function HomePage() {
         </section>
 
         <Reveal>
-          <section className="rounded-[2rem] border border-border/60 bg-gradient-to-br from-muted/50 via-background to-muted/30 px-8 py-12 shadow-sm ring-1 ring-foreground/[0.04] sm:px-10 sm:py-14">
+          <section className="relative overflow-hidden rounded-[2rem] border border-border/60 bg-gradient-to-br from-amber-500/[0.08] via-muted/45 to-violet-500/[0.06] px-8 py-12 shadow-sm ring-1 ring-foreground/[0.04] sm:px-10 sm:py-14">
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div className="space-y-3">
                 <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">Video library</h2>

@@ -6,7 +6,7 @@ Applies to **all routes** unless a feature spec narrows further. Visual directio
 
 - **Mobile-first:** Base styles target small screens; add breakpoints for tablet and desktop.
 - **Readable widths:** Main text columns use a comfortable max width (roughly `prose` / ~65ch) so lines do not span edge-to-edge on large screens.
-- **Navigation:** Header uses **three regions**: **logo** (left, links home), **primary nav** (centered on `md+`; **Glossary, Videos, Courses, Blog** — no separate Home item), **Sign up** (right: **primary-colored border + text**, distinct from default outline). Below `md`, primary links move into a **sheet**; **Sign up** stays visible beside the menu trigger. No horizontal scroll for the header chrome at common mobile widths (~375px).
+- **Navigation:** Header uses **three regions**: **logo** (left, links home), **primary nav** (centered on `md+`; **Glossary, Videos, Courses, Blog** — no separate Home item), **Sign up** (right: **primary-colored border + text**, **taller control** `~h-10`, **Lucide `UserPlus`** icon + label, light shadow). Below `md`, primary links move into a **sheet**; **Sign up** stays visible beside the menu trigger. No horizontal scroll for the header chrome at common mobile widths (~375px).
 - **Touch:** Primary taps (CTAs, cards, modal triggers) have adequate spacing; avoid **hover-only** affordances as the only way to complete a core action (provide focus / visible affordances).
 - **Imagery:** Images scale within their containers (`next/image`); no fixed widths that break small viewports.
 - **Sections:** Stack vertically on narrow viewports; multi-column grids from **`md`** / **`lg`** upward.
@@ -28,6 +28,7 @@ Applies to **all routes** unless a feature spec narrows further. Visual directio
 ## Color, depth, and ornament
 
 - **Background:** Soft off-white / warm neutrals — avoid flat pure white everywhere; use **very subtle radial gradients** in hero or page headers for depth (not heavy illustrations required).
+- **Section atmosphere:** Major routes may use **`SectionBackdrop`** (shared component) with **tone presets** (`violet`, `sky`, `emerald`, `amber`, `rose`) — stacked soft radial washes, **low opacity**, never competing with body text. Different sections on the same page may use **different tones** to add rhythm (home FAQ band, course feature row, etc.).
 - **Gradients on phrases:** Key words or short phrases may use a **text gradient** (e.g. violet → indigo → sky) for emphasis; use sparingly so sentences stay readable if gradients are removed.
 - **Surfaces:** **Rounded blocks** (`2rem`-class corners or similar) for cards, bands, and feature panels; light **border + ring** or shadow for separation instead of harsh lines alone.
 

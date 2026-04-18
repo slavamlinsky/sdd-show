@@ -18,7 +18,7 @@ Each **video** (row or document) should support at least:
 | ---------------- | ------- |
 | **youtube id / canonical URL** | Embed + thumbnail (existing MVP behavior). |
 | **title**, **description** (optional) | Card + SEO. |
-| **category** (required in v2) | Filter + taxonomy (e.g. “Workflow”, “Talks”, “Tools”). |
+| **category** (required in v2) | One of **Product · Build · Quality · Design** per [spec-taxonomy.md](./spec-taxonomy.md). |
 | **tags** (optional, multi) | Finer filtering / future faceted UI. |
 | **stats** (views, likes — source TBD) | Display on card or detail; may be **manual** at first, **YouTube API** later, or **on-platform** counts only. |
 | **related article slug** | Link to an on-site blog post that summarizes or comments on the video (your “text copy” plan). |

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GradientText } from "@/components/gradient-text";
 import { Reveal } from "@/components/reveal";
+import { SectionBackdrop } from "@/components/section-backdrop";
 import {
   Card,
   CardDescription,
@@ -24,11 +25,8 @@ export default function BlogIndexPage() {
   const posts = getAllPosts();
 
   return (
-    <div className="relative">
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-[380px] bg-[radial-gradient(ellipse_75%_55%_at_40%_-25%,rgba(14,165,233,0.1),transparent_60%)]"
-        aria-hidden
-      />
+    <div className="relative overflow-hidden">
+      <SectionBackdrop tone="sky" />
       <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
         <Reveal className="max-w-2xl space-y-4">
           <h1 className="font-heading text-4xl font-semibold tracking-tight sm:text-5xl">
@@ -39,7 +37,7 @@ export default function BlogIndexPage() {
           </p>
         </Reveal>
 
-        <ul className="mt-16 flex flex-col gap-6">
+        <ul className="relative mt-16 flex flex-col gap-6 rounded-[2rem] border border-border/40 bg-gradient-to-b from-rose-500/[0.05] via-muted/15 to-transparent px-4 py-8 sm:px-8 sm:py-10">
           {posts.map(({ meta }, i) => (
             <li key={meta.slug} className="list-none">
               <Reveal delay={i * 0.05} distance={14}>
