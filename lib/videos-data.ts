@@ -3,48 +3,66 @@ export type VideoEntry = {
   title: string;
   youtubeId: string;
   channelTitle?: string;
+  /** Display label; aligns with spec-taxonomy when v2 filters ship */
+  category?: string;
 };
 
-/** Curated placeholders — replace with your preferred SDD / software design talks */
+/** Curated SDD-related talks — edit `lib/videos-data.ts` to update */
 export const videos: VideoEntry[] = [
   {
-    id: "v1",
-    title: "Introduction: why specs before code",
-    youtubeId: "Ke90TjeKbVI",
-    channelTitle: "Placeholder channel",
+    id: "augment-sdd-workflow",
+    title:
+      "Spec-Driven Development Explained: The Workflow That Keeps AI Agents Aligned",
+    youtubeId: "2XI-lO7ANYw",
+    channelTitle: "Augment Code",
+    category: "Development",
   },
   {
-    id: "v2",
-    title: "From fuzzy idea to testable acceptance criteria",
-    youtubeId: "aircAruvnKk",
-    channelTitle: "Placeholder channel",
+    id: "netninja-claude-spec-command",
+    title: "Spec Driven Workflow with Claude Code #1 - Making a /spec Command",
+    youtubeId: "e_D9M_MJ9Hs",
+    channelTitle: "Net Ninja",
+    category: "Development",
   },
   {
-    id: "v3",
-    title: "Design docs that teams actually read",
-    youtubeId: "M6EfzoKQFSs",
-    channelTitle: "Placeholder channel",
+    id: "awesome-spec-workflow-mess",
+    title: "The new spec-driven workflow is a mess...",
+    youtubeId: "nnUMJX9013Y",
+    channelTitle: "Awesome",
+    category: "Development",
   },
   {
-    id: "v4",
-    title: "Tracing requirements to implementation",
-    youtubeId: "M7lc1UVf-VE",
-    channelTitle: "Placeholder channel",
+    id: "brian-casel-sdd-real-world",
+    title: "Spec-Driven Development in the Real World",
+    youtubeId: "3le-v1Pme44",
+    channelTitle: "Brian Casel",
+    category: "Development",
   },
   {
-    id: "v5",
-    title: "Living documents in fast-moving teams",
-    youtubeId: "tgTczHdFOHI",
-    channelTitle: "Placeholder channel",
+    id: "cesar-soto-sdd-future",
+    title: "Is Spec-Driven Development the Future of Software Development?",
+    youtubeId: "maIBlxGubeI",
+    channelTitle: "César Soto Valero",
+    category: "Development",
   },
   {
-    id: "v6",
-    title: "API contracts and safe evolution",
-    youtubeId: "vJFA9jqFp0U",
-    channelTitle: "Placeholder channel",
+    id: "ibm-sdd-ai-assisted",
+    title: "Spec-Driven Development: AI Assisted Coding Explained",
+    youtubeId: "mViFYTwWvcM",
+    channelTitle: "IBM Technology",
+    category: "Development",
   },
 ];
 
-export function youtubeThumbUrl(youtubeId: string) {
-  return `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`;
+/**
+ * YouTube static thumbnail URLs (no API key).
+ * Order: max quality first — `maxresdefault` is often missing; caller should fall back.
+ * @see https://img.youtube.com/vi/VIDEO_ID/{maxresdefault,sddefault,hqdefault,mqdefault,default}.jpg
+ */
+export function getYoutubeThumbnailUrls(videoId: string): string[] {
+  return [
+    `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+    `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
+    `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+  ];
 }

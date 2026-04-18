@@ -4,13 +4,44 @@ import Image from "next/image";
 import { useState } from "react";
 import { PlayIcon } from "lucide-react";
 import type { VideoEntry } from "@/lib/videos-data";
-import { youtubeThumbUrl } from "@/lib/videos-data";
+import { getYoutubeThumbnailUrls } from "@/lib/videos-data";
 import { cn } from "@/lib/utils";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog";
+
+function YoutubePoster({
+  youtubeId,
+  title,
+  className,
+  sizes,
+}: {
+  youtubeId: string;
+  title: string;
+  className?: string;
+  sizes: string;
+}) {
+  const urls = getYoutubeThumbnailUrls(youtubeId);
+  const [urlIndex, setUrlIndex] = useState(0);
+  const src = urls[Math.min(urlIndex, urls.length - 1)];
+
+  return (
+    <Image
+      src={src}
+      alt=""
+      title={title}
+      fill
+      unoptimized
+      className={className}
+      sizes={sizes}
+      onError={() => {
+        setUrlIndex((i) => (i < urls.length - 1 ? i + 1 : i));
+      }}
+    />
+  );
+}
 
 export function VideoGrid({ videos }: { videos: VideoEntry[] }) {
   const [active, setActive] = useState<VideoEntry | null>(null);
@@ -31,10 +62,9 @@ export function VideoGrid({ videos }: { videos: VideoEntry[] }) {
             )}
           >
             <span className="relative block aspect-video w-full overflow-hidden rounded-t-3xl bg-muted">
-              <Image
-                src={youtubeThumbUrl(video.youtubeId)}
-                alt=""
-                fill
+              <YoutubePoster
+                youtubeId={video.youtubeId}
+                title={video.title}
                 className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
@@ -47,7 +77,12 @@ export function VideoGrid({ videos }: { videos: VideoEntry[] }) {
                 </span>
               </span>
             </span>
-            <span className="flex flex-col gap-1 px-4 py-4">
+            <span className="flex flex-col gap-2 px-4 py-4">
+              {video.category ? (
+                <span className="w-fit rounded-md border border-border/80 bg-muted/50 px-2 py-0.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                  {video.category}
+                </span>
+              ) : null}
               <span className="font-heading text-sm font-medium leading-snug text-foreground">
                 {video.title}
               </span>
