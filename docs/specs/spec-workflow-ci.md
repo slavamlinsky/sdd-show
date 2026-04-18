@@ -2,15 +2,21 @@
 
 Complements [spec-main.md](./spec-main.md). This file is the **default team contract** for how work lands in the repo.
 
-## Git branching (default: PR to `main`)
+## Git branching (`main` only via approved PRs)
 
-- **`main`** is **protected in practice**: production on Vercel should track it. **Do not treat `main` as a scratch pad** for multi-file features once previews and collaborators exist.
-- **Preferred flow for any non-trivial change:**
-  1. **`git checkout main && git pull`**
-  2. **`git checkout -b feat/short-description`** (or `fix/…`, `docs/…` — see table below).
-  3. Commit on the branch; **`git push -u origin your-branch-name`**
-  4. Open a **Pull Request** into `main` on GitHub (review yourself if solo — still gives history + preview URL).
-  5. Merge when green (see checks below).
+- **`main`** is the **production line** (Vercel deploys from it). **New work does not land on `main` via direct push** — it lands via a **feature branch** → **Pull Request** → **merge** (after review/approval as configured below).
+- **Every new commit** (features, fixes, docs) should be created on a **branch**, pushed there, and merged into `main` **through GitHub** — not by pushing local commits straight to `main`.
+
+**Standard flow:**
+
+1. **`git checkout main && git pull origin main`** — start from up-to-date `main`.
+2. **`git checkout -b feat/short-description`** — use an informative slug; see naming table (e.g. `docs/update-workflow`, `fix/nav-zindex`).
+3. Implement, **`git commit`**, **`git push -u origin your-branch-name`**.
+4. Open a **Pull Request** on GitHub: **base = `main`**, compare = your branch.
+5. **Review:** at least one **approval** before merge when branch protection is on (see below). Solo maintainer may self-approve if policy allows.
+6. **Merge** on GitHub when checks pass; then locally: **`git checkout main && git pull origin main`**.
+
+**Do not** `git push origin main` for normal changes — that bypasses PR and (if enabled) required reviews.
 
 **Branch naming (examples):**
 
@@ -21,13 +27,24 @@ Complements [spec-main.md](./spec-main.md). This file is the **default team cont
 | `docs/` | Specs, README, comments only |
 | `chore/` | Tooling, deps, config with no user-visible change |
 
-**Direct push to `main`** is acceptable only for **tiny** hotfixes (one-liner, urgent typo) when a branch feels heavier than the change. Default assumption: **use a branch + PR**.
+**Emergencies only:** direct `git push origin main` for **critical** hotfixes (e.g. prod down, revert broken deploy) — still prefer a **branch + fast PR** when possible. Do not use direct pushes for routine docs or features.
+
+### GitHub: enforce PR + approvals (recommended)
+
+In **Settings → Rules → Rulesets** (or **Branches → Branch protection**) for **`main`**:
+
+- Require **Pull request** before merging.
+- Require **approvals** (`1` or more) before merge — even solo teams often use **1** so merges stay intentional; you can self-approve if GitHub allows for repo admins.
+- Optional: **Require status checks** (CI) before merge when Actions exist.
+
+This matches **“update `main` through PR approvals”** and prevents accidental direct pushes if **“Do not allow bypassing”** is set appropriately.
 
 ## Pull requests
 
 - **Title:** Imperative, concise (e.g. `feat: add scroll-to-top on home`).
 - **Body:** What changed, why; link to spec section if relevant (`docs/specs/...`).
 - **Checks before merge:** `npm run lint` and **`npm run build`** pass locally (or via CI when added).
+- **Approval:** Per branch protection; do not merge your own PR until required reviews pass (unless policy explicitly allows admin bypass for solo work).
 - **Merge:** Squash merge is fine for a linear history; merge commit is OK if you prefer preserving branch commits.
 
 ## Vercel deployment — when to connect
