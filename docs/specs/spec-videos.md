@@ -32,3 +32,7 @@ Curated **YouTube** videos about SDD (or close topics), presented as **cards** w
 ## Non-goals
 
 - Playlists sync, autoplay next, comments embed.
+
+## Roadmap (v2 / v3)
+
+Planned capabilities (Supabase, suggest-video form, categories, search, TTL, favorites, badges) live in **[spec-videos-v2-v3.md](./spec-videos-v2-v3.md)** so this file stays the **current / MVP** checklist.
