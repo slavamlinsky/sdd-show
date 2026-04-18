@@ -6,7 +6,7 @@ Applies to **all routes** unless a feature spec narrows further. Visual directio
 
 - **Mobile-first:** Base styles target small screens; add breakpoints for tablet and desktop.
 - **Readable widths:** Main text columns use a comfortable max width (roughly `prose` / ~65ch) so lines do not span edge-to-edge on large screens.
-- **Navigation:** Header nav collapses to a **mobile pattern** (hamburger / sheet) so links remain usable without horizontal scroll.
+- **Navigation:** Header uses **three regions**: **logo** (left, links home), **primary nav** (centered on `md+`; Glossary, Blog, Videos, Course — no separate Home item), **Sign in** (right, outline style). Below `md`, primary links move into a **sheet**; **Sign in** stays visible beside the menu trigger. No horizontal scroll for the header chrome at common mobile widths (~375px).
 - **Touch:** Primary taps (CTAs, cards, modal triggers) have adequate spacing; avoid **hover-only** affordances as the only way to complete a core action (provide focus / visible affordances).
 - **Imagery:** Images scale within their containers (`next/image`); no fixed widths that break small viewports.
 - **Sections:** Stack vertically on narrow viewports; multi-column grids from **`md`** / **`lg`** upward.
