@@ -39,7 +39,7 @@ Students and developers new to SDD or comparing it to other practices.
 
 - **Header:** Site title / logo text, primary nav links to all routes above.
 - **Footer:** Short note + optional link to repo or contact (optional for MVP).
-- **Design:** Light, simple, modern (AI-tool / edu style). Detailed visual refs live in a separate `design.md` (or similar) when added — not blocking MVP.
+- **Design:** Light, simple, modern (AI-tool / edu style). **Responsive layout, spacing (“air”), structured blocks, CTAs, and image rules** are defined in [spec-design-layout.md](./spec-design-layout.md). Optional visual references may live in a future **`design.md`** — not blocking MVP.
 
 ## Content storage (MVP)
 
@@ -64,6 +64,7 @@ Choose one approach and use it consistently for blog posts, glossary entries, an
 
 ## Success criteria (MVP)
 
+- Layout meets [spec-design-layout.md](./spec-design-layout.md) (responsive, block structure, CTA hierarchy, images/placeholders).
 - All routes render without errors; nav highlights current section where practical.
 - Blog: **3** short articles published in-repo.
 - Glossary: **10–15** terms.
