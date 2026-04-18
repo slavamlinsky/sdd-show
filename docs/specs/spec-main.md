@@ -23,6 +23,7 @@ Students and developers new to SDD or comparing it to other practices.
 | Hosting | Vercel |
 | Repo | GitHub |
 | Backend / DB | None for MVP; **Supabase** allowed later (e.g. lead form persistence) |
+| Git / deploy / tests | See [spec-workflow-ci.md](./spec-workflow-ci.md) (branching, Vercel timing, Playwright + Vitest/Jest) |
 
 ## Routes (MVP)
 
@@ -59,6 +60,7 @@ Choose one approach and use it consistently for blog posts, glossary entries, an
 
 - Search (glossary / blog) — **v2**
 - Full accessibility audit — no formal bar for MVP; still prefer semantic HTML and shadcn defaults
+- **Automated E2E (Playwright) and CI test gates** — add post-MVP per [spec-workflow-ci.md](./spec-workflow-ci.md); optional Vitest/Jest for units when useful
 - Real payments or course delivery
 - CMS, auth, comments
 
