@@ -1,21 +1,43 @@
 # Workflow, Git, Vercel, and testing
 
-Complements [spec-main.md](./spec-main.md). Not every practice below is mandatory for solo MVP; this records **defaults** and **what to add later**.
+Complements [spec-main.md](./spec-main.md). This file is the **default team contract** for how work lands in the repo.
 
-## Git branching
+## Git branching (default: PR to `main`)
 
-- **`main`** is the **default branch** and the intended **production** line once Vercel deploys from it.
-- **Pushing everything directly to `main`** is acceptable for **small, solo** changes (docs-only, tiny fixes). For **features** or anything risky, use **short-lived branches** (e.g. `feat/home-layout`, `fix/nav`) and merge via **pull request** so history stays reviewable and optional CI can run on PRs.
-- **Feature branches are recommended** when more than one change is in flight, or when you want GitHub PR review or Vercel **preview deployments** per branch/PR — not strictly required for a one-person MVP with careful commits.
+- **`main`** is **protected in practice**: production on Vercel should track it. **Do not treat `main` as a scratch pad** for multi-file features once previews and collaborators exist.
+- **Preferred flow for any non-trivial change:**
+  1. **`git checkout main && git pull`**
+  2. **`git checkout -b feat/short-description`** (or `fix/…`, `docs/…` — see table below).
+  3. Commit on the branch; **`git push -u origin your-branch-name`**
+  4. Open a **Pull Request** into `main` on GitHub (review yourself if solo — still gives history + preview URL).
+  5. Merge when green (see checks below).
+
+**Branch naming (examples):**
+
+| Prefix | Use for |
+| ----- | -------- |
+| `feat/` | New user-facing behavior or pages |
+| `fix/` | Bugfixes |
+| `docs/` | Specs, README, comments only |
+| `chore/` | Tooling, deps, config with no user-visible change |
+
+**Direct push to `main`** is acceptable only for **tiny** hotfixes (one-liner, urgent typo) when a branch feels heavier than the change. Default assumption: **use a branch + PR**.
+
+## Pull requests
+
+- **Title:** Imperative, concise (e.g. `feat: add scroll-to-top on home`).
+- **Body:** What changed, why; link to spec section if relevant (`docs/specs/...`).
+- **Checks before merge:** `npm run lint` and **`npm run build`** pass locally (or via CI when added).
+- **Merge:** Squash merge is fine for a linear history; merge commit is OK if you prefer preserving branch commits.
 
 ## Vercel deployment — when to connect
 
-- **Connect early:** Import the GitHub repo in Vercel as soon as the app **`next build`** succeeds locally. Typical moment: **after the project exists on GitHub and has a minimal runnable app** (even before content is finished).
+- **Connect early:** Import the GitHub repo in Vercel as soon as the app **`next build`** succeeds locally.
 - **Production:** Deploy **production** from **`main`** (Vercel default).
-- **Previews:** Enable **preview deployments** for PRs when using feature branches (optional but useful).
+- **Previews:** Enable **preview deployments for pull requests** so every **`feat/*`** PR gets a **unique preview URL** before merging — highly recommended once development is active.
 - **Environment variables:** Document in README or Vercel project when Supabase or other secrets are added later.
 
-Nothing in the specs requires “push only from CI”; direct `git push origin main` remains valid.
+Nothing in the specs requires “push only from CI”; developers push **branches**; `main` updates via **merge**.
 
 ## Testing strategy
 
@@ -28,7 +50,7 @@ Nothing in the specs requires “push only from CI”; direct `git push origin m
 
 ## CI (later)
 
-- **GitHub Actions** (or Vercel checks): run `npm run lint`, `npm run build`, and eventually **`playwright test`** on PRs or on merge to `main`.
+- **GitHub Actions** (or Vercel checks): run `npm run lint`, `npm run build`, and eventually **`playwright test`** on **pull requests** targeting `main`.
 - Playwright in CI usually needs **browser install** step and can run against **Vercel preview URL** or **local `next start`** — choose one approach when implementing.
 
 ## What to add to the repo when E2E lands
