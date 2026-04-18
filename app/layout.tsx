@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
+import { FooterRegion } from "@/components/footer-region";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
@@ -47,7 +47,7 @@ export default function RootLayout({
         <main id="main-content" className="flex-1 scroll-mt-0 outline-none" tabIndex={-1}>
           {children}
         </main>
-        <SiteFooter />
+        <FooterRegion />
         <ScrollToTop />
       </body>
     </html>

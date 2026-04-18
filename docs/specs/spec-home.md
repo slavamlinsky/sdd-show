@@ -26,9 +26,14 @@ Follow [spec-design-layout.md](./spec-design-layout.md) for **responsive bands**
 4. **Optional teaser row**
    - One line + link to `/videos` (if hero already pushes Course, this balances exploration).
 
+5. **Bottom FAQ (home only, below global footer)**
+   - Extra **accordion FAQ** rendered **after** the site footer on `/` only (does not appear on other routes).
+   - Content should complement the mid-page Q&A — e.g. where to start on the site, course notifications, open source, how SDD relates to TDD — not a verbatim duplicate.
+   - Landmark: optional `id` (e.g. `#bottom-faq`) for deep links.
+
 ## Acceptance
 
-- Hero + Q&A + blog preview are visible without relying on client-only rendering for core copy (SEO-friendly).
+- Hero + Q&A + blog preview + video teaser are visible without relying on client-only rendering for core copy where feasible (SEO-friendly); bottom FAQ may use client accordion like other interactive blocks.
 - CTAs match **spec-main** (primary → course) and **spec-design-layout.md** (visual hierarchy).
 - **Responsive:** Sections stack with clear separation; hero image does not break layout at mobile and desktop widths.
 
