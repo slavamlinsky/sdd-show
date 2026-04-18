@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Eye } from "lucide-react";
 import Link from "next/link";
 import { GradientText } from "@/components/gradient-text";
 import { Reveal } from "@/components/reveal";
@@ -43,12 +42,9 @@ export default function GlossaryPage() {
                     {term.shortDefinition}
                   </p>
                   {term.relatedSlugs && term.relatedSlugs.length > 0 ? (
-                    <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border/50 pt-8">
-                      <span className="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-                        <Eye className="size-3.5 shrink-0 opacity-80" aria-hidden />
-                        See also
-                      </span>
-                      <ul className="flex flex-wrap items-center gap-2">
+                    <div className="mt-8 flex flex-wrap gap-2 border-t border-border/50 pt-8">
+                      <span className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">See also</span>
+                      <ul className="flex flex-wrap gap-2">
                         {term.relatedSlugs.map((slug) => {
                           const related = getGlossaryTerm(slug);
                           if (!related) return null;
