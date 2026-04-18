@@ -4,9 +4,9 @@ import Link from "next/link";
 import { GradientText } from "@/components/gradient-text";
 import { Reveal } from "@/components/reveal";
 import { SectionBackdrop } from "@/components/section-backdrop";
+import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { glossaryTerms } from "@/lib/glossary-data";
-import { formatTag } from "@/lib/taxonomy";
 import { keywordsForPage } from "@/lib/seo-keywords";
 import { cn } from "@/lib/utils";
 
@@ -64,28 +64,15 @@ export default function GlossaryPage() {
               <Reveal delay={(i % 5) * 0.04} distance={14}>
                 <article className="rounded-[1.75rem] border border-border/60 bg-card/90 px-7 py-9 shadow-sm ring-1 ring-foreground/[0.04] backdrop-blur-sm sm:px-10">
                   <h2 className="font-heading text-xl font-semibold tracking-tight sm:text-2xl">{term.title}</h2>
-                  <div className="mt-3 flex flex-col gap-2">
-                    <ul className="flex flex-wrap gap-1.5" aria-label="Pillars">
-                      {term.categories.map((label) => (
-                        <li key={label}>
-                          <span className="inline-flex rounded-md border border-border/80 bg-background/80 px-2 py-0.5 text-[11px] font-medium leading-none text-muted-foreground">
-                            {label}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                    {term.tags && term.tags.length > 0 ? (
-                      <ul className="flex flex-wrap gap-1.5" aria-label="Tags">
-                        {term.tags.map((slug) => (
-                          <li key={slug}>
-                            <span className="inline-flex rounded-full border border-dashed border-border/70 bg-muted/30 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
-                              {formatTag(slug)}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </div>
+                  <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Pillars">
+                    {term.categories.map((label) => (
+                      <li key={label}>
+                        <Badge variant="outline" size="xs">
+                          {label}
+                        </Badge>
+                      </li>
+                    ))}
+                  </ul>
                   <p className="mt-4 max-w-prose text-sm leading-relaxed text-muted-foreground">
                     {term.shortDefinition}
                   </p>

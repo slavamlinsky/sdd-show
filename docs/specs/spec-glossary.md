@@ -2,7 +2,7 @@
 
 ## Intent
 
-Cover **SDD** plus vocabulary across the four pillars — **Product**, **Build**, **Quality**, **Design** — and AI-era terms via **tags**. Definitions stay short; the blog, videos, and course carry depth.
+Cover **SDD** plus vocabulary across the four pillars — **Product**, **Build**, **Quality**, **Design**. Definitions stay short; the blog, videos, and course carry depth.
 
 ## Term card / entry fields
 
@@ -13,8 +13,7 @@ Each term should have:
 | `slug` | yes | Stable id for anchors; URL optional if single-page list |
 | `title` | yes | Term name |
 | `shortDefinition` | yes | 1–3 sentences; rendered at **`text-sm`** on the glossary page |
-| `categories` | yes | **1–3** labels from **Product \| Build \| Quality \| Design** only — pillar badges (“where this applies”) |
-| `tags` | no | Cross-cutting slugs (`ai`, `methodology`, `growth`, …) — aligned with [spec-taxonomy.md](./spec-taxonomy.md) and **`lib/taxonomy.ts`**; shown as secondary chips |
+| `categories` | yes | **1–3** labels from **Product \| Build \| Quality \| Design** — **shadcn `Badge`** (outline, `xs`) on the glossary page. Optional **`tags`** in data may return later; not shown in MVP UI. |
 
 ## Page behavior (MVP)
 
@@ -26,7 +25,7 @@ Each term should have:
 ## Content seed
 
 - Include **SDD** and foundational SDD terms (requirements vs acceptance criteria, traceability, artifacts, etc.).
-- Balance the **four pillars** in the library: **Product** (strategy, GTM, PM), **Build** (specs, code, AI tooling), **Quality** (testing, eval, safety), **Design** (UX, flows). Use **tags** for AI, API, methodology, growth, CRO/ROI-as-topic, etc.
+- Balance the **four pillars** in the library: **Product** (strategy, GTM, PM), **Build** (specs, code, AI tooling), **Quality** (testing, eval, safety), **Design** (UX, flows). Cross-cutting **tags** may be reintroduced in data/UI later per [spec-taxonomy.md](./spec-taxonomy.md).
 - Total count grows with the blog/course; aim for breadth across pillars, not duplicate jargon.
 
 ## v2 (planned)
@@ -36,7 +35,7 @@ Each term should have:
 ## Acceptance
 
 - All terms render from shared content source (same pattern as **spec-main** content storage).
-- Each term exposes **pillar badges** (outline style) and optional **tag** chips; no “see also” link row on cards.
+- Each term exposes **pillar** `Badge`s (outline, `xs`); no tag row; no “see also” link row on cards.
 
 ## Non-goals
 

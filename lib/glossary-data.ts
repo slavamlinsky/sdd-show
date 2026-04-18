@@ -6,8 +6,6 @@ export type GlossaryTerm = {
   shortDefinition: string;
   /** 1–3 pillars from Product | Build | Quality | Design */
   categories: Pillar[];
-  /** Optional cross-cutting tags (see spec-taxonomy + lib/taxonomy.ts) */
-  tags?: string[];
 };
 
 export const glossaryTerms: GlossaryTerm[] = [
@@ -17,7 +15,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "Specific, verifiable conditions that define “done.” They turn high-level requirements into checklists you can validate manually, in tests, or with automation — unlike requirements, which state broader needs.",
     categories: ["Quality", "Build"],
-    tags: ["methodology"],
   },
   {
     slug: "artifact",
@@ -25,7 +22,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "A tangible output of your process: specs, diagrams, tickets, test reports, repositories, or release notes. SDD treats artifacts as evidence of what was agreed and what shipped.",
     categories: ["Build", "Product"],
-    tags: ["documentation", "process"],
   },
   {
     slug: "context-window",
@@ -33,7 +29,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "The maximum number of tokens a language model can attend to in one pass. It limits how much spec, code, chat history, and tooling context you can load together in AI-assisted workflows.",
     categories: ["Build"],
-    tags: ["ai", "llm"],
   },
   {
     slug: "contract",
@@ -41,7 +36,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "Agreed inputs, outputs, and error behavior at a boundary. Contracts are a compact form of spec for integrations.",
     categories: ["Build"],
-    tags: ["api"],
   },
   {
     slug: "evaluation-dataset",
@@ -49,7 +43,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "A labeled set of inputs and expected outputs (or rubrics) used to measure model or system behavior against acceptance-style expectations — central to testing AI features before ship.",
     categories: ["Quality"],
-    tags: ["ai", "evaluation"],
   },
   {
     slug: "hallucination-rate",
@@ -57,7 +50,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "How often a model produces false, fabricated, or unsupported content on a defined task or benchmark. Teams track it as a quality signal alongside traditional defect rates.",
     categories: ["Quality"],
-    tags: ["ai"],
   },
   {
     slug: "implementation",
@@ -72,7 +64,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "Specs that update as you learn — not frozen bureaucracy. The goal is truth over time, with a clear trail of what changed.",
     categories: ["Build", "Design"],
-    tags: ["documentation", "process"],
   },
   {
     slug: "model-inference",
@@ -80,7 +71,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "Running a trained model to generate outputs from inputs in production or evaluation. Latency, cost, and reliability constraints shape how AI features are specced and tested.",
     categories: ["Build"],
-    tags: ["ai"],
   },
   {
     slug: "mvp",
@@ -88,7 +78,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "The smallest version that validates your hypothesis. SDD helps decide what belongs in the MVP slice without silent scope creep.",
     categories: ["Product"],
-    tags: ["planning", "growth"],
   },
   {
     slug: "prd",
@@ -96,7 +85,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "A product-level document describing goals, users, scope, and metrics. Often pairs with more granular technical specs.",
     categories: ["Product"],
-    tags: ["planning", "documentation"],
   },
   {
     slug: "product-market-fit",
@@ -104,7 +92,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "Evidence that a product satisfies strong demand in a real market. It informs roadmap bets, messaging, and how aggressively you narrow scope in specs.",
     categories: ["Product"],
-    tags: ["growth"],
   },
   {
     slug: "prompt-engineering",
@@ -112,7 +99,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "Designing and refining natural-language instructions and examples so models produce reliable, on-spec outputs — a core practice when specs and AI tooling meet.",
     categories: ["Build"],
-    tags: ["ai"],
   },
   {
     slug: "red-teaming",
@@ -120,7 +106,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "Structured adversarial testing: a group tries to misuse, break, or trick a system to surface safety and quality gaps before users do.",
     categories: ["Quality"],
-    tags: ["security"],
   },
   {
     slug: "requirements",
@@ -128,7 +113,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "Stakeholder needs, outcomes, and constraints — the *what* and *why*. They stay broader than **acceptance criteria**, which spell out specific, testable conditions for delivery.",
     categories: ["Product"],
-    tags: ["planning"],
   },
   {
     slug: "rfc",
@@ -136,7 +120,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "A written proposal for a notable change: context, decision, alternatives, and consequences — common in open source and larger orgs.",
     categories: ["Build"],
-    tags: ["process", "documentation"],
   },
   {
     slug: "spec-driven-development",
@@ -144,7 +127,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "A methodology where written specifications (scope, behavior, acceptance) come *before* implementation so teams and AI agents stay aligned — reducing rework from vague tickets or drifting intent.",
     categories: ["Build", "Product"],
-    tags: ["methodology", "ai"],
   },
   {
     slug: "specification",
@@ -152,7 +134,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "A precise description of what the system should do: inputs, outputs, constraints, and edge cases. Good specs are readable by both humans and contributors who turn them into code.",
     categories: ["Build"],
-    tags: ["documentation"],
   },
   {
     slug: "test-driven-development",
@@ -160,7 +141,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "Writing automated tests before production code to drive design and catch regressions. It complements **acceptance criteria** (outcomes) with fast feedback at the unit or service level.",
     categories: ["Build", "Quality"],
-    tags: ["methodology"],
   },
   {
     slug: "traceability",
@@ -182,7 +162,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "Checking that real user scenarios and outcomes match what was promised in messaging and specs — closing the loop between marketing story and shipped behavior.",
     categories: ["Product", "Quality", "Design"],
-    tags: ["growth"],
   },
   {
     slug: "value-proposition",
@@ -190,7 +169,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "A concise statement of who the product helps and what outcome they get. It keeps GTM language aligned with what engineering commits to in specs and roadmaps.",
     categories: ["Product", "Design"],
-    tags: ["growth"],
   },
 ];
 

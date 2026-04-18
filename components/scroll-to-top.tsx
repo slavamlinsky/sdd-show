@@ -34,7 +34,7 @@ export function ScrollToTop() {
         size="icon"
         aria-label="Scroll to top"
         className={cn(
-          "pointer-events-auto h-11 w-11 rounded-full shadow-lg shadow-foreground/10",
+          "pointer-events-auto cursor-pointer h-11 w-11 rounded-full shadow-lg shadow-foreground/10",
           "bg-primary text-primary-foreground ring-1 ring-foreground/10",
           "hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring"
         )}
