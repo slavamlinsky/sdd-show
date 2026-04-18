@@ -4,6 +4,8 @@ Supersedes nothing: **[spec-videos.md](./spec-videos.md)** remains the **MVP / c
 
 **Stack assumption:** **Supabase** (or equivalent Postgres + API) for persisted videos, categories, tags, user prefs, and TTL logic — aligned with [spec-main](./spec-main.md) (“Supabase allowed later”).
 
+**Category and tag slugs** (v2+) must follow **[spec-taxonomy.md](./spec-taxonomy.md)** so `/videos` and `/blog` share one vocabulary when filters land.
+
 ---
 
 ## v2 — database, curation, discovery, suggestions

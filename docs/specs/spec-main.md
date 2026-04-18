@@ -67,6 +67,8 @@ Implementations may use:
 
 Choose one approach and use it consistently for blog posts, glossary entries, and video metadata.
 
+**v2:** topic browse — **categories and tags** (filters, badges) follow [spec-taxonomy.md](./spec-taxonomy.md) (shared across blog, videos, and course positioning). Not required for MVP.
+
 ## SEO baseline
 
 - Per-route `metadata` (title, description).
@@ -74,6 +76,7 @@ Choose one approach and use it consistently for blog posts, glossary entries, an
 
 ## Out of scope (MVP)
 
+- **Topic taxonomy UX** — category/tag filters, browse-by-topic, listing badges per [spec-taxonomy.md](./spec-taxonomy.md) — **v2** (data-only prep optional)
 - Search (glossary / blog) — **v2**
 - Full accessibility audit — no formal bar for MVP; still prefer semantic HTML and shadcn defaults
 - **Automated E2E (Playwright) and CI test gates** — add post-MVP per [spec-workflow-ci.md](./spec-workflow-ci.md); optional Vitest/Jest for units when useful

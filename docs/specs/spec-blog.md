@@ -38,4 +38,8 @@ Body: MD/MDX supported by the chosen content pipeline.
 
 ## Non-goals
 
-- RSS (optional nice-to-have), comments, tags/categories for MVP.
+- RSS (optional nice-to-have), comments.
+
+## Taxonomy (v2)
+
+**Categories** and **tags** — filters, chips, and listing badges — follow **[spec-taxonomy.md](./spec-taxonomy.md)** (same model as videos and course). **Not in MVP.** Optional `category` / `tags` in frontmatter before v2 only if the team wants data prep; no UI requirement until v2.
