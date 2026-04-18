@@ -9,12 +9,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getAllPosts } from "@/lib/blog";
+import { keywordsForPage } from "@/lib/seo-keywords";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Articles about spec driven development — workflows, vocabulary, and practical tips.",
+  description:
+    "Articles about spec driven development: workflows, vocabulary, and practical tips for teams and solo builders.",
+  keywords: keywordsForPage("blog", "SDD articles", "software workflow"),
 };
 
 export default function BlogIndexPage() {

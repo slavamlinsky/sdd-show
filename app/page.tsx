@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
@@ -13,7 +14,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getAllPosts } from "@/lib/blog";
+import { keywordsForPage } from "@/lib/seo-keywords";
+import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  title: { absolute: siteConfig.title },
+  description: siteConfig.description,
+  keywords: keywordsForPage("software engineering", "documentation", "agile"),
+};
 
 export default function HomePage() {
   const posts = getAllPosts().slice(0, 3);
@@ -28,23 +37,22 @@ export default function HomePage() {
         <div className="relative mx-auto flex max-w-6xl flex-col gap-12 px-4 py-20 sm:gap-16 sm:px-6 sm:py-28 lg:flex-row lg:items-center lg:gap-16">
           <Reveal className="flex-1 space-y-8" distance={28}>
             <p className="text-sm font-semibold tracking-wide text-muted-foreground uppercase">
-              For students & developers
+              For students and developers
             </p>
             <h1 className="font-heading text-balance text-4xl font-semibold tracking-tight sm:text-5xl lg:text-[3.35rem] lg:leading-[1.08]">
               Ship software from{" "}
-              <GradientText className="font-semibold">clear specs</GradientText>{" "}
-              — not vague tickets.
+              <GradientText className="font-semibold">clear specs</GradientText>, not vague tickets.
             </h1>
             <p className="max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-[1.125rem]">
               Spec driven development (SDD) means defining behavior and acceptance before you code yourself into a
-              corner. Learn the ideas, vocabulary, and a practical workflow you can use on real projects.
+              corner. Learn the ideas, vocabulary, and a workflow you can use on real projects.
             </p>
             <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
               <Link
                 href="/course"
                 className={cn(
                   buttonVariants({ size: "lg" }),
-                  "inline-flex h-12 gap-2 rounded-full px-8 text-base shadow-md shadow-primary/15"
+                  "inline-flex h-12 gap-2 rounded-md px-8 text-base shadow-md shadow-primary/15"
                 )}
               >
                 View course
@@ -54,7 +62,7 @@ export default function HomePage() {
                 href="/glossary"
                 className={cn(
                   buttonVariants({ variant: "outline", size: "lg" }),
-                  "h-12 rounded-full border-border/80 px-8 text-base justify-center sm:min-w-[10rem]"
+                  "h-12 rounded-md border-border/80 px-8 text-base justify-center sm:min-w-[10rem]"
                 )}
               >
                 Open glossary
@@ -88,14 +96,14 @@ export default function HomePage() {
                 From the <GradientText className="font-semibold">blog</GradientText>
               </h2>
               <p className="max-w-prose text-lg text-muted-foreground">
-                Short reads on SDD — new posts added as we grow the library.
+                Short reads on SDD. New posts land here as we grow the library.
               </p>
             </div>
             <Link
               href="/blog"
               className={cn(
                 buttonVariants({ variant: "ghost", size: "lg" }),
-                "self-start rounded-full sm:self-auto"
+                "self-start rounded-md sm:self-auto"
               )}
             >
               All articles
@@ -148,14 +156,14 @@ export default function HomePage() {
               <div className="space-y-3">
                 <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">Video library</h2>
                 <p className="max-w-xl text-lg text-muted-foreground">
-                  Curated talks and explainers — watch without leaving the site.
+                  Curated talks and explainers. Watch on the site without tab hopping.
                 </p>
               </div>
               <Link
                 href="/videos"
                 className={cn(
                   buttonVariants({ variant: "secondary", size: "lg" }),
-                  "h-12 rounded-full px-8 text-base shrink-0"
+                  "h-12 rounded-md px-8 text-base shrink-0"
                 )}
               >
                 Browse videos

@@ -3,11 +3,13 @@ import Link from "next/link";
 import { GradientText } from "@/components/gradient-text";
 import { Reveal } from "@/components/reveal";
 import { glossaryTerms, getGlossaryTerm } from "@/lib/glossary-data";
+import { keywordsForPage } from "@/lib/seo-keywords";
 
 export const metadata: Metadata = {
   title: "Glossary",
   description:
-    "Definitions for spec driven development (SDD) and related terms — specs, acceptance criteria, traceability, and more.",
+    "Definitions for spec driven development (SDD) and related terms: specs, acceptance criteria, traceability, and more.",
+  keywords: keywordsForPage("glossary", "software terms", "PRD", "RFC"),
 };
 
 export default function GlossaryPage() {
