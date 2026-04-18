@@ -9,9 +9,25 @@ A small public website that explains **spec driven development (SDD)** to **stud
 - **Primary:** Drive visitors toward the **Course** page (subscribe / lead form; real course later).
 - **Secondary:** Let visitors **explore** glossary, blog, and curated videos.
 
-## Audience
+## Audience (site)
 
-Students and developers new to SDD or comparing it to other practices.
+Visitors who want **clearer specs and less rework** — primarily **learners and builders** (see **Course target audience** below for the paid/free course positioning).
+
+## Course audience
+
+The course is for people who **benefit from writing and reading specs** before or while shipping (“who is this for?”). Segments (not mutually exclusive — copy should welcome overlap):
+
+| Segment | Positioning (draft) |
+| -------- | ---------------------- |
+| **Students** | CS / software-engineering / design programs, **bootcamp grads**, or **serious self-learners** building a portfolio — *not* “anyone in school”; narrow to people who will ship code or technical artifacts. |
+| **Developers** | **Any level** for *habit change* (specs first): juniors learning discipline; mids/seniors who want less churn. Optional signpost: “junior-friendly, senior-useful.” |
+| **QA / test engineers** | Moving toward **delivery or automation engineering**, or who want specs that actually match what ships. |
+| **Product / PM / technical ICs** | Who need **faster MVPs** with fewer misunderstood requirements — emphasis on **shared acceptance**, not replacing engineering. |
+| **Founders / entrepreneurs** | **Solo or tiny teams** validating ideas; language: **scope discipline** and **cheap experiments**, not enterprise process. |
+
+**Explicit non-goals for positioning:** do not promise certifications, job placement, or “replace your PM” — keep promises aligned with **spec fluency** and **delivery quality**.
+
+**Where messaging lives:** summarized on **Home** ([spec-home](./spec-home.md)); expanded on **Course** ([spec-course](./spec-course.md)) + **Course FAQ** there — see phased rollout in **spec-course**.
 
 ## Technical stack (fixed for MVP)
 

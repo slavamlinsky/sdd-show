@@ -4,29 +4,69 @@
 
 Sell the **idea** of an SDD course and collect **leads**; page is **substance + placeholder** until a real course exists.
 
-Follow [spec-design-layout.md](./spec-design-layout.md): **responsive** sections, **airy** spacing, **clear blocks** (hero → syllabus → form), **CTA** hierarchy, optional **placeholder images** for hero or module icons until final art.
+Follow [spec-design-layout.md](./spec-design-layout.md): **responsive** sections, **airy** spacing, **clear blocks** (hero → who it’s for → syllabus → FAQ → form), **CTA** hierarchy, optional **placeholder images** for hero or module icons until final art.
 
-## Page structure (MVP)
+Audience positioning aligns with [spec-main.md](./spec-main.md) (**Target audience — course**).
+
+---
+
+## Phased rollout (content & UX) — implementation later
+
+| Phase | Scope | Notes |
+| ----- | ----- | ----- |
+| **P0 (current MVP)** | Hero, syllabus placeholder, lead form, trust row | Audience messaging can stay light in copy until P1. |
+| **P1** | **“Who this course is for”** block on `/course` — **detailed** vs Home: personas, 1 line each, maybe “not for you if…” |
+| **P1** | **Course FAQ** section on `/course` (accordion): questions below |
+| **P2** | **Home**: compact **“Who it’s for”** band + optional **one** audience FAQ line in mid or bottom FAQ (see [spec-home](./spec-home.md)) |
+
+Implement in order **P1 Course page first**, then **P2 Home** so messaging stays consistent (Course is source of truth for nuance).
+
+---
+
+## Page structure (MVP baseline + planned sections)
 
 1. **Hero / pitch**
    - What learners get (bullet list).
+   - Optional line: **who it’s for** (single sentence teaser linking down-page when P1 ships).
    - Optional **hero image** (placeholder OK) to match landing quality from the home page.
    - **Primary CTA:** scroll to lead form or in-page form section.
 
-2. **Syllabus-style sections (dummy but plausible)**
+2. **Who this course is for** — *P1*
+   - **Detailed** audience block (not the same length as Home):
+     - **Students:** software-related learning paths, bootcamps, self-taught builders — *narrow* from generic “students.”
+     - **Developers:** **all levels** where the gap is **spec discipline**, not syntax.
+     - **QA / test → dev or delivery:** wanting clearer acceptance and less last-minute scope fights.
+     - **Product / technical PM types:** **faster MVP** through better specs and acceptance (not “PM 101” replacement).
+     - **Entrepreneurs / founders:** small teams, scope control, validation — avoid implying formal enterprise-only process.
+   - Short “**Not a fit if…**” (optional): e.g. only want raw coding drills with zero docs.
+
+3. **Syllabus-style sections (dummy but plausible)**
    - **4–6** modules or weeks with title + one-line description each; present as **cards or stacked blocks** with breathing room.
    - Copy can say “coming soon” where honest.
 
-3. **Lead form**
+4. **Course FAQ** — *P1*
+   - **Accordion** (same interaction pattern as Home FAQs for consistency).
+   - **Intent:** objections, time commitment, level, career path, relationship to agile/tickets — **not** duplicating glossary definitions.
+   - **Suggested buckets (draft questions — copy TBD):**
+     - Do I need to be a developer already? *(levels)*
+     - Is this for students / career switchers / QA? *(segments)*
+     - How is this different from “writing tickets”? *(ties to SDD)*
+     - I’m a founder with no team — does SDD apply? *(entrepreneurs)*
+     - How much time per week? *(commitment — TBD with real syllabus)*
+     - Will there be certificates / job support? *(honest: only what you will offer)*
+
+5. **Lead form**
    - Fields: at minimum **email**; optional **name** (if included, keep optional or required consistently in one place).
    - **Submit:** MVP may `console.log`, show success toast, or POST to a Next.js Route Handler that returns 200 — real persistence via **Supabase** later (**spec-main**).
+   - Optional: single checkbox “**I identify as:** student / developer / QA / product / founder” for segmentation — **only if** privacy copy is clear; else skip until analytics policy exists.
 
-4. **Trust row (optional)**
+6. **Trust row (optional)**
    - Link back to `/blog` or `/videos` as “free resources”.
 
 ## Acceptance
 
 - Page reads as a **landing-style** flow: distinct bands, not a single cramped column of text (see **spec-design-layout**).
+- When P1 ships: **audience** + **FAQ** sections are scannable on mobile; no accordion-within-accordion confusion.
 - Form has client-side validation for email format.
 - Successful submit shows clear **success state** (message or inline).
 - No dead links in syllabus (anchors can be non-interactive headings).

@@ -26,9 +26,14 @@ Follow [spec-design-layout.md](./spec-design-layout.md) for **responsive bands**
 4. **Optional teaser row**
    - One line + link to `/videos` (if hero already pushes Course, this balances exploration).
 
-5. **Bottom FAQ (home only, below global footer)**
+5. **“Who it’s for” (course audience — compact)** — *phased; see [spec-course](./spec-course.md)*
+   - **Small band** (not a wall of text): short heading (e.g. **Who this is for**) + **2–4 bullets or chips** mapping to [course audience in spec-main](./spec-main.md#course-audience) (students in software paths, developers any level, QA→dev, product/MVP, founders).
+   - **Goal:** set expectations before `/course`; reinforce that SDD helps **shipping and alignment**, not one narrow job title.
+   - **Optional:** **one** audience-related question may appear in the **mid-page Q&A** or **bottom FAQ** (e.g. “I’m a student — is this for me?”) pointing to `/course` for detail — avoid duplicating the full list in three places.
+
+6. **Bottom FAQ (home only, below global footer)**
    - Extra **accordion FAQ** rendered **after** the site footer on `/` only (does not appear on other routes).
-   - Content should complement the mid-page Q&A — e.g. where to start on the site, course notifications, open source, how SDD relates to TDD — not a verbatim duplicate.
+   - Content should complement the mid-page Q&A — e.g. where to start on the site, course notifications, open source, how SDD relates to TDD; **optional one-liner on course audience fit** — not a verbatim duplicate of the **Course** page FAQ ([spec-course](./spec-course.md)).
    - Landmark: optional `id` (e.g. `#bottom-faq`) for deep links.
 
 ## Acceptance
