@@ -68,8 +68,13 @@ export function SiteHeader() {
         </nav>
 
         <div className="ml-auto flex shrink-0 items-center gap-2">
-          <Button variant="outline" size="sm" render={<Link href="/sign-in" />}>
-            Sign in
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-primary/80 bg-background text-primary hover:bg-primary/10 hover:text-primary"
+            render={<Link href="/sign-up" />}
+          >
+            Sign up
           </Button>
 
           <div className="md:hidden">
