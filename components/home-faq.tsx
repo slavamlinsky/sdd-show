@@ -12,22 +12,22 @@ const items = [
   {
     id: "what",
     q: "What is spec driven development?",
-    a: "Writing clear specs (behavior + acceptance) before or alongside implementation so the whole team shares one source of truth — not just ticket titles.",
+    a: "You write behavior and acceptance before (or beside) implementation so everyone shares one source of truth. Ticket titles alone are not specs.",
   },
   {
     id: "vs",
-    q: "How is it different from “we have tickets”?",
-    a: "Tickets track work; specs explain outcomes. SDD connects cards to testable intent so rework drops when requirements shift.",
+    q: 'How is this different from "we have tickets"?',
+    a: "Tickets track work. Specs explain what done means. SDD links the two so rework drops when things shift.",
   },
   {
     id: "when",
     q: "When does SDD help most?",
-    a: "When multiple people touch the same flow, APIs cross team boundaries, or mistakes are expensive — a short spec pays for itself.",
+    a: "When several people touch one flow, APIs cross team lines, or mistakes get expensive. A short spec usually pays for itself.",
   },
   {
     id: "tools",
     q: "Do I need special tools?",
-    a: "No. A markdown file, a PR description, or a design doc can be enough. Tools help scale, but clarity is the requirement.",
+    a: "No. A markdown file, a solid PR description, or a short design doc can be enough. Tools help at scale. Clarity is the requirement.",
   },
 ] as const;
 
@@ -38,7 +38,7 @@ export function HomeFaq() {
         Questions & <GradientText className="font-semibold">answers</GradientText>
       </h2>
       <p className="mt-3 max-w-prose text-lg text-muted-foreground">
-        Quick answers — dig into the glossary and blog for more.
+        Quick answers. For depth, use the glossary and blog. Course questions live on the course page.
       </p>
       <Accordion className="mt-10 w-full" defaultValue={[items[0].id]}>
         {items.map((item) => (

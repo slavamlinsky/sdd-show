@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { MarkdownContent } from "@/components/markdown-content";
 import { Reveal } from "@/components/reveal";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import { keywordsForPage } from "@/lib/seo-keywords";
 import { ArrowLeftIcon } from "lucide-react";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -19,6 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.meta.title,
     description: post.meta.description,
+    keywords: keywordsForPage("blog", "SDD", post.meta.slug.replace(/-/g, " ")),
   };
 }
 
@@ -36,7 +38,7 @@ export default async function BlogPostPage({ params }: Props) {
       <Reveal>
         <Link
           href="/blog"
-          className="relative inline-flex items-center gap-1.5 rounded-full text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+          className="relative inline-flex items-center gap-1.5 rounded-md text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
         >
           <ArrowLeftIcon className="size-4" />
           Back to blog

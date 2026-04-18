@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import { Reveal } from "@/components/reveal";
 import { GradientText } from "@/components/gradient-text";
 import { VideoGrid } from "@/components/video-grid";
+import { keywordsForPage } from "@/lib/seo-keywords";
 import { videos } from "@/lib/videos-data";
 
 export const metadata: Metadata = {
   title: "Videos",
-  description: "Curated YouTube videos about spec driven development and related ideas — watch in place.",
+  description:
+    "Curated YouTube videos about spec driven development and related ideas. Play in page with one click.",
+  keywords: keywordsForPage("videos", "software talks", "YouTube", "SDD"),
 };
 
 export default function VideosPage() {

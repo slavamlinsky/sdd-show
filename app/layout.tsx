@@ -4,6 +4,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { FooterRegion } from "@/components/footer-region";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { baseKeywords } from "@/lib/seo-keywords";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
     template: `%s · ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  keywords: [...baseKeywords],
 };
 
 export default function RootLayout({

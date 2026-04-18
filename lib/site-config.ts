@@ -2,6 +2,6 @@ export const siteConfig = {
   name: "Spec Driven Dev",
   title: "Spec Driven Development — learn SDD",
   description:
-    "A clear, practical introduction to spec driven development (SDD) for students and developers — glossary, articles, videos, and course updates.",
+    "A practical intro to spec driven development (SDD): glossary, articles, videos, and a course list for students and developers.",
   url: "https://sdd-show.vercel.app",
 } as const;
