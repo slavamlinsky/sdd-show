@@ -1,5 +1,5 @@
+/** Primary header nav (no separate “Home” item — brand links to `/`). */
 export const mainNav = [
-  { href: "/", label: "Home" },
   { href: "/glossary", label: "Glossary" },
   { href: "/blog", label: "Blog" },
   { href: "/videos", label: "Videos" },

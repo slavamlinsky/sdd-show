@@ -51,10 +51,11 @@ The course is for people who **benefit from writing and reading specs** before o
 | `/blog/[slug]` | Single article |
 | `/videos` | Curated YouTube list with in-site playback |
 | `/course` | Course CTA + structured placeholder + lead form |
+| `/sign-in` | Stub page (“coming soon”) until auth — linked from header only |
 
 ## Global layout
 
-- **Header:** Site title / logo text, primary nav links to all routes above.
+- **Header:** **Site title / logo** (links to `/`); **primary nav** lists content routes only — **no duplicate “Home” link**; nav is **centered** on `md+` between logo and actions; **“Sign in”** (outline control, top-right) links to `/sign-in` (stub until auth). **Mobile:** sheet menu for nav + Sign in remains visible next to menu trigger.
 - **Footer:** Short note + optional link to repo or contact (optional for MVP).
 - **Design:** Light, simple, modern (AI-tool / edu style). **Responsive layout, spacing (“air”), structured blocks, CTAs, and image rules** are defined in [spec-design-layout.md](./spec-design-layout.md). Optional visual references may live in a future **`design.md`** — not blocking MVP.
 
