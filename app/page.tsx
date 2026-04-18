@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 import { HomeFaq } from "@/components/home-faq";
+import { HomePillars } from "@/components/home-pillars";
 import { GradientText } from "@/components/gradient-text";
 import { Reveal } from "@/components/reveal";
 import { SectionBackdrop } from "@/components/section-backdrop";
@@ -84,6 +85,8 @@ export default function HomePage() {
           </Reveal>
         </div>
       </section>
+
+      <HomePillars />
 
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-20 px-4 py-20 sm:gap-28 sm:px-6 sm:py-28">
         <section className="relative overflow-hidden rounded-[2rem] border border-border/40 py-8 sm:py-10">

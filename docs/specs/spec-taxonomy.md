@@ -9,61 +9,59 @@ This doc is the **shared vocabulary and rules** so that when v2 ships, **blog ar
 
 ---
 
-## Recommendation: **one primary category + many tags**
+## Four **category** pillars (browse shelves)
+
+Use these **four** labels only — keep the set **fixed** so filters stay scannable.
+
+| Category | Meaning |
+| -------- | ------- |
+| **Product** | Strategy, users, roadmap, PM, GTM, positioning, PMF, value, requirements at the “what / why” level — merged **product + marketing** concerns. |
+| **Build** | Shipping work: specs, code, APIs, tooling, implementation — what we used to call **development**; **“Build”** is the preferred shelf name (human, outcome-oriented). |
+| **Quality** | Verification and safety: testing, acceptance, evals, red teaming, traceability to tests — **not** the same as Build (how we ship vs how we prove it). |
+| **Design** | UX/UI, flows, research-backed decisions, clarity of surfaces — distinct from Build (implementation) and Product (strategy). |
+
+### Build vs Development
+
+- **Development** is still fine in **prose** (“development workflow”).
+- For **taxonomy and UI**, use **Build** as the canonical category slug/label so the pillar reads as **what we build and how we specify it**, not as a generic org function.
+
+### Glossary exception (MVP)
+
+- Glossary cards may show **1–3 pillar badges** per term (terms often span pillars). Blog/video/course items should converge on **one primary category** for v2 filters plus tags.
+
+---
+
+## Tags (cross-cutting)
 
 | Mechanism | Role | Cardinality |
 | --------- | ---- | ------------- |
-| **Category** | **Where it lives in the reader’s head** — broad pillar for browse and primary navigation (filters, landing sections). | **Exactly one** per item (pick the best fit). |
-| **Tags** | **What it is *about*** — tools, methods, themes, channels; cross-cutting and combinable. | **Zero or more** per item. |
+| **Category** (pillar) | Primary shelf for browse — **exactly one** per blog post / video / course slice in v2. | **One of** Product, Build, Quality, Design |
+| **Tags** | Tools, domains, themes — **AI**, **API**, **methodology**, **growth**, **CRO**, **ROI** (as topics), etc. | **Zero or more** |
 
-### Why not subcategories (for now)?
+Tags are **orthogonal** to pillars: e.g. **Build** + tags `ai`, `llm`, `spec-driven-development`.
 
-- **Subcategories** (e.g. Development → Frontend → React) help when a pillar is huge and **hierarchy is always required** for reporting or IA.
-- They add **mental overhead** (“Is SDD Development or Product?”) and duplicate what tags already express.
-- **Tags + a single category** usually cover: *Development* + tags `claude`, `spec-driven-development` without nesting.
+### Recommended controlled tags (extend in repo)
 
-**When to introduce subcategories later:** only if a category becomes crowded (dozens of items per week) and UX research shows users need a second level **before** opening a list. Until then, prefer **more tags** or a **controlled tag group** (see below).
+- **AI / ML:** `ai`, `llm`, `inference`, `evaluation`
+- **Practice:** `spec-driven-development`, `tdd`, `agile`, `methodology`
+- **Interfaces:** `api`, `documentation`, `ux`
+- **Risk / trust:** `security`, `compliance`
+- **Commercial:** `growth`, `planning`, `cro`, `roi` (use as **tags**, not pillars — ROI/CRO are lenses, not shelves)
 
-### Tags vs free keywords
-
-- **Controlled tags** (recommended for consistency): slug list in repo or DB — e.g. `claude`, `spec-driven-development`, `ai`, `branding`, `strategy`.
-- **Aliases:** one display label, one canonical slug (`Spec driven development` → `spec-driven-development`).
-- Optional **tag groups** in UI only (not a second DB tree): “Tool”, “Practice”, “Theme” — same flat tag list, grouped by convention in docs.
+Aliases: one display label, one canonical slug (`Spec driven development` → `spec-driven-development`). See **`lib/taxonomy.ts`** for display helpers.
 
 ---
 
-## Categories (initial set — editable)
+## Examples
 
-High-level buckets. Keep the list **small** (roughly **5–10**) so filters stay scannable.
+- **Category:** Build — **Tags:** `ai`, `claude`, `spec-driven-development`  
+  Meaning: builder-focused content about SDD with AI tooling.
 
-| Category | Typical use |
-| -------- | ----------- |
-| **Development** | Building software, specs, code, tools, platforms, engineering workflow. |
-| **Marketing** | Positioning, campaigns, brand, growth, content marketing, GTM. |
-| **Product** | Discovery, roadmaps, prioritization, PM practice (when not pure marketing). |
-| **AI** | Could be a **top-level category** if AI becomes a major vertical; **or** handle mostly via tags (`ai`, `claude`, `llm`) under Development/Marketing until volume justifies a pillar. |
+- **Category:** Product — **Tags:** `growth`, `roi`, `branding`  
+  Meaning: strategy/GTM shelf; commercial themes as tags.
 
-**Rule of thumb:** If unsure between **Product** and **Development**, ask: “Is the reader mostly a **builder**?” → Development. “Mostly **commercial / GTM**?” → Marketing or Product.
-
----
-
-## Tags (examples)
-
-Tags are **orthogonal** to category: the same tag can appear on Development and Marketing items.
-
-- **Tools / platforms:** `claude`, `cursor`, `github`, …
-- **Practices / methodologies:** `spec-driven-development`, `tdd`, `agile`, …
-- **Themes:** `ai`, `branding`, `strategy`, `mvp`, …
-
-One piece of content can carry many tags, e.g.:
-
-- **Category:** Development  
-- **Tags:** `claude`, `spec-driven-development`, `ai`  
-Meaning: “sits on the Development shelf, and is specifically about Claude + SDD, with an AI angle.”
-
-- **Category:** Marketing  
-- **Tags:** `ai`, `branding`, `strategy`  
-Meaning: “Marketing shelf; topics are AI + branding + strategy.”
+- **Category:** Design — **Tags:** `ux`, `cro`  
+  Meaning: UX-focused; conversion experimentation as a tag.
 
 ---
 
@@ -71,39 +69,40 @@ Meaning: “Marketing shelf; topics are AI + branding + strategy.”
 
 | Content type | Category | Tags |
 | ------------ | -------- | ---- |
-| **Blog post** | Required in taxonomy phase (optional in MVP). | Recommended once filtering exists. |
-| **Video** | Same set as blog (aligned filters on `/videos` and `/blog`). | Same tag namespace. |
-| **Course** (whole product) | Often **one** category for the course landing (e.g. Development). | Course-level tags; optional **per-module** tags in detailed spec when modules ship. |
+| **Blog post** | One pillar in v2 | Recommended once filtering exists |
+| **Video** | One pillar | Same tag namespace; static data may use `category` early |
+| **Course** | Often **Product** or **Build** for the landing | Course-level tags; optional per-module tags later |
+| **Glossary term** | **1–3** pillar badges + optional tags | Pedagogy: show where a term applies |
 
-**Related links:** a video can **link** to a blog article (and vice versa) via `relatedArticleSlug` / `relatedVideoIds` in addition to shared tags — links are **navigation**, tags are **discovery**.
+**Related links:** navigation between items is separate from tags — use `relatedArticleSlug` / `relatedVideoIds` when needed.
 
 ---
 
 ## UX implications (v2 — when implemented)
 
-- **Primary filter:** category (tabs or sidebar).
+- **Primary filter:** category (four pillars).
 - **Secondary refinement:** tags (chips, multi-select).
-- **Search:** full text over title/body **plus** tag matching.
-- **Badges on cards:** show **category** + **1–2 tags** if space (or tags only in meta line).
+- **Search:** full text + tag matching.
+- **Badges on cards:** one category + 1–2 tags when space allows.
 
 ---
 
 ## Spec dependencies
 
-- Blog: extend [spec-blog.md](./spec-blog.md) when implementing **v2** `category` / `tags` (frontmatter + UI).
-- Videos: [spec-videos-v2-v3.md](./spec-videos-v2-v3.md) — category + tags for persisted/filterable videos; **slugs align with this document**.
-- Course: [spec-course.md](./spec-course.md) — audience copy is MVP; library **category/tags** for browse align here in **v2**.
+- Blog: [spec-blog.md](./spec-blog.md) — frontmatter `category` / `tags` when v2 ships.
+- Videos: [spec-videos-v2-v3.md](./spec-videos-v2-v3.md) — align slugs with this document.
+- Course: [spec-course.md](./spec-course.md) — library browse uses the same pillars.
+- Glossary: [spec-glossary.md](./spec-glossary.md) — multi-badge pillars + optional tags.
 
 ---
 
 ## Open decisions (record answers as you decide)
 
-1. Is **AI** a **top-level category** or only **tags** under Development/Marketing?  
-2. Maximum tags per item (e.g. **5–8**) to avoid tag spam.  
-3. Locale: English slugs only for v1?
+1. Maximum tags per item (e.g. **5–8**) to avoid tag spam.
+2. Locale: English slugs only for v1?
 
 ---
 
 ## Summary
 
-Use **one clear category** per article, video, or course slice for “shelf” navigation. Use **tags** for Claude, SDD, AI, branding, strategy — mix freely without subcategories until the catalog forces a second hierarchy.
+Use **four pillars:** **Product · Build · Quality · Design**. Prefer **Build** over “Development” as the **category label**. Use **tags** for AI, API, methodology, growth, CRO, ROI, and other cross-cutting themes — not as top-level categories.

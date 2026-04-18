@@ -8,7 +8,7 @@ Follow [spec-design-layout.md](./spec-design-layout.md): **responsive** sections
 
 Audience positioning aligns with [spec-main.md](./spec-main.md) (**Course audience**).
 
-**Library taxonomy (v2):** when browse-by-topic ships, the course uses a **category** (usually Development) and optional **tags** per [spec-taxonomy.md](./spec-taxonomy.md) — same vocabulary as blog and videos. Not required for MVP course page copy/structure.
+**Library taxonomy (v2):** when browse-by-topic ships, the course uses a **category** (one of **Product · Build · Quality · Design**, often **Build** or **Product**) and optional **tags** per [spec-taxonomy.md](./spec-taxonomy.md) — same vocabulary as blog and videos. Not required for MVP course page copy/structure.
 
 ---
 

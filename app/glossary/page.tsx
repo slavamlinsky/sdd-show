@@ -6,14 +6,21 @@ import { Reveal } from "@/components/reveal";
 import { SectionBackdrop } from "@/components/section-backdrop";
 import { buttonVariants } from "@/components/ui/button";
 import { glossaryTerms } from "@/lib/glossary-data";
+import { formatTag } from "@/lib/taxonomy";
 import { keywordsForPage } from "@/lib/seo-keywords";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Glossary",
+  title: "Glossary & Core Concepts",
   description:
-    "Definitions for spec driven development (SDD) and related terms: specs, acceptance criteria, traceability, and more.",
-  keywords: keywordsForPage("glossary", "software terms", "PRD", "RFC"),
+    "Foundational vocabulary for the AI-driven product lifecycle: Product, Design, Build, and Quality. Short definitions; deep-dive narratives on the blog, videos for visual insights, and courses for end-to-end workflow.",
+  keywords: keywordsForPage(
+    "glossary",
+    "SDD",
+    "AI development",
+    "prompt engineering",
+    "product marketing"
+  ),
 };
 
 export default function GlossaryPage() {
@@ -24,13 +31,17 @@ export default function GlossaryPage() {
       <SectionBackdrop tone="violet" />
       <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
-          <Reveal className="max-w-2xl space-y-4">
+          <Reveal className="max-w-3xl space-y-4">
             <h1 className="font-heading text-4xl font-semibold tracking-tight sm:text-5xl">
               <GradientText className="font-semibold">Glossary</GradientText>
+              <span className="text-foreground"> &amp; Core Concepts</span>
             </h1>
             <p className="text-lg leading-relaxed text-muted-foreground">
-              Core vocabulary around spec driven development. Terms are short by design — use the blog for narratives and
-              the course for a full workflow.
+              Foundational vocabulary for the AI-driven product lifecycle:{" "}
+              <span className="text-foreground/90">Product</span>, <span className="text-foreground/90">Design</span>,{" "}
+              <span className="text-foreground/90">Build</span>, and <span className="text-foreground/90">Quality</span>.
+              Definitions are kept short by design. Explore the blog for deep-dive narratives, watch our latest videos for
+              visual insights, or enroll in our courses for a complete, end-to-end workflow.
             </p>
           </Reveal>
           <Reveal delay={0.04} className="shrink-0">
@@ -53,18 +64,28 @@ export default function GlossaryPage() {
               <Reveal delay={(i % 5) * 0.04} distance={14}>
                 <article className="rounded-[1.75rem] border border-border/60 bg-card/90 px-7 py-9 shadow-sm ring-1 ring-foreground/[0.04] backdrop-blur-sm sm:px-10">
                   <h2 className="font-heading text-xl font-semibold tracking-tight sm:text-2xl">{term.title}</h2>
-                  <ul
-                    className="mt-3 flex flex-wrap gap-1.5"
-                    aria-label="Where this applies"
-                  >
-                    {term.categories.map((label) => (
-                      <li key={label}>
-                        <span className="inline-flex rounded-md border border-border/80 bg-background/80 px-2 py-0.5 text-[11px] font-medium leading-none text-muted-foreground">
-                          {label}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="mt-3 flex flex-col gap-2">
+                    <ul className="flex flex-wrap gap-1.5" aria-label="Pillars">
+                      {term.categories.map((label) => (
+                        <li key={label}>
+                          <span className="inline-flex rounded-md border border-border/80 bg-background/80 px-2 py-0.5 text-[11px] font-medium leading-none text-muted-foreground">
+                            {label}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                    {term.tags && term.tags.length > 0 ? (
+                      <ul className="flex flex-wrap gap-1.5" aria-label="Tags">
+                        {term.tags.map((slug) => (
+                          <li key={slug}>
+                            <span className="inline-flex rounded-full border border-dashed border-border/70 bg-muted/30 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+                              {formatTag(slug)}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
                   <p className="mt-4 max-w-prose text-sm leading-relaxed text-muted-foreground">
                     {term.shortDefinition}
                   </p>

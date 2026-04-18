@@ -2,7 +2,7 @@
 
 ## Intent
 
-Define **SDD** and **10–15** related or commonly confused terms so readers can scan quickly.
+Cover **SDD** plus vocabulary across the four pillars — **Product**, **Build**, **Quality**, **Design** — and AI-era terms via **tags**. Definitions stay short; the blog, videos, and course carry depth.
 
 ## Term card / entry fields
 
@@ -13,7 +13,8 @@ Each term should have:
 | `slug` | yes | Stable id for anchors; URL optional if single-page list |
 | `title` | yes | Term name |
 | `shortDefinition` | yes | 1–3 sentences; rendered at **`text-sm`** on the glossary page |
-| `categories` | yes | **2–3** short labels (e.g. Development, Product, Planning) — shown as **small outline badges** (“where this applies”), not cross-links |
+| `categories` | yes | **1–3** labels from **Product \| Build \| Quality \| Design** only — pillar badges (“where this applies”) |
+| `tags` | no | Cross-cutting slugs (`ai`, `methodology`, `growth`, …) — aligned with [spec-taxonomy.md](./spec-taxonomy.md) and **`lib/taxonomy.ts`**; shown as secondary chips |
 
 ## Page behavior (MVP)
 
@@ -24,17 +25,18 @@ Each term should have:
 
 ## Content seed
 
-- Include **SDD** as a term.
-- Remaining terms: planning, acceptance criteria, traceability, living document, etc. (final list at authoring time; total **10–15**).
+- Include **SDD** and foundational SDD terms (requirements vs acceptance criteria, traceability, artifacts, etc.).
+- Balance the **four pillars** in the library: **Product** (strategy, GTM, PM), **Build** (specs, code, AI tooling), **Quality** (testing, eval, safety), **Design** (UX, flows). Use **tags** for AI, API, methodology, growth, CRO/ROI-as-topic, etc.
+- Total count grows with the blog/course; aim for breadth across pillars, not duplicate jargon.
 
 ## v2 (planned)
 
-- **Suggest a term:** form or GitHub issue link, optional moderation queue, spam protection — align with [spec-taxonomy.md](./spec-taxonomy.md) if terms get categories/tags.
+- **Suggest a term:** form or GitHub issue link, optional moderation queue, spam protection — align with [spec-taxonomy.md](./spec-taxonomy.md).
 
 ## Acceptance
 
 - All terms render from shared content source (same pattern as **spec-main** content storage).
-- Each term exposes **category badges** (outline style) for usage spheres; no “see also” link row on cards.
+- Each term exposes **pillar badges** (outline style) and optional **tag** chips; no “see also” link row on cards.
 
 ## Non-goals
 
