@@ -1,3 +1,4 @@
+import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -35,6 +36,22 @@ const markdownComponents = {
   code: ({ ...props }: React.ComponentPropsWithoutRef<"code">) => (
     <code className="rounded bg-muted px-1 py-0.5 font-mono text-[0.9em] text-foreground" {...props} />
   ),
+  hr: () => <hr className="my-10 border-border/60" />,
+  img: ({ src, alt }: React.ComponentPropsWithoutRef<"img">) => {
+    if (!src || typeof src !== "string") return null;
+    return (
+      <span className="relative my-6 block aspect-[16/9] w-full overflow-hidden rounded-xl border border-border/60 bg-muted/20 not-italic shadow-sm">
+        <Image
+          src={src}
+          alt={alt ?? ""}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 42rem"
+          unoptimized={src.endsWith(".svg")}
+        />
+      </span>
+    );
+  },
 };
 
 export function MarkdownContent({ markdown }: { markdown: string }) {
