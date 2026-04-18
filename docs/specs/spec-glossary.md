@@ -12,8 +12,8 @@ Each term should have:
 | ----- | -------- | ----- |
 | `slug` | yes | Stable id for anchors; URL optional if single-page list |
 | `title` | yes | Term name |
-| `shortDefinition` | yes | 1–3 sentences |
-| `relatedSlugs` | no | Optional “see also” links to other terms |
+| `shortDefinition` | yes | 1–3 sentences; rendered at **`text-sm`** on the glossary page |
+| `categories` | yes | **2–3** short labels (e.g. Development, Product, Planning) — shown as **small outline badges** (“where this applies”), not cross-links |
 
 ## Page behavior (MVP)
 
@@ -34,7 +34,7 @@ Each term should have:
 ## Acceptance
 
 - All terms render from shared content source (same pattern as **spec-main** content storage).
-- Internal “see also” links resolve to entries on the same page (or scroll-to-anchor).
+- Each term exposes **category badges** (outline style) for usage spheres; no “see also” link row on cards.
 
 ## Non-goals
 

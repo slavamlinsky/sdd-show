@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Eye, Lightbulb } from "lucide-react";
+import { Lightbulb } from "lucide-react";
 import Link from "next/link";
 import { GradientText } from "@/components/gradient-text";
 import { Reveal } from "@/components/reveal";
 import { SectionBackdrop } from "@/components/section-backdrop";
 import { buttonVariants } from "@/components/ui/button";
-import { glossaryTerms, getGlossaryTerm } from "@/lib/glossary-data";
+import { glossaryTerms } from "@/lib/glossary-data";
 import { keywordsForPage } from "@/lib/seo-keywords";
 import { cn } from "@/lib/utils";
 
@@ -53,33 +53,21 @@ export default function GlossaryPage() {
               <Reveal delay={(i % 5) * 0.04} distance={14}>
                 <article className="rounded-[1.75rem] border border-border/60 bg-card/90 px-7 py-9 shadow-sm ring-1 ring-foreground/[0.04] backdrop-blur-sm sm:px-10">
                   <h2 className="font-heading text-xl font-semibold tracking-tight sm:text-2xl">{term.title}</h2>
-                  <p className="mt-4 max-w-prose text-[15px] leading-relaxed text-muted-foreground sm:text-base">
+                  <ul
+                    className="mt-3 flex flex-wrap gap-1.5"
+                    aria-label="Where this applies"
+                  >
+                    {term.categories.map((label) => (
+                      <li key={label}>
+                        <span className="inline-flex rounded-md border border-border/80 bg-background/80 px-2 py-0.5 text-[11px] font-medium leading-none text-muted-foreground">
+                          {label}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-4 max-w-prose text-sm leading-relaxed text-muted-foreground">
                     {term.shortDefinition}
                   </p>
-                  {term.relatedSlugs && term.relatedSlugs.length > 0 ? (
-                    <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border/50 pt-8">
-                      <span className="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-                        <Eye className="size-3.5 shrink-0 opacity-80" aria-hidden />
-                        See also
-                      </span>
-                      <ul className="flex flex-wrap items-center gap-2">
-                        {term.relatedSlugs.map((slug) => {
-                          const related = getGlossaryTerm(slug);
-                          if (!related) return null;
-                          return (
-                            <li key={slug}>
-                              <Link
-                                href={`/glossary#${slug}`}
-                                className="rounded-full bg-muted px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-primary/10 hover:text-primary"
-                              >
-                                {related.title}
-                              </Link>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  ) : null}
                 </article>
               </Reveal>
             </li>
