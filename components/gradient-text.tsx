@@ -4,14 +4,17 @@ import type { ReactNode } from "react";
 type GradientTextProps = {
   children: ReactNode;
   className?: string;
+  /** Dark surface (modal, navy section): lighter solid fallback if background-clip is unsupported */
+  onDark?: boolean;
 };
 
-/** Accent line or phrase — gradient fill (decorative; keep sentence meaning if color is stripped). */
-export function GradientText({ children, className }: GradientTextProps) {
+/** Inline span inside headings — meetami-style gradient (see `.gradient-text-fill` in globals.css). */
+export function GradientText({ children, className, onDark }: GradientTextProps) {
   return (
     <span
       className={cn(
-        "bg-gradient-to-r from-violet-600 via-indigo-600 to-sky-600 bg-clip-text text-transparent",
+        "gradient-text-fill",
+        onDark && "gradient-text-fill--on-dark",
         className
       )}
     >

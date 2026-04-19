@@ -45,7 +45,8 @@ export function HomeIntentPillars() {
             Four Core Principles <GradientText>for Intent-Driven Work</GradientText>
           </h2>
           <p className="mt-8 max-w-[65ch] mx-auto text-[15px] leading-[1.7] text-muted-foreground sm:text-base">
-            Turn vague goals into specs people can execute — starting with how you frame intent.
+          Learn how to translate high-level intent into a complete, workable system design. Master the ideas,
+          vocabulary, and a repeatable workflow you can use on real-world projects.  
           </p>
         </Reveal>
         <ul className="mt-12 grid list-none grid-cols-1 gap-6 p-0 sm:grid-cols-2 lg:gap-8">

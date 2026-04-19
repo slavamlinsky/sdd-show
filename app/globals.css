@@ -155,4 +155,47 @@
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
   }
+
+  /*
+   * Gradient text fill — meetami.ai pattern: plain words + <span class="gradient-text-fill">…</span>
+   * (hero h1, popup h2 on dark, etc.). Stops match their Elementor CSS. Gradient only inside
+   * @supports. Use .gradient-text-fill--on-dark (see GradientText onDark) for navy/popup surfaces
+   * so the no-clip fallback stays light-on-dark.
+   */
+  .gradient-text-fill {
+    display: inline;
+    color: rgb(151 74 220); /* ~ #974adc; readable if clip unsupported */
+    -webkit-text-fill-color: currentColor;
+  }
+  .gradient-text-fill.gradient-text-fill--on-dark {
+    color: rgb(221 214 254); /* indigo-200: fallback on dark modals / scorebg-style sections */
+    -webkit-text-fill-color: currentColor;
+  }
+  .dark .gradient-text-fill {
+    color: rgb(192 132 252);
+    -webkit-text-fill-color: currentColor;
+  }
+  .dark .gradient-text-fill.gradient-text-fill--on-dark {
+    color: rgb(233 213 255); /* purple-200 */
+    -webkit-text-fill-color: currentColor;
+  }
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .gradient-text-fill,
+    .gradient-text-fill.gradient-text-fill--on-dark,
+    .dark .gradient-text-fill,
+    .dark .gradient-text-fill.gradient-text-fill--on-dark {
+      background-image: linear-gradient(
+        to right,
+        #005ff2,
+        #974adc,
+        #cf2ebc,
+        #f01496,
+        #ff256f
+      );
+      color: rgb(0 0 0 / 0);
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+  }
 }

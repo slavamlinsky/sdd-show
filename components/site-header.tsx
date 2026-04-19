@@ -8,7 +8,16 @@ import { mainNav } from "@/lib/navigation";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 function navLinkClass(active: boolean) {
   return cn(
@@ -42,17 +51,21 @@ function MobileMainNav() {
         <SheetContent
           id="mobile-main-nav"
           side="right"
-          className="w-[min(100%,20rem)] gap-0 p-0"
+          className="flex h-full max-h-[100dvh] w-[min(100%,20rem)] flex-col gap-0 p-0"
         >
           <SheetHeader className="border-b border-border p-4 text-left">
             <SheetTitle className="text-left">Menu</SheetTitle>
           </SheetHeader>
-          <nav className="flex flex-col p-2" aria-label="Mobile main">
+          <nav
+            className="flex min-h-0 flex-1 flex-col overflow-y-auto p-2"
+            aria-label="Mobile main"
+          >
             {mainNav.map(({ href, label }) => {
               const active = isNavActive(pathname, href);
               return (
                 <SheetClose
                   key={href}
+                  nativeButton={false}
                   render={<Link href={href} />}
                   className={cn(
                     "rounded-lg px-3 py-2.5 text-sm font-medium",
@@ -66,6 +79,14 @@ function MobileMainNav() {
               );
             })}
           </nav>
+          <SheetFooter className="border-t border-border sm:gap-0">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-sm font-medium text-muted-foreground">
+                Theme
+              </span>
+              <ThemeToggle />
+            </div>
+          </SheetFooter>
         </SheetContent>
       </Sheet>
     </div>
@@ -122,6 +143,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="ml-auto flex shrink-0 items-center gap-2">
+          <ThemeToggle className="hidden md:inline-flex" />
           <Button
             variant="outline"
             nativeButton={false}

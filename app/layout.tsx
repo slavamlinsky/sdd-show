@@ -4,6 +4,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { FooterRegion } from "@/components/footer-region";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { ThemeProvider } from "@/components/theme-provider";
 import { baseKeywords } from "@/lib/seo-keywords";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
@@ -37,6 +38,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${plusJakarta.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body
@@ -45,16 +47,23 @@ export default function RootLayout({
           "min-h-full flex flex-col bg-background text-foreground"
         )}
       >
-        <SiteHeader />
-        <main
-          id="main-content"
-          className="min-w-0 flex-1 scroll-mt-16 outline-none w-full pt-16"
-          tabIndex={-1}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
-          <ScrollToTop />
-          {children}
-        </main>
-        <FooterRegion />
+          <SiteHeader />
+          <main
+            id="main-content"
+            className="min-w-0 flex-1 scroll-mt-16 outline-none w-full pt-16"
+            tabIndex={-1}
+          >
+            <ScrollToTop />
+            {children}
+          </main>
+          <FooterRegion />
+        </ThemeProvider>
       </body>
     </html>
   );

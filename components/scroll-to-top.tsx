@@ -18,14 +18,43 @@ function getViewportScrollY(): number {
   );
 }
 
-/** Sentinel sits at the top of `<main>`; walk ancestors for nested scroll containers (IDE previews, etc.). */
-function scrollPageToTop(behavior: ScrollBehavior, sentinel: HTMLElement | null) {
-  let el: HTMLElement | null = sentinel;
+function isVerticallyScrollable(el: HTMLElement): boolean {
+  const overflowY = getComputedStyle(el).overflowY;
+  if (
+    overflowY !== "auto" &&
+    overflowY !== "scroll" &&
+    overflowY !== "overlay"
+  ) {
+    return false;
+  }
+  return el.scrollHeight > el.clientHeight;
+}
+
+/** Nearest scroll container first (sentinel → … → document), same list used for visibility and scroll-to-top. */
+function collectScrollableAncestors(start: HTMLElement | null): HTMLElement[] {
+  const out: HTMLElement[] = [];
+  if (!start || typeof window === "undefined") return out;
+  let el: HTMLElement | null = start;
   while (el) {
-    if (el.scrollTop > 0) {
-      el.scrollTo({ top: 0, behavior });
+    if (isVerticallyScrollable(el)) {
+      out.push(el);
     }
     el = el.parentElement;
+  }
+  return out;
+}
+
+function getMaxVerticalScroll(sentinel: HTMLElement | null): number {
+  let max = getViewportScrollY();
+  for (const el of collectScrollableAncestors(sentinel)) {
+    max = Math.max(max, el.scrollTop);
+  }
+  return max;
+}
+
+function scrollPageToTop(behavior: ScrollBehavior, sentinel: HTMLElement | null) {
+  for (const el of collectScrollableAncestors(sentinel)) {
+    el.scrollTo({ top: 0, behavior });
   }
   document.documentElement.scrollTo({ top: 0, behavior });
   document.body.scrollTo({ top: 0, behavior });
@@ -37,24 +66,52 @@ function scrollPageToTop(behavior: ScrollBehavior, sentinel: HTMLElement | null)
 export function ScrollToTop() {
   const [visible, setVisible] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
+    if (!visible) {
+      buttonRef.current?.blur();
+    }
+  }, [visible]);
+
+  useEffect(() => {
+    let scrollableWithListeners: HTMLElement[] = [];
+
     const update = () => {
-      setVisible(getViewportScrollY() > SHOW_AFTER_PX);
+      setVisible(getMaxVerticalScroll(sentinelRef.current) > SHOW_AFTER_PX);
+    };
+
+    const refreshScrollableListeners = () => {
+      for (const el of scrollableWithListeners) {
+        el.removeEventListener("scroll", update);
+      }
+      scrollableWithListeners = collectScrollableAncestors(sentinelRef.current);
+      for (const el of scrollableWithListeners) {
+        el.addEventListener("scroll", update, { passive: true });
+      }
+    };
+
+    const onResize = () => {
+      refreshScrollableListeners();
+      update();
     };
 
     update();
     requestAnimationFrame(() => requestAnimationFrame(update));
+    refreshScrollableListeners();
 
     window.addEventListener("scroll", update, { passive: true });
     document.addEventListener("scroll", update, { capture: true, passive: true });
-    window.addEventListener("resize", update, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
     window.addEventListener("pageshow", update);
 
     return () => {
+      for (const el of scrollableWithListeners) {
+        el.removeEventListener("scroll", update);
+      }
       window.removeEventListener("scroll", update);
       document.removeEventListener("scroll", update, true);
-      window.removeEventListener("resize", update);
+      window.removeEventListener("resize", onResize);
       window.removeEventListener("pageshow", update);
     };
   }, []);
@@ -73,7 +130,11 @@ export function ScrollToTop() {
         )}
       >
         <button
+          ref={buttonRef}
           type="button"
+          disabled={!visible}
+          tabIndex={visible ? 0 : -1}
+          aria-hidden={!visible ? true : undefined}
           aria-label="Scroll to top"
           className={cn(
             buttonVariants({ variant: "default", size: "icon" }),
@@ -82,6 +143,7 @@ export function ScrollToTop() {
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           )}
           onClick={() => {
+            if (!visible) return;
             const reduce =
               typeof window !== "undefined" &&
               window.matchMedia("(prefers-reduced-motion: reduce)").matches;
