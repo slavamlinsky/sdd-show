@@ -68,13 +68,6 @@ const curatedVideos: VideoEntry[] = [
     category: "Product",
   },
   {
-    id: "marc-schluper-intent-engineering-sdd-example",
-    title: "Intent Engineering By Example - how to boost Spec-Driven Development",
-    youtubeId: "59RhwBq2GN4",
-    channelTitle: "Marc Schluper",
-    category: "Build",
-  },
-  {
     id: "executive-producer-intent-engineering-claudesim",
     title: "What is Intent Engineering? Tell AI What You Want, Not How | ClaudeSim",
     youtubeId: "P0wz1LHNHjo",

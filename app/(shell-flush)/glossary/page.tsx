@@ -29,7 +29,7 @@ export default function GlossaryPage() {
   return (
     <div className="full-bleed relative overflow-hidden">
       <SectionBackdrop tone="violet" />
-      <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6">
+      <div className="relative mx-auto w-full max-w-6xl px-4 pt-6 sm:px-6 sm:pt-12">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
           <Reveal className="max-w-3xl space-y-4">
             <h1>
