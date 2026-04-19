@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 export default function SignUpPage() {
   return (
-    <div className="mx-auto max-w-lg px-4 py-24 text-center">
-      <h1 className="font-heading text-2xl font-semibold tracking-tight">Sign up</h1>
+    <div className="mx-auto max-w-lg text-center">
+      <h1 className="text-2xl font-semibold tracking-tight">Sign up</h1>
       <p className="mt-3 text-muted-foreground">
         Registration isn’t wired up yet. Check back later, or continue exploring the site.
       </p>

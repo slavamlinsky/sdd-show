@@ -42,12 +42,14 @@ export default function RootLayout({
       <body
         className={cn(
           plusJakarta.className,
-          "min-h-full flex flex-col bg-background text-foreground"
+          "min-h-full flex flex-col overflow-x-hidden bg-background text-foreground"
         )}
       >
         <SiteHeader />
         <main id="main-content" className="flex-1 scroll-mt-0 outline-none" tabIndex={-1}>
-          {children}
+          <div className="page-shell mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+            {children}
+          </div>
         </main>
         <FooterRegion />
         <ScrollToTop />

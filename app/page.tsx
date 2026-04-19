@@ -31,17 +31,17 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col">
-      <section className="relative overflow-hidden border-b border-border/50">
+      <section className="full-bleed relative overflow-hidden border-b border-border/50">
         <div
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-35%,rgba(99,102,241,0.16),transparent_55%),radial-gradient(ellipse_70%_50%_at_100%_0%,rgba(14,165,233,0.1),transparent_50%)]"
           aria-hidden
         />
-        <div className="relative mx-auto flex max-w-6xl flex-col gap-12 px-4 py-20 sm:gap-16 sm:px-6 sm:py-28 lg:flex-row lg:items-center lg:gap-16">
+        <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 py-20 sm:gap-16 sm:px-6 sm:py-28 lg:flex-row lg:items-center lg:gap-16">
           <Reveal className="flex-1 space-y-8" distance={28}>
             <p className="text-sm font-semibold tracking-wide text-muted-foreground uppercase">
               For students and developers
             </p>
-            <h1 className="font-heading text-balance text-4xl font-semibold tracking-tight sm:text-5xl lg:text-[3.35rem] lg:leading-[1.08]">
+            <h1 className="text-balance lg:text-[3.35rem] lg:leading-[1.08]">
               Ship software from{" "}
               <GradientText className="font-semibold">clear specs</GradientText>, not vague tickets.
             </h1>
@@ -88,7 +88,7 @@ export default function HomePage() {
 
       <HomePillars />
 
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-20 px-4 py-20 sm:gap-28 sm:px-6 sm:py-28">
+      <div className="flex w-full flex-col gap-20 py-20 sm:gap-28 sm:py-28">
         <section className="relative overflow-hidden rounded-[2rem] border border-border/40 py-8 sm:py-10">
           <SectionBackdrop tone="emerald" heightClass="h-[min(420px,55vh)]" />
           <Reveal className="relative px-2 sm:px-4">

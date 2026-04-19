@@ -35,9 +35,9 @@ const pillars = [
 
 export function HomePillars() {
   return (
-    <section className="relative overflow-hidden border-y border-border/40 bg-gradient-to-b from-muted/25 via-background to-muted/15">
+    <section className="full-bleed relative overflow-hidden border-y border-border/40 bg-gradient-to-b from-muted/25 via-background to-muted/15">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(99,102,241,0.09),transparent_70%)]" aria-hidden />
-      <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+      <div className="relative mx-auto w-full max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-14">
           <Reveal className="order-2 lg:order-1" distance={20}>
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[2rem] border border-border/60 bg-muted shadow-xl ring-1 ring-foreground/[0.04]">

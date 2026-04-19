@@ -2,6 +2,12 @@
 
 Applies to **all routes** unless a feature spec narrows further. Visual direction is a **light, modern marketing / edu** feel with **clear hierarchy**, informed in part by contemporary product landing patterns (e.g. generous type, soft gradients, motion on scroll).
 
+## App shell (root layout)
+
+- **Single page shell:** All route content renders inside one shared wrapper in `app/layout.tsx`: **horizontal** padding `px-4` / `sm:px-6`, **vertical** padding `py-16` / `sm:py-24`, and **max width** `max-w-6xl` centered (`mx-auto`). Individual routes **do not** repeat this outer shell; they only add layout when something differs (e.g. article column `max-w-3xl`, lead form `max-w-lg`).
+- **Full-bleed bands:** Marketing sections whose background or borders should span the **viewport** (hero, some bordered bands, `SectionBackdrop` pages) use a shared **`full-bleed`** utility: break out of the shell horizontally, then use an inner `mx-auto max-w-6xl px-4 sm:px-6` (or narrower when specified) so text aligns with the shell.
+- **Default page title (`h1`):** Primary titles use a shared base style — `font-heading`, `text-4xl` / `sm:text-5xl`, `font-semibold`, `tracking-tight` — scoped with **`:where(.page-shell) h1`** in global CSS so route-level utilities can override size (e.g. `text-2xl` on `/sign-up`, larger `lg:` display on heroes).
+
 ## Responsive behavior (required)
 
 - **Mobile-first:** Base styles target small screens; add breakpoints for tablet and desktop.
