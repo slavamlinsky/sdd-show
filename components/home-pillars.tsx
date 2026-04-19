@@ -45,11 +45,11 @@ export function HomePillars() {
       />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-10%,rgba(99,102,241,0.08),transparent_55%)]" aria-hidden />
 
-      <div className="relative mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+      <div className="relative mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-24 lg:px-10">
         <Reveal className="mx-auto max-w-3xl text-center" distance={18}>
           <h2
             id="home-pillars-heading"
-            className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
+            className="font-heading text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl"
           >
             Vocabulary for the{" "}
             <GradientText className="font-semibold">AI-driven product lifecycle</GradientText>
@@ -64,7 +64,7 @@ export function HomePillars() {
                 <Reveal delay={i * 0.06} distance={14}>
                   <div
                     className={cn(
-                      "flex h-full gap-5 hover:translate-y-2 rounded-xl bg-card p-6 shadow-sm",
+                      "flex h-full gap-5 rounded-xl bg-card p-8 shadow-sm hover:-translate-y-1",
                       "ring-1 ring-border/50 dark:shadow-[0_12px_40px_-12px_rgba(0,0,0,0.35)]"
                     )}
                   >
@@ -75,10 +75,10 @@ export function HomePillars() {
                       <Icon className="size-12 text-violet-600 dark:text-sky-400" strokeWidth={1.65} />
                     </span>
                     <div className="min-w-0 flex-1">
-                      <h3 className="font-heading text-xl font-semibold tracking-tight text-foreground">
+                      <h3 className="font-heading text-xl font-semibold leading-snug tracking-tight text-foreground">
                         {item.title}
                       </h3>
-                      <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{item.description}</p>
+                      <p className="mt-3 text-[15px] leading-[1.7] text-muted-foreground">{item.description}</p>
                     </div>
                   </div>
                 </Reveal>

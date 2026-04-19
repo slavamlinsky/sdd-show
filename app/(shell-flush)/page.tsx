@@ -39,15 +39,22 @@ export default function HomePage() {
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-35%,rgba(99,102,241,0.16),transparent_55%),radial-gradient(ellipse_70%_50%_at_100%_0%,rgba(14,165,233,0.1),transparent_50%)]"
           aria-hidden
         />
-        <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 py-12 sm:px-6 lg:flex-row lg:items-center lg:gap-16">
+        <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-12 px-5 pt-12 sm:px-8 sm:pt-14 lg:flex-row lg:items-center lg:gap-16 lg:px-10 pb-24 sm:pb-28 lg:pb-32">
           <Reveal className="flex-1 space-y-8" distance={28}>
-            <h1>
+            <h1 className="text-balance leading-[1.15] sm:leading-[1.12]">
               Ship software from{" "}
               <GradientText className="font-semibold">clear specs</GradientText>, not vague tickets.
             </h1>
-            <p className="max-w-xl text-pretty text-sm leading-relaxed text-muted-foreground">
-              Intent-Driven Engineering (IDE) focuses on defining the desired outcomes before implementation, ensuring requirements drive development rather than just following tasks. Learn how to translate high-level intent into a complete, workable system design. Master the ideas, vocabulary, and a repeatable workflow you can use on real-world projects.
-            </p>
+            <div className="max-w-[65ch] space-y-8 text-pretty text-base leading-[1.7] text-muted-foreground">
+              <p>
+                Intent-Driven Engineering (IDE) focuses on defining the desired outcomes before implementation,
+                ensuring requirements drive development rather than just following tasks.
+              </p>
+              <p>
+                Learn how to translate high-level intent into a complete, workable system design. Master the ideas,
+                vocabulary, and a repeatable workflow you can use on real-world projects.
+              </p>
+            </div>
             <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
               <Link
                 href="/course"
