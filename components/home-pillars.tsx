@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Code2, Package, Palette, ShieldCheck } from "lucide-react";
 import { GradientText } from "@/components/gradient-text";
@@ -35,80 +34,89 @@ const pillars = [
 
 export function HomePillars() {
   return (
-    <section className="full-bleed relative overflow-hidden border-y border-border/40 bg-gradient-to-b from-muted/25 via-background to-muted/15">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(99,102,241,0.09),transparent_70%)]" aria-hidden />
-      <div className="relative mx-auto w-full max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-14">
-          <Reveal className="order-2 lg:order-1" distance={20}>
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[2rem] border border-border/60 bg-muted shadow-xl ring-1 ring-foreground/[0.04]">
-              <Image
-                src="/images/home-pillars.png"
-                alt="Professional working at a desk with laptop and monitors — organized product development"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
-          </Reveal>
+    <section
+      className="full-bleed relative overflow-hidden border-y border-border/30"
+      aria-labelledby="home-pillars-heading"
+    >
+      {/* Soft diagonal wash — pale blue → lavender */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-sky-100/70 via-indigo-50/50 to-violet-100/65 dark:from-sky-950/25 dark:via-indigo-950/20 dark:to-violet-950/25"
+        aria-hidden
+      />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-10%,rgba(99,102,241,0.08),transparent_55%)]" aria-hidden />
 
-          <div className="order-1 space-y-6 lg:order-2">
-            <Reveal distance={16}>
-              <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
-                <GradientText className="font-semibold">Product</GradientText>, Design, Build &amp; Quality
-              </h2>
-              <p className="mt-4 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
-                Foundational vocabulary for the AI-driven product lifecycle. Definitions stay short in the{" "}
-                <Link href="/glossary" className="font-medium text-foreground underline-offset-4 hover:underline">
-                  glossary
-                </Link>
-                ; go deeper on the{" "}
-                <Link href="/blog" className="font-medium text-foreground underline-offset-4 hover:underline">
-                  blog
-                </Link>
-                , watch{" "}
-                <Link href="/videos" className="font-medium text-foreground underline-offset-4 hover:underline">
-                  videos
-                </Link>{" "}
-                for visual walkthroughs, or take the{" "}
-                <Link href="/course" className="font-medium text-foreground underline-offset-4 hover:underline">
-                  course
-                </Link>{" "}
-                for an end-to-end workflow.
-              </p>
-            </Reveal>
+      <div className="relative mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+        <Reveal className="mx-auto max-w-3xl text-center" distance={18}>
+          <h2
+            id="home-pillars-heading"
+            className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
+          >
+            Foundational vocabulary for the{" "}
+            <GradientText className="font-semibold">AI-driven product lifecycle</GradientText>
+          </h2>
+          <p className="mt-4 text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
+            Short definitions in the{" "}
+            <Link href="/glossary" className="font-medium text-foreground underline-offset-4 hover:underline">
+              glossary
+            </Link>
+            ; deeper reads on the{" "}
+            <Link href="/blog" className="font-medium text-foreground underline-offset-4 hover:underline">
+              blog
+            </Link>
+            ,{" "}
+            <Link href="/videos" className="font-medium text-foreground underline-offset-4 hover:underline">
+              videos
+            </Link>{" "}
+            for walkthroughs, and the{" "}
+            <Link href="/course" className="font-medium text-foreground underline-offset-4 hover:underline">
+              course
+            </Link>{" "}
+            for a full workflow.
+          </p>
+        </Reveal>
 
-            <div className="grid gap-6 sm:grid-cols-2">
-              {pillars.map((item, i) => {
-                const Icon = item.icon;
-                return (
-                  <Reveal key={item.title} delay={i * 0.05} distance={12}>
-                    <div className="flex gap-3 rounded-2xl border border-border/60 bg-card/80 p-4 shadow-sm ring-1 ring-foreground/[0.03] backdrop-blur-sm">
-                      <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                        <Icon className="size-5" aria-hidden />
-                      </span>
-                      <div className="min-w-0 space-y-1.5">
-                        <h3 className="font-heading text-sm font-semibold text-foreground">{item.title}</h3>
-                        <p className="text-[13px] leading-snug text-muted-foreground">{item.description}</p>
-                      </div>
+        <ul className="mt-12 grid list-none grid-cols-1 gap-6 p-0 sm:grid-cols-2 sm:gap-7 lg:mt-14 lg:gap-8">
+          {pillars.map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <li key={item.title}>
+                <Reveal delay={i * 0.06} distance={14}>
+                  <div
+                    className={cn(
+                      "flex h-full gap-5 rounded-[1.35rem] bg-card p-6 shadow-[0_12px_40px_-12px_rgba(79,70,229,0.12),0_4px_16px_-4px_rgba(15,23,42,0.08)]",
+                      "ring-1 ring-border/50 dark:shadow-[0_12px_40px_-12px_rgba(0,0,0,0.35)]"
+                    )}
+                  >
+                    <span
+                      className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500/12 via-white to-sky-500/15 ring-1 ring-violet-500/15 dark:from-violet-500/20 dark:via-card dark:to-sky-500/20 dark:ring-violet-400/20"
+                      aria-hidden
+                    >
+                      <Icon className="size-7 text-violet-600 dark:text-sky-400" strokeWidth={1.65} />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-heading text-lg font-semibold tracking-tight text-foreground">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{item.description}</p>
                     </div>
-                  </Reveal>
-                );
-              })}
-            </div>
+                  </div>
+                </Reveal>
+              </li>
+            );
+          })}
+        </ul>
 
-            <Reveal delay={0.12}>
-              <Link
-                href="/glossary"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "inline-flex h-11 rounded-xl border-primary/30 px-6 text-sm font-semibold"
-                )}
-              >
-                Open glossary & core concepts
-              </Link>
-            </Reveal>
-          </div>
-        </div>
+        <Reveal delay={0.12} className="mt-10 flex justify-center sm:mt-12">
+          <Link
+            href="/glossary"
+            className={cn(
+              buttonVariants({ variant: "outline", size: "lg" }),
+              "h-12 rounded-xl border-primary/25 bg-background/80 px-8 text-sm font-semibold shadow-sm backdrop-blur-sm hover:bg-background"
+            )}
+          >
+            Open glossary &amp; core concepts
+          </Link>
+        </Reveal>
       </div>
     </section>
   );

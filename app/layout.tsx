@@ -46,7 +46,11 @@ export default function RootLayout({
         )}
       >
         <SiteHeader />
-        <main id="main-content" className="flex-1 scroll-mt-0 outline-none" tabIndex={-1}>
+        <main
+          id="main-content"
+          className="min-w-0 flex-1 scroll-mt-0 outline-none w-full"
+          tabIndex={-1}
+        >
           {children}
         </main>
         <FooterRegion />

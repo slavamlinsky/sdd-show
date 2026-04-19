@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 import { HomeFaq } from "@/components/home-faq";
+import { HeroFeaturedVideo } from "@/components/hero-featured-video";
+import { HomeEvolutionTimeline } from "@/components/home-evolution-timeline";
+import { HomeIntentPillars } from "@/components/home-intent-pillars";
 import { HomePillars } from "@/components/home-pillars";
 import { GradientText } from "@/components/gradient-text";
 import { Reveal } from "@/components/reveal";
@@ -18,6 +20,7 @@ import {
 import { getAllPosts } from "@/lib/blog";
 import { keywordsForPage } from "@/lib/seo-keywords";
 import { siteConfig } from "@/lib/site-config";
+import { featuredHeroVideo } from "@/lib/videos-data";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -72,19 +75,14 @@ export default function HomePage() {
             </div>
           </Reveal>
           <Reveal className="relative w-full shrink-0 lg:max-w-lg" delay={0.08} distance={24}>
-            <div className="relative aspect-[5/4] w-full overflow-hidden rounded-[2rem] border border-border/60 bg-card shadow-xl shadow-foreground/5 ring-1 ring-foreground/[0.04]">
-              <Image
-                src="/images/hero-placeholder.svg"
-                alt="Abstract placeholder illustration for spec driven development"
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 1024px) 100vw, 33vw"
-              />
-            </div>
+            <HeroFeaturedVideo video={featuredHeroVideo} />
           </Reveal>
         </div>
       </section>
+
+      <HomeIntentPillars />
+
+      <HomeEvolutionTimeline />
 
       <HomePillars />
 

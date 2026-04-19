@@ -12,13 +12,13 @@ Each term should have:
 | ----- | -------- | ----- |
 | `slug` | yes | Stable id for anchors; URL optional if single-page list |
 | `title` | yes | Term name |
-| `shortDefinition` | yes | 1–3 sentences; rendered at **`text-sm`** on the glossary page |
+| `shortDefinition` | yes | 1–3 sentences; **plain text only** (no Markdown); rendered at **`text-sm`** on the glossary page |
 | `categories` | yes | **1–3** labels from **Product \| Build \| Quality \| Design** — **shadcn `Badge`** (outline, `xs`) on the glossary page. Optional **`tags`** in data may return later; not shown in MVP UI. |
 
 ## Page behavior (MVP)
 
-- Single page listing all terms in one **accordion**: each row shows the **term title** and a **chevron**; expanding reveals **pillar badges** and the **short definition**. **Only one row open at a time**; the **first term (alphabetical)** is expanded by default.
-- **Layout:** Single column list inside a shared rounded container; see [spec-design-layout.md](./spec-design-layout.md).
+- Single page listing all terms as **collapsible cards** in a **two-column grid** on **`md+`** (one column on small viewports). Each card shows the **term title** and **chevron**; expanding that card reveals **pillar badges** and the **short definition**. Cards toggle **independently** (several may be open at once). Cards use a light **border**, **rounded corners**, and subtle **shadow** consistent with the FAQ-style reference.
+- **Layout:** See [spec-design-layout.md](./spec-design-layout.md).
 - **“Suggest something new”** — button in the hero row links to anchor **`#suggest-term`**; copy explains that **submission / moderation is v2** (stub band at bottom until then).
 - **No search** in MVP (see **spec-main** v2).
 

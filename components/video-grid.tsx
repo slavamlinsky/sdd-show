@@ -1,47 +1,15 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { PlayIcon } from "lucide-react";
 import type { VideoEntry } from "@/lib/videos-data";
-import { getYoutubeThumbnailUrls } from "@/lib/videos-data";
+import { YoutubePoster } from "@/components/youtube-poster";
 import { cn } from "@/lib/utils";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog";
-
-function YoutubePoster({
-  youtubeId,
-  title,
-  className,
-  sizes,
-}: {
-  youtubeId: string;
-  title: string;
-  className?: string;
-  sizes: string;
-}) {
-  const urls = getYoutubeThumbnailUrls(youtubeId);
-  const [urlIndex, setUrlIndex] = useState(0);
-  const src = urls[Math.min(urlIndex, urls.length - 1)];
-
-  return (
-    <Image
-      src={src}
-      alt=""
-      title={title}
-      fill
-      unoptimized
-      className={className}
-      sizes={sizes}
-      onError={() => {
-        setUrlIndex((i) => (i < urls.length - 1 ? i + 1 : i));
-      }}
-    />
-  );
-}
 
 export function VideoGrid({ videos }: { videos: VideoEntry[] }) {
   const [active, setActive] = useState<VideoEntry | null>(null);

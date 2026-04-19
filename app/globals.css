@@ -146,12 +146,12 @@
 @layer utilities {
   /*
    * Break out of .page-shell for edge-to-edge backgrounds; inner row: mx-auto max-w-6xl px-4 sm:px-6
-   * max-width caps the used width so 100vw (scrollbar-inclusive on some UAs) cannot force page overflow;
-   * html/body overflow-x: hidden is an additional guard.
+   * Do NOT use max-width: 100% here — percentage is against the shell and prevents a real breakout,
+   * which shifts the whole column left with empty space on the right. html/body overflow-x: hidden
+   * contains any minor 100vw vs scrollbar overflow.
    */
   .full-bleed {
     width: 100vw;
-    max-width: 100%;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
   }

@@ -7,8 +7,16 @@ export type VideoEntry = {
   category?: string;
 };
 
-/** Curated SDD-related talks — edit `lib/videos-data.ts` to update */
-export const videos: VideoEntry[] = [
+/** Featured on the home hero (also listed on `/videos`). */
+export const featuredHeroVideo: VideoEntry = {
+  id: "intent-driven-engineering-evolution",
+  title: "Intent-Driven Engineering: The Evolution of Software Architecture",
+  youtubeId: "5VgLY-Mq7CY",
+  channelTitle: "Вячеслав Млинський",
+  category: "Product",
+};
+
+const curatedVideos: VideoEntry[] = [
   {
     id: "augment-sdd-workflow",
     title:
@@ -53,6 +61,9 @@ export const videos: VideoEntry[] = [
     category: "Build",
   },
 ];
+
+/** Curated SDD-related talks — edit `lib/videos-data.ts` to update */
+export const videos: VideoEntry[] = [featuredHeroVideo, ...curatedVideos];
 
 /**
  * YouTube static thumbnail URLs (no API key).
