@@ -91,14 +91,12 @@ export default function HomePage() {
               <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
                 Most popular in <GradientText className="font-semibold">our Blog</GradientText>
               </h2>
-              <p className="max-w-prose text-lg text-muted-foreground">
-                Short reads on SDD. New posts land here as we grow the library.
-              </p>
+              
             </div>
             <Link
               href="/blog"
               className={cn(
-                buttonVariants({ variant: "ghost", size: "lg" }),
+                buttonVariants({ variant: "outline", size: "lg" }),
                 "self-start rounded-md sm:self-auto"
               )}
             >
@@ -171,7 +169,7 @@ export default function HomePage() {
 
       <section
         id="faq"
-        className="full-bleed border-y border-zinc-800/80 bg-zinc-950 text-zinc-100"
+        className="full-bleed border-y border-border/40 bg-gradient-to-b from-muted/25 via-background to-muted/15 text-foreground dark:from-muted/10 dark:to-muted/5"
       >
         <Reveal>
           <HomeFaq />
