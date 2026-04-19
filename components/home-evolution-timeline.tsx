@@ -77,8 +77,9 @@ export function HomeEvolutionTimeline() {
             </GradientText>
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          A vertical journey through the evolution of the software development lifecycle. 
-          from documents and manual testing, to prompts, and now to intent and executable specs as the new leverage.
+            A vertical journey through the evolution of the software development lifecycle — from documents and manual
+            testing, to prompts, and now to intent and executable specs as the new leverage.
+          </p>
         </Reveal>
 
         <div className="relative mx-auto mt-14 max-w-4xl md:mt-20">
