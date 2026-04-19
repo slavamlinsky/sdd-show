@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MenuIcon, UserPlus } from "lucide-react";
+import { LogIn, MenuIcon } from "lucide-react";
 import { mainNav } from "@/lib/navigation";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
@@ -71,10 +71,10 @@ export function SiteHeader() {
           <Button
             variant="outline"
             className="h-10 gap-2 border-primary/80 bg-background px-5 text-sm font-semibold text-primary shadow-sm hover:bg-primary/10 hover:text-primary"
-            render={<Link href="/sign-up" />}
+            render={<Link href="/sign-in" />}
           >
-            <UserPlus className="size-4 shrink-0" aria-hidden />
-            Sign up
+            <LogIn className="size-4 shrink-0" aria-hidden />
+            Sign in
           </Button>
 
           <div className="md:hidden">

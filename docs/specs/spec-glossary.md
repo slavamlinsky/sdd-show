@@ -12,7 +12,7 @@ Each term should have:
 | ----- | -------- | ----- |
 | `slug` | yes | Stable id for anchors; URL optional if single-page list |
 | `title` | yes | Term name |
-| `shortDefinition` | yes | 1–3 sentences; rendered at **`text-sm`** on the glossary page |
+| `shortDefinition` | yes | 1–3 sentences; **plain text only** (no Markdown); rendered at **`text-sm`** on the glossary page |
 | `categories` | yes | **1–3** labels from **Product \| Build \| Quality \| Design** — **shadcn `Badge`** (outline, `xs`) on the glossary page. Optional **`tags`** in data may return later; not shown in MVP UI. |
 
 ## Page behavior (MVP)
