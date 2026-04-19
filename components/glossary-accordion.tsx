@@ -14,8 +14,9 @@ export function GlossaryAccordion({ terms }: { terms: GlossaryTerm[] }) {
           <Collapsible.Root className="flex h-full flex-col rounded-xl border border-border/60 bg-card shadow-sm ring-1 ring-foreground/[0.04]">
             <Collapsible.Trigger
               className={cn(
-                "group/collapsible-trigger flex w-full items-center justify-between gap-3 px-4 py-4 text-left outline-none sm:px-5",
-                "rounded-t-xl hover:bg-muted/30 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                "group/collapsible-trigger flex w-full cursor-pointer items-center justify-between gap-3 px-4 py-4 text-left outline-none sm:px-5",
+                "rounded-t-xl hover:bg-muted/30",
+                "focus-visible:rounded-xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               )}
             >
               <span className="font-heading text-base font-semibold tracking-tight text-foreground sm:text-lg">

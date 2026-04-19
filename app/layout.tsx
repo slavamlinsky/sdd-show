@@ -48,7 +48,7 @@ export default function RootLayout({
         <SiteHeader />
         <main
           id="main-content"
-          className="min-w-0 flex-1 scroll-mt-0 outline-none w-full"
+          className="min-w-0 flex-1 scroll-mt-16 outline-none w-full pt-16"
           tabIndex={-1}
         >
           {children}

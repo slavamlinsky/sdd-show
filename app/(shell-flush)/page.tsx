@@ -39,18 +39,14 @@ export default function HomePage() {
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-35%,rgba(99,102,241,0.16),transparent_55%),radial-gradient(ellipse_70%_50%_at_100%_0%,rgba(14,165,233,0.1),transparent_50%)]"
           aria-hidden
         />
-        <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 py-20 sm:gap-16 sm:px-6 sm:py-28 lg:flex-row lg:items-center lg:gap-16">
+        <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 py-12 sm:px-6 lg:flex-row lg:items-center lg:gap-16">
           <Reveal className="flex-1 space-y-8" distance={28}>
-            <p className="text-sm font-semibold tracking-wide text-muted-foreground uppercase">
-              For students and developers
-            </p>
-            <h1 className="text-balance lg:text-[3.35rem] lg:leading-[1.08]">
+            <h1>
               Ship software from{" "}
               <GradientText className="font-semibold">clear specs</GradientText>, not vague tickets.
             </h1>
-            <p className="max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-[1.125rem]">
-              Spec driven development (SDD) means defining behavior and acceptance before you code yourself into a
-              corner. Learn the ideas, vocabulary, and a workflow you can use on real projects.
+            <p className="max-w-xl text-pretty text-sm leading-relaxed text-muted-foreground">
+              Intent-Driven Engineering (IDE) focuses on defining the desired outcomes before implementation, ensuring requirements drive development rather than just following tasks. Learn how to translate high-level intent into a complete, workable system design. Master the ideas, vocabulary, and a repeatable workflow you can use on real-world projects.
             </p>
             <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
               <Link
