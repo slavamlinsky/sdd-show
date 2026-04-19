@@ -12,10 +12,12 @@ const badgeVariants = cva(
           "border-transparent bg-primary text-primary-foreground [a]:hover:bg-primary/80",
         outline:
           "border-border/80 bg-background text-muted-foreground shadow-none",
+        primary:
+          "border-primary/35 bg-background text-primary shadow-none",
       },
       size: {
         default: "rounded-md px-2 py-0.5 text-xs",
-        xs: "rounded-[5px] px-1.5 py-px text-[10px] leading-tight",
+        xs: "rounded-[5px] px-2 py-0.5 text-[11px] leading-tight",
       },
     },
     defaultVariants: {
