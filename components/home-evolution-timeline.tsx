@@ -5,6 +5,7 @@ import { GradientText } from "./gradient-text";
 type Phase = {
   range: string;
   title: string;
+  subtitle?: string;
   process: string;
   /** Friction, challenge, issue, or future-facing note */
   note?: { label: string; text: string };
@@ -12,8 +13,9 @@ type Phase = {
 
 const phases: Phase[] = [
   {
-    range: "2018–2020",
-    title: "Requirement driven (the classic era)",
+    range: "2018-2020",
+    title: "Requirement driven",
+    subtitle: "the classic era",
     process:
       "Business teams write PRDs; developers manually translate prose into logic in the editor.",
     note: {
@@ -22,8 +24,9 @@ const phases: Phase[] = [
     },
   },
   {
-    range: "2020–2022",
-    title: "Test driven (TDD & BDD)",
+    range: "2020-2022",
+    title: "Test driven",
+    subtitle: "the disciplined era",
     process: "Write the test first, then the code — behavior is agreed before implementation lands.",
     note: {
       label: "Challenge",
@@ -31,8 +34,9 @@ const phases: Phase[] = [
     },
   },
   {
-    range: "2023–2024",
-    title: 'Prompt engineering ("vibe coding")',
+    range: "2023-2024",
+    title: 'Prompt engineering',
+    subtitle: "vibe coding era",
     process:
       "Natural-language prompts in chat produce huge diffs in minutes — iteration looks fast on the surface.",
     note: {
@@ -42,13 +46,15 @@ const phases: Phase[] = [
   },
   {
     range: "2025",
-    title: "Spec-driven development (the structured era)",
+    title: "Spec-driven development",
+    subtitle: "the structured era",
     process:
       "The specification — not the code — is the source of truth. Models and tools are guided by an explicit behavior contract.",
   },
   {
     range: "2026+",
-    title: "Intent-driven engineering (the autonomous era)",
+    title: "Intent-driven engineering",
+    subtitle: "the autonomous era",
     process:
       'Define outcomes and success criteria (the "what") and let agents reason through the "how" across tools and systems — within guardrails you wrote down.',
   },
@@ -69,11 +75,11 @@ export function HomeEvolutionTimeline() {
           <p className="text-xs font-semibold tracking-wide text-primary uppercase">How we got here</p>
           <h2
             id="evolution-timeline-heading"
-            className="mt-2 font-heading text-2xl font-semibold tracking-tight sm:text-3xl"
+            className="mt-2 font-heading text-2xl font-semibold text-balance tracking-tight sm:text-3xl"
           >
-            From manual friction to{" "}
+            From manual friction{" "}
             <GradientText>
-              AI-driven speed
+              to AI-driven speed
             </GradientText>
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -107,17 +113,17 @@ export function HomeEvolutionTimeline() {
                     </div>
 
                     {/* Desktop: alternating sides (first era on the right) */}
-                    <div className="hidden md:grid md:grid-cols-[1fr_auto_1fr] md:gap-x-6 md:gap-y-0 md:items-start">
+                    <div className="hidden md:grid md:grid-cols-[1fr_auto_1fr] md:gap-x-6 md:gap-y-0 md:items-center">
                       <div
                         className={cn(
-                          "min-w-0 pt-1",
+                          "min-w-0",
                           onRight ? "col-start-1 invisible" : "col-start-1 justify-self-end text-right"
                         )}
                       >
                         {!onRight ? <PhaseCard phase={phase} align="right" /> : null}
                       </div>
 
-                      <div className="relative col-start-2 flex flex-col items-center pt-2">
+                      <div className="relative col-start-2 flex flex-col items-center justify-center">
                         <span
                           className="relative z-10 size-3.5 shrink-0 rounded-full border-[3px] border-background bg-primary shadow-[0_0_0_4px_rgba(99,102,241,0.2)]"
                           aria-hidden
@@ -126,7 +132,7 @@ export function HomeEvolutionTimeline() {
 
                       <div
                         className={cn(
-                          "min-w-0 pt-1",
+                          "min-w-0",
                           onRight ? "col-start-3 justify-self-start text-left" : "col-start-3 invisible"
                         )}
                       >
@@ -153,9 +159,12 @@ function PhaseCard({ phase, align }: { phase: Phase; align: "left" | "right" }) 
       )}
     >
       <p className="text-xs font-semibold tabular-nums tracking-wide text-primary">{phase.range}</p>
-      <h3 className="mt-1 font-heading text-lg font-semibold tracking-tight text-foreground sm:text-xl">
+      <h3 className="mt-1 font-heading text-xl font-semibold tracking-tight text-primary sm:text-2xl">
         {phase.title}
       </h3>
+      <h4 className="font-heading text-sm md:text-lg font-medium tracking-tight text-foreground">
+        {phase.subtitle}
+      </h4>
       <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
         <span className="font-medium text-foreground/90">Process: </span>
         {phase.process}

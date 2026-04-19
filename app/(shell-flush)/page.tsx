@@ -8,7 +8,6 @@ import { HomeIntentPillars } from "@/components/home-intent-pillars";
 import { HomePillars } from "@/components/home-pillars";
 import { GradientText } from "@/components/gradient-text";
 import { Reveal } from "@/components/reveal";
-import { SectionBackdrop } from "@/components/section-backdrop";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -52,7 +51,7 @@ export default function HomePage() {
                 ensuring requirements drive development rather than just following tasks.
               </p>
             </div>
-            <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
+            <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center">
               <Link
                 href="/course"
                 className={cn(
@@ -91,7 +90,7 @@ export default function HomePage() {
           <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="space-y-3">
               <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
-                Most popular in our <GradientText className="font-semibold">Blog</GradientText>
+                Most popular in <GradientText className="font-semibold">our Blog</GradientText>
               </h2>
               <p className="max-w-prose text-lg text-muted-foreground">
                 Short reads on SDD. New posts land here as we grow the library.
@@ -171,13 +170,13 @@ export default function HomePage() {
         </Reveal>
       </div>
 
-      <section className="full-bleed relative overflow-hidden border-y border-border/40 bg-gradient-to-b from-muted/25 via-background to-muted/15 py-16 sm:py-20 dark:from-muted/10 dark:to-muted/5">
-        <SectionBackdrop tone="emerald" heightClass="h-[min(420px,55vh)]" />
-        <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6">
-          <Reveal>
-            <HomeFaq />
-          </Reveal>
-        </div>
+      <section
+        id="faq"
+        className="full-bleed border-y border-zinc-800/80 bg-zinc-950 text-zinc-100"
+      >
+        <Reveal>
+          <HomeFaq />
+        </Reveal>
       </section>
     </div>
   );

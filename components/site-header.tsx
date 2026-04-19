@@ -3,20 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LogIn, MenuIcon } from "lucide-react";
+import { LogIn } from "lucide-react";
 import { mainNav } from "@/lib/navigation";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { MobileNavDrawer } from "@/components/mobile-nav-drawer";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 function navLinkClass(active: boolean) {
@@ -28,69 +20,6 @@ function navLinkClass(active: boolean) {
 
 function isNavActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
-}
-
-function MobileMainNav() {
-  const pathname = usePathname();
-
-  return (
-    <div className="relative z-[45] md:hidden">
-      <Sheet>
-        <SheetTrigger
-          className={cn(buttonVariants({ variant: "outline", size: "icon" }))}
-          aria-label="Open menu"
-          aria-controls="mobile-main-nav"
-          onClick={() => {
-            if (process.env.NODE_ENV === "development") {
-              console.log("[MobileMainNav] hamburger SheetTrigger: click");
-            }
-          }}
-        >
-          <MenuIcon className="size-4" />
-        </SheetTrigger>
-        <SheetContent
-          id="mobile-main-nav"
-          side="right"
-          className="flex h-full max-h-[100dvh] w-[min(100%,20rem)] flex-col gap-0 p-0"
-        >
-          <SheetHeader className="border-b border-border p-4 text-left">
-            <SheetTitle className="text-left">Menu</SheetTitle>
-          </SheetHeader>
-          <nav
-            className="flex min-h-0 flex-1 flex-col overflow-y-auto p-2"
-            aria-label="Mobile main"
-          >
-            {mainNav.map(({ href, label }) => {
-              const active = isNavActive(pathname, href);
-              return (
-                <SheetClose
-                  key={href}
-                  nativeButton={false}
-                  render={<Link href={href} />}
-                  className={cn(
-                    "rounded-lg px-3 py-2.5 text-sm font-medium",
-                    active
-                      ? "bg-muted text-foreground"
-                      : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
-                  )}
-                >
-                  {label}
-                </SheetClose>
-              );
-            })}
-          </nav>
-          <SheetFooter className="border-t border-border sm:gap-0">
-            <div className="flex items-center justify-between gap-3">
-              <span className="text-sm font-medium text-muted-foreground">
-                Theme
-              </span>
-              <ThemeToggle />
-            </div>
-          </SheetFooter>
-        </SheetContent>
-      </Sheet>
-    </div>
-  );
 }
 
 export function SiteHeader() {
@@ -154,7 +83,7 @@ export function SiteHeader() {
             Sign in
           </Button>
 
-          <MobileMainNav />
+          <MobileNavDrawer />
         </div>
       </div>
     </header>

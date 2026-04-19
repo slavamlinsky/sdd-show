@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ChevronUpIcon } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 /** Show after this many CSS pixels of vertical scroll (any scroll container). */
@@ -125,7 +124,8 @@ export function ScrollToTop() {
       />
       <div
         className={cn(
-          "fixed bottom-6 right-4 z-[90] transition-opacity duration-200 sm:bottom-8 sm:right-8",
+          /* ~48px higher than bottom-6 / bottom-8 so it clears footer link rows */
+          "fixed bottom-[4.5rem] right-4 z-[90] transition-opacity duration-200 sm:bottom-20 sm:right-8",
           visible ? "opacity-100" : "pointer-events-none opacity-0"
         )}
       >
@@ -137,10 +137,12 @@ export function ScrollToTop() {
           aria-hidden={!visible ? true : undefined}
           aria-label="Scroll to top"
           className={cn(
-            buttonVariants({ variant: "default", size: "icon" }),
-            "pointer-events-auto h-11 min-h-11 w-11 min-w-11 cursor-pointer rounded-2xl shadow-lg shadow-foreground/10",
-            "ring-1 ring-foreground/10 hover:bg-primary/90",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            /* Outline / transparent chip (e.g. footer-style): shows page behind, accent border + icon */
+            "pointer-events-auto flex size-11 cursor-pointer items-center justify-center rounded-md border-2 border-primary",
+            "bg-primary/25 text-primary shadow-none backdrop-blur-sm",
+            "transition-colors hover:bg-primary/35 active:bg-primary/40",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+            "disabled:pointer-events-none disabled:opacity-40"
           )}
           onClick={() => {
             if (!visible) return;
@@ -151,7 +153,7 @@ export function ScrollToTop() {
             scrollPageToTop(behavior, sentinelRef.current);
           }}
         >
-          <ChevronUpIcon className="size-5" />
+          <ChevronUpIcon className="size-5 shrink-0" strokeWidth={2.25} aria-hidden />
         </button>
       </div>
     </>

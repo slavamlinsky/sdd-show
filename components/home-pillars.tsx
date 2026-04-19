@@ -49,7 +49,7 @@ export function HomePillars() {
         <Reveal className="mx-auto max-w-3xl text-center" distance={18}>
           <h2
             id="home-pillars-heading"
-            className="font-heading text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl"
+            className="font-heading text-3xl text-balance font-semibold leading-tight tracking-tight text-foreground sm:text-4xl"
           >
             Vocabulary for the{" "}
             <GradientText className="font-semibold">AI-driven product lifecycle</GradientText>
