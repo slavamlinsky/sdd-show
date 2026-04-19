@@ -16,20 +16,20 @@ export function VideoGrid({ videos }: { videos: VideoEntry[] }) {
 
   return (
     <>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mb-12 grid gap-6 sm:mb-16 sm:grid-cols-2 lg:grid-cols-3">
         {videos.map((video) => (
           <button
             key={video.id}
             type="button"
             onClick={() => setActive(video)}
             className={cn(
-              "group text-left",
+              "group flex h-full min-h-0 flex-col text-left",
               "rounded-3xl border border-border/70 bg-card ring-1 ring-foreground/[0.04] transition-all duration-300",
               "motion-safe:hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/5 hover:ring-foreground/10",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             )}
           >
-            <span className="relative block aspect-video w-full overflow-hidden rounded-t-3xl bg-muted">
+            <span className="relative block aspect-video w-full shrink-0 overflow-hidden rounded-t-3xl bg-muted">
               <YoutubePoster
                 youtubeId={video.youtubeId}
                 title={video.title}
@@ -45,18 +45,18 @@ export function VideoGrid({ videos }: { videos: VideoEntry[] }) {
                 </span>
               </span>
             </span>
-            <span className="flex flex-col gap-2 px-4 py-4">
+            <span className="flex min-h-0 flex-1 flex-col gap-2 px-4 py-4">
               {video.category ? (
-                <span className="w-fit rounded-md border border-border/80 bg-muted/50 px-2 py-0.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                <span className="w-fit shrink-0 rounded-md border border-border/80 bg-muted/50 px-2 py-0.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
                   {video.category}
                 </span>
               ) : null}
-              <span className="font-heading text-sm font-medium leading-snug text-foreground">
+              <span className="line-clamp-2 min-h-[2.75rem] font-heading text-sm font-medium leading-snug text-foreground">
                 {video.title}
               </span>
-              {video.channelTitle ? (
-                <span className="text-xs text-muted-foreground">{video.channelTitle}</span>
-              ) : null}
+              <span className="mt-auto min-h-[1.25rem] shrink-0 text-xs leading-tight text-muted-foreground">
+                {video.channelTitle}
+              </span>
             </span>
           </button>
         ))}

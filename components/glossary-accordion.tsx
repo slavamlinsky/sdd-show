@@ -27,7 +27,7 @@ export function GlossaryAccordion({ terms }: { terms: GlossaryTerm[] }) {
                 className="size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-aria-expanded/collapsible-trigger:rotate-180"
               />
             </Collapsible.Trigger>
-            <Collapsible.Panel className="flex min-h-0 flex-1 flex-col overflow-hidden text-sm data-closed:animate-accordion-up data-open:animate-accordion-down">
+            <Collapsible.Panel className="h-[var(--collapsible-panel-height)] overflow-hidden text-sm transition-[height] duration-200 ease-out data-[ending-style]:h-0 data-[starting-style]:h-0">
               <div className="border-t border-border/50 px-4 pb-4 pt-3 sm:px-5">
                 <ul className="flex flex-wrap gap-1.5 pb-3" aria-label="Pillars">
                   {term.categories.map((label) => (

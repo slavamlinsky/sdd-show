@@ -33,7 +33,7 @@ const pillars = [
 export function HomeIntentPillars() {
   return (
     <section
-      className="border-b border-border/40 bg-gradient-to-b from-muted/20 via-background to-background pb-16 pt-0 sm:pb-20"
+      className="border-b border-border/40 bg-gradient-to-b from-muted/20 via-background to-background pb-16 pt-6 sm:pb-20 sm:pt-8"
       aria-labelledby="intent-pillars-heading"
     >
       <div className="mx-auto w-full max-w-6xl px-5 sm:px-8 lg:px-10">

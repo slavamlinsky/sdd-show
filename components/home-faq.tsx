@@ -37,7 +37,7 @@ export function HomeFaq() {
       <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
         Questions & <GradientText className="font-semibold">answers</GradientText>
       </h2>
-      <p className="mt-3 max-w-prose text-lg text-muted-foreground">
+      <p className="mt-3 max-w-prose text-sm text-muted-foreground">
         Quick answers. For depth, use the glossary and blog. Course questions live on the course page.
       </p>
       <Accordion className="mt-10 w-full" defaultValue={[items[0].id]}>

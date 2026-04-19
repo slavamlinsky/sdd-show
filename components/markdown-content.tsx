@@ -35,10 +35,11 @@ function isNextAllowedRemote(src: string): boolean {
   return false;
 }
 
+/** Wide figure box: blog diagrams are often ~2.3:1; object-contain avoids cropping. */
 const figureShell =
-  "relative my-6 block aspect-[16/9] w-full overflow-hidden rounded-xl border border-border/60 bg-muted/20 not-italic shadow-sm";
+  "relative my-6 block aspect-[2/1] w-full overflow-hidden rounded-xl border border-border/60 bg-muted/20 not-italic shadow-sm";
 
-const figureMediaClass = "h-full w-full object-cover";
+const figureMediaClass = "h-full w-full object-contain object-center";
 
 const markdownComponents = {
   h2: ({ ...props }: React.ComponentPropsWithoutRef<"h2">) => (

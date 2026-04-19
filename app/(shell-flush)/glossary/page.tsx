@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Lightbulb } from "lucide-react";
+import { ArrowRightIcon, Lightbulb } from "lucide-react";
 import Link from "next/link";
 import { GradientText } from "@/components/gradient-text";
 import { Reveal } from "@/components/reveal";
@@ -64,18 +64,30 @@ export default function GlossaryPage() {
 
         <section
           id="suggest-term"
-          className="relative mt-20 overflow-hidden rounded-[1.75rem] border border-border/60 bg-gradient-to-br from-primary/[0.06] via-muted/30 to-sky-500/[0.05] px-6 py-10 shadow-sm ring-1 ring-foreground/[0.04] sm:px-10"
+          className="relative mt-20 mb-20 overflow-hidden rounded-[1.75rem] border border-border/60 bg-gradient-to-br from-primary/[0.06] via-muted/30 to-sky-500/[0.05] px-6 py-10 shadow-sm ring-1 ring-foreground/[0.04] sm:mb-24 sm:px-10 lg:mb-28"
         >
           <div
             className="pointer-events-none absolute -right-20 -top-20 size-64 rounded-full bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.12),transparent_70%)]"
             aria-hidden
           />
-          <div className="relative space-y-3 text-center">
+          <div className="relative flex flex-col items-center space-y-4 text-center">
             <h2 className="font-heading text-lg font-semibold tracking-tight sm:text-xl">Suggest a term or fix</h2>
             <p className="mx-auto max-w-lg text-sm leading-relaxed text-muted-foreground sm:text-[15px]">
               A lightweight submission flow (and moderation) is planned for{" "}
               <span className="font-medium text-foreground">v2</span>. For now, this anchor is reserved for that feature — see the glossary spec.
             </p>
+            <Link
+              href="https://github.com/slavamlinsky/sdd-show/blob/main/docs/specs/spec-glossary.md"
+              target="_blank"
+              rel="noreferrer"
+              className={cn(
+                buttonVariants({ size: "lg" }),
+                "mt-2 inline-flex h-12 items-center gap-2 rounded-xl px-8 text-base font-semibold shadow-md shadow-primary/20 hover:shadow-primary/25"
+              )}
+            >
+              Read the glossary spec
+              <ArrowRightIcon className="size-4 shrink-0" aria-hidden />
+            </Link>
           </div>
         </section>
       </div>

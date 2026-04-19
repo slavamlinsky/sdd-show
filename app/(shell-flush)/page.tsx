@@ -36,14 +36,15 @@ export default function HomePage() {
     <div className="flex flex-col">
       <section className="full-bleed relative overflow-hidden border-b border-border/50">
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-35%,rgba(99,102,241,0.16),transparent_55%),radial-gradient(ellipse_70%_50%_at_100%_0%,rgba(14,165,233,0.1),transparent_50%)]"
+          className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-35%,rgba(99,102,241,0.16),transparent_55%),radial-gradient(ellipse_70%_50%_at_100%_0%,rgba(14,165,233,0.1),transparent_50%)]"
           aria-hidden
         />
-        <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-12 px-5 pt-12 sm:px-8 sm:pt-14 lg:flex-row lg:items-center lg:gap-16 lg:px-10 pb-24 sm:pb-28 lg:pb-32">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 pt-3 sm:px-8 sm:pt-4 lg:flex-row lg:items-center lg:gap-12 pb-12 sm:pb-16 lg:pb-20">
           <Reveal className="flex-1 space-y-8" distance={28}>
             <h1 className="text-balance leading-[1.15] sm:leading-[1.12]">
               Ship software from{" "}
-              <GradientText className="font-semibold">clear specs</GradientText>, not vague tickets.
+              <GradientText className="font-semibold">clear and strong specs</GradientText>
+              {" — "}not vague tickets
             </h1>
             <div className="max-w-[65ch] space-y-8 text-pretty text-base leading-[1.7] text-muted-foreground">
               <p>
@@ -90,18 +91,11 @@ export default function HomePage() {
       <HomePillars />
 
       <div className="flex w-full flex-col gap-20 py-20 sm:gap-28 sm:py-28">
-        <section className="relative overflow-hidden rounded-[2rem] border border-border/40 py-8 sm:py-10">
-          <SectionBackdrop tone="emerald" heightClass="h-[min(420px,55vh)]" />
-          <Reveal className="relative px-2 sm:px-4">
-            <HomeFaq />
-          </Reveal>
-        </section>
-
         <section className="space-y-8">
           <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="space-y-3">
               <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
-                From the <GradientText className="font-semibold">blog</GradientText>
+                Most popular in our <GradientText className="font-semibold">Blog</GradientText>
               </h2>
               <p className="max-w-prose text-lg text-muted-foreground">
                 Short reads on SDD. New posts land here as we grow the library.
@@ -180,6 +174,15 @@ export default function HomePage() {
           </section>
         </Reveal>
       </div>
+
+      <section className="full-bleed relative overflow-hidden border-y border-border/40 bg-gradient-to-b from-muted/25 via-background to-muted/15 py-16 sm:py-20 dark:from-muted/10 dark:to-muted/5">
+        <SectionBackdrop tone="emerald" heightClass="h-[min(420px,55vh)]" />
+        <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6">
+          <Reveal>
+            <HomeFaq />
+          </Reveal>
+        </div>
+      </section>
     </div>
   );
 }

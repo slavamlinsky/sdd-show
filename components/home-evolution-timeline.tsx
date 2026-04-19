@@ -96,12 +96,12 @@ export function HomeEvolutionTimeline() {
                 <li key={phase.range} className="relative pb-12 last:pb-0 md:pb-16 md:last:pb-4">
                   {/* Mobile: rail + card */}
                   <Reveal delay={i * 0.07} distance={18} className="contents">
-                    <div className="flex gap-4 md:hidden">
-                      <div className="flex w-5 shrink-0 flex-col items-center pt-1">
-                        <span className="size-3 rounded-full border-2 border-background bg-primary shadow-[0_0_0_3px_rgba(99,102,241,0.25)]" />
-                        {i < phases.length - 1 ? (
-                          <span className="mt-2 w-px flex-1 min-h-[2.5rem] bg-gradient-to-b from-primary/40 to-border" />
-                        ) : null}
+                    <div className="flex flex-col gap-4 md:hidden [&>*:first-child]:hidden">
+                      <div className="flex w-5 shrink-0 items-start justify-center pt-1">
+                        <span
+                          className="size-3 shrink-0 rounded-full border-2 border-background bg-primary shadow-[0_0_0_3px_rgba(99,102,241,0.25)]"
+                          aria-hidden
+                        />
                       </div>
                       <PhaseCard phase={phase} align="left" />
                     </div>

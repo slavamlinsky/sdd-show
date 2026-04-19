@@ -15,7 +15,7 @@ export default function SignInPage() {
       <p className="mt-3 text-muted-foreground">
         Authentication isn’t wired up yet. Check back later, or continue exploring the site.
       </p>
-      <Button className="mt-8" render={<Link href="/" />}>
+      <Button nativeButton={false} className="mt-8" render={<Link href="/" />}>
         Back to home
       </Button>
     </div>
