@@ -1,10 +1,9 @@
 ---
-
-## title: "The Rise of Intent-Driven Engineering"
-
+title: "Beyond the Spec: The Rise of Intent-Driven Engineering"
 slug: "intent-driven-engineering"
 date: "2026-04-19"
 description: "From prompt hacks to specs — and now to intent. Why the next shift is about architecting outcomes, not writing longer instructions."
+---
 
 For the last few years, we have obsessed over how to give AI better instructions. We called it **prompt engineering.** Then we asked for **structure** so behavior stayed reliable — and **spec-driven development (SDD)** gave the machine something testable to implement.
 
@@ -23,7 +22,7 @@ To see where we are going, it helps to see where we have been:
 
 That is the compelling shift: from teaching the machine to **code line-by-line** to **architecting outcomes** the system must satisfy.
 
-Developer as intent architect: figure at a desk facing a display where intent connects to Product, Design, Build, and Quality
+![Developer as intent architect: figure at a desk facing a display where intent connects to Product, Design, Build, and Quality](/images/intent-driven-developer.png)
 
 ---
 
@@ -48,7 +47,7 @@ Fear of losing control is natural. In practice, **control moves upstream**:
 
 The machine can broaden the **middle** of the workflow; it does not remove accountability at the edges.
 
-Diagram: human intent and guardrails, agents and automation in the middle, human verify and ship
+![Diagram: human intent and guardrails, agents and automation in the middle, human verify and ship](/images/intent-driven-diagram.png)
 
 ---
 
