@@ -38,7 +38,7 @@ export default function HomePage() {
           className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-35%,rgba(99,102,241,0.16),transparent_55%),radial-gradient(ellipse_70%_50%_at_100%_0%,rgba(14,165,233,0.1),transparent_50%)]"
           aria-hidden
         />
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 pt-3 sm:px-8 sm:pt-4 lg:flex-row lg:items-center lg:gap-12 pb-12 sm:pb-16 lg:pb-20">
+        <div className="relative mx-auto w-full max-w-6xl px-4 pt-6 sm:px-6 sm:pt-12">
           <Reveal className="flex-1 space-y-8" distance={28}>
             <h1 className="text-balance leading-[1.15] sm:leading-[1.12]">
               Ship software from{" "}
@@ -47,8 +47,7 @@ export default function HomePage() {
             </h1>
             <div className="max-w-[65ch] space-y-8 text-pretty text-base leading-[1.7] text-muted-foreground">
               <p>
-                Intent-Driven Engineering (IDE) focuses on defining the desired outcomes before implementation,
-                ensuring requirements drive development rather than just following tasks.
+                <span className="font-medium">Intent-Driven Engineering (IDE)</span> focuses on defining the desired outcomes before implementation, ensuring clear requirements drive development decisions rather than simply following predefined tasks.
               </p>
             </div>
             <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center">
