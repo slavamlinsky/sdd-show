@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 import { HomeFaq } from "@/components/home-faq";
+import { HomeEvolutionTimeline } from "@/components/home-evolution-timeline";
+import { HomeIntentPillars } from "@/components/home-intent-pillars";
 import { HomePillars } from "@/components/home-pillars";
 import { GradientText } from "@/components/gradient-text";
 import { Reveal } from "@/components/reveal";
@@ -85,6 +87,10 @@ export default function HomePage() {
           </Reveal>
         </div>
       </section>
+
+      <HomeIntentPillars />
+
+      <HomeEvolutionTimeline />
 
       <HomePillars />
 
