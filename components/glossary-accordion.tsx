@@ -1,51 +1,48 @@
 "use client";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Collapsible } from "@base-ui/react/collapsible";
+import { ChevronDownIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { GlossaryTerm } from "@/lib/glossary-data";
+import { cn } from "@/lib/utils";
 
 export function GlossaryAccordion({ terms }: { terms: GlossaryTerm[] }) {
-  const first = terms[0]?.slug;
-
   return (
-    <div className="mt-16 overflow-hidden rounded-[1.75rem] border border-border/60 bg-card/90 shadow-sm ring-1 ring-foreground/[0.04] backdrop-blur-sm">
-      <Accordion
-        className="w-full"
-        defaultValue={first ? [first] : []}
-        multiple={false}
-      >
-        {terms.map((term) => (
-          <AccordionItem
-            key={term.slug}
-            value={term.slug}
-            id={term.slug}
-            className="scroll-mt-28 border-border/60 px-5 sm:px-10"
-          >
-            <AccordionTrigger className="items-center gap-3 py-4 text-left hover:no-underline sm:py-5 [&>svg]:self-center">
-              <span className="font-heading text-xl font-semibold tracking-tight sm:text-2xl">
+    <ul className="mt-16 grid list-none grid-cols-1 gap-6 p-0 md:grid-cols-2 md:gap-x-8 md:gap-y-6">
+      {terms.map((term) => (
+        <li key={term.slug} id={term.slug} className="scroll-mt-28">
+          <Collapsible.Root className="flex h-full flex-col rounded-xl border border-border/60 bg-card shadow-sm ring-1 ring-foreground/[0.04]">
+            <Collapsible.Trigger
+              className={cn(
+                "group/collapsible-trigger flex w-full items-center justify-between gap-3 px-4 py-4 text-left outline-none sm:px-5",
+                "rounded-t-xl hover:bg-muted/30 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              )}
+            >
+              <span className="font-heading text-base font-semibold tracking-tight text-foreground sm:text-lg">
                 {term.title}
               </span>
-            </AccordionTrigger>
-            <AccordionContent className="pb-6 sm:pb-8">
-              <ul className="flex flex-wrap gap-1.5 pb-3" aria-label="Pillars">
-                {term.categories.map((label) => (
-                  <li key={label}>
-                    <Badge variant="outline" size="xs">
-                      {label}
-                    </Badge>
-                  </li>
-                ))}
-              </ul>
-              <p className="text-sm leading-relaxed text-muted-foreground">{term.shortDefinition}</p>
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
-    </div>
+              <ChevronDownIcon
+                aria-hidden
+                className="size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-aria-expanded/collapsible-trigger:rotate-180"
+              />
+            </Collapsible.Trigger>
+            <Collapsible.Panel className="flex min-h-0 flex-1 flex-col overflow-hidden text-sm data-closed:animate-accordion-up data-open:animate-accordion-down">
+              <div className="border-t border-border/50 px-4 pb-4 pt-3 sm:px-5">
+                <ul className="flex flex-wrap gap-1.5 pb-3" aria-label="Pillars">
+                  {term.categories.map((label) => (
+                    <li key={label}>
+                      <Badge variant="outline" size="xs">
+                        {label}
+                      </Badge>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-sm leading-relaxed text-muted-foreground">{term.shortDefinition}</p>
+              </div>
+            </Collapsible.Panel>
+          </Collapsible.Root>
+        </li>
+      ))}
+    </ul>
   );
 }

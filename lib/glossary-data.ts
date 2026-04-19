@@ -24,6 +24,27 @@ export const glossaryTerms: GlossaryTerm[] = [
     categories: ["Build", "Product"],
   },
   {
+    slug: "bottleneck",
+    title: "Bottleneck",
+    shortDefinition:
+      "The step, queue, or resource that limits throughput for a workflow or system. Specs that ignore bottlenecks often optimize the wrong part of the pipeline — find the constraint before you tune everything else.",
+    categories: ["Product", "Build"],
+  },
+  {
+    slug: "code-clarity",
+    title: "Code clarity",
+    shortDefinition:
+      "Code that communicates intent: naming, structure, and boundaries that make behavior easy to follow and trace back to specs — so teammates and future you can change it without fear.",
+    categories: ["Build", "Quality"],
+  },
+  {
+    slug: "constraints-and-guards",
+    title: "Constraints and guards",
+    shortDefinition:
+      "Hard limits and safety nets you write down or enforce: scope boundaries, budgets, policies, performance ceilings, or runtime checks that keep the system from crossing what the team agreed is acceptable.",
+    categories: ["Product", "Build", "Quality"],
+  },
+  {
     slug: "context-window",
     title: "Context window",
     shortDefinition:
@@ -36,6 +57,13 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "Agreed inputs, outputs, and error behavior at a boundary. Contracts are a compact form of spec for integrations.",
     categories: ["Build"],
+  },
+  {
+    slug: "delegation",
+    title: "Delegation",
+    shortDefinition:
+      "Handing off work with clear ownership, context, and **acceptance criteria** so others can decide and execute without endless re-sync. Vague delegation is a common source of rework; specs make it explicit.",
+    categories: ["Product", "Build"],
   },
   {
     slug: "evaluation-dataset",
@@ -78,6 +106,13 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "The smallest version that validates your hypothesis. SDD helps decide what belongs in the MVP slice without silent scope creep.",
     categories: ["Product"],
+  },
+  {
+    slug: "outcome-clarity",
+    title: "Outcome clarity",
+    shortDefinition:
+      "A shared, written picture of what “win” means for a feature or initiative — for users and the business — so design, engineering, and stakeholders aren’t solving different problems under the same ticket.",
+    categories: ["Product", "Design"],
   },
   {
     slug: "prd",
@@ -134,6 +169,13 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "A precise description of what the system should do: inputs, outputs, constraints, and edge cases. Good specs are readable by both humans and contributors who turn them into code.",
     categories: ["Build"],
+  },
+  {
+    slug: "success-metrics",
+    title: "Success metrics",
+    shortDefinition:
+      "Measures that show whether intent was met: adoption, revenue, latency, defect rate, model quality, or user-reported outcomes. Strong specs name a small set of metrics and how you’ll judge **acceptance**.",
+    categories: ["Product", "Quality"],
   },
   {
     slug: "test-driven-development",
