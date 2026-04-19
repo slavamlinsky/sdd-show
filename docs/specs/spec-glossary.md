@@ -17,8 +17,8 @@ Each term should have:
 
 ## Page behavior (MVP)
 
-- Single page listing all terms (sections or cards). Alphabetical or curated order — either is fine.
-- **Layout:** On **`lg` and up**, term cards use a **two-column grid** (single column on smaller viewports). See [spec-design-layout.md](./spec-design-layout.md).
+- Single page listing all terms in one **accordion**: each row shows the **term title** and a **chevron**; expanding reveals **pillar badges** and the **short definition**. **Only one row open at a time**; the **first term (alphabetical)** is expanded by default.
+- **Layout:** Single column list inside a shared rounded container; see [spec-design-layout.md](./spec-design-layout.md).
 - **“Suggest something new”** — button in the hero row links to anchor **`#suggest-term`**; copy explains that **submission / moderation is v2** (stub band at bottom until then).
 - **No search** in MVP (see **spec-main** v2).
 

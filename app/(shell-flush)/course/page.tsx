@@ -67,15 +67,15 @@ const modules = [
 export default function CoursePage() {
   return (
     <div className="flex flex-col">
-      <section className="relative overflow-hidden border-b border-border/50">
+      <section className="full-bleed relative overflow-hidden border-b border-border/50">
         <div
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_55%_at_30%_-25%,rgba(99,102,241,0.14),transparent_55%),radial-gradient(ellipse_60%_45%_at_100%_10%,rgba(14,165,233,0.09),transparent_45%)]"
           aria-hidden
         />
-        <div className="relative mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:gap-16 sm:px-6 sm:py-28 lg:grid-cols-[1fr_minmax(0,24rem)] lg:items-start">
+        <div className="relative mx-auto grid w-full max-w-6xl gap-12 px-4 py-20 sm:gap-16 sm:px-6 sm:py-28 lg:grid-cols-[1fr_minmax(0,24rem)] lg:items-start">
           <Reveal className="space-y-8" distance={28}>
             <p className="text-sm font-semibold tracking-wide text-muted-foreground uppercase">Coming soon</p>
-            <h1 className="font-heading text-balance text-4xl font-semibold tracking-tight sm:text-5xl lg:text-[3.25rem] lg:leading-[1.08]">
+            <h1 className="text-balance lg:text-[3.25rem] lg:leading-[1.08]">
               Spec driven development: the <GradientText className="font-semibold">course</GradientText>
             </h1>
             <p className="max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
@@ -137,7 +137,7 @@ export default function CoursePage() {
         </div>
       </section>
 
-      <section className="relative mx-auto w-full max-w-6xl overflow-hidden px-4 py-20 sm:px-6 sm:py-28">
+      <section className="relative w-full overflow-hidden py-20 sm:py-28">
         <SectionBackdrop tone="rose" heightClass="h-[min(480px,60vh)]" />
         <div className="relative grid gap-8 md:grid-cols-3 md:gap-10">
           {[
@@ -169,8 +169,8 @@ export default function CoursePage() {
         </div>
       </section>
 
-      <section className="border-y border-border/50 bg-gradient-to-b from-muted/35 to-muted/15">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+      <section className="full-bleed border-y border-border/50 bg-gradient-to-b from-muted/35 to-muted/15">
+        <div className="mx-auto w-full max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
           <Reveal className="space-y-4">
             <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
               Module <GradientText className="font-semibold">outline</GradientText>
@@ -202,7 +202,7 @@ export default function CoursePage() {
       <CourseFaq />
 
       <Reveal>
-        <section id="lead" className="mx-auto max-w-6xl scroll-mt-28 px-4 py-20 sm:px-6 sm:py-28">
+        <section id="lead" className="scroll-mt-28 py-20 sm:py-28">
           <div className="mx-auto max-w-xl space-y-3 text-center">
             <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
               Get <GradientText className="font-semibold">notified</GradientText>

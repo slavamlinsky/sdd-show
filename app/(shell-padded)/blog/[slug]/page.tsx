@@ -30,7 +30,7 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <div className="relative mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
+    <div className="relative mx-auto w-full max-w-3xl">
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-[320px] bg-[radial-gradient(ellipse_70%_55%_at_30%_-30%,rgba(99,102,241,0.07),transparent_65%)]"
         aria-hidden
@@ -52,7 +52,7 @@ export default async function BlogPostPage({ params }: Props) {
                 day: "numeric",
               })}
             </time>
-            <h1 className="font-heading mt-4 text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+            <h1 className="mt-4 text-balance">
               {post.meta.title}
             </h1>
             <p className="mt-5 max-w-prose text-lg leading-relaxed text-muted-foreground">{post.meta.description}</p>

@@ -2,6 +2,12 @@
 
 Applies to **all routes** unless a feature spec narrows further. Visual direction is a **light, modern marketing / edu** feel with **clear hierarchy**, informed in part by contemporary product landing patterns (e.g. generous type, soft gradients, motion on scroll).
 
+## App shell (root layout)
+
+- **Shared horizontal shell:** Root `app/layout.tsx` wraps the site chrome only (`SiteHeader`, `main`, footer). Inside `main`, **route-group layouts** apply **`PageShellPadded`** or **`PageShellFlush`** from `components/page-shell.tsx`: both use **`page-shell`** + `mx-auto max-w-6xl px-4 sm:px-6`. **`PageShellPadded`** adds **`py-16 sm:py-24`** (article-style pages, stubs). **`PageShellFlush`** omits vertical padding so full-bleed heroes and backdrops can sit flush under the header (home, course, blog index, glossary, videos). New top-level routes pick the segment that matches their first-band layout.
+- **Full-bleed bands:** Marketing sections whose background or borders should span the **viewport** (hero, some bordered bands, `SectionBackdrop` pages) use a shared **`full-bleed`** utility: break out of the shell horizontally, then use an inner `mx-auto max-w-6xl px-4 sm:px-6` (or narrower when specified) so text aligns with the shell.
+- **Default page title (`h1`):** Primary titles use a shared base style — `font-heading`, `text-4xl` / `sm:text-5xl`, `font-semibold`, `tracking-tight` — scoped with **`:where(.page-shell) h1`** in global CSS so route-level utilities can override size (e.g. `text-2xl` on `/sign-up`, larger `lg:` display on heroes).
+
 ## Responsive behavior (required)
 
 - **Mobile-first:** Base styles target small screens; add breakpoints for tablet and desktop.

@@ -42,9 +42,9 @@ export function CourseFaq() {
     <section
       id="course-faq"
       aria-labelledby="course-faq-heading"
-      className="border-y border-border/50 bg-muted/15"
+      className="full-bleed border-y border-border/50 bg-muted/15"
     >
-      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
+      <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
         <div className="text-center">
           <h2
             id="course-faq-heading"

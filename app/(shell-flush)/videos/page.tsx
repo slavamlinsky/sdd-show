@@ -15,20 +15,22 @@ export const metadata: Metadata = {
 
 export default function VideosPage() {
   return (
-    <div className="relative mx-auto max-w-6xl overflow-hidden px-4 py-16 sm:px-6 sm:py-24">
+    <div className="full-bleed relative overflow-hidden">
       <SectionBackdrop tone="emerald" />
-      <Reveal className="relative max-w-2xl space-y-4">
-        <h1 className="font-heading text-4xl font-semibold tracking-tight sm:text-5xl">
-          Curated <GradientText className="font-semibold">videos</GradientText>
-        </h1>
-        <p className="text-lg leading-relaxed text-muted-foreground">
-          Hand-picked explainers and talks. Click a card to play in a modal — swap the list in the codebase when you
-          find better references.
-        </p>
-      </Reveal>
-      <Reveal className="relative mt-14" delay={0.06}>
-        <VideoGrid videos={videos} />
-      </Reveal>
+      <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6">
+        <Reveal className="relative max-w-2xl space-y-4">
+          <h1>
+            Curated <GradientText className="font-semibold">videos</GradientText>
+          </h1>
+          <p className="text-lg leading-relaxed text-muted-foreground">
+            Hand-picked explainers and talks. Click a card to play in a modal — swap the list in the codebase when you
+            find better references.
+          </p>
+        </Reveal>
+        <Reveal className="relative mt-14" delay={0.06}>
+          <VideoGrid videos={videos} />
+        </Reveal>
+      </div>
     </div>
   );
 }

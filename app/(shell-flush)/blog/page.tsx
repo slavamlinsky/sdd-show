@@ -25,11 +25,11 @@ export default function BlogIndexPage() {
   const posts = getAllPosts();
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="full-bleed relative overflow-hidden">
       <SectionBackdrop tone="sky" />
-      <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+      <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6">
         <Reveal className="max-w-2xl space-y-4">
-          <h1 className="font-heading text-4xl font-semibold tracking-tight sm:text-5xl">
+          <h1>
             SDD <GradientText className="font-semibold">blog</GradientText>
           </h1>
           <p className="text-lg leading-relaxed text-muted-foreground">
