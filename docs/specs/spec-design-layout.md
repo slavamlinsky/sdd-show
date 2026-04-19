@@ -4,7 +4,7 @@ Applies to **all routes** unless a feature spec narrows further. Visual directio
 
 ## App shell (root layout)
 
-- **Single page shell:** All route content renders inside one shared wrapper in `app/layout.tsx`: **horizontal** padding `px-4` / `sm:px-6`, **vertical** padding `py-16` / `sm:py-24`, and **max width** `max-w-6xl` centered (`mx-auto`). Individual routes **do not** repeat this outer shell; they only add layout when something differs (e.g. article column `max-w-3xl`, lead form `max-w-lg`).
+- **Shared horizontal shell:** Root `app/layout.tsx` wraps the site chrome only (`SiteHeader`, `main`, footer). Inside `main`, **route-group layouts** apply **`PageShellPadded`** or **`PageShellFlush`** from `components/page-shell.tsx`: both use **`page-shell`** + `mx-auto max-w-6xl px-4 sm:px-6`. **`PageShellPadded`** adds **`py-16 sm:py-24`** (article-style pages, stubs). **`PageShellFlush`** omits vertical padding so full-bleed heroes and backdrops can sit flush under the header (home, course, blog index, glossary, videos). New top-level routes pick the segment that matches their first-band layout.
 - **Full-bleed bands:** Marketing sections whose background or borders should span the **viewport** (hero, some bordered bands, `SectionBackdrop` pages) use a shared **`full-bleed`** utility: break out of the shell horizontally, then use an inner `mx-auto max-w-6xl px-4 sm:px-6` (or narrower when specified) so text aligns with the shell.
 - **Default page title (`h1`):** Primary titles use a shared base style — `font-heading`, `text-4xl` / `sm:text-5xl`, `font-semibold`, `tracking-tight` — scoped with **`:where(.page-shell) h1`** in global CSS so route-level utilities can override size (e.g. `text-2xl` on `/sign-up`, larger `lg:` display on heroes).
 
