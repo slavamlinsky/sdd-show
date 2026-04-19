@@ -40,7 +40,7 @@ export function HomeIntentPillars() {
         <Reveal className="mx-auto max-w-2xl text-center" distance={16}>
           <h2
             id="intent-pillars-heading"
-            className="font-heading text-2xl font-semibold leading-tight tracking-tight sm:text-3xl"
+            className="font-heading text-2xl text-balance font-semibold leading-tight tracking-tight sm:text-3xl"
           >
             Four Core Principles <GradientText>for Intent-Driven Work</GradientText>
           </h2>
