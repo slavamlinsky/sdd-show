@@ -1,12 +1,24 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "framer-motion";
 import { ChevronUpIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-/** Sentinel must sit at the top of scrollable page content (first node inside `<main>`). */
+/** Show after this many CSS pixels of vertical scroll (any scroll container). */
+const SHOW_AFTER_PX = 280;
+
+function getViewportScrollY(): number {
+  if (typeof window === "undefined") return 0;
+  return Math.max(
+    window.scrollY ?? 0,
+    window.pageYOffset ?? 0,
+    document.documentElement?.scrollTop ?? 0,
+    document.body?.scrollTop ?? 0
+  );
+}
+
+/** Sentinel sits at the top of `<main>`; walk ancestors for nested scroll containers (IDE previews, etc.). */
 function scrollPageToTop(behavior: ScrollBehavior, sentinel: HTMLElement | null) {
   let el: HTMLElement | null = sentinel;
   while (el) {
@@ -15,6 +27,8 @@ function scrollPageToTop(behavior: ScrollBehavior, sentinel: HTMLElement | null)
     }
     el = el.parentElement;
   }
+  document.documentElement.scrollTo({ top: 0, behavior });
+  document.body.scrollTo({ top: 0, behavior });
   if (window.scrollY > 0) {
     window.scrollTo({ top: 0, behavior });
   }
@@ -22,33 +36,27 @@ function scrollPageToTop(behavior: ScrollBehavior, sentinel: HTMLElement | null)
 
 export function ScrollToTop() {
   const [visible, setVisible] = useState(false);
-  const reduce = useReducedMotion();
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = sentinelRef.current;
-    if (!el) return undefined;
+    const update = () => {
+      setVisible(getViewportScrollY() > SHOW_AFTER_PX);
+    };
 
-    if (typeof IntersectionObserver !== "undefined") {
-      const io = new IntersectionObserver(
-        ([entry]) => {
-          setVisible(!entry.isIntersecting);
-        },
-        { root: null, threshold: 0, rootMargin: "0px" }
-      );
-      io.observe(el);
-      return () => io.disconnect();
-    }
+    update();
+    requestAnimationFrame(() => requestAnimationFrame(update));
 
-    const y = () =>
-      window.scrollY ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop ||
-      0;
-    const onScroll = () => setVisible(y() > 400);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", update, { passive: true });
+    document.addEventListener("scroll", update, { capture: true, passive: true });
+    window.addEventListener("resize", update, { passive: true });
+    window.addEventListener("pageshow", update);
+
+    return () => {
+      window.removeEventListener("scroll", update);
+      document.removeEventListener("scroll", update, true);
+      window.removeEventListener("resize", update);
+      window.removeEventListener("pageshow", update);
+    };
   }, []);
 
   return (
@@ -60,27 +68,29 @@ export function ScrollToTop() {
       />
       <div
         className={cn(
-          "fixed bottom-6 right-4 z-50 transition-opacity duration-200 sm:bottom-8 sm:right-8",
+          "fixed bottom-6 right-4 z-[90] transition-opacity duration-200 sm:bottom-8 sm:right-8",
           visible ? "opacity-100" : "pointer-events-none opacity-0"
         )}
       >
-        <Button
+        <button
           type="button"
-          variant="default"
-          size="icon"
           aria-label="Scroll to top"
           className={cn(
-            "pointer-events-auto h-11 w-11 cursor-pointer rounded-2xl shadow-lg shadow-foreground/10",
-            "bg-primary text-primary-foreground ring-1 ring-foreground/10",
-            "hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring"
+            buttonVariants({ variant: "default", size: "icon" }),
+            "pointer-events-auto h-11 min-h-11 w-11 min-w-11 cursor-pointer rounded-2xl shadow-lg shadow-foreground/10",
+            "ring-1 ring-foreground/10 hover:bg-primary/90",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           )}
           onClick={() => {
+            const reduce =
+              typeof window !== "undefined" &&
+              window.matchMedia("(prefers-reduced-motion: reduce)").matches;
             const behavior: ScrollBehavior = reduce ? "auto" : "smooth";
             scrollPageToTop(behavior, sentinelRef.current);
           }}
         >
           <ChevronUpIcon className="size-5" />
-        </Button>
+        </button>
       </div>
     </>
   );

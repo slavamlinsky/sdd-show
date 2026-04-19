@@ -31,6 +31,11 @@ function MobileMainNav() {
           className={cn(buttonVariants({ variant: "outline", size: "icon" }))}
           aria-label="Open menu"
           aria-controls="mobile-main-nav"
+          onClick={() => {
+            if (process.env.NODE_ENV === "development") {
+              console.log("[MobileMainNav] hamburger SheetTrigger: click");
+            }
+          }}
         >
           <MenuIcon className="size-4" />
         </SheetTrigger>
