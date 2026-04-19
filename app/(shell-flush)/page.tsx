@@ -44,7 +44,7 @@ export default function HomePage() {
             <h1 className="text-balance leading-[1.15] sm:leading-[1.12]">
               Ship software from{" "}
               <GradientText className="font-semibold">clear and strong specs</GradientText>
-              not vague tickets
+              {" "}not vague tickets
             </h1>
             <div className="max-w-[65ch] space-y-8 text-pretty text-base leading-[1.7] text-muted-foreground">
               <p>
