@@ -162,10 +162,10 @@ function PhaseCard({ phase, align }: { phase: Phase; align: "left" | "right" }) 
       <h3 className="mt-1 font-heading text-xl font-semibold tracking-tight text-primary sm:text-2xl">
         {phase.title}
       </h3>
-      <h4 className="font-heading text-sm md:text-lg font-medium tracking-tight text-muted-foreground">
+      <h4 className="font-heading text-sm md:text-lg font-medium tracking-tight text-foreground">
         {phase.subtitle}
       </h4>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+      <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
         <span className="font-medium text-foreground/90">Process: </span>
         {phase.process}
       </p>
