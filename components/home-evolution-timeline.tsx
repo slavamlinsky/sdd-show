@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/reveal";
+import { GradientText } from "./gradient-text";
 
 type Phase = {
   range: string;
@@ -71,13 +72,13 @@ export function HomeEvolutionTimeline() {
             className="mt-2 font-heading text-2xl font-semibold tracking-tight sm:text-3xl"
           >
             From manual friction to{" "}
-            <span className="bg-gradient-to-r from-violet-600 to-sky-600 bg-clip-text text-transparent">
+            <GradientText>
               AI-driven speed
-            </span>{" "}
-            — with direction
+            </GradientText>
           </h2>
-          <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground sm:text-base">
-            A vertical thread through five eras: documents and tests, then prompts, then specs and intent as the lever.
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            A vertical journey through the evolution of the software development lifecycle — from documents and manual
+            testing, to prompts, and now to intent and executable specs as the new leverage.
           </p>
         </Reveal>
 

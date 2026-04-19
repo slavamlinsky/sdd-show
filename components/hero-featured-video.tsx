@@ -30,7 +30,7 @@ export function HeroFeaturedVideo({ video }: { video: VideoEntry }) {
           youtubeId={video.youtubeId}
           title={video.title}
           priority
-          className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+          className="object-cover transition-transform duration-300 scale-[1.02]  group-hover:scale-[1.05]"
           sizes="(max-width: 1024px) 100vw, 33vw"
         />
         <span className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-foreground/50 via-foreground/10 to-transparent p-5 sm:p-6">
@@ -42,9 +42,6 @@ export function HeroFeaturedVideo({ video }: { video: VideoEntry }) {
               <span className="block font-heading text-sm font-semibold leading-snug text-white drop-shadow-sm sm:text-base">
                 {video.title}
               </span>
-              {video.channelTitle ? (
-                <span className="mt-0.5 block text-xs text-white/85">{video.channelTitle}</span>
-              ) : null}
             </span>
           </span>
         </span>

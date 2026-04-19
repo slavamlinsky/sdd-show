@@ -9,7 +9,7 @@ const pillars = [
   {
     title: "Product",
     description:
-      "Roadmaps, priorities, and outcomes: what to build, for whom, and why it matters — before scope quietly drifts.",
+      "Roadmaps, priorities, and outcomes: what to build, for whom, and why it matters, before scope quietly drifts.",
     icon: Package,
   },
   {
@@ -21,7 +21,7 @@ const pillars = [
   {
     title: "Build",
     description:
-      "Specs, code, APIs, and AI-assisted workflows. Ship what you documented — with contracts and context that hold up.",
+      "Specs, code, APIs, and workflows. Ship what you documented: with contracts and context that hold up.",
     icon: Code2,
   },
   {
@@ -51,28 +51,9 @@ export function HomePillars() {
             id="home-pillars-heading"
             className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
           >
-            Foundational vocabulary for the{" "}
+            Vocabulary for the{" "}
             <GradientText className="font-semibold">AI-driven product lifecycle</GradientText>
           </h2>
-          <p className="mt-4 text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Short definitions in the{" "}
-            <Link href="/glossary" className="font-medium text-foreground underline-offset-4 hover:underline">
-              glossary
-            </Link>
-            ; deeper reads on the{" "}
-            <Link href="/blog" className="font-medium text-foreground underline-offset-4 hover:underline">
-              blog
-            </Link>
-            ,{" "}
-            <Link href="/videos" className="font-medium text-foreground underline-offset-4 hover:underline">
-              videos
-            </Link>{" "}
-            for walkthroughs, and the{" "}
-            <Link href="/course" className="font-medium text-foreground underline-offset-4 hover:underline">
-              course
-            </Link>{" "}
-            for a full workflow.
-          </p>
         </Reveal>
 
         <ul className="mt-12 grid list-none grid-cols-1 gap-6 p-0 sm:grid-cols-2 sm:gap-7 lg:mt-14 lg:gap-8">
@@ -83,7 +64,7 @@ export function HomePillars() {
                 <Reveal delay={i * 0.06} distance={14}>
                   <div
                     className={cn(
-                      "flex h-full gap-5 rounded-[1.35rem] bg-card p-6 shadow-[0_12px_40px_-12px_rgba(79,70,229,0.12),0_4px_16px_-4px_rgba(15,23,42,0.08)]",
+                      "flex h-full gap-5 hover:translate-y-2 rounded-xl bg-card p-6 shadow-sm",
                       "ring-1 ring-border/50 dark:shadow-[0_12px_40px_-12px_rgba(0,0,0,0.35)]"
                     )}
                   >
@@ -91,10 +72,10 @@ export function HomePillars() {
                       className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500/12 via-white to-sky-500/15 ring-1 ring-violet-500/15 dark:from-violet-500/20 dark:via-card dark:to-sky-500/20 dark:ring-violet-400/20"
                       aria-hidden
                     >
-                      <Icon className="size-7 text-violet-600 dark:text-sky-400" strokeWidth={1.65} />
+                      <Icon className="size-12 text-violet-600 dark:text-sky-400" strokeWidth={1.65} />
                     </span>
                     <div className="min-w-0 flex-1">
-                      <h3 className="font-heading text-lg font-semibold tracking-tight text-foreground">
+                      <h3 className="font-heading text-xl font-semibold tracking-tight text-foreground">
                         {item.title}
                       </h3>
                       <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{item.description}</p>
