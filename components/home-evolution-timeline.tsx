@@ -5,6 +5,7 @@ import { GradientText } from "./gradient-text";
 type Phase = {
   range: string;
   title: string;
+  subtitle?: string;
   process: string;
   /** Friction, challenge, issue, or future-facing note */
   note?: { label: string; text: string };
@@ -112,17 +113,17 @@ export function HomeEvolutionTimeline() {
                     </div>
 
                     {/* Desktop: alternating sides (first era on the right) */}
-                    <div className="hidden md:grid md:grid-cols-[1fr_auto_1fr] md:gap-x-6 md:gap-y-0 md:items-start">
+                    <div className="hidden md:grid md:grid-cols-[1fr_auto_1fr] md:gap-x-6 md:gap-y-0 md:items-center">
                       <div
                         className={cn(
-                          "min-w-0 pt-1",
+                          "min-w-0",
                           onRight ? "col-start-1 invisible" : "col-start-1 justify-self-end text-right"
                         )}
                       >
                         {!onRight ? <PhaseCard phase={phase} align="right" /> : null}
                       </div>
 
-                      <div className="relative col-start-2 flex flex-col items-center pt-2">
+                      <div className="relative col-start-2 flex flex-col items-center justify-center">
                         <span
                           className="relative z-10 size-3.5 shrink-0 rounded-full border-[3px] border-background bg-primary shadow-[0_0_0_4px_rgba(99,102,241,0.2)]"
                           aria-hidden
@@ -131,7 +132,7 @@ export function HomeEvolutionTimeline() {
 
                       <div
                         className={cn(
-                          "min-w-0 pt-1",
+                          "min-w-0",
                           onRight ? "col-start-3 justify-self-start text-left" : "col-start-3 invisible"
                         )}
                       >

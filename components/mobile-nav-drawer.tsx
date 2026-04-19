@@ -67,20 +67,31 @@ export function MobileNavDrawer() {
     };
   }, [open, mounted]);
 
+  /** Same chip language as `HomePillars` icons — larger tap target (size-14) helps older phones. */
+  const menuTriggerChip = cn(
+    "flex size-14 shrink-0 items-center justify-center rounded-2xl border-0 shadow-none outline-none",
+    "bg-gradient-to-br from-violet-500/12 via-white to-sky-500/15 ring-1 ring-violet-500/15",
+    "dark:from-violet-500/20 dark:via-card dark:to-sky-500/20 dark:ring-violet-400/20",
+    "text-violet-600 dark:text-sky-400",
+    "cursor-pointer [touch-action:manipulation] [-webkit-tap-highlight-color:transparent]",
+    "hover:opacity-90 active:opacity-80"
+  );
+
   return (
     <div className="relative z-[60] md:hidden">
       <button
         type="button"
-        className={cn(
-          buttonVariants({ variant: "outline", size: "icon" }),
-          "cursor-pointer [touch-action:manipulation] [-webkit-tap-highlight-color:transparent]"
-        )}
+        className={menuTriggerChip}
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         aria-controls={open ? panelId : undefined}
         onClick={() => setOpen((o) => !o)}
       >
-        <MenuIcon className="size-4 pointer-events-none" aria-hidden />
+        {open ? (
+          <XIcon className="size-6 pointer-events-none" strokeWidth={1.65} aria-hidden />
+        ) : (
+          <MenuIcon className="size-6 pointer-events-none" strokeWidth={1.65} aria-hidden />
+        )}
       </button>
       {mounted && open
         ? createPortal(

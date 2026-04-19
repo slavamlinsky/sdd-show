@@ -124,7 +124,8 @@ export function ScrollToTop() {
       />
       <div
         className={cn(
-          "fixed bottom-6 right-4 z-[90] transition-opacity duration-200 sm:bottom-8 sm:right-8",
+          /* ~48px higher than bottom-6 / bottom-8 so it clears footer link rows */
+          "fixed bottom-[4.5rem] right-4 z-[90] transition-opacity duration-200 sm:bottom-20 sm:right-8",
           visible ? "opacity-100" : "pointer-events-none opacity-0"
         )}
       >
@@ -138,8 +139,8 @@ export function ScrollToTop() {
           className={cn(
             /* Outline / transparent chip (e.g. footer-style): shows page behind, accent border + icon */
             "pointer-events-auto flex size-11 cursor-pointer items-center justify-center rounded-md border-2 border-primary",
-            "bg-transparent text-primary shadow-none",
-            "transition-colors hover:bg-primary/10 active:bg-primary/15",
+            "bg-primary/25 text-primary shadow-none backdrop-blur-sm",
+            "transition-colors hover:bg-primary/35 active:bg-primary/40",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
             "disabled:pointer-events-none disabled:opacity-40"
           )}
