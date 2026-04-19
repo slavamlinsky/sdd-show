@@ -7,14 +7,8 @@ import { LogIn, MenuIcon } from "lucide-react";
 import { mainNav } from "@/lib/navigation";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 function navLinkClass(active: boolean) {
   return cn(
@@ -27,11 +21,57 @@ function isNavActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
+function MobileMainNav() {
+  const pathname = usePathname();
+
+  return (
+    <div className="relative z-[45] md:hidden">
+      <Sheet>
+        <SheetTrigger
+          className={cn(buttonVariants({ variant: "outline", size: "icon" }))}
+          aria-label="Open menu"
+          aria-controls="mobile-main-nav"
+        >
+          <MenuIcon className="size-4" />
+        </SheetTrigger>
+        <SheetContent
+          id="mobile-main-nav"
+          side="right"
+          className="w-[min(100%,20rem)] gap-0 p-0"
+        >
+          <SheetHeader className="border-b border-border p-4 text-left">
+            <SheetTitle className="text-left">Menu</SheetTitle>
+          </SheetHeader>
+          <nav className="flex flex-col p-2" aria-label="Mobile main">
+            {mainNav.map(({ href, label }) => {
+              const active = isNavActive(pathname, href);
+              return (
+                <SheetClose
+                  key={href}
+                  render={<Link href={href} />}
+                  className={cn(
+                    "rounded-lg px-3 py-2.5 text-sm font-medium",
+                    active
+                      ? "bg-muted text-foreground"
+                      : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
+                  )}
+                >
+                  {label}
+                </SheetClose>
+              );
+            })}
+          </nav>
+        </SheetContent>
+      </Sheet>
+    </div>
+  );
+}
+
 export function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 w-full border-b border-border/60 bg-background/95 shadow-[0_1px_0_0_rgb(0_0_0/0.03)] backdrop-blur-xl supports-backdrop-filter:bg-background/85">
+    <header className="fixed inset-x-0 top-0 z-40 w-full border-b border-border/60 bg-white shadow-[0_1px_0_0_rgb(0_0_0/0.03)] dark:bg-background dark:shadow-[0_1px_0_0_rgb(0_0_0/0.06)]">
       <a
         href="#main-content"
         className="bg-background text-foreground fixed left-4 top-4 z-[100] -translate-y-[200%] rounded-full border border-border px-4 py-2 text-sm font-medium shadow-md outline-none transition-transform duration-200 ease-out focus:translate-y-0 focus-visible:ring-2 focus-visible:ring-ring"
@@ -41,17 +81,17 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 sm:gap-4 sm:px-6">
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2.5 font-heading text-lg font-semibold tracking-tight text-foreground outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md"
+          aria-label={`${siteConfig.name} (home)`}
+          className="flex shrink-0 items-center outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md"
         >
           <Image
             src="/logo-ai-driven.png"
             alt=""
-            width={160}
-            height={40}
-            className="h-8 w-auto sm:h-9"
+            width={180}
+            height={45}
+            className="h-9 w-auto sm:h-10"
             priority
           />
-          <span>{siteConfig.name}</span>
         </Link>
 
         <nav
@@ -79,6 +119,7 @@ export function SiteHeader() {
         <div className="ml-auto flex shrink-0 items-center gap-2">
           <Button
             variant="outline"
+            nativeButton={false}
             className="h-10 gap-2 border-primary/80 bg-background px-5 text-sm font-semibold text-primary shadow-sm hover:bg-primary/10 hover:text-primary"
             render={<Link href="/sign-in" />}
           >
@@ -86,41 +127,7 @@ export function SiteHeader() {
             Sign in
           </Button>
 
-          <div className="md:hidden">
-            <Sheet>
-              <SheetTrigger
-                render={
-                  <Button variant="outline" size="icon" aria-label="Open menu">
-                    <MenuIcon className="size-4" />
-                  </Button>
-                }
-              />
-              <SheetContent side="right" className="w-[min(100%,20rem)] gap-0 p-0">
-                <SheetHeader className="border-b border-border p-4 text-left">
-                  <SheetTitle className="text-left">Menu</SheetTitle>
-                </SheetHeader>
-                <nav className="flex flex-col p-2" aria-label="Mobile main">
-                  {mainNav.map(({ href, label }) => {
-                    const active = isNavActive(pathname, href);
-                    return (
-                      <Link
-                        key={href}
-                        href={href}
-                        className={cn(
-                          "rounded-lg px-3 py-2.5 text-sm font-medium",
-                          active
-                            ? "bg-muted text-foreground"
-                            : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
-                        )}
-                      >
-                        {label}
-                      </Link>
-                    );
-                  })}
-                </nav>
-              </SheetContent>
-            </Sheet>
-          </div>
+          <MobileMainNav />
         </div>
       </div>
     </header>

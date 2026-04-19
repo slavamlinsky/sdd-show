@@ -51,10 +51,10 @@ export default function RootLayout({
           className="min-w-0 flex-1 scroll-mt-16 outline-none w-full pt-16"
           tabIndex={-1}
         >
+          <ScrollToTop />
           {children}
         </main>
         <FooterRegion />
-        <ScrollToTop />
       </body>
     </html>
   );

@@ -60,6 +60,27 @@ const curatedVideos: VideoEntry[] = [
     channelTitle: "IBM Technology",
     category: "Build",
   },
+  {
+    id: "matt-pocock-7-phases-ai-driven-development",
+    title: "The 7 phases of AI-driven development",
+    youtubeId: "Ah9p7v7nJWg",
+    channelTitle: "Matt Pocock",
+    category: "Product",
+  },
+  {
+    id: "marc-schluper-intent-engineering-sdd-example",
+    title: "Intent Engineering By Example - how to boost Spec-Driven Development",
+    youtubeId: "59RhwBq2GN4",
+    channelTitle: "Marc Schluper",
+    category: "Build",
+  },
+  {
+    id: "executive-producer-intent-engineering-claudesim",
+    title: "What is Intent Engineering? Tell AI What You Want, Not How | ClaudeSim",
+    youtubeId: "P0wz1LHNHjo",
+    channelTitle: "The Executive Producer",
+    category: "Product",
+  },
 ];
 
 /** Curated SDD-related talks — edit `lib/videos-data.ts` to update */

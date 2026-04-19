@@ -1,5 +1,5 @@
 ---
-title: "Beyond the Spec: The Rise of Intent-Driven Engineering"
+title: "Spec: The Rise of Intent-Driven Engineering"
 slug: "intent-driven-engineering"
 date: "2026-04-19"
 description: "From prompt hacks to specs — and now to intent. Why the next shift is about architecting outcomes, not writing longer instructions."
