@@ -17,7 +17,7 @@ export default function VideosPage() {
   return (
     <div className="full-bleed relative overflow-hidden">
       <SectionBackdrop tone="emerald" />
-      <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6">
+      <div className="relative mx-auto w-full max-w-6xl px-4 pt-6 sm:px-6 sm:pt-12">
         <Reveal className="relative max-w-2xl space-y-4">
           <h1>
             Curated <GradientText className="font-semibold">videos</GradientText>

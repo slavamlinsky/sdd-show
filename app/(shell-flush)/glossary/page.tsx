@@ -30,7 +30,7 @@ export default function GlossaryPage() {
     <div className="full-bleed relative overflow-hidden">
       <SectionBackdrop tone="violet" />
       <div className="relative mx-auto w-full max-w-6xl px-4 pt-6 sm:px-6 sm:pt-12">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-10">
           <Reveal className="max-w-3xl space-y-4">
             <h1>
               <GradientText className="font-semibold">Glossary</GradientText>
@@ -49,7 +49,7 @@ export default function GlossaryPage() {
               href="#suggest-term"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
-                "inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border-primary/25 bg-background/80 px-6 text-sm font-semibold text-primary shadow-sm backdrop-blur-sm hover:bg-primary/5 sm:w-auto"
+                "inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border-primary/25 bg-accent/80 px-6 text-sm font-semibold text-primary shadow-sm backdrop-blur-sm hover:bg-primary/5 sm:w-auto"
               )}
             >
               <Lightbulb className="size-4 shrink-0" aria-hidden />

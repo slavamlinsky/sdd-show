@@ -8,7 +8,6 @@ import { HomeIntentPillars } from "@/components/home-intent-pillars";
 import { HomePillars } from "@/components/home-pillars";
 import { GradientText } from "@/components/gradient-text";
 import { Reveal } from "@/components/reveal";
-import { SectionBackdrop } from "@/components/section-backdrop";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -171,13 +170,13 @@ export default function HomePage() {
         </Reveal>
       </div>
 
-      <section className="full-bleed relative overflow-hidden border-y border-border/40 bg-gradient-to-b from-muted/25 via-background to-muted/15 py-16 sm:py-20 dark:from-muted/10 dark:to-muted/5">
-        <SectionBackdrop tone="emerald" heightClass="h-[min(420px,55vh)]" />
-        <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6">
-          <Reveal>
-            <HomeFaq />
-          </Reveal>
-        </div>
+      <section
+        id="faq"
+        className="full-bleed border-y border-zinc-800/80 bg-zinc-950 text-zinc-100"
+      >
+        <Reveal>
+          <HomeFaq />
+        </Reveal>
       </section>
     </div>
   );

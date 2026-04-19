@@ -72,7 +72,7 @@ export default function CoursePage() {
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_55%_at_30%_-25%,rgba(99,102,241,0.14),transparent_55%),radial-gradient(ellipse_60%_45%_at_100%_10%,rgba(14,165,233,0.09),transparent_45%)]"
           aria-hidden
         />
-        <div className="relative mx-auto grid w-full max-w-6xl gap-12 px-4 py-20 sm:gap-16 sm:px-6 sm:py-28 lg:grid-cols-[1fr_minmax(0,24rem)] lg:items-start">
+        <div className="relative mx-auto w-full max-w-6xl px-4 pt-6 sm:px-6 sm:pt-12">
           <Reveal className="space-y-8" distance={28}>
             <p className="text-sm font-semibold tracking-wide text-muted-foreground uppercase">Coming soon</p>
             <h1 className="text-balance lg:text-[3.25rem] lg:leading-[1.08]">

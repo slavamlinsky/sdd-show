@@ -27,7 +27,7 @@ export default function BlogIndexPage() {
   return (
     <div className="full-bleed relative overflow-hidden">
       <SectionBackdrop tone="sky" />
-      <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6">
+      <div className="relative mx-auto w-full max-w-6xl px-4 pt-6 sm:px-6 sm:pt-12">
         <Reveal className="max-w-2xl space-y-4">
           <h1>
             SDD <GradientText className="font-semibold">blog</GradientText>
