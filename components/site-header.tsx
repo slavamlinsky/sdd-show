@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LogIn, MenuIcon } from "lucide-react";
@@ -40,9 +41,17 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 sm:gap-4 sm:px-6">
         <Link
           href="/"
-          className="shrink-0 font-heading text-lg font-semibold tracking-tight text-foreground"
+          className="flex shrink-0 items-center gap-2.5 font-heading text-lg font-semibold tracking-tight text-foreground outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md"
         >
-          {siteConfig.name}
+          <Image
+            src="/logo-ai-driven.png"
+            alt=""
+            width={160}
+            height={40}
+            className="h-8 w-auto sm:h-9"
+            priority
+          />
+          <span>{siteConfig.name}</span>
         </Link>
 
         <nav
