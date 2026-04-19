@@ -44,16 +44,12 @@ export default function HomePage() {
             <h1 className="text-balance leading-[1.15] sm:leading-[1.12]">
               Ship software from{" "}
               <GradientText className="font-semibold">clear and strong specs</GradientText>
-              {" — "}not vague tickets
+              not vague tickets
             </h1>
             <div className="max-w-[65ch] space-y-8 text-pretty text-base leading-[1.7] text-muted-foreground">
               <p>
                 Intent-Driven Engineering (IDE) focuses on defining the desired outcomes before implementation,
                 ensuring requirements drive development rather than just following tasks.
-              </p>
-              <p>
-                Learn how to translate high-level intent into a complete, workable system design. Master the ideas,
-                vocabulary, and a repeatable workflow you can use on real-world projects.
               </p>
             </div>
             <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
