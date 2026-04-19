@@ -45,7 +45,10 @@ export default async function BlogPostPage({ params }: Props) {
         </Link>
         <article className="relative mt-10">
           <header className="border-b border-border/60 pb-10">
-            <time className="text-xs font-semibold tracking-wide text-muted-foreground uppercase" dateTime={post.meta.date}>
+            <time
+              className="block text-end text-xs font-semibold tracking-wide text-muted-foreground uppercase"
+              dateTime={post.meta.date}
+            >
               {new Date(post.meta.date).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
