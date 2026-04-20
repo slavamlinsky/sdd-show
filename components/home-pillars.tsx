@@ -15,7 +15,7 @@ const pillars = [
   {
     title: "Design",
     description:
-      "Mapping	Translates high-level intent into functional specifications and UX flows. AI acts as an architect to ensure designs are feasible, reusable, and aligned with core business requirements.",
+      "Translates high-level intent into functional specifications and UX flows. AI acts as an architect to ensure designs are feasible, reusable, and aligned with core business requirements.",
     icon: Palette,
   },
   {

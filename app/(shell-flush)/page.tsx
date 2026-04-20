@@ -91,7 +91,7 @@ export default function HomePage() {
           <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="space-y-3">
               <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
-                Popular in our <GradientText className="font-semibold">AI-driven content hub</GradientText>
+                Latest from our <GradientText className="font-semibold">AI-driven content hub</GradientText>
               </h2>
               
             </div>

@@ -63,8 +63,8 @@ The course is for people who **benefit from writing and reading specs** before o
 
 - **Header:** **Site title / logo** (links to `/`); **primary nav** order: **Glossary → Videos → Courses → Blog** (no duplicate “Home”); nav **centered** on `md+` between logo and actions; **“Sign in”** (primary border + primary text, top-right, **Lucide `LogIn`**) links to `/sign-in` (stub until auth). **Mobile:** sheet menu for nav + **Sign in** stays visible next to the menu trigger.
 - **Footer:** Short note + optional link to repo or contact (optional for MVP).
-- **App shell:** **Main content** uses one shared wrapper (max width, horizontal + vertical padding, default `h1` styling) in the root layout; routes use `**full-bleed`** only where a section must span the viewport. See **App shell (root layout)** in [spec-design-layout.md](./spec-design-layout.md).
-- **Design:** Light, simple, modern (AI-tool / edu style). **Responsive layout, spacing (“air”), structured blocks, CTAs, and image rules** are defined in [spec-design-layout.md](./spec-design-layout.md). Optional visual references may live in a future `**design.md`** — not blocking MVP.
+- **App shell:** **Main content** uses one shared wrapper (max width, horizontal + vertical padding, default `h1` styling) in the root layout; routes use `full-bleed` only where a section must span the viewport. See **App shell (root layout)** in [spec-design-layout.md](./spec-design-layout.md).
+- **Design:** Light, simple, modern (AI-tool / edu style). **Responsive layout, spacing (“air”), structured blocks, CTAs, and image rules** are defined in [spec-design-layout.md](./spec-design-layout.md). Optional visual references may live in a future `design.md` — not blocking MVP.
 
 ## Content storage (MVP)
 
@@ -109,5 +109,5 @@ Choose one approach and use it consistently for blog posts, glossary entries, an
 
 | Term | Meaning here                                                                                              |
 | ---- | --------------------------------------------------------------------------------------------------------- |
-| SDD  | Spec driven development — defining specifications before implementation and using them to drive delivery. |
+| SDD  | Spec-driven development — defining specifications before implementation and using them to drive delivery. |
 | MVP  | First shippable version described in this document.                                                       |
