@@ -26,8 +26,9 @@ Applies to **all routes** unless a feature spec narrows further. Visual directio
 
 ## Motion & scroll
 
-- **Scroll reveal:** Primary sections use **subtle entrance motion** when they enter the viewport (fade + short vertical travel). **Stagger** sibling cards modestly where it helps rhythm.
-- **Reduced motion:** When `prefers-reduced-motion: reduce` is set, **do not** run scroll-driven movement; show content statically (respecting the user’s OS preference).
+- **Implementation — Framer Motion:** Animate **block- and element-level appearance** with **[Framer Motion](https://www.framer.com/motion/)** — e.g. **`motion.div`** (or other `motion.*` elements) with **`whileInView`**, **`initial` / `animate`**, and optional **`variants`** for parent/child stagger. Use for **primary sections**, **cards**, **hero copy/media**, and other marketing blocks where a subtle entrance improves rhythm. Prefer **once** (or bounded) viewport triggers so motion does not loop distractingly on re-scroll unless a spec calls for it.
+- **Scroll reveal (behavior):** Entrances stay **subtle** — typically **opacity + short vertical offset** (or equivalent), modest **duration** and **easing**, and **staggered** siblings (lists, grids) only where it aids scanability — not flashy or long-running.
+- **Reduced motion:** When `prefers-reduced-motion: reduce` is set, **skip** scroll-driven transforms and opacity ramps (Framer’s **`useReducedMotion`** or equivalent); render **static** final styles. Respect the same rule for any non–Framer Motion fallbacks.
 - **Page scroll:** Prefer `scroll-behavior: smooth` only when **not** `prefers-reduced-motion: reduce`.
 - **Scroll-to-top:** A **floating control** appears after scrolling down; returns the user to the top with smooth scroll (or instant if reduced motion).
 

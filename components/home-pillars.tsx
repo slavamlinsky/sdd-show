@@ -21,7 +21,7 @@ const pillars = [
   {
     title: "Build",
     description:
-      "Specs, code, APIs, and workflows. Ship what you documented: with contracts and context that hold up.",
+      "Ship what you documented—contracts and context that still hold up in production. Specs, code, APIs, and workflows.",
     icon: Code2,
   },
   {

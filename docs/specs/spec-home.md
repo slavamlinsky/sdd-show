@@ -41,6 +41,7 @@ Follow [spec-design-layout.md](./spec-design-layout.md) for **responsive bands**
 - Hero + Q&A + blog preview + video teaser are visible without relying on client-only rendering for core copy where feasible (SEO-friendly).
 - CTAs match **spec-main** (primary → course) and **spec-design-layout.md** (visual hierarchy).
 - **Responsive:** Sections stack with clear separation; hero image does not break layout at mobile and desktop widths.
+- **Motion:** Home bands (hero, pillars, timeline, blog row, etc.) follow **spec-design-layout.md** — **Framer Motion** for block/element entrance where used, with **`prefers-reduced-motion`** respected.
 
 ## Non-goals
 
