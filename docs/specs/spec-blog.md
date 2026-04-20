@@ -31,6 +31,15 @@ Body: MD/MDX supported by the chosen content pipeline.
 - Render full article.
 - `metadata` from title + description (+ optional OG later).
 
+## Inline figures (markdown)
+
+- **Default:** Images in post bodies use a shared **figure frame** in `components/markdown-content.tsx`: **~2:1** aspect, **`object-cover`**, rounded border — suitable for diagrams and hero art on most posts.
+- **Intent-driven article (`intent-driven-engineering`):** Inline assets:
+  - **`/images/intent-driven-user.png`** — after “The evolution of the lifecycle” (human / intent-architect framing). **16:9** in the frame.
+  - **`/images/intent-driven-schema.png`** — after “Where does control live?” (workflow / guardrails schema). **16:9** in the frame.
+  - **`/images/intent-driven-role-shift.jpg`** — after the ambiguity line in “From scribe to architect” (upstream role metaphor). Uses the **default ~2:1** blog figure aspect unless a future change aligns it to 16:9.
+- **Implementation:** Paths **`intent-driven-user`** and **`intent-driven-schema`** use **`aspect-video` (16:9)** in the markdown renderer; other post images (including **`intent-driven-role-shift`**) keep **~2:1**. Export **user** and **schema** at **16:9** for predictable crops.
+
 ## MVP content
 
 - **3** articles, not large (rough target: **500–1200 words** each unless shorter fits better).
