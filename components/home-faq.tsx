@@ -42,11 +42,7 @@ export function HomeFaq() {
         Quick answers. For depth, use the glossary and blog. Course questions live on the course page.
       </p>
 
-      <Accordion
-        multiple
-        defaultValue={[items[0].id, items[1].id, items[2].id]}
-        className="mt-12 w-full border-t border-border"
-      >
+      <Accordion multiple defaultValue={[]} className="mt-12 w-full border-t border-border">
         {items.map((item) => (
           <AccordionItem
             key={item.id}
