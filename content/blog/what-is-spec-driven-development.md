@@ -3,6 +3,9 @@ title: "What is spec driven development?"
 slug: "what-is-spec-driven-development"
 date: "2026-04-01"
 description: "A short, practical definition of SDD — and when it helps your team ship with less thrash."
+name: "What is spec-driven development?"
+anons: "A practical definition of SDD—and when it helps your team ship with less thrash."
+heading: "What is spec driven development?"
 ---
 
 ## A working definition

@@ -90,7 +90,7 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
+  --primary: oklch(0.922 0 0); 
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -184,13 +184,21 @@
     .gradient-text-fill.gradient-text-fill--on-dark,
     .dark .gradient-text-fill,
     .dark .gradient-text-fill.gradient-text-fill--on-dark {
-      background-image: linear-gradient(
+      /* background-image: linear-gradient(
         to right,
         #005ff2,
         #974adc,
         #cf2ebc,
         #f01496,
         #ff256f
+      ); */
+      background-image: linear-gradient(
+        to right,
+        #974adc, /* Deep Purple */
+    #6236b5, /* Muted Purple/Blue transition */
+    #005ff2, /* Your Base Blue */
+    #00c2f2, /* Cyan */
+    #00e676  /* Vibrant Green */
       );
       color: rgb(0 0 0 / 0);
       -webkit-text-fill-color: transparent;

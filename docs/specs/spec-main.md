@@ -4,6 +4,8 @@
 
 A small public website that explains **spec driven development (SDD)** to **students and developers**, with clear navigation and room to grow content.
 
+**Copy convention:** Headings, marketing lines, and blog metadata follow **sentence case**; formal terms, acronyms, proper nouns, and fixed taxonomy labels are exceptions — see [spec-design-layout.md — Naming & capitalization](./spec-design-layout.md#naming--capitalization).
+
 ## Primary and secondary goals
 
 - **Primary:** Drive visitors toward the **Course** page (subscribe / lead form; real course later).
@@ -82,7 +84,7 @@ Choose one approach and use it consistently for blog posts, glossary entries, an
 ## SEO baseline
 
 - Per-route `metadata` (title, description).
-- Sensible defaults for `/blog/[slug]` from post frontmatter.
+- Sensible defaults for `/blog/[slug]` from post frontmatter (**Open Graph / Twitter** preview: **`socialImage`**, else first body image, else **`siteConfig.defaultBlogShareImage`** — see [spec-blog.md — Share preview](./spec-blog.md#share-preview-open-graph-and-social-links)).
 
 ## Out of scope (MVP)
 

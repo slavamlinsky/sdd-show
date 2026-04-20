@@ -1,8 +1,12 @@
 ---
-title: "The rise of Intent-Driven Engineering"
+title: "The rise of Intent-Driven Engineering (AI development)."
+description: "From prompt hacks to specs and now to intent. Why the next shift is about architecting outcomes, not writing longer instructions."
 slug: "intent-driven-engineering"
 date: "2026-04-19"
-description: "From prompt hacks to specs and now to intent. Why the next shift is about architecting outcomes, not writing longer instructions."
+name: "Intent-driven engineering"
+anons: "Writing longer prompts isn't the same as engineering a better outcome. If you are tired of managing vague tickets and endless instruction loops, it’s time for a change. We’re moving toward a world where your job isn't to provide the steps, but to architect the intent. It is time to move from being 'prompt engineers' to being 'outcome architects'."
+heading: "The rise of Intent-Driven Engineering"
+socialImage: "/images/intent-driven-user.png"
 ---
 
 For the last few years, we have obsessed over how to give AI better instructions. We called it **prompt engineering.** Then we asked for **structure** so behavior stayed reliable — and **spec-driven development (SDD)** gave the machine something testable to implement.
@@ -30,7 +34,7 @@ That is the compelling shift: from teaching the machine to **code line-by-line**
 
 In an intent-driven model, you worry less about *how* every line is written and more about *what* must be true when the work is done. The same four pillars you use to organize learning still apply — but the emphasis moves **upstream**:
 
-- **Product** — The North Star: who it is for, what success means, and which outcomes are non-negotiable.
+- **Product** — The north star: who it is for, what success means, and which outcomes are non-negotiable.
 - **Design** — Constraints on experience: accessibility, tone, flows, and visual language the solution must respect.
 - **Build** — Architecture and delivery within **guardrails** (stack, boundaries, integrations) you define up front.
 - **Quality** — Validation against **original intent**, not only “does the code compile” — including tests, evals, and review where AI is in the loop.
@@ -66,7 +70,7 @@ The developer of the future looks more like an **intent architect** than a wall 
 
 Technical work is no longer just translating tickets into code. It is about shaping intent, aligning understanding, and reducing uncertainty before anything gets built.
 
-Technical skill increasingly means **communicating vision** and **managing systems** — across Product, Design, Build, and Quality. These roles are blending because software delivery is shifting from isolated execution to shared ownership of outcomes.
+Technical skill increasingly means **communicating vision** and **managing systems** — across product, design, build, and quality. These roles are blending because software delivery is shifting from isolated execution to shared ownership of outcomes.
 
 The old model was simple: receive tasks → implement → move on.
 

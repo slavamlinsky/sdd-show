@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 const items = [
   {
     id: "what",
-    q: "What is Intent-Driven Development?",
+    q: "What is intent-driven development?",
     a: "It means defining the outcome, behavior, and success criteria before implementation starts. Teams align on what success looks like so execution becomes faster and more predictable.",
   },
   {
@@ -31,7 +31,7 @@ const items = [
   },
   {
     id: "who",
-    q: "Who can use Intent-Driven Development?",
+    q: "Who can use intent-driven development?",
     a: "Any team building software can use it, including product managers, designers, engineers, QA, founders, and agencies. If people need shared clarity before building, this approach fits.",
   },
 ] as const;

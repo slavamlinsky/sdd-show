@@ -20,6 +20,8 @@ Use these **four** labels only — keep the set **fixed** so filters stay scanna
 | **Quality** | Verification and safety: testing, acceptance, evals, red teaming, traceability to tests — **not** the same as Build (how we ship vs how we prove it). |
 | **Design** | UX/UI, flows, research-backed decisions, clarity of surfaces — distinct from Build (implementation) and Product (strategy). |
 
+**Capitalization:** These four **category** strings are **fixed UI labels** (short shelf names). Explanatory copy elsewhere uses **sentence case** per [spec-design-layout.md — Naming & capitalization](./spec-design-layout.md#naming--capitalization).
+
 ### Build vs Development
 
 - **Development** is still fine in **prose** (“development workflow”).

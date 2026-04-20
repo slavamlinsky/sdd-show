@@ -24,6 +24,30 @@ Applies to **all routes** unless a feature spec narrows further. Visual directio
 - **Font:** A **smooth, contemporary sans** (e.g. **Plus Jakarta Sans** or equivalent via `next/font`) for UI and headings; monospace reserved for code contexts if needed.
 - **Scale:** **Large display headings** on hero and primary page titles; clear step down for `h2` / `h3`. Avoid shrinking hero type too much on desktop — emphasis is part of the brand read.
 
+## Naming & capitalization
+
+**Default: sentence case** for almost all reader-facing and UI copy — capitalize the first word and proper elements only; avoid “Title Case Everywhere.”
+
+Apply sentence case to:
+
+- **Page and section headings** (`h1`–`h3`), **FAQ questions**, **card titles** (except where a title is a single taxonomy label; see below).
+- **Blog frontmatter** `title` (SEO), `name` (cards / links), `heading` (article `<h1>`), **`anons`**, and **body `##` headings**.
+- **Site chrome** strings from `siteConfig` (e.g. browser title, footer brand line) unless a legal or partner string dictates otherwise.
+
+**Reserve non–sentence-case styling for:**
+
+- **Named methods and phrases** when you mean the formal idea: e.g. **Spec-Driven Development (SDD)**, **Intent-Driven Engineering** (and **IDE** when the copy defines it that way). In running prose after the first clear mention, **spec-driven development** / **intent-driven engineering** may stay lowercase unless emphasis needs bold.
+- **Acronyms** in standard form: SDD, TDD, API, UI, QA, PRD, etc.
+- **Proper nouns** (products, companies, people): Jira, GitHub, Next.js, YouTube, etc.
+- **Taxonomy pillar labels** on chips, badges, and filters: **Product**, **Design**, **Build**, **Quality** — fixed labels per [spec-taxonomy.md](./spec-taxonomy.md) (short shelf names, not full sentences).
+- **Code identifiers**, routes, and UI that mirror technical literals (e.g. `Done`, branch names) — match the source of truth.
+
+**Hyphenation:** Use hyphens in **compound modifiers** before a noun: *AI-driven*, *spec-driven*, *test-driven*, *requirement-driven* (e.g. “AI-driven blog”, “spec-driven development workflow”).
+
+**Alt text and captions:** Same rules — sentence case; don’t shout with Title Case unless the visible label in the image is styled that way.
+
+**Acceptance:** New copy and content edits are reviewed against this section so headings and cards stay calm and scannable; coined terms stay recognizable.
+
 ## Motion & scroll
 
 - **Implementation — Framer Motion:** Animate **block- and element-level appearance** with **[Framer Motion](https://www.framer.com/motion/)** — e.g. **`motion.div`** (or other `motion.*` elements) with **`whileInView`**, **`initial` / `animate`**, and optional **`variants`** for parent/child stagger. Use for **primary sections**, **cards**, **hero copy/media**, and other marketing blocks where a subtle entrance improves rhythm. Prefer **once** (or bounded) viewport triggers so motion does not loop distractingly on re-scroll unless a spec calls for it.

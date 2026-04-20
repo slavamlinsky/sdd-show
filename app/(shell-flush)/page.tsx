@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
+import { BlogReadingTime } from "@/components/blog-reading-time";
 import { HomeFaq } from "@/components/home-faq";
 import { HeroFeaturedVideo } from "@/components/hero-featured-video";
 import { HomeEvolutionTimeline } from "@/components/home-evolution-timeline";
@@ -16,7 +17,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getAllPosts } from "@/lib/blog";
+import { blogCardAnons, blogCardTitle, blogReadingTimeMinutes, getAllPosts } from "@/lib/blog";
 import { keywordsForPage } from "@/lib/seo-keywords";
 import { siteConfig } from "@/lib/site-config";
 import { featuredHeroVideo } from "@/lib/videos-data";
@@ -48,7 +49,7 @@ export default function HomePage() {
               </h1>
               <div className="max-w-[65ch] space-y-8 text-pretty text-base leading-[1.7] text-muted-foreground lg:max-w-none">
                 <p>
-                  <span className="font-medium">Intent-Driven Engineering (IDE)</span> focuses on defining the desired outcomes before implementation, ensuring clear requirements drive development decisions rather than simply following predefined tasks.
+                  <span className="font-medium">Intent-driven engineering (IDE)</span> focuses on defining the desired outcomes before implementation, ensuring clear requirements drive development decisions rather than simply following predefined tasks.
                 </p>
               </div>
               <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center">
@@ -107,28 +108,30 @@ export default function HomePage() {
             </Link>
           </Reveal>
           <ul className="grid gap-6 md:grid-cols-2">
-            {posts.map(({ meta }, i) => (
+            {posts.map((post, i) => {
+              const { meta } = post;
+              return (
               <li key={meta.slug}>
                 <Reveal delay={i * 0.06} distance={16}>
                   <Card className="h-full rounded-2xl px-6 border-border/70 shadow-sm ring-1 ring-foreground/[0.03] transition-shadow hover:shadow-md">
                     <CardHeader className="gap-3">
-                      <time
-                        className="text-xs font-semibold tracking-wide text-muted-foreground uppercase"
-                        dateTime={meta.date}
-                      >
-                        {new Date(meta.date).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "short",
-                          day: "numeric",
-                        })}
-                      </time>
+                      <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+                        <time dateTime={meta.date}>
+                          {new Date(meta.date).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          })}
+                        </time>
+                        <BlogReadingTime minutes={blogReadingTimeMinutes(post)} className="text-muted-foreground" />
+                      </div>
                       <CardTitle className="font-heading text-lg leading-snug">
                         <Link href={`/blog/${meta.slug}`} className="hover:text-primary">
-                          {meta.title}
+                          {blogCardTitle(meta)}
                         </Link>
                       </CardTitle>
                       <CardDescription className="line-clamp-3 text-[15px] leading-relaxed">
-                        {meta.description}
+                        {blogCardAnons(meta)}
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="pt-0">
@@ -142,7 +145,8 @@ export default function HomePage() {
                   </Card>
                 </Reveal>
               </li>
-            ))}
+              );
+            })}
           </ul>
         </section>
 

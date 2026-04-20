@@ -25,13 +25,13 @@ const pillars = [
     glossarySlug: "success-metrics",
   },
   {
-    title: "Constraints & Guards",
+    title: "Constraints & guards",
     description: "Clearly state boundaries, limitations, and what is off-limits. Strong constraints prevent wasted effort and guide better decisions.",
     icon: Ban,
     glossarySlug: "constraints-and-guards",
   },
   {
-    title: "Delegation & Trust",
+    title: "Delegation & trust",
     description: 'Describe the desired result instead of prescribing the process. Focus on the what and allow flexibility in the how.',
     icon: Handshake,
     glossarySlug: "delegation",
