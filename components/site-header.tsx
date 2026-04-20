@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRef } from "react";
 import { LogIn } from "lucide-react";
 import { mainNav } from "@/lib/navigation";
 import { siteConfig } from "@/lib/site-config";
@@ -24,9 +25,13 @@ function isNavActive(pathname: string, href: string) {
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const headerRef = useRef<HTMLElement>(null);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 w-full border-b border-border/60 bg-white shadow-[0_1px_0_0_rgb(0_0_0/0.03)] dark:bg-background dark:shadow-[0_1px_0_0_rgb(0_0_0/0.06)]">
+    <header
+      ref={headerRef}
+      className="fixed inset-x-0 top-0 z-40 w-full border-b border-border/60 bg-white shadow-[0_1px_0_0_rgb(0_0_0/0.03)] dark:bg-background dark:shadow-[0_1px_0_0_rgb(0_0_0/0.06)]"
+    >
       <a
         href="#main-content"
         className="bg-background text-foreground fixed left-4 top-4 z-[100] -translate-y-[200%] rounded-full border border-border px-4 py-2 text-sm font-medium shadow-md outline-none transition-transform duration-200 ease-out focus:translate-y-0 focus-visible:ring-2 focus-visible:ring-ring"
@@ -83,7 +88,7 @@ export function SiteHeader() {
             Sign in
           </Button>
 
-          <MobileNavDrawer />
+          <MobileNavDrawer headerRef={headerRef} />
         </div>
       </div>
     </header>

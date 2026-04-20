@@ -83,7 +83,7 @@ export function HomeEvolutionTimeline() {
             </GradientText>
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            A vertical journey through the evolution of the software development lifecycle — from documents and manual
+            A vertical journey through the evolution of the software development lifecycle. From documents and manual
             testing, to prompts, and now to intent and executable specs as the new leverage.
           </p>
         </Reveal>
@@ -99,7 +99,7 @@ export function HomeEvolutionTimeline() {
             {phases.map((phase, i) => {
               const onRight = i % 2 === 0;
               return (
-                <li key={phase.range} className="relative pb-12 last:pb-0 md:pb-16 md:last:pb-4">
+                <li key={phase.range} className="relative pb-4 last:pb-0 md:last:pb-4">
                   {/* Mobile: rail + card */}
                   <Reveal delay={i * 0.07} distance={18} className="contents">
                     <div className="flex flex-col gap-4 md:hidden [&>*:first-child]:hidden">
@@ -172,7 +172,7 @@ function PhaseCard({ phase, align }: { phase: Phase; align: "left" | "right" }) 
       {phase.note ? (
         <p
           className={cn(
-            "mt-3 border-t border-border/50 pt-3 text-[14px] leading-relaxed text-muted-foreground",
+            "mt-3 border-t border-border/50 pt-3 text-sm leading-relaxed text-muted-foreground",
             align === "right" && "md:text-right"
           )}
         >

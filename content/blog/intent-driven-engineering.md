@@ -1,5 +1,5 @@
 ---
-title: "Spec: The Rise of Intent-Driven Engineering"
+title: "The Rise of Intent-Driven Engineering"
 slug: "intent-driven-engineering"
 date: "2026-04-19"
 description: "From prompt hacks to specs — and now to intent. Why the next shift is about architecting outcomes, not writing longer instructions."
@@ -64,7 +64,35 @@ The developer of the future looks more like an **intent architect** than a wall 
 
 ## From scribe to architect
 
-Technical skill increasingly means **communicating vision** and **managing systems** — whether you sit in Product, Design, Build, or Quality. The goal is unchanged: **ship value faster, with less ambiguity and fewer nasty surprises.**
+Technical work is no longer just translating tickets into code. It is about shaping intent, aligning understanding, and reducing uncertainty before anything gets built.
+
+Technical skill increasingly means **communicating vision** and **managing systems** — across Product, Design, Build, and Quality. These roles are blending because software delivery is shifting from isolated execution to shared ownership of outcomes.
+
+The old model was simple: receive tasks → implement → move on.
+
+The new model is different: define intent → clarify constraints → guide execution → validate outcomes.
+
+This shift exists because the main bottleneck in software is no longer implementation — it is ambiguity.
+
+![Developer role moving upstream: from task execution to clarifying intent and reducing ambiguity](/images/intent-driven-role-shift.jpg)
+
+Misaligned expectations, unclear goals, and late surprises cost far more than writing the code itself. Teams that resolve intent early move faster by reducing rework later.
+
+Today, value is no longer defined by how much you build, but by how clearly you can define and deliver what should be built.
+
+### Conclusion
+
+Intent-Driven Engineering reflects a simple reality: as systems get smarter, the human role moves upstream.
+
+The advantage is no longer in producing more output — but in producing clearer intent.
+
+The future developer is:
+
+- less scribe
+- more architect
+- focused on outcomes, not tasks
+
+And the teams that master this shift will ship faster, with less confusion, and far fewer surprises.
 
 ---
 
