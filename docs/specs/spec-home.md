@@ -27,8 +27,8 @@ Follow [spec-design-layout.md](./spec-design-layout.md) for **responsive bands**
    - **Do not** duplicate a second full FAQ below the footer; **course-specific** FAQ lives on **`/course`** ([spec-course](./spec-course.md)).
 
 5. **Blog preview**
-   - Show **latest 3** posts (title, date, 1-line excerpt, link to `/blog/[slug]`).
-   - Link to full `/blog` listing.
+   - **MVP:** Show **latest 3** posts (title, date, 1-line excerpt, link to `/blog/[slug]`) in a simple grid or list; link to full **`/blog`** listing.
+   - **v2:** Replace/upgrade with the **carousel band** in [spec-blog.md](./spec-blog.md) — **5–7** cards, **pillar category** badge strip between the section header and carousel, **See all** → `/blog`, prev/next (and swipe). Follows the same structural idea as modern **resources** carousels (headline + filters + horizontal cards).
 
 6. **Optional teaser row**
    - One line + link to `/videos` (if hero already pushes Course, this balances exploration).
@@ -42,6 +42,7 @@ Follow [spec-design-layout.md](./spec-design-layout.md) for **responsive bands**
 - CTAs match **spec-main** (primary → course) and **spec-design-layout.md** (visual hierarchy).
 - **Responsive:** Sections stack with clear separation; hero image does not break layout at mobile and desktop widths.
 - **Motion:** Home bands (hero, pillars, timeline, blog row, etc.) follow **spec-design-layout.md** — **Framer Motion** for block/element entrance where used, with **`prefers-reduced-motion`** respected.
+- **v2 (when shipped):** Blog band matches [spec-blog.md](./spec-blog.md) (carousel, category strip, related rules on article pages are blog spec).
 
 ## Non-goals
 
