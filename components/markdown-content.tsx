@@ -1,6 +1,7 @@
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { cn } from "@/lib/utils";
 
 /** Path only, for extension checks (query strings, hash, case). */
 function pathForExtension(src: string): string {
@@ -35,9 +36,22 @@ function isNextAllowedRemote(src: string): boolean {
   return false;
 }
 
-/** Wide figure box (~2:1); object-cover fills width and crops vertically when needed. */
-const figureShell =
-  "relative my-6 block aspect-[2/1] w-full overflow-hidden rounded-xl border border-border/60 bg-muted/20 not-italic shadow-sm";
+/** Shared frame for blog figures; aspect ratio varies (see `figureAspectForSrc`). */
+const figureShellBase =
+  "relative my-6 block w-full overflow-hidden rounded-xl border border-border/60 bg-muted/20 not-italic shadow-sm";
+
+/** Default wide figure (~2:1). Intent-driven article hero figures use 16:9 — see spec-blog.md. */
+const figureAspectDefault = "aspect-video";
+/** 16:9 — Tailwind `aspect-video`. */
+const figureAspectVideo = "aspect-video";
+
+function figureAspectForSrc(src: string): string {
+  const path = pathForExtension(src).toLowerCase();
+  if (path.includes("intent-driven-user") || path.includes("intent-driven-schema")) {
+    return figureAspectVideo;
+  }
+  return figureAspectDefault;
+}
 
 const figureMediaClass = "h-full w-full object-cover object-center";
 
@@ -80,6 +94,7 @@ const markdownComponents = {
     if (!src || typeof src !== "string") return null;
 
     const unoptimized = isSvgPath(src);
+    const figureShell = cn(figureShellBase, figureAspectForSrc(src));
 
     if (isRemoteSrc(src) && !isNextAllowedRemote(src)) {
       return (
@@ -97,7 +112,7 @@ const markdownComponents = {
     }
 
     return (
-      <span className={figureShell}>
+      <span className={figureShell + "  mx-auto sm:w-9/10"}>
         <Image
           src={src}
           alt={alt ?? ""}
@@ -113,7 +128,7 @@ const markdownComponents = {
 
 export function MarkdownContent({ markdown }: { markdown: string }) {
   return (
-    <article className="prose-brand max-w-prose">
+    <article className="prose-brand max-w-4xl">
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
         {markdown}
       </ReactMarkdown>

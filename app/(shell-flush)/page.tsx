@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const posts = getAllPosts().slice(0, 3);
+  const posts = getAllPosts().slice(0, 2);
 
   return (
     <div className="flex flex-col">
@@ -91,7 +91,7 @@ export default function HomePage() {
           <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="space-y-3">
               <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
-                Most popular in <GradientText className="font-semibold">our Blog</GradientText>
+                Latest from our <GradientText className="font-semibold">AI-driven content hub</GradientText>
               </h2>
               
             </div>
@@ -107,7 +107,7 @@ export default function HomePage() {
             </Link>
           </Reveal>
           <ul className="grid gap-6 md:grid-cols-2">
-            {posts.slice(0,2).map(({ meta }, i) => (
+            {posts.map(({ meta }, i) => (
               <li key={meta.slug}>
                 <Reveal delay={i * 0.06} distance={16}>
                   <Card className="h-full rounded-2xl px-6 border-border/70 shadow-sm ring-1 ring-foreground/[0.03] transition-shadow hover:shadow-md">
