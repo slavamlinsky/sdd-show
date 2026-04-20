@@ -6,7 +6,7 @@ import { GradientText } from "./gradient-text";
 
 /** Matches `HomePillars` icon chip: larger box + smaller glyph = comfortable padding on all sides */
 const intentIconChipClass = cn(
-  "flex size-14 shrink-0 items-center justify-center rounded-2xl",
+  "flex size-14 p-2 shrink-0 items-center justify-center rounded-lg",
   "bg-gradient-to-br from-violet-500/12 via-white to-sky-500/15 ring-1 ring-violet-500/15",
   "dark:from-violet-500/20 dark:via-card dark:to-sky-500/20 dark:ring-violet-400/20"
 );
@@ -50,10 +50,10 @@ export function HomeIntentPillars() {
             id="intent-pillars-heading"
             className="font-heading text-2xl text-balance font-semibold leading-tight tracking-tight sm:text-3xl"
           >
-            Four Core Principles <GradientText>for Intent-Driven Work</GradientText>
+            Four core principles <GradientText>for intent-driven work</GradientText>
           </h2>
-          <p className="mt-8 max-w-[65ch] mx-auto text-[15px] leading-[1.7] text-muted-foreground sm:text-base">
-          Learn how to translate high-level intent into a complete, workable system design. Master the ideas,
+          <p className="mt-8 max-w-[62ch] mx-auto text-sm text-muted-foreground">
+          You can learn how to translate high-level intent into a complete, workable system design. Master the ideas,
           vocabulary, and a repeatable workflow you can use on real-world projects.  
           </p>
         </Reveal>
@@ -63,11 +63,11 @@ export function HomeIntentPillars() {
             return (
               <li key={item.glossarySlug}>
                 <Reveal delay={i * 0.06} distance={14}>
-                  <div className="flex h-full gap-5 rounded-3xl border border-border/60 bg-card/90 p-8 shadow-sm ring-1 ring-foreground/[0.03] backdrop-blur-sm sm:p-8">
+                  <div className="flex h-full gap-5 rounded-xl border border-border/60 bg-card/90 p-8 shadow-sm ring-1 ring-foreground/[0.03] backdrop-blur-sm sm:p-8">
                     <span className={intentIconChipClass} aria-hidden>
                       <Icon
-                        className="size-12 text-violet-600 dark:text-sky-400"
-                        strokeWidth={1.65}
+                        className="size-10 text-violet-600 dark:text-sky-400"
+                        strokeWidth={1.5}
                       />
                     </span>
                     <div className="min-w-0 flex-1">

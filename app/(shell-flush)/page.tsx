@@ -38,7 +38,7 @@ export default function HomePage() {
           className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-35%,rgba(99,102,241,0.16),transparent_55%),radial-gradient(ellipse_70%_50%_at_100%_0%,rgba(14,165,233,0.1),transparent_50%)]"
           aria-hidden
         />
-        <div className="relative mx-auto w-full max-w-6xl px-4 pt-6 pb-12 sm:px-6 sm:pt-12 sm:pb-16">
+        <div className="relative flex mx-auto w-full max-w-6xl px-4 pt-6 pb-12 sm:px-6 sm:pt-12 sm:pb-16">
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-12">
             <Reveal className="min-w-0 flex-1 space-y-8" distance={28}>
               <h1 className="text-balance leading-[1.15] sm:leading-[1.12]">
@@ -106,11 +106,11 @@ export default function HomePage() {
               <ArrowRightIcon className="size-4" />
             </Link>
           </Reveal>
-          <ul className="grid gap-6 md:grid-cols-3">
-            {posts.map(({ meta }, i) => (
+          <ul className="grid gap-6 md:grid-cols-2">
+            {posts.slice(0,2).map(({ meta }, i) => (
               <li key={meta.slug}>
                 <Reveal delay={i * 0.06} distance={16}>
-                  <Card className="h-full rounded-3xl border-border/70 shadow-sm ring-1 ring-foreground/[0.03] transition-shadow hover:shadow-md">
+                  <Card className="h-full rounded-2xl px-6 border-border/70 shadow-sm ring-1 ring-foreground/[0.03] transition-shadow hover:shadow-md">
                     <CardHeader className="gap-3">
                       <time
                         className="text-xs font-semibold tracking-wide text-muted-foreground uppercase"
