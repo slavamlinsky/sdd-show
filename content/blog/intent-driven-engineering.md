@@ -2,7 +2,7 @@
 title: "The Rise of Intent-Driven Engineering"
 slug: "intent-driven-engineering"
 date: "2026-04-19"
-description: "From prompt hacks to specs — and now to intent. Why the next shift is about architecting outcomes, not writing longer instructions."
+description: "From prompt hacks to specs and now to intent. Why the next shift is about architecting outcomes, not writing longer instructions."
 ---
 
 For the last few years, we have obsessed over how to give AI better instructions. We called it **prompt engineering.** Then we asked for **structure** so behavior stayed reliable — and **spec-driven development (SDD)** gave the machine something testable to implement.

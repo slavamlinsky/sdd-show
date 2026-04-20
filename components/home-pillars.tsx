@@ -9,25 +9,25 @@ const pillars = [
   {
     title: "Product",
     description:
-      "Roadmaps, priorities, and outcomes: what to build, for whom, and why it matters, before scope quietly drifts.",
+      'Moves from "we think" to "we know" by using AI to synthesize customer signals and data into validated PRDs, ensuring you solve the right problem before a single line of code is written.',
     icon: Package,
   },
   {
     title: "Design",
     description:
-      "Flows, clarity, and research-backed UX. Align interfaces and narratives with the behavior your specs describe.",
+      "Mapping	Translates high-level intent into functional specifications and UX flows. AI acts as an architect to ensure designs are feasible, reusable, and aligned with core business requirements.",
     icon: Palette,
   },
   {
     title: "Build",
     description:
-      "Ship what you documented—contracts and context that still hold up in production. Specs, code, APIs, and workflows.",
+      "Shifts coding from manual implementation to directed generation. Using context (specs, APIs, and constraints), AI builds features that are consistent with the system's architecture.",
     icon: Code2,
   },
   {
     title: "Quality",
     description:
-      "Tests, evals, and traceability from intent to release. Catch regressions and model drift before users do.",
+      "Replaces static, manual testing with autonomous validation. AI continuously verifies that the final build matches the original intent, catching regressions and drift in real-time.",
     icon: ShieldCheck,
   },
 ] as const;
@@ -51,8 +51,8 @@ export function HomePillars() {
             id="home-pillars-heading"
             className="font-heading text-3xl text-balance font-semibold leading-tight tracking-tight text-foreground sm:text-4xl"
           >
-            Vocabulary for the{" "}
-            <GradientText className="font-semibold whitespace-nowrap">AI-driven product lifecycle</GradientText>
+            Foundational pillars of{" "}
+            <GradientText className="font-semibold whitespace-nowrap">AI-driven engineering</GradientText>
           </h2>
         </Reveal>
 
@@ -69,7 +69,7 @@ export function HomePillars() {
                     )}
                   >
                     <span
-                      className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500/12 via-white to-sky-500/15 ring-1 ring-violet-500/15 dark:from-violet-500/20 dark:via-card dark:to-sky-500/20 dark:ring-violet-400/20"
+                      className="flex size-14 shrink-0 items-center justify-center rounded-lg p-2 bg-gradient-to-br from-violet-500/12 via-white to-sky-500/15 ring-1 ring-violet-500/15 dark:from-violet-500/20 dark:via-card dark:to-sky-500/20 dark:ring-violet-400/20"
                       aria-hidden
                     >
                       <Icon className="size-12 text-violet-600 dark:text-sky-400" strokeWidth={1.65} />

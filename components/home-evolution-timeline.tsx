@@ -20,17 +20,17 @@ const phases: Phase[] = [
       "Business teams write PRDs; developers manually translate prose into logic in the editor.",
     note: {
       label: "Friction",
-      text: 'The "thinking gap" sat in manual coding — speed capped by typing, context switching, and syntax mistakes.',
+      text: 'The "thinking gap" sat in manual coding, speed capped by typing, context switching, syntax mistakes.',
     },
   },
   {
     range: "2020-2022",
     title: "Test driven",
     subtitle: "the disciplined era",
-    process: "Write the test first, then the code — behavior is agreed before implementation lands.",
+    process: "Write the test first, then the code. Behavior is agreed before implementation lands.",
     note: {
       label: "Challenge",
-      text: "Can feel redundant when AI can draft code and tests at once — unless tests still anchor intent.",
+      text: "Can feel redundant when AI can draft code and tests at once, unless tests still anchor intent.",
     },
   },
   {
@@ -38,7 +38,7 @@ const phases: Phase[] = [
     title: 'Prompt engineering',
     subtitle: "vibe coding era",
     process:
-      "Natural-language prompts in chat produce huge diffs in minutes — iteration looks fast on the surface.",
+      "Natural-language prompts in chat produce huge diffs in minutes and iteration looks fast on the surface.",
     note: {
       label: "Issue",
       text: 'Speed without direction: teams babysit hallucinations and one-shot code that never matched a contract.',
@@ -49,14 +49,14 @@ const phases: Phase[] = [
     title: "Spec-driven development",
     subtitle: "the structured era",
     process:
-      "The specification — not the code — is the source of truth. Models and tools are guided by an explicit behavior contract.",
+      "The source of truth is specification — not the code. Models are guided by an explicit behavior contract.",
   },
   {
     range: "2026+",
     title: "Intent-driven engineering",
     subtitle: "the autonomous era",
     process:
-      'Define outcomes and success criteria (the "what") and let agents reason through the "how" across tools and systems — within guardrails you wrote down.',
+      'Define outcomes and success criteria (the "what") and let agents reason through the "how" across tools and systems, within guardrails you wrote down.',
   },
 ];
 
@@ -113,7 +113,7 @@ export function HomeEvolutionTimeline() {
                     </div>
 
                     {/* Desktop: alternating sides (first era on the right) */}
-                    <div className="hidden md:grid md:grid-cols-[1fr_auto_1fr] md:gap-x-6 md:gap-y-0 md:items-center">
+                    <div className="hidden md:grid md:grid-cols-[1fr_auto_1fr] md:gap-x-3 md:gap-y-0 md:items-center">
                       <div
                         className={cn(
                           "min-w-0",
@@ -125,7 +125,7 @@ export function HomeEvolutionTimeline() {
 
                       <div className="relative col-start-2 flex flex-col items-center justify-center">
                         <span
-                          className="relative z-10 size-3.5 shrink-0 rounded-full border-[3px] border-background bg-primary shadow-[0_0_0_4px_rgba(99,102,241,0.2)]"
+                          className="relative z-10 size-3 shrink-0 rounded-full border-[3px] border-background bg-primary shadow-[0_0_0_4px_rgba(99,102,241,0.2)]"
                           aria-hidden
                         />
                       </div>
@@ -154,7 +154,7 @@ function PhaseCard({ phase, align }: { phase: Phase; align: "left" | "right" }) 
   return (
     <article
       className={cn(
-        "rounded-2xl border border-border/60 bg-card/95 p-5 shadow-sm ring-1 ring-foreground/[0.04] sm:p-6",
+        "rounded-2xl border border-border/60 bg-card/95 p-4 shadow-sm ring-1 ring-foreground/[0.04] sm:p-5",
         align === "right" && "md:text-right"
       )}
     >
@@ -162,10 +162,10 @@ function PhaseCard({ phase, align }: { phase: Phase; align: "left" | "right" }) 
       <h3 className="mt-1 font-heading text-xl font-semibold tracking-tight text-primary sm:text-2xl">
         {phase.title}
       </h3>
-      <h4 className="font-heading text-sm md:text-lg font-medium tracking-tight text-foreground">
+      <h4 className="font-heading text-sm md:text-base font-medium tracking-tight text-gray-400">
         {phase.subtitle}
       </h4>
-      <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
         <span className="font-medium text-foreground/90">Process: </span>
         {phase.process}
       </p>
