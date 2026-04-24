@@ -14,7 +14,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     slug: "acceptance-criteria",
     title: "Acceptance criteria",
     shortDefinition:
-      "Specific, verifiable conditions that define “done.” They turn high-level requirements into checklists you can validate manually, in tests, or with automation — unlike requirements, which state broader needs.",
+      "Specific, verifiable conditions that define “done”. They turn high-level requirements into checklists you can validate manually, in tests, or with automation — unlike requirements, which state broader needs.",
     categories: ["Quality", "Build"],
   },
   {

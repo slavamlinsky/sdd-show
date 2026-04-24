@@ -14,7 +14,7 @@ type Phase = {
 const phases: Phase[] = [
   {
     range: "2018-2020",
-    title: "Requirement driven",
+    title: "Requirement-driven",
     subtitle: "the classic era",
     process:
       "Business teams write PRDs; developers manually translate prose into logic in the editor.",
@@ -25,7 +25,7 @@ const phases: Phase[] = [
   },
   {
     range: "2020-2022",
-    title: "Test driven",
+    title: "Test-driven",
     subtitle: "the disciplined era",
     process: "Write the test first, then the code. Behavior is agreed before implementation lands.",
     note: {

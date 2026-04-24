@@ -13,7 +13,7 @@ Each term should have:
 | Field | Required | Notes |
 | ----- | -------- | ----- |
 | `slug` | yes | Stable id for anchors; URL optional if single-page list |
-| `title` | yes | Term name |
+| `title` | yes | Term name — **sentence case** for multi-word terms unless the term is a proper noun or acronym; see [spec-design-layout.md — Naming & capitalization](./spec-design-layout.md#naming--capitalization). |
 | `shortDefinition` | yes | 1–3 sentences; **plain text only** (no Markdown); rendered at **`text-sm`** on the glossary page |
 | `categories` | yes | **1–3** labels from **Product \| Design \| Build \| Quality** — **shadcn `Badge`** (outline, `xs`) on the glossary page. Optional **`tags`** in data may return later; not shown in MVP UI. |
 
