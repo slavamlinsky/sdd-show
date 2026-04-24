@@ -12,7 +12,7 @@ heading: "What is spec driven development?"
 
 **Spec driven development** means you treat **clear specifications** as the primary input to building software: you write down intent, behavior, and acceptance **before** (or tightly alongside) the code that implements them.
 
-That is different from “we have Jira tickets, so we have specs.” Ticket titles are not specs.
+That is different from “we have Jira tickets, so we have specs”. Ticket titles are not specs.
 
 ## What a good spec anchors
 

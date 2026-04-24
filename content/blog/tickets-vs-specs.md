@@ -9,7 +9,7 @@ heading: "Why your team is busy but not shipping"
 socialImage: "/images/spec-ticket-split-screen.png"
 ---
 
-In modern software development, we often confuse **"tracking"** with **"engineering."** We look at a Jira board overflowing with tickets—"Feature A: Done," "Bug B: In Progress"—and assume we are building something meaningful.
+In modern software development, we often confuse **"tracking"** with **"engineering"**. We look at a Jira board overflowing with tickets—"Feature A: Done", "Bug B: In Progress"—and assume we are building something meaningful.
 
 But there is a dangerous trap here. A ticket is a **container for effort**, not for knowledge. When we treat tickets as the primary source of truth, we end up in a high-velocity cycle of rework and misalignment.
 
@@ -29,15 +29,15 @@ Tickets are excellent for **project management**, but they are terrible at captu
 
 A specification—even a lightweight one—is the **blueprint of behavior**. Its purpose is to define **"Done"** in enough detail that any two engineers would arrive at the same outcome. While a ticket tracks the **movement** of work, a spec defines the **value** of the work.
 
-When you rely solely on tickets, you lose the **"why."** You gain speed, but you lose direction.
+When you rely solely on tickets, you lose the **"why"**. You gain speed, but you lose direction.
 
 ![Relay metaphor: ticket as baton, spec as map to the finish line](/images/spec-ticket-baton.png)
 
 ## The failure mode: the "busy" trap
 
-What happens when tickets replace specs? You get **"the busy trap."**
+What happens when tickets replace specs? You get **"the busy trap"**.
 
-Engineers start working immediately to turn cards to "Done." Because the requirement is implicit or hidden in a Slack thread, the developer makes a guess. QA discovers the guess was wrong. The ticket goes back to "In Progress."
+Engineers start working immediately to turn cards to "Done". Because the requirement is implicit or hidden in a Slack thread, the developer makes a guess. QA discovers the guess was wrong. The ticket goes back to "In Progress".
 
 The team is moving faster than ever, but the product isn't evolving. Rework piles up, and the shared vision of the system vanishes into a black hole of closed tickets.
 
@@ -59,4 +59,4 @@ The spec can be tiny, but it **cannot** be implicit.
 
 Think of it this way: **Use tickets to run the board, and use specs to run the product.**
 
-Great teams don't choose between the two. They **connect** them. By creating a clear bridge between the management of tasks and the definition of behavior, you eliminate the guesswork, reduce technical debt, and ensure that when a ticket is moved to "Done," it actually matters.
+Great teams don't choose between the two. They **connect** them. By creating a clear bridge between the management of tasks and the definition of behavior, you eliminate the guesswork, reduce technical debt, and ensure that when a ticket is moved to "Done", it actually matters.

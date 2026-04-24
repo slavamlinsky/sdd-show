@@ -9,9 +9,9 @@ heading: "The rise of Intent-Driven Engineering"
 socialImage: "/images/intent-driven-user.png"
 ---
 
-For the last few years, we have obsessed over how to give AI better instructions. We called it **prompt engineering.** Then we asked for **structure** so behavior stayed reliable — and **spec-driven development (SDD)** gave the machine something testable to implement.
+For the last few years, we have obsessed over how to give AI better instructions. We called it **prompt engineering**. Then we asked for **structure** so behavior stayed reliable — and **spec-driven development (SDD)** gave the machine something testable to implement.
 
-The next step is not “longer prompts” or “more pages of requirements.” It is **Intent-Driven Engineering** — where **IDE** means *Intent-Driven Engineering* here, not “Integrated Development Environment.” The human becomes the **architect of intent**, not the scribe of tickets.
+The next step is not “longer prompts” or “more pages of requirements”. It is **Intent-Driven Engineering** — where **IDE** means *Intent-Driven Engineering* here, not “Integrated Development Environment”. The human becomes the **architect of intent**, not the scribe of tickets.
 
 ---
 
@@ -46,7 +46,7 @@ In an intent-driven model, you worry less about *how* every line is written and 
 Fear of losing control is natural. In practice, **control moves upstream**:
 
 - **You own the vision** — Objectives and tradeoffs the system must satisfy.
-- **You own the guardrails** — What is out of bounds: security rules, data handling, budget, allowed dependencies, or “never ship without human sign-off on X.”
+- **You own the guardrails** — What is out of bounds: security rules, data handling, budget, allowed dependencies, or “never ship without human sign-off on X”.
 - **You own validation** — You remain the judge: does this output match the intent and constraints we agreed at the start?
 
 The machine can broaden the **middle** of the workflow; it does not remove accountability at the edges.

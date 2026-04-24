@@ -17,7 +17,7 @@ Here is how to move from a raw idea to a shipped increment without losing your s
 
 ## 1. Frame the problem
 
-Stop jumping straight to the "how." Start with the "why." Write one short, punchy problem statement that defines:
+Stop jumping straight to the "how". Start with the "why". Write one short, punchy problem statement that defines:
 
 - Who is being blocked?
 - What specific outcome are you targeting?
@@ -42,7 +42,7 @@ If the risk is high, go deeper. If it's a simple change, keep it lean. The goal 
 
 ## 4. Implement against the spec
 
-This is where the magic happens: **Keep the spec open while you code.** Treat the document as your primary developer tool. If reality hits and you learn something new (and you always will), **update the spec immediately.** An outdated spec is a lie; a living, updated spec is a superpower.
+This is where the magic happens: **Keep the spec open while you code.** Treat the document as your primary developer tool. If reality hits and you learn something new (and you always will), **update the spec immediately**. An outdated spec is a lie; a living, updated spec is a superpower.
 
 ## 5. Demo and prune
 

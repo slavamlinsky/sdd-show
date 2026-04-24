@@ -195,10 +195,10 @@
       background-image: linear-gradient(
         to right,
         #974adc, /* Deep Purple */
-    #6236b5, /* Muted Purple/Blue transition */
-    #005ff2, /* Your Base Blue */
-    #00c2f2, /* Cyan */
-    #00e676  /* Vibrant Green */
+        #6236b5, /* Muted Purple/Blue transition */
+        #005ff2, /* Your Base Blue */
+        #00c2f2, /* Cyan */
+        #00e676  /* Vibrant Green */
       );
       color: rgb(0 0 0 / 0);
       -webkit-text-fill-color: transparent;
