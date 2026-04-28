@@ -17,7 +17,7 @@ Each **video** (row or document) should support at least:
 
 | Field / concept                       | Purpose                                                                                                       |
 | ------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **youtube id / canonical URL**        | Embed + thumbnail (existing MVP behavior).                                                                    |
+| **youTube id / canonical URL**        | Embed + thumbnail (existing MVP behavior).                                                                    |
 | **title**, **description** (optional) | Card + SEO.                                                                                                   |
 | **category** (required in v2)         | One of **Product · Build · Quality · Design** per [spec-taxonomy.md](./spec-taxonomy.md).                     |
 | **tags** (optional, multi)            | Finer filtering / future faceted UI.                                                                          |

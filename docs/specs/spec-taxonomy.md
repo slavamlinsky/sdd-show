@@ -24,8 +24,6 @@ Use these **four** labels only — keep the set **fixed** so filters stay scanna
 
 **Capitalization:** These four **category** strings are **fixed UI labels** (short shelf names). Explanatory copy elsewhere uses **sentence case** per [spec-design-layout.md — Naming & capitalization](./spec-design-layout.md#naming--capitalization).
 
-**Capitalization:** These four **category** strings are **fixed UI labels** (short shelf names). Explanatory copy elsewhere uses **sentence case** per [spec-design-layout.md — Naming & capitalization](./spec-design-layout.md#naming--capitalization).
-
 ### Build vs Development
 
 - **Development** is still fine in **prose** (“development workflow”).
@@ -56,7 +54,7 @@ Tags are **orthogonal** to pillars: e.g. **Build** + tags `ai`, `llm`, `spec-dri
 - **Risk / trust:** `security`, `compliance`
 - **Commercial:** `growth`, `planning`, `cro`, `roi` (use as **tags**, not pillars — ROI/CRO are lenses, not shelves)
 
-Aliases: one display label, one canonical slug (`Spec driven development` → `spec-driven-development`). See `**lib/taxonomy.ts`** for display helpers.
+Aliases: one display label, one canonical slug (`Spec driven development` → `spec-driven-development`). See `lib/taxonomy.ts` for display helpers.
 
 ---
 
