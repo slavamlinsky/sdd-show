@@ -55,11 +55,11 @@ function scrollPageToTop(behavior: ScrollBehavior, sentinel: HTMLElement | null)
   for (const el of collectScrollableAncestors(sentinel)) {
     el.scrollTo({ top: 0, behavior });
   }
+  // Match initial page load: document scroll position 0. scrollIntoView(main) can
+  // land on a slightly different offset than first paint in some cases.
+  window.scrollTo({ top: 0, behavior });
   document.documentElement.scrollTo({ top: 0, behavior });
   document.body.scrollTo({ top: 0, behavior });
-  if (window.scrollY > 0) {
-    window.scrollTo({ top: 0, behavior });
-  }
 }
 
 export function ScrollToTop() {
