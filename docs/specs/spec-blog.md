@@ -37,7 +37,7 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
 - Render full article.
 - **`generateMetadata`:** `title` + `description` for `<title>` / basic meta; also **`openGraph`** / **`twitter`** with preview image from **`blogShareImagePath`** (**`socialImage`** → first local inline image → **`defaultBlogShareImage`**). **`alternates.canonical`** uses `metadataBase` from the root layout for absolute URLs.
 - **Header:** Meta row (date + reading time); **`<h1>`** from **`heading`** (then `name`, then `title`); lead from **`anons`** (then `description`). **No** full-bleed hero image in the header—figures appear only inside the article markdown body.
-- **Similar articles (MVP):** Immediately **after** the `</article>` body, render **`BlogSimilarArticles`**: up to **two** other posts, **newest first**, excluding the current slug (`getSimilarPosts` in **`lib/blog.ts`**). Cards: optional cover thumb, date, **`BlogReadingTime`**, title, one-line **`anons`**, whole card links to **`/blog/[slug]`** — internal links for UX + SEO. **Hover:** **~8px** upward translate (**`-translate-y-2`**) + border emphasis; **no** shadow lift (**`shadow-none`** on the link). **v2** may replace this rail with category-based **Related** rules (below) where **`category`** exists.
+- **Similar articles (MVP):** Immediately **after** the `</article>` body, render **`BlogSimilarArticles`**: up to **two** other posts, **newest first**, excluding the current slug (`getSimilarPosts` in **`lib/blog.ts`**). Cards: optional cover thumb, date, **`BlogReadingTime`**, title, one-line **`anons`**, whole card links to `/blog/[slug]` — internal links for UX + SEO. **Hover:** **~8px** upward translate (**`-translate-y-2`**) + border emphasis; **no** shadow lift (**`shadow-none`** on the link). **v2** may replace this rail with category-based **Related** rules (below) where `category` exists.
 
 ## Share preview (Open Graph and social links)
 
@@ -86,23 +86,23 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
 
 1. **Section header**
   - **Headline** (two lines or one strong line — follow [spec-design-layout.md](./spec-design-layout.md) type rhythm).
-  - **Secondary control:** text or outline button **“See all articles”** / **“All posts”** → `**/blog`** (full listing).
+  - **Secondary control:** text or outline button **“See all articles”** / **“All posts”** → `/blog` (full listing).
 2. **Category strip (between header and carousel)**
   - A horizontal row of **small badge-style links or toggle chips** — one per **primary pillar**: **Product**, **Design**, **Build**, **Quality**, plus an **All** (or equivalent) that clears the filter.
   - Labels and slugs match **[spec-taxonomy.md](./spec-taxonomy.md)**.
-  - **Client-side filter:** clicking a pillar restricts the carousel to posts whose frontmatter `**category`** matches; **All** shows every post in the carousel pool. Active chip state is visually obvious.
+  - **Client-side filter:** clicking a pillar restricts the carousel to posts whose frontmatter `category` matches; **All** shows every post in the carousel pool. Active chip state is visually obvious.
 3. **Carousel**
    - **5–7** article cards in the **horizontal** scroller (target **at least 5** once content exists; if the repo has fewer posts, show all available without breaking layout).
-   - **Card contents:** visual top (cover image, gradient placeholder, or simple illustration), **small category badge** on the card (matches post `category`; may **deep-link** to the same filter state as the strip, e.g. by updating selection + scroll), **title**, **date**, **reading time** (estimated or from frontmatter), whole card links to **`/blog/[slug]`**.
+   - **Card contents:** visual top (cover image, gradient placeholder, or simple illustration), **small category badge** on the card (matches post `category`; may **deep-link** to the same filter state as the strip, e.g. by updating selection + scroll), **title**, **date**, **reading time** (estimated or from frontmatter), whole card links to `/blog/[slug]`.
    - **Navigation:** **Previous / next** affordances (icon buttons); keyboard-friendly where feasible; **touch swipe** on small viewports.
    - **Motion:** optional smooth scroll / Framer Motion per [spec-design-layout.md](./spec-design-layout.md); honor **`prefers-reduced-motion`**.
 4. **Data**
-  - Same source as `**/blog`** index (files in repo). Default pool order: **newest first** before pillar filter is applied.
+  - Same source as `/blog` index (files in repo). Default pool order: **newest first** before pillar filter is applied.
 
 ### Acceptance (home blog v2)
 
 - Headline + **See all** → `/blog` are present.
-- **Category strip** sits **between** header and carousel; filtering is **client-side** and matches post `**category`**.
+- **Category strip** sits **between** header and carousel; filtering is **client-side** and matches post `category`.
 - Carousel shows up to **5–7** posts with **arrow** (and swipe) navigation; cards match the described structure.
 
 ---
@@ -114,16 +114,16 @@ Applies **below** the main markdown body, **above** the site footer chrome.
 ### Join Us CTA banner
 
 - **Placement:** Immediately **after** the article content, **before** related articles.
-- **Purpose:** Conversion / community — e.g. **Join us**, **Stay in the loop**, or **Start the course** (final copy TBD). At least **one primary** CTA (e.g. `**/course`**, newsletter stub, or `**/sign-in`** when relevant).
+- **Purpose:** Conversion / community — e.g. **Join us**, **Stay in the loop**, or **Start the course** (final copy TBD). At least **one primary** CTA (e.g. `/course`, newsletter stub, or `/sign-in` when relevant).
 - **Visual:** Full width of the article column (`max-w-3xl` alignment with prose), reads as a **distinct band** (background, border, or rounded panel) — not part of the essay body.
 
 ### Related articles
 
-- **Count:** Exactly **two** cards side by side on `**md+`**, stacked on small screens.
+- **Count:** Exactly **two** cards side by side on `md+`, stacked on small screens.
 - **Eligibility:** Both must share the current post’s **primary `category`** (v2 frontmatter). If the current post has **no** `category` in v2, **omit** the related block or show two **latest** posts excluding current (implementation choice — prefer **requiring `category`** for v2 posts).
-- **Slot A — New in category:** The **single newest** other post in the same category by `**date`**, excluding the current slug.
-- **Slot B — Popular in category:** Another post in the same category, **excluding** the current article and **excluding** the Slot A article. **“Popular” without analytics:** prefer a post with `**editorsPick: true`** (if multiple, take the **most recent** by `date`); if **none** flagged, use the **second-newest** by `date` among remaining posts in that category. When real engagement metrics exist later, this rule may be replaced by metric-based ranking without changing the **two-slot** layout.
-- **Card UI:** Title, date, optional one-line excerpt, link to `**/blog/[slug]`**; optional category badge.
+- **Slot A — New in category:** The **single newest** other post in the same category by `date`, excluding the current slug.
+- **Slot B — Popular in category:** Another post in the same category, **excluding** the current article and **excluding** the Slot A article. **“Popular” without analytics:** prefer a post with `editorsPick: true` (if multiple, take the **most recent** by `date`); if **none** flagged, use the **second-newest** by `date` among remaining posts in that category. When real engagement metrics exist later, this rule may be replaced by metric-based ranking without changing the **two-slot** layout.
+- **Card UI:** Title, date, optional one-line excerpt, link to `/blog/[slug]`; optional category badge.
 
 ### Acceptance (detail v2)
 
