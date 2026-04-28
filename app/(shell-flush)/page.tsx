@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const posts = getAllPosts().slice(0, 2);
+  const posts = getAllPosts().slice(0, 3);
 
   return (
     <div className="flex flex-col">

@@ -9,41 +9,36 @@ Follow [spec-design-layout.md](./spec-design-layout.md) for **responsive bands**
 ## Sections (MVP)
 
 1. **Hero**
-   - Headline: what SDD is in plain language (one line + optional subline).
-   - Short supporting text (2–4 sentences max).
-   - **Visual:** Hero **image or illustration** on desktop (side-by-side or tasteful background treatment); stack **image above or below** copy on mobile. Use **placeholder** art until final assets (ChatGPT / FreePik / etc.).
-   - **Primary CTA:** button/link to `/course`.
-   - **Secondary CTA:** button/link to `/glossary` or “Explore” anchored to the next section (either is fine; pick one implementation).
-
+  - Headline: what SDD is in plain language (one line + optional subline).
+  - Short supporting text (2–4 sentences max).
+  - **Visual:** Hero **image or illustration** on desktop (side-by-side or tasteful background treatment); stack **image above or below** copy on mobile. Use **placeholder** art until final assets (ChatGPT / FreePik / etc.).
+  - **Primary CTA:** button/link to `/course`.
+  - **Secondary CTA:** button/link to `/glossary` or “Explore” anchored to the next section (either is fine; pick one implementation).
 2. **Four pillars of intent**
-   - Short band: heading + **four cards** (title, Lucide icon, one-line description) — outcome clarity, success metrics, constraints, delegation — responsive **2×2** from `sm` up, **single column** on the smallest widths. Card titles link to matching anchors on **`/glossary`** where terms exist.
-
+  - Short band: heading + **four cards** (title, Lucide icon, one-line description) — outcome clarity, success metrics, constraints, delegation — responsive **2×2** from `sm` up, **single column** on the smallest widths. Card titles link to matching anchors on `**/glossary`** where terms exist.
 3. **Evolution timeline**
-   - **Vertical** band (full-bleed): copy explains progression **from manual friction to AI-driven speed**. Five **eras** (2018–20 → 2026+) with **process** and optional **friction/challenge/issue** lines. **Desktop:** centered axis with **alternating** cards (first era on the **right**); **mobile:** left rail with dots and stacked cards.
-
+  - **Vertical** band (full-bleed): copy explains progression **from manual friction to AI-driven speed**. Five **eras** (2018–20 → 2026+) with **process** and optional **friction/challenge/issue** lines. **Desktop:** centered axis with **alternating** cards (first era on the **right**); **mobile:** left rail with dots and stacked cards.
 4. **Q&A (single FAQ block on home)**
-   - **3–5** questions and short answers (accordion or static blocks).
-   - Topics: what SDD is, how it differs from “just tickets”, when it helps, tools optional.
-   - **Do not** duplicate a second full FAQ below the footer; **course-specific** FAQ lives on **`/course`** ([spec-course](./spec-course.md)).
-
+  - **3–5** questions and short answers (accordion or static blocks).
+  - Topics: what SDD is, how it differs from “just tickets”, when it helps, tools optional.
+  - **Do not** duplicate a second full FAQ below the footer; **course-specific** FAQ lives on `**/course`** ([spec-course](./spec-course.md)).
 5. **Blog preview**
-   - **MVP:** Show **latest 3** posts (title, date, **reading time** as clock + **Nmin**, 1-line excerpt, link to `/blog/[slug]`) in a simple grid or list; link to full **`/blog`** listing.
-   - **v2:** Replace/upgrade with the **carousel band** in [spec-blog.md](./spec-blog.md) — **5–7** cards, **pillar category** badge strip between the section header and carousel, **See all** → `/blog`, prev/next (and swipe). Follows the same structural idea as modern **resources** carousels (headline + filters + horizontal cards).
-
+  - **MVP:** Show **latest 3** posts (title, date, **reading time** as clock + **Nmin**, 1-line excerpt, link to `/blog/[slug]`) in a simple grid or list; link to full `**/blog`** listing.
+  - **v2:** Replace/upgrade with the **carousel band** in [spec-blog.md](./spec-blog.md) — **5–7** cards, **pillar category** badge strip between the section header and carousel, **See all** → `/blog`, prev/next (and swipe). Follows the same structural idea as modern **resources** carousels (headline + filters + horizontal cards).
 6. **Optional teaser row**
-   - One line + link to `/videos` (if hero already pushes Course, this balances exploration).
-
+  - One line + link to `/videos` (if hero already pushes Course, this balances exploration).
 7. **“Who it’s for” (course audience — compact)** — *optional / phased; see [spec-course](./spec-course.md)*
-   - **Small band** on home (optional): short heading + **2–4 bullets or chips** mapping to [course audience in spec-main](./spec-main.md#course-audience). Full detail and bullets may live primarily on **`/course`** hero.
+  - **Small band** on home (optional): short heading + **2–4 bullets or chips** mapping to [course audience in spec-main](./spec-main.md#course-audience). Full detail and bullets may live primarily on `**/course`** hero.
 
 ## Acceptance
 
 - Hero + Q&A + blog preview + video teaser are visible without relying on client-only rendering for core copy where feasible (SEO-friendly).
 - CTAs match **spec-main** (primary → course) and **spec-design-layout.md** (visual hierarchy).
 - **Responsive:** Sections stack with clear separation; hero image does not break layout at mobile and desktop widths.
-- **Motion:** Home bands (hero, pillars, timeline, blog row, etc.) follow **spec-design-layout.md** — **Framer Motion** for block/element entrance where used, with **`prefers-reduced-motion`** respected.
+- **Motion:** Home bands (hero, pillars, timeline, blog row, etc.) follow **spec-design-layout.md** — **Framer Motion** for block/element entrance where used, with `**prefers-reduced-motion`** respected.
 - **v2 (when shipped):** Blog band matches [spec-blog.md](./spec-blog.md) (carousel, category strip, related rules on article pages are blog spec).
 
 ## Non-goals
 
 - Blog content authoring on this page; posts live under `/blog`.
+

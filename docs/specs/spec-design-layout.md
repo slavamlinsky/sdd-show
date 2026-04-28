@@ -4,7 +4,7 @@ Applies to **all routes** unless a feature spec narrows further. Visual directio
 
 ## App shell (root layout)
 
-- **Shared horizontal shell:** Root `app/layout.tsx` wraps the site chrome only (`SiteHeader`, `main`, footer). Inside `main`, **route-group layouts** apply `**PageShellPadded`** or `**PageShellFlush**` from `components/page-shell.tsx`: both use `**page-shell**` + `mx-auto max-w-6xl px-4 sm:px-6`. `**PageShellPadded**` adds `**py-16 sm:py-24**` (article-style pages, stubs). `**PageShellFlush**` omits vertical padding so full-bleed heroes and backdrops can sit flush under the header (home, course, blog index, glossary, videos). New top-level routes pick the segment that matches their first-band layout.
+- **Shared horizontal shell:** Root `app/layout.tsx` wraps the site chrome only (`SiteHeader`, `main`, footer). Inside `main`, **route-group layouts** apply `**PageShellPadded`** or `**PageShellFlush`** from `components/page-shell.tsx`: both use `**page-shell**` + `mx-auto max-w-6xl px-4 sm:px-6`. `**PageShellPadded**` adds `**py-16 sm:py-24**` (article-style pages, stubs). `**PageShellFlush**` omits vertical padding so full-bleed heroes and backdrops can sit flush under the header (home, course, blog index, glossary, videos). New top-level routes pick the segment that matches their first-band layout.
 - **Full-bleed bands:** Marketing sections whose background or borders should span the **viewport** (hero, some bordered bands, `SectionBackdrop` pages) use a shared `**full-bleed`** utility: break out of the shell horizontally, then use an inner `mx-auto max-w-6xl px-4 sm:px-6` (or narrower when specified) so text aligns with the shell.
 - **Default page title (`h1`):** Primary titles use a shared base style — `font-heading`, `text-4xl` / `sm:text-5xl`, `font-semibold`, `tracking-tight` — scoped with `**:where(.page-shell) h1`** in global CSS so route-level utilities can override size (e.g. `text-2xl` on `/sign-in`, larger `lg:` display on heroes).
 
@@ -15,7 +15,7 @@ Applies to **all routes** unless a feature spec narrows further. Visual directio
 - **Navigation:** Header uses **three regions**: **logo** (left, links home), **primary nav** (centered on `md+`; **Glossary, Videos, Courses, Blog** — no separate Home item), **Sign in** (right: **primary-colored border + text**, **taller control** `~h-10`, **Lucide `LogIn`** icon + label, light shadow). Below `md`, primary links move into a **sheet**; **Sign in** stays visible beside the menu trigger. No horizontal scroll for the header chrome at common mobile widths (~375px).
 - **Touch:** Primary taps (CTAs, cards, modal triggers) have adequate spacing; avoid **hover-only** affordances as the only way to complete a core action (provide focus / visible affordances).
 - **Imagery:** Images scale within their containers (`next/image`); no fixed widths that break small viewports.
-- **Sections:** Stack vertically on narrow viewports; multi-column grids from `**md`** / `**lg**` upward.
+- **Sections:** Stack vertically on narrow viewports; multi-column grids from `**md`** / `**lg`** upward.
 
 **Acceptance:** No horizontal page-level scroll at common mobile widths (except intentional full-bleed edge cases); spot-check `/`, `/course`, `/videos` at ~375px and desktop.
 
@@ -52,11 +52,11 @@ Apply sentence case to:
 
 ## Motion & scroll
 
-- **Implementation — Framer Motion:** Animate **block- and element-level appearance** with **[Framer Motion](https://www.framer.com/motion/)** — e.g. `**motion.div`** (or other `motion.*` elements) with `**whileInView**`, `**initial` / `animate**`, and optional `**variants**` for parent/child stagger. Use for **primary sections**, **cards**, **hero copy/media**, and other marketing blocks where a subtle entrance improves rhythm. Prefer **once** (or bounded) viewport triggers so motion does not loop distractingly on re-scroll unless a spec calls for it.
+- **Implementation — Framer Motion:** Animate **block- and element-level appearance** with **[Framer Motion](https://www.framer.com/motion/)** — e.g. `**motion.div`** (or other `motion.*` elements) with `**whileInView`**, `**initial` / `animate**`, and optional `**variants**` for parent/child stagger. Use for **primary sections**, **cards**, **hero copy/media**, and other marketing blocks where a subtle entrance improves rhythm. Prefer **once** (or bounded) viewport triggers so motion does not loop distractingly on re-scroll unless a spec calls for it.
 - **Scroll reveal (behavior):** Entrances stay **subtle** — typically **opacity + short vertical offset** (or equivalent), modest **duration** and **easing**, and **staggered** siblings (lists, grids) only where it aids scanability — not flashy or long-running.
 - **Reduced motion:** When `prefers-reduced-motion: reduce` is set, **skip** scroll-driven transforms and opacity ramps (Framer’s `**useReducedMotion`** or equivalent); render **static** final styles. Respect the same rule for any non–Framer Motion fallbacks.
 - **Page scroll:** Prefer `scroll-behavior: smooth` only when **not** `prefers-reduced-motion: reduce`.
-- **Scroll-to-top:** A **floating control** appears after scrolling down; returns the user to the top with smooth scroll (or instant if reduced motion).
+- **Scroll-to-top:** A **floating control** (`**ScrollToTop`**) appears after scrolling down; it uses smooth scroll (or instant if `prefers-reduced-motion`) and must restore the **same document scroll position as initial load** (`**window` / root scroll `top: 0`**, after resetting any nested `overflow: auto`/`scroll` ancestors). Do not rely on `**scrollIntoView(main)**` alone for the primary document — it can settle a few pixels off from first paint in some layouts.
 
 ## Color, depth, and ornament
 
@@ -74,6 +74,7 @@ Apply sentence case to:
 ## UX practices (baseline)
 
 - **Skip link:** First focusable control skips to **main content** (`#main-content`); main landmark is focusable after skip for keyboard users.
+- **Scroll to top:** The floating control (`**ScrollToTop`**) first resets any **nested** scrollable panels (`overflow: auto` / `scroll`), then sets **document scroll to `top: 0`** on `**window`**, `**document.documentElement`**, and `**document.body`** so the result matches **first paint** (fixed header + `**main**` `**pt-16`** unchanged from a fresh navigation). **Skip link** still uses `#main-content` / focus; scroll-to-top targets the same visual top via **`scrollY === 0`**.
 - **Focus:** Visible focus rings on interactive elements (buttons, links, sheet, dialog).
 - **CTAs:** Primary vs secondary styles are distinct; primary routes to **Course** where specs require.
 

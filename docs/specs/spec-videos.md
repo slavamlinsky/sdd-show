@@ -6,13 +6,15 @@ Curated **YouTube** videos about SDD (or close topics), presented as **cards** w
 
 ## Video entry fields
 
-| Field | Required | Notes |
-| ----- | -------- | ----- |
-| `title` | yes | |
-| `youtubeId` or canonical URL | yes | Enough to build embed |
-| `coverUrl` | yes | Usually `https://img.youtube.com/vi/{id}/hqdefault.jpg` or maxres |
-| `duration` | no | Optional label on card |
-| `channelTitle` | no | Optional |
+
+| Field                        | Required | Notes                                                             |
+| ---------------------------- | -------- | ----------------------------------------------------------------- |
+| `title`                      | yes      |                                                                   |
+| `youtubeId` or canonical URL | yes      | Enough to build embed                                             |
+| `coverUrl`                   | yes      | Usually `https://img.youtube.com/vi/{id}/hqdefault.jpg` or maxres |
+| `duration`                   | no       | Optional label on card                                            |
+| `channelTitle`               | no       | Optional                                                          |
+
 
 ## UI
 

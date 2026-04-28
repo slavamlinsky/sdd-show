@@ -13,12 +13,14 @@ This doc is the **shared vocabulary and rules** so that when v2 ships, **blog ar
 
 Use these **four** labels only — keep the set **fixed** so filters stay scannable.
 
-| Category | Meaning |
-| -------- | ------- |
-| **Product** | Strategy, users, roadmap, PM, GTM, positioning, PMF, value, requirements at the “what / why” level — merged **product + marketing** concerns. |
-| **Build** | Shipping work: specs, code, APIs, tooling, implementation — what we used to call **development**; **“Build”** is the preferred shelf name (human, outcome-oriented). |
-| **Quality** | Verification and safety: testing, acceptance, evals, red teaming, traceability to tests — **not** the same as Build (how we ship vs how we prove it). |
-| **Design** | UX/UI, flows, research-backed decisions, clarity of surfaces — distinct from Build (implementation) and Product (strategy). |
+
+| Category    | Meaning                                                                                                                                                              |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Product** | Strategy, users, roadmap, PM, GTM, positioning, PMF, value, requirements at the “what / why” level — merged **product + marketing** concerns.                        |
+| **Build**   | Shipping work: specs, code, APIs, tooling, implementation — what we used to call **development**; **“Build”** is the preferred shelf name (human, outcome-oriented). |
+| **Quality** | Verification and safety: testing, acceptance, evals, red teaming, traceability to tests — **not** the same as Build (how we ship vs how we prove it).                |
+| **Design**  | UX/UI, flows, research-backed decisions, clarity of surfaces — distinct from Build (implementation) and Product (strategy).                                          |
+
 
 **Capitalization:** These four **category** strings are **fixed UI labels** (short shelf names). Explanatory copy elsewhere uses **sentence case** per [spec-design-layout.md — Naming & capitalization](./spec-design-layout.md#naming--capitalization).
 
@@ -35,10 +37,12 @@ Use these **four** labels only — keep the set **fixed** so filters stay scanna
 
 ## Tags (cross-cutting)
 
-| Mechanism | Role | Cardinality |
-| --------- | ---- | ------------- |
-| **Category** (pillar) | Primary shelf for browse — **exactly one** per blog post / video / course slice in v2. | **One of** Product, Build, Quality, Design |
-| **Tags** | Tools, domains, themes — **AI**, **API**, **methodology**, **growth**, **CRO**, **ROI** (as topics), etc. | **Zero or more** |
+
+| Mechanism             | Role                                                                                                      | Cardinality                                |
+| --------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| **Category** (pillar) | Primary shelf for browse — **exactly one** per blog post / video / course slice in v2.                    | **One of** Product, Build, Quality, Design |
+| **Tags**              | Tools, domains, themes — **AI**, **API**, **methodology**, **growth**, **CRO**, **ROI** (as topics), etc. | **Zero or more**                           |
+
 
 Tags are **orthogonal** to pillars: e.g. **Build** + tags `ai`, `llm`, `spec-driven-development`.
 
@@ -50,31 +54,31 @@ Tags are **orthogonal** to pillars: e.g. **Build** + tags `ai`, `llm`, `spec-dri
 - **Risk / trust:** `security`, `compliance`
 - **Commercial:** `growth`, `planning`, `cro`, `roi` (use as **tags**, not pillars — ROI/CRO are lenses, not shelves)
 
-Aliases: one display label, one canonical slug (`Spec driven development` → `spec-driven-development`). See **`lib/taxonomy.ts`** for display helpers.
+Aliases: one display label, one canonical slug (`Spec driven development` → `spec-driven-development`). See `**lib/taxonomy.ts`** for display helpers.
 
 ---
 
 ## Examples
 
 - **Category:** Build — **Tags:** `ai`, `claude`, `spec-driven-development`  
-  Meaning: builder-focused content about SDD with AI tooling.
-
+Meaning: builder-focused content about SDD with AI tooling.
 - **Category:** Product — **Tags:** `growth`, `roi`, `branding`  
-  Meaning: strategy/GTM shelf; commercial themes as tags.
-
+Meaning: strategy/GTM shelf; commercial themes as tags.
 - **Category:** Design — **Tags:** `ux`, `cro`  
-  Meaning: UX-focused; conversion experimentation as a tag.
+Meaning: UX-focused; conversion experimentation as a tag.
 
 ---
 
 ## How this maps to content types
 
-| Content type | Category | Tags |
-| ------------ | -------- | ---- |
-| **Blog post** | One pillar in v2 | Recommended once filtering exists |
-| **Video** | One pillar | Same tag namespace; static data may use `category` early |
-| **Course** | Often **Product** or **Build** for the landing | Course-level tags; optional per-module tags later |
-| **Glossary term** | **1–3** pillar badges + optional tags | Pedagogy: show where a term applies |
+
+| Content type      | Category                                       | Tags                                                     |
+| ----------------- | ---------------------------------------------- | -------------------------------------------------------- |
+| **Blog post**     | One pillar in v2                               | Recommended once filtering exists                        |
+| **Video**         | One pillar                                     | Same tag namespace; static data may use `category` early |
+| **Course**        | Often **Product** or **Build** for the landing | Course-level tags; optional per-module tags later        |
+| **Glossary term** | **1–3** pillar badges + optional tags          | Pedagogy: show where a term applies                      |
+
 
 **Related links:** navigation between items is separate from tags — use `relatedArticleSlug` / `relatedVideoIds` when needed.
 

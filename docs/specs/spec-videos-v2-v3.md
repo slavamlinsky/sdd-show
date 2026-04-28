@@ -14,16 +14,18 @@ Supersedes nothing: **[spec-videos.md](./spec-videos.md)** remains the **MVP / c
 
 Each **video** (row or document) should support at least:
 
-| Field / concept | Purpose |
-| ---------------- | ------- |
-| **youtube id / canonical URL** | Embed + thumbnail (existing MVP behavior). |
-| **title**, **description** (optional) | Card + SEO. |
-| **category** (required in v2) | One of **Product · Build · Quality · Design** per [spec-taxonomy.md](./spec-taxonomy.md). |
-| **tags** (optional, multi) | Finer filtering / future faceted UI. |
+
+| Field / concept                       | Purpose                                                                                                       |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **youtube id / canonical URL**        | Embed + thumbnail (existing MVP behavior).                                                                    |
+| **title**, **description** (optional) | Card + SEO.                                                                                                   |
+| **category** (required in v2)         | One of **Product · Build · Quality · Design** per [spec-taxonomy.md](./spec-taxonomy.md).                     |
+| **tags** (optional, multi)            | Finer filtering / future faceted UI.                                                                          |
 | **stats** (views, likes — source TBD) | Display on card or detail; may be **manual** at first, **YouTube API** later, or **on-platform** counts only. |
-| **related article slug** | Link to an on-site blog post that summarizes or comments on the video (your “text copy” plan). |
-| **published at** | Sorting, “New” badge logic (see v3), TTL anchor. |
-| **suggested-by** (optional) | If a user suggestion was accepted — attribution policy TBD. |
+| **related article slug**              | Link to an on-site blog post that summarizes or comments on the video (your “text copy” plan).                |
+| **published at**                      | Sorting, “New” badge logic (see v3), TTL anchor.                                                              |
+| **suggested-by** (optional)           | If a user suggestion was accepted — attribution policy TBD.                                                   |
+
 
 Admin/curation flow (who approves suggestions) is **out of scope** for this roadmap doc; implementation can start with **email-only** intake.
 
@@ -46,7 +48,7 @@ Admin/curation flow (who approves suggestions) is **out of scope** for this road
 
 ### Infrastructure
 
-- Move from static **`lib/videos-data.ts`** (or content files) to **Supabase** (or API backed by Postgres).
+- Move from static `**lib/videos-data.ts`** (or content files) to **Supabase** (or API backed by Postgres).
 - **Auth:** not required for v2 public listing; **favorites** (v3) imply **anonymous or authenticated** identity (see v3).
 
 ---
@@ -85,11 +87,13 @@ Admin/curation flow (who approves suggestions) is **out of scope** for this road
 
 ## Phasing summary
 
-| Release | Focus |
-| ------- | ----- |
-| **MVP** | Static list, modal embed — [spec-videos.md](./spec-videos.md) |
-| **v2** | Supabase (or DB), categories, tags, stats + related article, suggest-video flow, email intake, **search / filter / sort / pagination** |
-| **v3** | TTL + favorites + badges + extended sorting |
+
+| Release | Focus                                                                                                                                  |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **MVP** | Static list, modal embed — [spec-videos.md](./spec-videos.md)                                                                          |
+| **v2**  | Supabase (or DB), categories, tags, stats + related article, suggest-video flow, email intake, **search / filter / sort / pagination** |
+| **v3**  | TTL + favorites + badges + extended sorting                                                                                            |
+
 
 Dependencies: v3 **builds on** v2 data model (published_at, user favorites table or equivalent).
 

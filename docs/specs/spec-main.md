@@ -84,13 +84,13 @@ Choose one approach and use it consistently for blog posts, glossary entries, an
 ## SEO baseline
 
 - Per-route `metadata` (title, description).
-- Sensible defaults for `/blog/[slug]` from post frontmatter (**Open Graph / Twitter** preview: **`socialImage`**, else first body image, else **`siteConfig.defaultBlogShareImage`** — see [spec-blog.md — Share preview](./spec-blog.md#share-preview-open-graph-and-social-links)).
+- Sensible defaults for `/blog/[slug]` from post frontmatter (**Open Graph / Twitter** preview: `**socialImage`**, else first body image, else `**siteConfig.defaultBlogShareImage`** — see [spec-blog.md — Share preview](./spec-blog.md#share-preview-open-graph-and-social-links)).
 
 ## Out of scope (MVP)
 
 - **Topic taxonomy UX** — category/tag filters, browse-by-topic, listing badges per [spec-taxonomy.md](./spec-taxonomy.md) — **v2** (data-only prep optional)
 - Search (glossary / blog) — **v2**
-- **Glossary pillar filter** (four multi-check toggles, default all on; **`/glossary?pillars=design`** and **`/glossary#design`**) — **v2**; see [spec-glossary.md](./spec-glossary.md)
+- **Glossary pillar filter** (four multi-check toggles, default all on; `**/glossary?pillars=design`** and `**/glossary#design`**) — **v2**; see [spec-glossary.md](./spec-glossary.md)
 - Full accessibility audit — no formal bar for MVP; still prefer semantic HTML and shadcn defaults
 - **Automated E2E (Playwright) and CI test gates** — add post-MVP per [spec-workflow-ci.md](./spec-workflow-ci.md); optional Vitest/Jest for units when useful
 - Real payments or course delivery

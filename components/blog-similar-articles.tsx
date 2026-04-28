@@ -40,7 +40,7 @@ export function BlogSimilarArticles({ posts, className }: Props) {
               <Reveal delay={i * 0.05} distance={12}>
                 <Link
                   href={`/blog/${meta.slug}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/60 ring-1 ring-foreground/[0.03] transition-[border-color,box-shadow] hover:border-border hover:shadow-md"
+                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/60 shadow-none ring-1 ring-foreground/[0.03] transition-[border-color,transform] duration-200 hover:-translate-y-2 hover:border-border hover:shadow-none"
                 >
                   {thumb ? (
                     <div className="relative aspect-video w-full shrink-0 overflow-hidden border-b border-border/40 bg-muted/20">
