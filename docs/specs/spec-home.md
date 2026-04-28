@@ -23,8 +23,8 @@ Follow [spec-design-layout.md](./spec-design-layout.md) for **responsive bands**
   - Topics: what SDD is, how it differs from “just tickets”, when it helps, tools optional.
   - **Do not** duplicate a second full FAQ below the footer; **course-specific** FAQ lives on `**/course`** ([spec-course](./spec-course.md)).
 5. **Blog preview**
-  - **MVP:** Show **latest 3** posts (title, date, **reading time** as clock + **Nmin**, 1-line excerpt, link to `/blog/[slug]`) in a simple grid or list; link to full `**/blog`** listing.
-  - **v2:** Replace/upgrade with the **carousel band** in [spec-blog.md](./spec-blog.md) — **5–7** cards, **pillar category** badge strip between the section header and carousel, **See all** → `/blog`, prev/next (and swipe). Follows the same structural idea as modern **resources** carousels (headline + filters + horizontal cards).
+   - **MVP:** Show **latest 3** posts (title, date, **reading time** as clock + **Nmin**, 1-line excerpt, link to `/blog/[slug]`) in a simple grid or list; link to full **`/blog`** listing.
+   - **v2:** Replace/upgrade with the **carousel band** in [spec-blog.md](./spec-blog.md) — **5–7** cards, **pillar category** badge strip between the section header and carousel, **See all** → `/blog`, prev/next (and swipe). Follows the same structural idea as modern **resources** carousels (headline + filters + horizontal cards).
 6. **Optional teaser row**
   - One line + link to `/videos` (if hero already pushes Course, this balances exploration).
 7. **“Who it’s for” (course audience — compact)** — *optional / phased; see [spec-course](./spec-course.md)*

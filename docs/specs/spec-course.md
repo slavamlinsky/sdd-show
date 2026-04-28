@@ -34,13 +34,13 @@ Audience positioning aligns with [spec-main.md](./spec-main.md) (**Course audien
   - Optional **hero image** (placeholder OK) to match landing quality from the home page.
   - **Primary CTA:** scroll to lead form or in-page form section.
 2. **Who this course is for**
-  - **Detailed** audience block on `/course` (not the same length as optional Home band):
-    - **Students:** software-related learning paths, bootcamps, self-taught builders — *narrow* from generic “students”.
-    - **Developers:** **all levels** where the gap is **spec discipline**, not syntax.
-    - **QA / test → dev or delivery:** wanting clearer acceptance and less last-minute scope fights.
-    - **Product / technical PM types:** **faster MVP** through better specs and acceptance (not “PM 101” replacement).
-    - **Entrepreneurs / founders:** small teams, scope control, validation — avoid implying formal enterprise-only process.
-  - Short “**Not a fit if…**” (optional): e.g. only want raw coding drills with zero docs.
+   - **Detailed** audience block on `/course` (not the same length as optional Home band):
+     - **Students:** software-related learning paths, bootcamps, self-taught builders — *narrow* from generic “students”.
+     - **Developers:** **all levels** where the gap is **spec discipline**, not syntax.
+     - **QA / test → dev or delivery:** wanting clearer acceptance and less last-minute scope fights.
+     - **Product / technical PM types:** **faster MVP** through better specs and acceptance (not “PM 101” replacement).
+     - **Entrepreneurs / founders:** small teams, scope control, validation — avoid implying formal enterprise-only process.
+   - Short “**Not a fit if…**” (optional): e.g. only want raw coding drills with zero docs.
 3. **Syllabus-style sections (dummy but plausible)**
   - **4–6** modules or weeks with title + one-line description each; present as **cards or stacked blocks** with breathing room.
   - Copy can say “coming soon” where honest.

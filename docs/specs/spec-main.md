@@ -84,7 +84,7 @@ Choose one approach and use it consistently for blog posts, glossary entries, an
 ## SEO baseline
 
 - Per-route `metadata` (title, description).
-- Sensible defaults for `/blog/[slug]` from post frontmatter (**Open Graph / Twitter** preview: `**socialImage`**, else first body image, else `**siteConfig.defaultBlogShareImage`** — see [spec-blog.md — Share preview](./spec-blog.md#share-preview-open-graph-and-social-links)).
+- Sensible defaults for `/blog/[slug]` from post frontmatter (**Open Graph / Twitter** preview: **`socialImage`**, else first body image, else **`siteConfig.defaultBlogShareImage`** — see [spec-blog.md — Share preview](./spec-blog.md#share-preview-open-graph-and-social-links)).
 
 ## Out of scope (MVP)
 

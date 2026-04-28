@@ -24,6 +24,8 @@ Use these **four** labels only — keep the set **fixed** so filters stay scanna
 
 **Capitalization:** These four **category** strings are **fixed UI labels** (short shelf names). Explanatory copy elsewhere uses **sentence case** per [spec-design-layout.md — Naming & capitalization](./spec-design-layout.md#naming--capitalization).
 
+**Capitalization:** These four **category** strings are **fixed UI labels** (short shelf names). Explanatory copy elsewhere uses **sentence case** per [spec-design-layout.md — Naming & capitalization](./spec-design-layout.md#naming--capitalization).
+
 ### Build vs Development
 
 - **Development** is still fine in **prose** (“development workflow”).
