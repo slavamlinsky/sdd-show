@@ -2,7 +2,7 @@
 title: "The rise of Intent-Driven Engineering (AI development)."
 description: "From prompt hacks to specs and now to intent. Why the next shift is about architecting outcomes, not writing longer instructions."
 slug: "intent-driven-engineering"
-date: "2026-04-19"
+date: "2026-05-07"
 name: "Intent-driven engineering"
 anons: "Writing longer prompts isn't the same as engineering a better outcome. If you are tired of managing vague tickets and endless instruction loops, it’s time for a change. We’re moving toward a world where your job isn't to provide the steps, but to architect the intent. It is time to move from being 'prompt engineers' to being 'outcome architects'."
 heading: "The rise of Intent-Driven Engineering"
