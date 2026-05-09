@@ -63,7 +63,7 @@ export default function BlogIndexPage() {
                         >
                           <Image
                             src={previewSrc}
-                            alt={`“${blogCardTitle(meta)}”`}
+                            alt={`Cover illustration for “${blogCardTitle(meta)}”`}
                             fill
                             className="object-cover"
                             sizes="(max-width: 640px) 100vw, 288px"
