@@ -33,7 +33,7 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
 
 - Reverse chronological (newest first).
 - Card or row per post: **`name`** (link text), **`anons`** (excerpt), date, **reading time** (clock icon + **Nmin**), “Read more” → `/blog/[slug]`. Falls back to `title` / `description` when `name` / `anons` absent.
-- **v2:** **Left cover** thumbnail per post (same source as **`blogCardPreviewImage`**), and **no** large outer tinted/bordered wrapper around the whole list — see **v2** below; **Implementation status** marks what is **Done** in this repo vs DB work still **Not started**.
+- **v2:** **Left cover** when **`blogCardPreviewImage`** resolves to an image; otherwise **no** thumbnail column (text-only row). **No** large outer tinted/bordered wrapper around the whole list — see **v2** below; **Implementation status** marks what is **Done** in this repo vs DB work still **Not started**.
 
 ## Detail page (`/blog/[slug]`)
 
@@ -92,7 +92,7 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
 ### UI (small improvements)
 
 - **`/blog` listing**
-  - **Cover thumbnail (left):** Each post row shows a **small cover image on the left** and text + actions on the right (responsive: may stack on narrow viewports). Image source matches **`blogCardPreviewImage`** semantics — `socialImage` when set, else **first** local inline image in the body, else a **neutral placeholder** (no broken image). Use a modest fixed aspect (e.g. ~**1:1** or **4:3**) and cropped (`object-cover`) so the column stays calm; not a full-bleed hero.
+  - **Cover thumbnail (left):** When **`blogCardPreviewImage`** resolves to an image (`socialImage` or first local inline in the body), show a **small cover on the left** and text + actions on the right (responsive: may stack on narrow viewports). If there is **no** image, **omit** the thumbnail column entirely — **no** empty placeholder block. Use a modest fixed aspect (e.g. ~**4:3** on small screens) and cropped (`object-cover`) so the column stays calm; not a full-bleed hero.
   - **Listing shell:** Remove the MVP pattern of a **single large tinted/bordered wrapper** around the entire post `<ul>` (the rose-tint gradient + heavy radius “card around all items”). Prefer a **plain vertical stack** (gap between items) or **light dividers**; keep per-post cards/rows as the main surface. No second “outer card” framing the list of article links.
   - Otherwise: clearer hierarchy, spacing and typography per [spec-design-layout.md](./spec-design-layout.md), sensible hover/focus, **empty and error** states if the DB is unavailable — **reverse chronological** and same content fields as MVP (title, excerpt, date, reading time, link).
 - **`/blog/[slug]`:** Minor alignment with layout tokens and meta row; no **Join Us** band or **category-based related** slots (those are **v3**).
@@ -103,7 +103,7 @@ What matches **v2 UI** today vs what remains **v2 data** work:
 
 | Area | Status |
 |------|--------|
-| **`/blog`:** left cover from **`blogCardPreviewImage`** (`socialImage` → first body image), **placeholder** when neither exists | **Done** — `app/(shell-flush)/blog/page.tsx` |
+| **`/blog`:** left cover from **`blogCardPreviewImage`** when present; **no** thumbnail column (and **no** placeholder) when there is no image | **Done** — `app/(shell-flush)/blog/page.tsx` |
 | **`/blog`:** plain vertical list (**no** outer rose/tint bordered wrapper around the post `<ul>`) | **Done** |
 | **`/blog` + `/blog/[slug]`:** runtime reads from **DB** in production | **Not started** — posts still load from `content/blog` via `getAllPosts()` |
 
@@ -117,7 +117,7 @@ What matches **v2 UI** today vs what remains **v2 data** work:
 - **Repo today:** Listing **UI** (left cover + plain list shell) is **Done**; **DB** runtime is **Not started** — see **Implementation status** above.
 - **Target — data:** In **production**, every post shown on `/blog` and `/blog/[slug]` is backed by **DB rows** (not direct file reads for published content).
 - **Target — behavior:** Listing and detail behavior matches MVP semantics (ordering, fallbacks for `name` / `anons`, reading time, share preview, **similar-articles** rail) unless explicitly superseded by a follow-up spec note.
-- **Target — listing:** Each row includes a **left cover** per **`blogCardPreviewImage`** (or placeholder); the list is **not** wrapped in a large tinted outer panel — only per-post surfaces + normal page padding.
+- **Target — listing:** Rows with a preview image include a **left cover** per **`blogCardPreviewImage`**; rows **without** an image are **text-only** (no placeholder). The list is **not** wrapped in a large tinted outer panel — only per-post surfaces + normal page padding.
 - Listing UI otherwise satisfies the **small improvements** bullets above.
 
 ---
