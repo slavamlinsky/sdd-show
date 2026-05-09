@@ -45,7 +45,7 @@ export default function BlogIndexPage() {
           </p>
         </Reveal>
 
-        <ul className="relative mt-16 flex flex-col gap-6">
+        <ul className="relative my-12 flex flex-col gap-6">
           {posts.map((post, i) => {
             const { meta } = post;
             const previewSrc = blogCardPreviewImage(post);
@@ -65,7 +65,7 @@ export default function BlogIndexPage() {
                             src={previewSrc}
                             alt={`Cover illustration for “${blogCardTitle(meta)}”`}
                             fill
-                            className="object-cover"
+                            className="object-cover rounded-xl"
                             sizes="(max-width: 640px) 100vw, 288px"
                           />
                         </Link>
