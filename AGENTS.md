@@ -26,3 +26,5 @@ When you add a real agent, document it in a **subsection** using:
 **Contract:** [docs/specs/spec-workflow-ci.md](./docs/specs/spec-workflow-ci.md) (branching, PRs, **Keep the feature branch current before merge**).
 
 Before `git push` or treating a branch as **ready to merge** into `main`: run `git fetch origin main` so `origin/main` is current. If the feature branch is **behind** `main`, `git merge origin/main` or `git rebase origin/main`, resolve conflicts on the branch, then push — so conflicts surface early and the PR matches latest `main`.
+
+**Commit messages:** For multi-line, reviewable messages aligned with Cursor’s **Generate commit message** quality, see [`.cursor/rules/git-commit-messages.mdc`](./.cursor/rules/git-commit-messages.mdc).

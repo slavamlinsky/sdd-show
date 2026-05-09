@@ -18,18 +18,18 @@ export const glossaryTerms: GlossaryTerm[] = [
     categories: ["Quality", "Build"],
   },
   {
-    slug: "artifact",
-    title: "Artifact",
-    shortDefinition:
-      "A tangible output of your process: specs, diagrams, tickets, test reports, repositories, or release notes. SDD treats artifacts as evidence of what was agreed and what shipped.",
-    categories: ["Build", "Product"],
-  },
-  {
     slug: "ambiguity",
     title: "Ambiguity",
     shortDefinition:
       "Missing or overlapping meaning in what was agreed: fuzzy nouns (“fast”, “secure”), silent edge cases, or two plausible readings of the same sentence. Specs exist to shrink ambiguity before it becomes rework.",
     categories: ["Product", "Build", "Quality"],
+  },
+  {
+    slug: "artifact",
+    title: "Artifact",
+    shortDefinition:
+      "A tangible output of your process: specs, diagrams, tickets, test reports, repositories, or release notes. SDD treats artifacts as evidence of what was agreed and what shipped.",
+    categories: ["Build", "Product"],
   },
   {
     slug: "bottleneck",

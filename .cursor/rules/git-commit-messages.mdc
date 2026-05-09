@@ -1,0 +1,55 @@
+---
+description: Detailed Git commit messages (Cursor-style / generate-commit quality) when staging, committing, or summarizing changes
+alwaysApply: true
+---
+
+# Git commit messages — detailed, “magic button” quality
+
+When the user asks to commit, push, or write a commit message — or when you finish work that should be committed — **propose or use a detailed message**, similar to what Cursor’s Source Control **Generate commit message** (sparkle) produces: **clear subject + blank line + structured body**, not a one-liner unless the change is truly trivial.
+
+## Subject line (first line)
+
+- **Imperative mood**: “Add…”, “Fix…”, “Refactor…”, “Document…” (not “Added” / “Adding”).
+- **Scope when helpful**: optional `area` prefix in parentheses or after colon, e.g. `blog:`, `glossary`, `specs`.
+- **~50–72 characters** when possible; **no trailing period**.
+- Summarize **what** and **impact**, not “update files”.
+
+## Body (after one blank line)
+
+Include some of the following, as relevant:
+
+1. **Why** the change exists (motivation, bug, spec alignment).
+2. **What** changed, as **short bullets** grouped by area (code vs content vs assets).
+3. **Notable details**: migrations, breaking changes, follow-ups, out-of-scope items.
+4. **Refs** if applicable: `Fixes #123`, `PR #29`, doc links — only when the user/context supplies them.
+
+Use **complete sentences** in bullets when it reads clearer; stay scannable.
+
+## Example (shape to imitate)
+
+```text
+blog: rewrite “what is SDD” article and ship preview assets
+
+- Replace the intro post with a hook, tables, and a concrete before/after
+  export example; link related posts for the full workflow and tickets vs specs.
+- Add socialImage plus inline art under public/images for OG and listing cards.
+- Extend spec-blog inline-figures list for the new slugs/paths.
+
+Glossary: add ambiguity, ownership, and velocity with SDD-focused definitions.
+```
+
+## When the user uses the IDE “magic button”
+
+In Cursor, **Source Control → commit message field → Generate** uses the staged diff. **You** should match that level of detail when drafting messages in chat or in `git commit -m`, including a **heredoc** or **`-m` subject + `-m` body** for multi-line commits, e.g.:
+
+`git commit -m "subject here" -m "body paragraph or bullets..."`
+
+## Anti-patterns
+
+- **Too vague**: “updates”, “fix stuff”, “changes”.
+- **Subject-only walls of text**: put detail in the body.
+- **No body** when multiple files, areas, or motivations are involved.
+
+## This repo
+
+Respect **[docs/specs/spec-workflow-ci.md](docs/specs/spec-workflow-ci.md)** for branch/PR workflow; commit messages support reviewers and `git log` archaeology, not only the merge.
