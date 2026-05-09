@@ -1,7 +1,7 @@
 ---
 title: "A simple SDD workflow for small teams (step-by-step guide)"
 slug: "sdd-workflow-for-small-teams"
-date: "2026-04-08"
+date: "2026-04-18"
 description: "Overwhelmed by project chaos? Learn a simple, 5-step Spec-Driven Development (SDD) workflow designed to help small teams move fast without building technical debt."
 name: "A simple SDD workflow for small teams"
 anons: "Our latest guide breaks down a simple 5-step Spec-Driven Development (SDD) workflow that keeps your specs, your code, and your team perfectly aligned."

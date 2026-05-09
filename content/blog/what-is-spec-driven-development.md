@@ -2,113 +2,106 @@
 title: "What is spec-driven development? A plain-English guide with examples"
 slug: "what-is-spec-driven-development"
 date: "2026-05-09"
-description: "Spec-driven development (SDD) treats clear intent, behavior, and acceptance as the driver for shipping—not ticket titles. Learn what it is, what it isn’t, and a before/after you can steal."
+description: "A straight answer to what SDD is, with a ticket vs spec comparison and a copy-paste example. Short sentences, no jargon wall."
 name: "What is spec-driven development?"
-anons: "If your “spec” lives only in chat and Jira titles, you’re not doing SDD yet—here’s the practical version, with examples and a rhythm you can adopt tomorrow."
+anons: "If your spec only lives in chat and ticket titles, you are not there yet. Here is the plain version, with examples and a loop you can repeat."
 heading: "What is spec-driven development?"
 socialImage: "/images/what-is-sdd-cover.png"
 ---
 
-## The hook: when the room *sounds* aligned
+## What is spec-driven development?
 
-You leave a planning call feeling good. Everyone nodded. Then implementation starts and the questions arrive anyway: *“Wait—does ‘fast’ mean cached or just fewer round trips?”* *“Are empty strings valid here?”* *“Who owns rollback?”*
+Planning ends and everyone nods. Then work starts. The questions show up anyway. Does “fast” mean caching or fewer round trips? Are empty strings allowed? Who owns rollback?
 
-That gap—between **shared optimism** and **shared meaning**—is where **spec-driven development (SDD)** focuses. SDD does not promise fewer words; it promises that the *right* words exist in a **single, checkable place** before (or tight beside) the code that implements them.
+That space between a good meeting and a shared picture of the work is where spec-driven development (SDD) helps. SDD is not about writing more for its own sake. It is about putting intent, behavior, and “done” in one place people can check. Preferably before the code ships, or right beside it if you iterate hard.
 
-## What spec-driven development actually is
+SDD means specifications drive the work: what it should do, where it stops, and how you know it worked. The spec is the thing you build against, not a PDF you file after the fact.
 
-**Spec-driven development** means you treat **specifications**—intent, behavior, boundaries, and acceptance—as the **primary input** to building software. The spec is not wallpaper after the fact; it is the contract your implementation is written against.
+A useful spec is usually:
 
-In practice, a “spec” is usually:
+- Short enough to read in one go.
+- Clear enough that two engineers would build the same behavior without a side chat.
+- Concrete enough that you can demo “done” against a short list of checks.
 
-- **Short enough** that a busy teammate can read it in one sitting.
-- **Precise enough** that two engineers would implement the same behavior without a sidebar.
-- **Testable enough** that you could demo “done” against explicit criteria.
+You can line this up with intent-driven engineering: start from what people need, not from the first API you thought of.
 
-It pairs naturally with **Intent-Driven Engineering**: you start from what the system should **do for people**, not from the first API that came to mind.
+## Tickets track work; specs state truth
 
-## “We have tickets” ≠ “we have specs”
+Tickets and specs do different jobs. Use both.
 
-Tickets track work. Specs describe **truth** about the slice you are building. You can have both; they solve different problems.
+Typical ticket:
 
-| | **Typical ticket** | **Spec slice** |
-| --- | --- | --- |
-| **Job** | Assign, sequence, unblock | Define behavior and “done” |
-| **Best line** | “Upgrade auth flow” | “For MFA enroll, if TOTP secret is missing, block submit and show error E104.” |
-| **Risk** | Title becomes the contract | Ambiguity hides in nouns (“secure”, “fast”, “simple”) |
-| **Good test** | Moves across a board | Two engineers answer edge-case questions the same way |
+- Job: assign work, clear blockers, keep sequence sane.
+- Example title: “Upgrade auth flow.”
+- Risk: the title quietly becomes the whole agreement.
+- Good sign: it moves across the board without drama.
 
-A backlog full of crisp titles is still not a spec. A spec can live **in** a ticket—or in a doc, or in a repo Markdown file—but it must answer **what** and **how we know**, not only **when**.
+Spec slice for the same work:
 
-## Tickets vs. clarity (at a glance)
+- Job: say what happens and what finished looks like.
+- Example: “For MFA enroll, if TOTP secret is missing, block submit and show error E104 and copy X.”
+- Risk: fuzzy words like “secure,” “fast,” or “simple” hide arguments.
+- Good sign: edge cases get the same answer from two people without a meeting.
 
-One picture to keep in mind: chaos on the left, one agreed story on the right.
+A backlog of neat titles is still not a spec. The spec can live in the ticket, a doc, or Markdown in the repo. It still needs to answer what you are building and how you will know, not only when it is due.
 
-![Messy ad-hoc notes versus a single ordered spec: the shift SDD is after](/images/tickets-vs-specs-visual.png)
+![Abstract split: tickets versus one agreed spec narrative](/images/tickets-vs-specs-visual.png)
+
+Messy notes on a wall are a mood. A short acceptance block is a promise. Same idea, different visual:
+
+![Chaotic sticky-note brainstorm versus a calm, numbered acceptance list](/images/sdd-acceptance-contrast.png)
 
 ## A before-and-after you can steal
 
-Imagine this lands in Slack:
+This lands in Slack:
 
-> **PM (message):** “We need the export to be faster for big accounts.”
+> PM: “We need the export to be faster for big accounts.”
 
-That is a **signal**, not a spec. A minimal SDD-style slice might look like this:
+That is a ping, not a spec. A small SDD-style slice could look like this.
 
-**Problem / intent**
+Intent:
 
-- **User:** Account admin exporting usage for billing.
-- **Pain:** Export >50k rows times out or blocks the tab for minutes.
-- **Success:** For accounts ≤200k rows, CSV download starts within **3s** and completes without crashing the tab (worker or server path is fine).
+- User: account admin exporting usage for billing.
+- Pain: exports above about 50k rows time out or freeze the tab.
+- Success: for accounts up to 200k rows, CSV download starts within 3 seconds and finishes without killing the tab. Server or worker is fine.
 
-**Scope**
+Scope:
 
-- **In:** CSV export for the usage report only; accounts up to 200k rows.
-- **Out:** PDF, scheduled emails, other reports (separate slices).
+- In: CSV export for the usage report only, accounts up to 200k rows.
+- Out: PDF, scheduled email, other reports. Those get their own slices later.
 
-**Acceptance (examples)**
+Acceptance examples:
 
-1. Given a 60k-row account, when the user clicks **Export CSV**, a download begins within 3 seconds and the file opens in Sheets without manual repair.
-2. Given a 250k-row account, the UI shows a clear **“too large—contact support”** state (no silent failure).
-3. Given an export in progress, refreshing the page does not start a second concurrent job for the same user.
+1. 60k rows: user clicks Export CSV, download starts within 3 seconds, file opens in Sheets without manual repair.
+2. 250k rows: UI shows “too large, contact support” with no silent failure.
+3. Export running: refresh does not start a second job for the same user.
 
-That is still one page—but now “fast” has a number, “big” has a cap, and edge cases have owners.
+You are still on about one page. Now “fast” has a number. “Big” has a cap. The scary edges have names.
 
-## When SDD earns its keep
+## When fuller specs are worth the ink
 
-| Situation | Why specs matter |
-| --- | --- |
-| Multiple contributors | Shared truth beats tribal memory. |
-| Integrations & contracts | Surfaces, errors, and idempotency need names. |
-| Compliance or audits | You can point to acceptance that was agreed *before* ship. |
-| Onboarding | A good spec is a flashlight into the codebase. |
+- Same slice, many hands: one written story beats tribal memory.
+- Integrations and public contracts: name surfaces, errors, and idempotency.
+- Audit or compliance: you can show acceptance that existed before ship.
+- Heavy onboarding: a tight spec helps new folks find the thread.
 
-## When *not* to over-invest
+## When to keep the write-up thin
 
-| Situation | Lighter approach |
-| --- | --- |
-| One-off script / spike | Capture decisions in comments + PR description; graduate to a spec if it sticks. |
-| Purely cosmetic tweak | Before/after screenshot + one acceptance line may be enough. |
-| Exploratory R&D | Time-box discovery; write the spec once you know which unknowns are real. |
+- One-off script or spike: PR and comments first. Promote to a spec if it ships.
+- Small UI tweak: a screenshot plus one acceptance line is often plenty.
+- Early R&D: time-box exploration. Write the spec once unknowns are real enough to name.
 
-SDD is **disciplined**, not **dogmatic**. The goal is to match depth to **risk**.
+Match how much you write to how much risk you are taking. SDD is meant to be strict where it matters, not heavy everywhere.
 
-## A working rhythm (without the buzzwords)
+## A rhythm you can repeat
 
-You do not need a heavyweight process—you need a **repeatable sequence**:
+You do not need a huge process. Run the same short loop:
 
-1. **Frame** the problem and boundaries in plain language.
-2. **Write acceptance** you could demo: happy path + the scary edges.
-3. **Implement** with the spec open; when reality disagrees, **update the spec first**.
-4. **Demo** against the acceptance lines—not against memory of the meeting.
+1. Frame the problem and boundaries in plain language.
+2. Write acceptance you could demo: happy path plus the edges that usually bite.
+3. Build with the spec open. When reality disagrees, update the spec first.
+4. Demo against those lines, not against memory of the last meeting.
 
-For a fuller walkthrough of those steps, see [A simple SDD workflow for small teams](/blog/sdd-workflow-for-small-teams).
+More detail and pictures for that loop live in [A simple SDD workflow for small teams](/blog/sdd-workflow-for-small-teams).
 
-## What to read next
-
-- [A simple SDD workflow for small teams](/blog/sdd-workflow-for-small-teams) — five-step rhythm from frame to demo.
-- [Intent-driven engineering](/blog/intent-driven-engineering) — putting intent upstream of implementation detail.
-- [Tickets vs specs](/blog/tickets-vs-specs) — when a ticket is enough, and when it isn’t.
-
-## Closing thought
-
-**Spec-driven development** is not about loving paperwork. It is about buying **cheaper feedback**: earlier, clearer, and closer to the people who will live with the result. Start with one slice—one export, one webhook, one screen—and write it so clearly that the next person says, *“Oh, that’s what we meant.”*
+![Circular rhythm: frame, acceptance, sketch, implement, demo](/images/sdd-rhythm-loop.png)

@@ -90,6 +90,24 @@ const markdownComponents = {
     <code className="rounded bg-muted px-1 py-0.5 font-mono text-[0.9em] text-foreground" {...props} />
   ),
   hr: () => <hr className="my-10 border-border/60" />,
+  table: ({ ...props }: React.ComponentPropsWithoutRef<"table">) => (
+    <div className="my-6 w-full overflow-x-auto rounded-lg border border-border/60 bg-muted/10">
+      <table className="w-full min-w-[18rem] border-collapse text-left text-[15px] text-muted-foreground" {...props} />
+    </div>
+  ),
+  thead: ({ ...props }: React.ComponentPropsWithoutRef<"thead">) => (
+    <thead className="border-b border-border bg-muted/40 text-foreground" {...props} />
+  ),
+  tbody: ({ ...props }: React.ComponentPropsWithoutRef<"tbody">) => <tbody {...props} />,
+  tr: ({ ...props }: React.ComponentPropsWithoutRef<"tr">) => (
+    <tr className="border-b border-border/50 last:border-b-0" {...props} />
+  ),
+  th: ({ ...props }: React.ComponentPropsWithoutRef<"th">) => (
+    <th className="px-3 py-2.5 align-top text-sm font-semibold tracking-tight" {...props} />
+  ),
+  td: ({ ...props }: React.ComponentPropsWithoutRef<"td">) => (
+    <td className="px-3 py-2.5 align-top" {...props} />
+  ),
   img: ({ src, alt }: React.ComponentPropsWithoutRef<"img">) => {
     if (!src || typeof src !== "string") return null;
 
