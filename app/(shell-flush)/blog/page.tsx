@@ -58,14 +58,14 @@ export default function BlogIndexPage() {
                       {previewSrc ? (
                         <Link
                           href={href}
-                          className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-muted/40 outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring sm:aspect-auto sm:w-44 md:w-72 sm:min-h-[11rem]"
+                          className="relative aspect-[4/3] w-full shrink-0 rounded-xl overflow-hidden bg-muted/40 outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring sm:aspect-auto sm:w-44 md:w-72 sm:min-h-[11rem]"
                           aria-label={`Open article: ${blogCardTitle(meta)}`}
                         >
                           <Image
                             src={previewSrc}
                             alt={`Cover illustration for “${blogCardTitle(meta)}”`}
                             fill
-                            className="object-cover rounded-xl"
+                            className="object-cover"
                             sizes="(max-width: 640px) 100vw, 288px"
                           />
                         </Link>
