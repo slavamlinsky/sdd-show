@@ -33,7 +33,7 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
 
 - Reverse chronological (newest first).
 - Card or row per post: **`name`** (link text), **`anons`** (excerpt), date, **reading time** (clock icon + **Nmin**), “Read more” → `/blog/[slug]`. Falls back to `title` / `description` when `name` / `anons` absent.
-- **v2:** **Left cover** thumbnail per post (same source as **`blogCardPreviewImage`**), and **no** large outer tinted/bordered wrapper around the whole list — see **v2** section below.
+- **v2:** **Left cover** thumbnail per post (same source as **`blogCardPreviewImage`**), and **no** large outer tinted/bordered wrapper around the whole list — see **v2** below; **Implementation status** marks what is **Done** in this repo vs DB work still **Not started**.
 
 ## Detail page (`/blog/[slug]`)
 
@@ -97,6 +97,16 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
   - Otherwise: clearer hierarchy, spacing and typography per [spec-design-layout.md](./spec-design-layout.md), sensible hover/focus, **empty and error** states if the DB is unavailable — **reverse chronological** and same content fields as MVP (title, excerpt, date, reading time, link).
 - **`/blog/[slug]`:** Minor alignment with layout tokens and meta row; no **Join Us** band or **category-based related** slots (those are **v3**).
 
+### Implementation status (this repo)
+
+What matches **v2 UI** today vs what remains **v2 data** work:
+
+| Area | Status |
+|------|--------|
+| **`/blog`:** left cover from **`blogCardPreviewImage`** (`socialImage` → first body image), **placeholder** when neither exists | **Done** — `app/(shell-flush)/blog/page.tsx` |
+| **`/blog`:** plain vertical list (**no** outer rose/tint bordered wrapper around the post `<ul>`) | **Done** |
+| **`/blog` + `/blog/[slug]`:** runtime reads from **DB** in production | **Not started** — posts still load from `content/blog` via `getAllPosts()` |
+
 ### Non-goals (v2)
 
 - Home **carousel**, **category strip**, **Join Us** CTA, and **two-slot related** rules (all **v3**).
@@ -104,9 +114,10 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
 
 ### Acceptance (v2)
 
-- In **production**, every post shown on `/blog` and `/blog/[slug]` is backed by **DB rows** (not direct file reads for published content).
-- Listing and detail behavior matches MVP semantics (ordering, fallbacks for `name` / `anons`, reading time, share preview, **similar-articles** rail) unless explicitly superseded by a follow-up spec note.
-- **`/blog`:** Each row includes a **left cover** per **`blogCardPreviewImage`** (or placeholder); the list is **not** wrapped in a large tinted outer panel — only per-post surfaces + normal page padding.
+- **Repo today:** Listing **UI** (left cover + plain list shell) is **Done**; **DB** runtime is **Not started** — see **Implementation status** above.
+- **Target — data:** In **production**, every post shown on `/blog` and `/blog/[slug]` is backed by **DB rows** (not direct file reads for published content).
+- **Target — behavior:** Listing and detail behavior matches MVP semantics (ordering, fallbacks for `name` / `anons`, reading time, share preview, **similar-articles** rail) unless explicitly superseded by a follow-up spec note.
+- **Target — listing:** Each row includes a **left cover** per **`blogCardPreviewImage`** (or placeholder); the list is **not** wrapped in a large tinted outer panel — only per-post surfaces + normal page padding.
 - Listing UI otherwise satisfies the **small improvements** bullets above.
 
 ---
@@ -123,12 +134,12 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
 2. **Category strip (between header and carousel)**
   - A horizontal row of **small badge-style links or toggle chips** — one per **primary pillar**: **Product**, **Design**, **Build**, **Quality**, plus an **All** (or equivalent) that clears the filter.
   - Labels and slugs match **[spec-taxonomy.md](./spec-taxonomy.md)**.
-  - **Client-side filter:** clicking a pillar restricts the carousel to posts whose stored `**category`** (DB or frontmatter, same value) matches; **All** shows every post in the carousel pool. Active chip state is visually obvious.
+  - **Client-side filter:** clicking a pillar restricts the carousel to posts whose stored **`category`** (DB or frontmatter, same value) matches; **All** shows every post in the carousel pool. Active chip state is visually obvious.
 3. **Carousel**
   - **5–7** article cards in the **horizontal** scroller (target **at least 5** once content exists; if the repo has fewer posts, show all available without breaking layout).
   - **Card contents:** visual top (cover image, gradient placeholder, or simple illustration), **small category badge** on the card (matches post `category`; may **deep-link** to the same filter state as the strip, e.g. by updating selection + scroll), **title**, **date**, **reading time** (estimated or from frontmatter), whole card links to `/blog/[slug]`.
   - **Navigation:** **Previous / next** affordances (icon buttons); keyboard-friendly where feasible; **touch swipe** on small viewports.
-  - **Motion:** optional smooth scroll / Framer Motion per [spec-design-layout.md](./spec-design-layout.md); honor `**prefers-reduced-motion`**.
+  - **Motion:** optional smooth scroll / Framer Motion per [spec-design-layout.md](./spec-design-layout.md); honor **`prefers-reduced-motion`**.
 4. **Data**
   - Same source as `/blog` index (by v3, **DB** per v2; consumer reads the same post list the listing page uses). Default pool order: **newest first** before pillar filter is applied.
 
