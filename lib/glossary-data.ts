@@ -25,6 +25,13 @@ export const glossaryTerms: GlossaryTerm[] = [
     categories: ["Build", "Product"],
   },
   {
+    slug: "ambiguity",
+    title: "Ambiguity",
+    shortDefinition:
+      "Missing or overlapping meaning in what was agreed: fuzzy nouns (“fast”, “secure”), silent edge cases, or two plausible readings of the same sentence. Specs exist to shrink ambiguity before it becomes rework.",
+    categories: ["Product", "Build", "Quality"],
+  },
+  {
     slug: "bottleneck",
     title: "Bottleneck",
     shortDefinition:
@@ -114,6 +121,13 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "A shared, written picture of what “win” means for a feature or initiative — for users and the business — so design, engineering, and stakeholders aren’t solving different problems under the same ticket.",
     categories: ["Product", "Design"],
+  },
+  {
+    slug: "ownership",
+    title: "Ownership",
+    shortDefinition:
+      "Who is accountable for a decision, a spec slice, or a boundary: who updates the doc when reality shifts, who resolves trade-offs, and who speaks for users or risk. Vague ownership is why progress stalls after energetic kickoffs.",
+    categories: ["Product", "Build"],
   },
   {
     slug: "prd",
@@ -212,6 +226,13 @@ export const glossaryTerms: GlossaryTerm[] = [
     shortDefinition:
       "A concise statement of who the product helps and what outcome they get. It keeps GTM language aligned with what engineering commits to in specs and roadmaps.",
     categories: ["Product", "Design"],
+  },
+  {
+    slug: "velocity",
+    title: "Velocity",
+    shortDefinition:
+      "The sustainable rate at which a team delivers valuable, working increments — not heroics or story-point theater. Clear specs reduce thrash and rework so velocity reflects real throughput instead of hidden debt.",
+    categories: ["Product", "Build"],
   },
 ];
 

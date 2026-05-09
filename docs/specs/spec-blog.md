@@ -51,6 +51,9 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
 ## Inline figures (markdown)
 
 - **Default:** Images in post bodies use a shared **figure frame** in `components/markdown-content.tsx`: **~16:9** aspect, `**object-cover`**, rounded border — suitable for diagrams and hero art on most posts.
+- **What is SDD article (`what-is-spec-driven-development`):** Assets:
+  - **`/images/what-is-sdd-cover.png`** — **`socialImage`** / link-preview art (abstract spec-to-build theme); not duplicated as a header hero.
+  - **`/images/tickets-vs-specs-visual.png`** — after “Tickets vs. clarity”; tickets-vs-specs contrast illustration. Default blog figure aspect in the renderer.
 - **SDD workflow article (`sdd-workflow-for-small-teams`):** Inline assets:
   - `**/images/sdd-rhythm-loop.png`** — after the intro, before “Frame the problem” (five-step rhythm diagram). Default blog figure aspect.
   - `**/images/sdd-acceptance-contrast.png**` — after “Draft acceptance criteria” (chaos vs clarity). Default blog figure aspect.
