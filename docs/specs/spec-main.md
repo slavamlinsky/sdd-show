@@ -79,7 +79,9 @@ Choose one approach and use it consistently for blog posts, glossary entries, an
 
 **v2:** topic browse — **categories and tags** (filters, badges) follow [spec-taxonomy.md](./spec-taxonomy.md) (shared across blog, videos, and course positioning). Not required for MVP.
 
-**v2:** **Blog** — home **carousel** (5–7 posts) with **pillar category** strip; article foot **Join Us CTA** + **two related posts** (same category: newest + popular rule) — [spec-blog.md](./spec-blog.md).
+**v2:** **Blog** — **database**-backed published posts with **listing + detail** served from the DB; **small UI polish** on `/blog` and `/blog/[slug]` — [spec-blog.md](./spec-blog.md).
+
+**v3:** **Blog** — home **carousel** (5–7 posts) with **pillar category** strip; article foot **Join Us CTA** + **two related posts** (same category: newest + popular rule) — [spec-blog.md](./spec-blog.md).
 
 ## SEO baseline
 

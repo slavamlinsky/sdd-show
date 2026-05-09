@@ -2,10 +2,10 @@
 
 ## Version / scope
 
-- **Target:** **v2** — category/tag **filters**, listing **badges**, and browse-by-topic UX are **out of scope for MVP**.
-- **MVP:** content may ship **without** `category` / `tags` in frontmatter or static data. Optional early **data-only** fields (same slugs as below) are allowed if useful for copy audits; no UI requirement until v2.
+- **Target:** **v2+** — category/tag **filters**, listing **badges**, and browse-by-topic UX are **out of scope for MVP** (exact **phase** per surface: e.g. **blog v3** for home carousel + strip; videos per [spec-videos-v2-v3.md](./spec-videos-v2-v3.md)).
+- **MVP:** content may ship **without** `category` / `tags` in frontmatter or static data. Optional early **data-only** fields (same slugs as below) are allowed if useful for copy audits; no UI requirement until the relevant surface ships taxonomy UX.
 
-This doc is the **shared vocabulary and rules** so that when v2 ships, **blog articles**, **videos**, and **course** positioning use **one** model (Markdown frontmatter, Supabase columns, etc., as chosen per route).
+This doc is the **shared vocabulary and rules** so **blog articles**, **videos**, and **course** positioning use **one** model when browse UI lands (Markdown frontmatter, Supabase columns, etc., as chosen per route — **blog v2** may already persist these fields in the DB without exposing taxonomy UI).
 
 ---
 
@@ -31,7 +31,7 @@ Use these **four** labels only — keep the set **fixed** so filters stay scanna
 
 ### Glossary exception (MVP)
 
-- Glossary cards may show **1–3 pillar badges** per term (terms often span pillars). Blog/video/course items should converge on **one primary category** for v2 filters plus tags.
+- Glossary cards may show **1–3 pillar badges** per term (terms often span pillars). Blog/video/course items should converge on **one primary category** for browse/filter UX plus tags.
 
 ---
 
@@ -40,7 +40,7 @@ Use these **four** labels only — keep the set **fixed** so filters stay scanna
 
 | Mechanism             | Role                                                                                                      | Cardinality                                |
 | --------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| **Category** (pillar) | Primary shelf for browse — **exactly one** per blog post / video / course slice in v2.                    | **One of** Product, Build, Quality, Design |
+| **Category** (pillar) | Primary shelf for browse — **exactly one** per blog post / video / course slice where filters/shelves apply (e.g. **blog v3** home strip; videos per their spec).                    | **One of** Product, Build, Quality, Design |
 | **Tags**              | Tools, domains, themes — **AI**, **API**, **methodology**, **growth**, **CRO**, **ROI** (as topics), etc. | **Zero or more**                           |
 
 
@@ -95,7 +95,7 @@ Meaning: UX-focused; conversion experimentation as a tag.
 
 ## Spec dependencies
 
-- Blog: [spec-blog.md](./spec-blog.md) — frontmatter `category` / `tags` when v2 ships.
+- Blog: [spec-blog.md](./spec-blog.md) — `category` / `tags` (frontmatter or DB) when **blog v3** taxonomy UI ships.
 - Videos: [spec-videos-v2-v3.md](./spec-videos-v2-v3.md) — align slugs with this document.
 - Course: [spec-course.md](./spec-course.md) — library browse uses the same pillars.
 - Glossary: [spec-glossary.md](./spec-glossary.md) — multi-badge pillars + optional tags.
