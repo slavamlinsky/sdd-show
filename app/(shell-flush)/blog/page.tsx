@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { FileText } from "lucide-react";
 import { BlogReadingTime } from "@/components/blog-reading-time";
 import { GradientText } from "@/components/gradient-text";
 import { Reveal } from "@/components/reveal";
@@ -54,30 +53,23 @@ export default function BlogIndexPage() {
             return (
               <li key={meta.slug} className="list-none">
                 <Reveal delay={i * 0.05} distance={14}>
-                  <Card className="overflow-hidden rounded-2xl border-border/60 shadow-sm ring-1 ring-foreground/[0.04] transition-shadow hover:shadow-md sm:rounded-[1.75rem]">
+                  <Card className="overflow-hidden px-4 md:px-6 rounded-2xl border-border/60 shadow-sm ring-1 ring-foreground/[0.04] transition-shadow hover:shadow-md sm:rounded-[1.75rem]">
                     <div className="flex flex-col sm:flex-row sm:items-stretch">
-                      <Link
-                        href={href}
-                        className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-muted/40 outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring sm:aspect-auto sm:w-44 md:w-52 sm:min-h-[11rem]"
-                        aria-label={`Cover image for ${blogCardTitle(meta)}`}
-                      >
-                        {previewSrc ? (
+                      {previewSrc ? (
+                        <Link
+                          href={href}
+                          className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-muted/40 outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring sm:aspect-auto sm:w-44 md:w-72 sm:min-h-[11rem]"
+                          aria-label={`Open article: ${blogCardTitle(meta)}`}
+                        >
                           <Image
                             src={previewSrc}
-                            alt=""
+                            alt={`Cover illustration for “${blogCardTitle(meta)}”`}
                             fill
                             className="object-cover"
-                            sizes="(max-width: 640px) 100vw, 208px"
+                            sizes="(max-width: 640px) 100vw, 288px"
                           />
-                        ) : (
-                          <span className="absolute inset-0 flex items-center justify-center bg-muted/50">
-                            <FileText
-                              className="h-10 w-10 text-muted-foreground/35"
-                              aria-hidden
-                            />
-                          </span>
-                        )}
-                      </Link>
+                        </Link>
+                      ) : null}
                       <CardHeader className="flex flex-1 flex-col gap-3 p-6 sm:p-8">
                         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
                           <time dateTime={meta.date}>
