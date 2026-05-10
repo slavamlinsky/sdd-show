@@ -90,7 +90,7 @@ const curatedVideos: VideoEntry[] = [
   },
 ];
 
-/** Curated SDD-related talks — edit `lib/videos-data.ts` to update */
+/** Curated AI-forward videos (agents, tools, team practice, and adjacent ideas) — edit `lib/videos-data.ts` to update */
 export const videos: VideoEntry[] = [featuredHeroVideo, ...curatedVideos];
 
 /**
