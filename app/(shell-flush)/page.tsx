@@ -156,7 +156,7 @@ export default function HomePage() {
               <div className="space-y-3">
                 <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">Video library</h2>
                 <p className="max-w-xl text-lg text-muted-foreground">
-                  Curated talks and explainers. Watch on the site without tab hopping.
+                  AI-driven picks: tools, agents, and how teams ship. Watch on the site without tab hopping.
                 </p>
               </div>
               <Link

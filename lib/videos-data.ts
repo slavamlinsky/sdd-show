@@ -18,6 +18,20 @@ export const featuredHeroVideo: VideoEntry = {
 
 const curatedVideos: VideoEntry[] = [
   {
+    id: "ycombinator-build-company-ai-ground-up",
+    title: "How To Build A Company With AI From The Ground Up",
+    youtubeId: "EN7frwQIbKc",
+    channelTitle: "Y Combinator",
+    category: "Product",
+  },
+  {
+    id: "tedx-raymond-fu-learning-swe-era-ai",
+    title: "Learning Software Engineering During the Era of AI | Raymond Fu | TEDxCSTU",
+    youtubeId: "w4rG5GY9IlA",
+    channelTitle: "TEDx Talks",
+    category: "Build",
+  },
+  {
     id: "augment-sdd-workflow",
     title:
       "Spec-Driven Development Explained: The Workflow That Keeps AI Agents Aligned",
@@ -76,7 +90,7 @@ const curatedVideos: VideoEntry[] = [
   },
 ];
 
-/** Curated SDD-related talks — edit `lib/videos-data.ts` to update */
+/** Curated AI-forward videos (agents, tools, team practice, and adjacent ideas) — edit `lib/videos-data.ts` to update */
 export const videos: VideoEntry[] = [featuredHeroVideo, ...curatedVideos];
 
 /**

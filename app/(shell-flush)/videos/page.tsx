@@ -9,8 +9,14 @@ import { videos } from "@/lib/videos-data";
 export const metadata: Metadata = {
   title: "Videos",
   description:
-    "Curated YouTube videos about spec driven development and related ideas. Play in page with one click.",
-  keywords: keywordsForPage("videos", "software talks", "YouTube", "SDD"),
+    "Hand-picked YouTube videos on AI in software: agents, intent, tools, and how teams ship — wider than specs alone. Play in page with one click.",
+  keywords: keywordsForPage(
+    "videos",
+    "AI engineering",
+    "LLM agents",
+    "AI-assisted development",
+    "YouTube",
+  ),
 };
 
 export default function VideosPage() {
@@ -23,8 +29,9 @@ export default function VideosPage() {
             Curated <GradientText className="font-semibold">videos</GradientText>
           </h1>
           <p className="text-lg leading-relaxed text-muted-foreground">
-            Hand-picked explainers and talks. Click a card to play in a modal — swap the list in the codebase when you
-            find better references.
+            Explainers and keynotes on AI tools, agent workflows, and engineering practice — not only spec-driven
+            development. Click a card to play in a modal — swap the list in the codebase when you find better
+            references.
           </p>
         </Reveal>
         <Reveal className="relative mt-14" delay={0.06}>
