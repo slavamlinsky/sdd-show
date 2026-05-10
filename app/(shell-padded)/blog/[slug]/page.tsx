@@ -29,14 +29,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(slug);
   if (!post) return {};
 
-  const { title, description, date } = post.meta;
+  const { title, description, date, keywords: fmKeywords } = post.meta;
   const path = `/blog/${slug}`;
   const ogImage = blogShareImagePath(post, siteConfig.defaultBlogShareImage).trim();
+  const keywords = [...new Set([...keywordsForPage("blog", "SDD", post.meta.slug.replace(/-/g, " ")), ...(fmKeywords ?? [])])];
 
   return {
     title,
     description,
-    keywords: keywordsForPage("blog", "SDD", post.meta.slug.replace(/-/g, " ")),
+    keywords,
     alternates: {
       canonical: path,
     },

@@ -24,6 +24,8 @@ export type BlogFrontmatter = {
   /** Override auto reading time (minutes); must be a positive number. */
   readingTimeMinutes?: number;
   author?: string;
+  /** Optional extra phrases merged into route `metadata.keywords` (deduped). */
+  keywords?: string[];
 };
 
 /** Baseline reading speed for word-count math (technical prose). */
