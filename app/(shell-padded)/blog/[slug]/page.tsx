@@ -6,7 +6,6 @@ import { BlogSimilarArticles } from "@/components/blog-similar-articles";
 import { MarkdownContent } from "@/components/markdown-content";
 import { Reveal } from "@/components/reveal";
 import {
-  blogCardAnons,
   blogPageHeading,
   blogReadingTimeMinutes,
   blogShareImagePath,
@@ -65,7 +64,7 @@ export default async function BlogPostPage({ params }: Props) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
-  const similarPosts = getSimilarPosts(slug, 2);
+  const similarPosts = getSimilarPosts(slug);
 
   return (
     <div className="relative mx-auto w-full max-w-4xl">

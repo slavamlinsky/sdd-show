@@ -31,12 +31,15 @@ export function BlogSimilarArticles({ posts, className }: Props) {
       <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
         Other posts you might want to read next.
       </p>
-      <ul className="mt-8 grid list-none gap-6 xl:gap-16 p-0 sm:grid-cols-2">
+      <ul className="mt-8 grid list-none grid-cols-1 gap-6 p-0 md:grid-cols-3 md:gap-8 xl:gap-12">
         {posts.map((p, i) => {
           const thumb = blogCardPreviewImage(p);
           const meta = p.meta;
           return (
-            <li key={meta.slug} className="min-w-0">
+            <li
+              key={meta.slug}
+              className={cn("min-w-0", i >= 2 && "hidden md:block")}
+            >
               <Reveal delay={i * 0.05} distance={12}>
                 <Link
                   href={`/blog/${meta.slug}`}
@@ -49,7 +52,7 @@ export function BlogSimilarArticles({ posts, className }: Props) {
                         alt=""
                         fill
                         className="object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
+                        sizes="(max-width: 767px) 100vw, 33vw"
                       />
                     </div>
                   ) : (

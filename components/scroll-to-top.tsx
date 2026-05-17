@@ -124,8 +124,8 @@ export function ScrollToTop() {
       />
       <div
         className={cn(
-          /* ~48px higher than bottom-6 / bottom-8 so it clears footer link rows */
-          "fixed bottom-[4.5rem] right-4 z-[90] transition-opacity duration-200 sm:bottom-20 sm:right-8",
+          /* Sits above footer link row + safe area — don’t cover GitHub / legal line */
+          "fixed bottom-28 right-4 z-[90] transition-opacity duration-200 sm:bottom-32 sm:right-8",
           visible ? "opacity-100" : "pointer-events-none opacity-0"
         )}
       >

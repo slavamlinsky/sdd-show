@@ -51,8 +51,8 @@ export function HomePillars() {
             id="home-pillars-heading"
             className="font-heading text-3xl text-balance font-semibold leading-tight tracking-tight text-foreground sm:text-4xl"
           >
-            Foundational pillars of{" "}
-            <GradientText className="font-semibold whitespace-nowrap">AI-driven engineering</GradientText>
+            Fundamentals of{" "}
+            <GradientText className="font-semibold whitespace-nowrap">intent-driven engineering</GradientText>
           </h2>
         </Reveal>
 

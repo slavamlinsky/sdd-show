@@ -1,11 +1,11 @@
 ---
-title: "What Is Spec-Driven Development (SDD)? Definition, Examples & Spec vs Ticket"
+title: "Spec-Driven Development (SDD): Learn the Basics."
 slug: "what-is-spec-driven-development"
 date: "2026-04-09"
-description: "Learn what spec-driven development (SDD) means: specifications as the driver for software delivery, how specs differ from Jira tickets, and a copy-paste example with acceptance-style checks. Plain language for engineers and leads."
+description: "Learn what spec-driven development (SDD) means: specifications as the driver for software delivery, how specs differ from Jira tickets."
 name: "What is spec-driven development?"
 anons: "SDD means intent, behavior, and done live in one checkable place, not only in ticket titles. Here is the short definition, a ticket vs spec compare, and an example you can reuse."
-heading: "What is spec-driven development (SDD)? Definition, examples, and spec vs ticket"
+heading: "What is spec-driven development (SDD)?"
 socialImage: "/images/what-is-sdd-cover.png"
 keywords:
   - what is spec driven development
@@ -99,6 +99,8 @@ You are still near one page. Fast has a number. Big has a cap. The scary edges h
 - Small UI tweak: a screenshot plus one acceptance line is often plenty.
 - Early research: time-box discovery. Write the spec once the unknowns are real enough to name.
 
+![Calibrate how much you spec: fuller docs when risk and coordination are high; stay thin when the bet is small](/images/what-is-sdd-spec-depth-scale.png)
+
 Match how much you write to how much risk you carry. SDD should feel strict where it matters, not heavy on every task.
 
 ## A small loop you can repeat
@@ -109,5 +111,3 @@ You do not need a large ceremony. Run the same short cycle:
 2. Write checks you could demo: happy path plus the edges that usually bite.
 3. Build with the spec open. When reality disagrees, update the spec first.
 4. Demo against those checks, not against memory of the last meeting.
-
-Step by step, with more diagrams, lives in [A simple SDD workflow for small teams](/blog/sdd-workflow-for-small-teams).

@@ -40,7 +40,7 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
 - Render full article.
 - `**generateMetadata`:** `title` + `description` for `<title>` / basic meta; also `**openGraph`** / `**twitter**` with preview image from `**blogShareImagePath**` (`**socialImage**` → first local inline image → `**defaultBlogShareImage**`). `**alternates.canonical**` uses `metadataBase` from the root layout for absolute URLs.
 - **Header:** Meta row (date + reading time); `**<h1>`** from `**heading**` (then `name`, then `title`); lead from `**anons**` (then `description`). **No** full-bleed hero image in the header—figures appear only inside the article markdown body.
-- **Similar articles (MVP / v2):** Immediately **after** the `</article>` body, render `**BlogSimilarArticles`**: up to **two** other posts, **newest first**, excluding the current slug (`getSimilarPosts` in `**lib/blog.ts`**). Cards: optional cover thumb, date, `**BlogReadingTime**`, title, one-line `**anons**`, whole card links to `/blog/[slug]` — internal links for UX + SEO. **Hover:** **~8px** upward translate (`**-translate-y-2`**) + border emphasis; **no** shadow lift (`**shadow-none`** on the link). **v3** may replace this rail with category-based **Related** rules (below) where `category` exists.
+- **Similar articles (MVP / v2):** Immediately **after** the `</article>` body, render `**BlogSimilarArticles`**: up to **three** other posts (**newest first**), excluding the current slug (`getSimilarPosts` in `**lib/blog.ts`**; default limit **3**). **Layout:** **two** cards on **&lt; md** viewports; **three** in a row from **`md`**. Cards: optional cover thumb, date, `**BlogReadingTime**`, title, one-line `**anons**`, whole card links to `/blog/[slug]` — internal links for UX + SEO. **Hover:** **~8px** upward translate (`**-translate-y-2`**) + border emphasis; **no** shadow lift (`**shadow-none`** on the link). **v3** may replace this rail with category-based **Related** rules (below) where `category` exists.
 
 ## Share preview (Open Graph and social links)
 
@@ -55,6 +55,7 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
   - **`/images/what-is-sdd-cover.png`** — **`socialImage`** / link-preview art; not shown as a header hero.
   - **`/images/what-is-sdd-spec-hub.png`** — after “What spec-driven development means in practice”; article-only hub diagram (spec as source). Default blog figure aspect.
   - **`/images/tickets-vs-specs-visual.png`** — after “How tickets and specs differ”; contrast illustration. Default blog figure aspect.
+  - **`/images/what-is-sdd-spec-depth-scale.png`** — after “When to keep the write-up thin”; spec depth vs risk calibration (fuller spec vs thin write-up). Default blog figure aspect.
 - **SDD workflow article (`sdd-workflow-for-small-teams`):** Inline assets:
   - `**/images/sdd-rhythm-loop.png`** — after the intro, before “Frame the problem” (five-step rhythm diagram). Default blog figure aspect.
   - `**/images/sdd-acceptance-contrast.png**` — after “Draft acceptance criteria” (chaos vs clarity). Default blog figure aspect.

@@ -50,13 +50,21 @@ const phases: Phase[] = [
     subtitle: "the structured era",
     process:
       "The source of truth is specification — not the code. Models are guided by an explicit behavior contract.",
+    note: {
+      label: "Challenge",
+      text: "Specs only work if they stay honest and easy to change; otherwise they rot into shelf-ware while the repo moves on.",
+    },
   },
   {
     range: "2026+",
-    title: "Intent-driven engineering",
+    title: "Intent-driven development",
     subtitle: "the autonomous era",
     process:
       'Define outcomes and success criteria (the "what") and let agents reason through the "how" across tools and systems, within guardrails you wrote down.',
+    note: {
+      label: "Opportunity",
+      text: "Autonomy compounds when intent and guardrails are concrete—teams that invest there ship faster loops with fewer surprises than those chasing raw diff speed alone.",
+    },
   },
 ];
 
