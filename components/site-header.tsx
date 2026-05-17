@@ -46,9 +46,9 @@ export function SiteHeader() {
         >
           <Image
             src="/logo.png"
-            alt="Intent Driven Development Community"
-            width={180}
-            height={45}
+            alt={siteConfig.name}
+            width={175}
+            height={50}
             className="h-9 w-auto sm:h-10"
             priority
           />
