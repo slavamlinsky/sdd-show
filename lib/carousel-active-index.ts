@@ -23,12 +23,12 @@ export function getCarouselSlidesPerView(
   return Math.min(itemCount, Math.max(1, raw));
 }
 
-/** Number of dot / page positions: one per valid “first visible slide” index. */
+/** Number of dot / page positions: one per valid “first visible slide” index. Zero when `itemCount` is 0. */
 export function getCarouselPageCount(
   itemCount: number,
   slidesPerView: number
 ): number {
-  if (itemCount <= 0) return 1;
+  if (itemCount <= 0) return 0;
   const v = Math.min(itemCount, Math.max(1, slidesPerView));
   return Math.max(1, itemCount - v + 1);
 }
