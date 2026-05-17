@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: siteConfig.title,
   description: siteConfig.description,
-  keywords: [...baseKeywords],
+  keywords: [...baseKeywords, ...siteConfig.keywords],
 };
 
 export default function RootLayout({

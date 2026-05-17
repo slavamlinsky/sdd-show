@@ -82,7 +82,6 @@ export default async function BlogPostPage({ params }: Props) {
           Back to blog
         </Link>
         <article className="relative mt-10">
-          <header className="border-b border-border/60 pb-10">
             <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-xs font-semibold tracking-wide text-muted-foreground">
             <time dateTime={post.meta.date} className="text-muted-foreground">
                 {new Date(post.meta.date).toLocaleDateString("en-US", {
@@ -96,10 +95,6 @@ export default async function BlogPostPage({ params }: Props) {
             <h1 className="mt-4 text-balance sm:text-prettier">
               {blogPageHeading(post.meta)}
             </h1>
-            <p className="mt-5 max-w-3xl leading-relaxed text-muted-foreground">
-              {blogCardAnons(post.meta)}
-            </p>
-          </header>
           <div className="pt-12">
             <MarkdownContent markdown={post.content} />
           </div>
