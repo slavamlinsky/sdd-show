@@ -78,7 +78,7 @@ The new model is different: define intent → clarify constraints → guide exec
 
 This shift exists because the main bottleneck in software is no longer implementation — it is ambiguity.
 
-![Developer role moving upstream: from task execution to clarifying intent and reducing ambiguity](/images/intent-driven-role-shift.jpg)
+![Developer role moving upstream: from task execution to clarifying intent and reducing ambiguity](/images/intent-driven-role-shift.png)
 
 Misaligned expectations, unclear goals, and late surprises cost far more than writing the code itself. Teams that resolve intent early move faster by reducing rework later.
 

@@ -1,26 +1,26 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
-import { BlogReadingTime } from "@/components/blog-reading-time";
 import { HomeFaq } from "@/components/home-faq";
 import { HeroFeaturedVideo } from "@/components/hero-featured-video";
 import { HomeEvolutionTimeline } from "@/components/home-evolution-timeline";
 import { HomeIntentPillars } from "@/components/home-intent-pillars";
+import { HomeLatestPostsCarousel } from "@/components/home-latest-posts-carousel";
 import { HomePillars } from "@/components/home-pillars";
+import { HomeVideosCarousel } from "@/components/home-videos-carousel";
 import { GradientText } from "@/components/gradient-text";
 import { Reveal } from "@/components/reveal";
 import { buttonVariants } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { blogCardAnons, blogCardTitle, blogReadingTimeMinutes, getAllPosts } from "@/lib/blog";
+  blogCardAnons,
+  blogCardPreviewImage,
+  blogCardTitle,
+  blogReadingTimeMinutes,
+  getAllPosts,
+} from "@/lib/blog";
 import { keywordsForPage } from "@/lib/seo-keywords";
 import { siteConfig } from "@/lib/site-config";
-import { featuredHeroVideo } from "@/lib/videos-data";
+import { featuredHeroVideo, videos } from "@/lib/videos-data";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -30,7 +30,17 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const posts = getAllPosts().slice(0, 3);
+  const posts = getAllPosts().slice(0, 4);
+  const latestItems = posts.map((post) => ({
+    slug: post.meta.slug,
+    title: blogCardTitle(post.meta),
+    anons: blogCardAnons(post.meta),
+    date: post.meta.date,
+    readingMinutes: blogReadingTimeMinutes(post),
+    imageSrc: blogCardPreviewImage(post) ?? null,
+  }));
+
+  const homeCarouselVideos = videos.slice(1, 5);
 
   return (
     <div className="flex flex-col">
@@ -92,7 +102,7 @@ export default function HomePage() {
           <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="space-y-3">
               <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
-                Latest from our <GradientText className="font-semibold">AI-driven content hub</GradientText>
+                Most popular from <GradientText className="font-semibold">our content hub</GradientText>
               </h2>
               
             </div>
@@ -107,70 +117,35 @@ export default function HomePage() {
               <ArrowRightIcon className="size-4" />
             </Link>
           </Reveal>
-          <ul className="grid gap-6 md:grid-cols-2">
-            {posts.map((post, i) => {
-              const { meta } = post;
-              return (
-              <li key={meta.slug}>
-                <Reveal delay={i * 0.06} distance={16}>
-                  <Card className="h-full rounded-2xl px-6 border-border/70 shadow-sm ring-1 ring-foreground/[0.03] transition-shadow hover:shadow-md">
-                    <CardHeader className="gap-3">
-                      <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-                        <time dateTime={meta.date}>
-                          {new Date(meta.date).toLocaleDateString("en-US", {
-                            year: "numeric",
-                            month: "short",
-                            day: "numeric",
-                          })}
-                        </time>
-                        <BlogReadingTime minutes={blogReadingTimeMinutes(post)} className="text-muted-foreground" />
-                      </div>
-                      <CardTitle className="font-heading text-lg leading-snug">
-                        <Link href={`/blog/${meta.slug}`} className="hover:text-primary">
-                          {blogCardTitle(meta)}
-                        </Link>
-                      </CardTitle>
-                      <CardDescription className="line-clamp-3 text-[15px] leading-relaxed">
-                        {blogCardAnons(meta)}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <Link
-                        href={`/blog/${meta.slug}`}
-                        className="inline-flex text-sm font-semibold text-primary underline-offset-4 hover:underline"
-                      >
-                        Read article
-                      </Link>
-                    </CardContent>
-                  </Card>
-                </Reveal>
-              </li>
-              );
-            })}
-          </ul>
+          <Reveal distance={18}>
+            <HomeLatestPostsCarousel items={latestItems} />
+          </Reveal>
         </section>
-
-        <Reveal>
-          <section className="relative overflow-hidden rounded-[2rem] border border-border/60 bg-gradient-to-br from-amber-500/[0.08] via-muted/45 to-violet-500/[0.06] px-8 py-12 shadow-sm ring-1 ring-foreground/[0.04] sm:px-10 sm:py-14">
-            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-              <div className="space-y-3">
-                <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">Video library</h2>
-                <p className="max-w-xl text-lg text-muted-foreground">
-                  AI-driven picks: tools, agents, and how teams ship. Watch on the site without tab hopping.
-                </p>
-              </div>
-              <Link
-                href="/videos"
-                className={cn(
-                  buttonVariants({ variant: "secondary", size: "lg" }),
-                  "h-12 rounded-md px-8 text-base shrink-0"
-                )}
-              >
-                Browse videos
-              </Link>
+        <section className="space-y-8">
+          <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="space-y-3">
+              <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
+                Curated videos from <GradientText className="font-semibold">our video library</GradientText>
+              </h2>
+              <p className="max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                Short talks on intent-driven engineering, and modern development workflows.
+              </p>
             </div>
-          </section>
-        </Reveal>
+            <Link
+              href="/videos"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "lg" }),
+                "self-start rounded-md sm:self-auto"
+              )}
+            >
+              All videos
+              <ArrowRightIcon className="size-4" />
+            </Link>
+          </Reveal>
+          <Reveal distance={18}>
+            <HomeVideosCarousel videos={homeCarouselVideos} />
+          </Reveal>
+        </section>
       </div>
 
       <section

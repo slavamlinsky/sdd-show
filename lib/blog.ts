@@ -165,8 +165,9 @@ export function getAllPosts(): BlogPost[] {
 /**
  * Other posts for “similar” / related rails (newest first, excluding current).
  * MVP: no taxonomy — v2 may filter by `category`; see spec-blog.md.
+ * UI may show fewer on narrow viewports (e.g. 2 on mobile, 3 on desktop).
  */
-export function getSimilarPosts(excludeSlug: string, limit = 2): BlogPost[] {
+export function getSimilarPosts(excludeSlug: string, limit = 3): BlogPost[] {
   return getAllPosts()
     .filter((p) => p.meta.slug !== excludeSlug)
     .slice(0, limit);

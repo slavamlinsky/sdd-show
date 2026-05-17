@@ -23,10 +23,11 @@ Follow [spec-design-layout.md](./spec-design-layout.md) for **responsive bands**
   - Topics: what SDD is, how it differs from “just tickets”, when it helps, tools optional.
   - **Do not** duplicate a second full FAQ below the footer; **course-specific** FAQ lives on `/course` ([spec-course](./spec-course.md)).
 5. **Blog preview**
-   - **MVP:** Show **latest 3** posts (title, date, **reading time** as clock + **Nmin**, 1-line excerpt, link to `/blog/[slug]`) in a simple grid or list; link to full `/blog` listing.
-   - **v3:** Replace/upgrade with the **carousel band** in [spec-blog.md](./spec-blog.md) — **5–7** cards, **pillar category** badge strip between the section header and carousel, **See all** → `/blog`, prev/next (and swipe). Follows the same structural idea as modern **resources** carousels (headline + filters + horizontal cards).
-6. **Optional teaser row**
-  - One line + link to `/videos` (if hero already pushes Course, this balances exploration).
+   - **MVP:** **Carousel** of up to **4** newest posts (title, date, reading time, excerpt, **cover** from post `**socialImage**` or first local inline figure). **Layout:** about **one** card on **&lt; md**, **two** from **`md`** up to **`lg`**, **three** from **`lg`** (viewport breakpoints so tablets stay two-up; horizontal snap + arrows + dot indicators). Entire **card** is one link to `/blog/[slug]`; **All articles** → `/blog`.
+   - **v3:** Optional **pillar category** strip between header and carousel; richer related rules on `/blog` — see [spec-blog.md](./spec-blog.md).
+6. **Video library strip**
+   - Same band pattern as blog preview: **heading** (e.g. **Fresh from our** + gradient **video library**) + short description + **All videos** → `/videos`.
+   - **Carousel** of up to **four** curated entries (the **`videos`** list **after** the hero featured item): same snap / arrows / dots behavior as the blog carousel; **one** slide on **&lt; md**, **two** from **`md`** to **`lg`**, **three** from **`lg`** (viewport breakpoints). Each **card**: YouTube poster, title, optional category + channel; **tap** opens in-site **modal player** (same as `/videos`).
 7. **“Who it’s for” (course audience — compact)** — *optional / phased; see [spec-course](./spec-course.md)*
   - **Small band** on home (optional): short heading + **2–4 bullets or chips** mapping to [course audience in spec-main](./spec-main.md#course-audience). Full detail and bullets may live primarily on `/course` hero.
 
