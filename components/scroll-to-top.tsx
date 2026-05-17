@@ -9,6 +9,10 @@ const SHOW_AFTER_PX = 280;
 
 function getViewportScrollY(): number {
   if (typeof window === "undefined") return 0;
+  const se = document.scrollingElement;
+  if (se) {
+    return se.scrollTop;
+  }
   return Math.max(
     window.scrollY ?? 0,
     window.pageYOffset ?? 0,
@@ -51,15 +55,15 @@ function getMaxVerticalScroll(sentinel: HTMLElement | null): number {
   return max;
 }
 
-function scrollPageToTop(behavior: ScrollBehavior, sentinel: HTMLElement | null) {
+function scrollPageToTop(
+  behavior: ScrollBehavior,
+  sentinel: HTMLElement | null
+) {
+  const opts: ScrollToOptions = { top: 0, left: 0, behavior };
   for (const el of collectScrollableAncestors(sentinel)) {
-    el.scrollTo({ top: 0, behavior });
+    el.scrollTo(opts);
   }
-  // Match initial page load: document scroll position 0. scrollIntoView(main) can
-  // land on a slightly different offset than first paint in some cases.
-  window.scrollTo({ top: 0, behavior });
-  document.documentElement.scrollTo({ top: 0, behavior });
-  document.body.scrollTo({ top: 0, behavior });
+  window.scrollTo(opts);
 }
 
 export function ScrollToTop() {

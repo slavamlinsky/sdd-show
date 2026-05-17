@@ -11,7 +11,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getActiveCarouselSlideIndex } from "@/lib/carousel-active-index";
+import {
+  getActiveCarouselPageIndex,
+  getCarouselPageCount,
+  getCarouselSlidesPerView,
+} from "@/lib/carousel-active-index";
 import { cn } from "@/lib/utils";
 
 export type HomeLatestPostItem = {
@@ -31,12 +35,18 @@ type Props = { items: HomeLatestPostItem[] };
 export function HomeLatestPostsCarousel({ items }: Props) {
   const trackRef = useRef<HTMLDivElement>(null);
   const slideWrapRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [active, setActive] = useState(0);
+  const [activePage, setActivePage] = useState(0);
+  const [pageCount, setPageCount] = useState(() =>
+    Math.max(1, items.length)
+  );
 
   const syncActiveFromScroll = useCallback(() => {
     const track = trackRef.current;
     if (!track || items.length === 0) return;
-    setActive(getActiveCarouselSlideIndex(track, slideWrapRefs.current));
+    const slides = slideWrapRefs.current;
+    const V = getCarouselSlidesPerView(track, slides, items.length);
+    setPageCount(getCarouselPageCount(items.length, V));
+    setActivePage(getActiveCarouselPageIndex(track, slides, items.length));
   }, [items.length]);
 
   useEffect(() => {
@@ -45,12 +55,17 @@ export function HomeLatestPostsCarousel({ items }: Props) {
     const onScroll = () => syncActiveFromScroll();
     track.addEventListener("scroll", onScroll, { passive: true });
     syncActiveFromScroll();
-    return () => track.removeEventListener("scroll", onScroll);
+    const ro = new ResizeObserver(() => syncActiveFromScroll());
+    ro.observe(track);
+    return () => {
+      track.removeEventListener("scroll", onScroll);
+      ro.disconnect();
+    };
   }, [syncActiveFromScroll, items.length]);
 
-  const scrollToIndex = useCallback((index: number) => {
+  const scrollToPage = useCallback((page: number) => {
     const track = trackRef.current;
-    const el = slideWrapRefs.current[index];
+    const el = slideWrapRefs.current[page];
     if (!track || !el) return;
     const pad = parseFloat(getComputedStyle(track).paddingLeft) || 16;
     track.scrollTo({
@@ -59,14 +74,19 @@ export function HomeLatestPostsCarousel({ items }: Props) {
     });
   }, []);
 
-  const scrollByDir = useCallback((dir: -1 | 1) => {
-    const track = trackRef.current;
-    if (!track) return;
-    track.scrollBy({
-      left: dir * Math.max(240, track.clientWidth * 0.65),
-      behavior: "smooth",
-    });
-  }, []);
+  const scrollPageBy = useCallback(
+    (dir: -1 | 1) => {
+      const track = trackRef.current;
+      if (!track || items.length === 0) return;
+      const slides = slideWrapRefs.current;
+      const cur = getActiveCarouselPageIndex(track, slides, items.length);
+      const V = getCarouselSlidesPerView(track, slides, items.length);
+      const pages = getCarouselPageCount(items.length, V);
+      const next = Math.max(0, Math.min(pages - 1, cur + dir));
+      scrollToPage(next);
+    },
+    [items.length, scrollToPage]
+  );
 
   useEffect(() => {
     slideWrapRefs.current = slideWrapRefs.current.slice(0, items.length);
@@ -83,7 +103,7 @@ export function HomeLatestPostsCarousel({ items }: Props) {
           aria-roledescription="carousel"
           aria-label="Latest blog posts"
           className={cn(
-            "@container/latest flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth px-4 py-3 sm:gap-5 sm:px-5 sm:py-4",
+            "@container/latest flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain scroll-smooth px-4 py-3 sm:gap-6 sm:px-5 sm:py-4",
             "scroll-pl-4 scroll-pr-4 sm:scroll-pl-5 sm:scroll-pr-5",
             SCROLLBAR_HIDE
           )}
@@ -165,26 +185,26 @@ export function HomeLatestPostsCarousel({ items }: Props) {
               "transition-colors hover:bg-muted hover:text-foreground",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             )}
-            onClick={() => scrollByDir(-1)}
+            onClick={() => scrollPageBy(-1)}
           >
             <ChevronLeftIcon className="size-5" />
           </button>
 
           <div className="flex items-center gap-2 px-1" role="tablist" aria-label="Slide indicators">
-            {items.map((item, i) => (
+            {Array.from({ length: pageCount }, (_, i) => (
               <button
-                key={item.slug}
+                key={i}
                 type="button"
                 role="tab"
-                aria-selected={i === active}
-                aria-label={`Go to slide ${i + 1}`}
+                aria-selected={i === activePage}
+                aria-label={`Go to page ${i + 1} of ${pageCount}`}
                 className={cn(
                   "size-2.5 cursor-pointer rounded-full transition-[transform,background-color]",
-                  i === active
+                  i === activePage
                     ? "scale-110 bg-primary"
                     : "bg-muted-foreground/35 hover:bg-muted-foreground/55"
                 )}
-                onClick={() => scrollToIndex(i)}
+                onClick={() => scrollToPage(i)}
               />
             ))}
           </div>
@@ -197,7 +217,7 @@ export function HomeLatestPostsCarousel({ items }: Props) {
               "transition-colors hover:bg-muted hover:text-foreground",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             )}
-            onClick={() => scrollByDir(1)}
+            onClick={() => scrollPageBy(1)}
           >
             <ChevronRightIcon className="size-5" />
           </button>

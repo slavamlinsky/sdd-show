@@ -10,7 +10,11 @@ import {
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { getActiveCarouselSlideIndex } from "@/lib/carousel-active-index";
+import {
+  getActiveCarouselPageIndex,
+  getCarouselPageCount,
+  getCarouselSlidesPerView,
+} from "@/lib/carousel-active-index";
 import { cn } from "@/lib/utils";
 
 const SCROLLBAR_HIDE =
@@ -22,13 +26,19 @@ type Props = { videos: VideoEntry[] };
 export function HomeVideosCarousel({ videos }: Props) {
   const trackRef = useRef<HTMLDivElement>(null);
   const slideWrapRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [active, setActive] = useState(0);
+  const [activePage, setActivePage] = useState(0);
+  const [pageCount, setPageCount] = useState(() =>
+    Math.max(1, videos.length)
+  );
   const [player, setPlayer] = useState<VideoEntry | null>(null);
 
   const syncActiveFromScroll = useCallback(() => {
     const track = trackRef.current;
     if (!track || videos.length === 0) return;
-    setActive(getActiveCarouselSlideIndex(track, slideWrapRefs.current));
+    const slides = slideWrapRefs.current;
+    const V = getCarouselSlidesPerView(track, slides, videos.length);
+    setPageCount(getCarouselPageCount(videos.length, V));
+    setActivePage(getActiveCarouselPageIndex(track, slides, videos.length));
   }, [videos.length]);
 
   useEffect(() => {
@@ -37,12 +47,17 @@ export function HomeVideosCarousel({ videos }: Props) {
     const onScroll = () => syncActiveFromScroll();
     track.addEventListener("scroll", onScroll, { passive: true });
     syncActiveFromScroll();
-    return () => track.removeEventListener("scroll", onScroll);
+    const ro = new ResizeObserver(() => syncActiveFromScroll());
+    ro.observe(track);
+    return () => {
+      track.removeEventListener("scroll", onScroll);
+      ro.disconnect();
+    };
   }, [syncActiveFromScroll, videos.length]);
 
-  const scrollToIndex = useCallback((index: number) => {
+  const scrollToPage = useCallback((page: number) => {
     const track = trackRef.current;
-    const el = slideWrapRefs.current[index];
+    const el = slideWrapRefs.current[page];
     if (!track || !el) return;
     const pad = parseFloat(getComputedStyle(track).paddingLeft) || 16;
     track.scrollTo({
@@ -51,14 +66,19 @@ export function HomeVideosCarousel({ videos }: Props) {
     });
   }, []);
 
-  const scrollByDir = useCallback((dir: -1 | 1) => {
-    const track = trackRef.current;
-    if (!track) return;
-    track.scrollBy({
-      left: dir * Math.max(240, track.clientWidth * 0.65),
-      behavior: "smooth",
-    });
-  }, []);
+  const scrollPageBy = useCallback(
+    (dir: -1 | 1) => {
+      const track = trackRef.current;
+      if (!track || videos.length === 0) return;
+      const slides = slideWrapRefs.current;
+      const cur = getActiveCarouselPageIndex(track, slides, videos.length);
+      const V = getCarouselSlidesPerView(track, slides, videos.length);
+      const pages = getCarouselPageCount(videos.length, V);
+      const next = Math.max(0, Math.min(pages - 1, cur + dir));
+      scrollToPage(next);
+    },
+    [videos.length, scrollToPage]
+  );
 
   useEffect(() => {
     slideWrapRefs.current = slideWrapRefs.current.slice(0, videos.length);
@@ -77,7 +97,7 @@ export function HomeVideosCarousel({ videos }: Props) {
             aria-label="Video picks"
             className={cn(
               /* Container on the track so 100cqw = content-box width inside padding (slide widths match row math). */
-              "@container/videos flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth px-4 py-3 sm:gap-5 sm:px-5 sm:py-4",
+              "@container/videos flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain scroll-smooth px-4 py-3 sm:gap-6 sm:px-5 sm:py-4",
               "scroll-pl-4 scroll-pr-4 sm:scroll-pl-5 sm:scroll-pr-5",
               SCROLLBAR_HIDE
             )}
@@ -155,7 +175,7 @@ export function HomeVideosCarousel({ videos }: Props) {
                 "transition-colors hover:bg-muted hover:text-foreground",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               )}
-              onClick={() => scrollByDir(-1)}
+              onClick={() => scrollPageBy(-1)}
             >
               <ChevronLeftIcon className="size-5" />
             </button>
@@ -165,20 +185,20 @@ export function HomeVideosCarousel({ videos }: Props) {
               role="tablist"
               aria-label="Video slide indicators"
             >
-              {videos.map((video, i) => (
+              {Array.from({ length: pageCount }, (_, i) => (
                 <button
-                  key={video.id}
+                  key={i}
                   type="button"
                   role="tab"
-                  aria-selected={i === active}
-                  aria-label={`Go to video ${i + 1}`}
+                  aria-selected={i === activePage}
+                  aria-label={`Go to video page ${i + 1} of ${pageCount}`}
                   className={cn(
                     "size-2.5 cursor-pointer rounded-full transition-[transform,background-color]",
-                    i === active
+                    i === activePage
                       ? "scale-110 bg-primary"
                       : "bg-muted-foreground/35 hover:bg-muted-foreground/55"
                   )}
-                  onClick={() => scrollToIndex(i)}
+                  onClick={() => scrollToPage(i)}
                 />
               ))}
             </div>
@@ -191,7 +211,7 @@ export function HomeVideosCarousel({ videos }: Props) {
                 "transition-colors hover:bg-muted hover:text-foreground",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               )}
-              onClick={() => scrollByDir(1)}
+              onClick={() => scrollPageBy(1)}
             >
               <ChevronRightIcon className="size-5" />
             </button>
