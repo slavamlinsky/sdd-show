@@ -104,7 +104,9 @@ export default function HomePage() {
               <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
                 Most popular from <GradientText className="font-semibold">our content hub</GradientText>
               </h2>
-              
+              <p className="max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                Articles about software best practices, SDLC and development workflows.
+              </p>
             </div>
             <Link
               href="/blog"
