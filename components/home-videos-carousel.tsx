@@ -97,7 +97,7 @@ export function HomeVideosCarousel({ videos }: Props) {
             aria-label="Video picks"
             className={cn(
               /* Container on the track so 100cqw = content-box width inside padding (slide widths match row math). */
-              "@container/videos flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth px-4 py-3 sm:gap-5 sm:px-5 sm:py-4",
+              "@container/videos flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain scroll-smooth px-4 py-3 sm:gap-6 sm:px-5 sm:py-4",
               "scroll-pl-4 scroll-pr-4 sm:scroll-pl-5 sm:scroll-pr-5",
               SCROLLBAR_HIDE
             )}
