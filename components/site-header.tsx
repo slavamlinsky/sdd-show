@@ -45,8 +45,8 @@ export function SiteHeader() {
           className="flex shrink-0 items-center outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md"
         >
           <Image
-            src="/logo-nobg.png"
-            alt=""
+            src="/logo.png"
+            alt="Intent Driven Development Community"
             width={180}
             height={45}
             className="h-9 w-auto sm:h-10"
