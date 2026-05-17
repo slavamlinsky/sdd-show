@@ -30,6 +30,7 @@ export function HomeVideosCarousel({ videos }: Props) {
   const [pageCount, setPageCount] = useState(() =>
     Math.max(1, videos.length)
   );
+  const [player, setPlayer] = useState<VideoEntry | null>(null);
 
   const syncActiveFromScroll = useCallback(() => {
     const track = trackRef.current;
