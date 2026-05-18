@@ -41,7 +41,12 @@ export function HeroFeaturedVideo({ video }: { video: VideoEntry }) {
               <PlayIcon className="size-6 text-foreground" aria-hidden />
             </span>
             <span className="min-w-0">
-              <span className="block font-heading text-sm font-semibold leading-snug text-white drop-shadow-sm sm:text-base">
+              <span
+                className={cn(
+                  "inline-block max-w-full rounded-md px-2 py-1 font-heading text-sm font-semibold leading-snug text-white drop-shadow-sm sm:text-base",
+                  "bg-transparent dark:bg-black/70 dark:ring-1 dark:ring-border/40 dark:shadow-sm dark:backdrop-blur-sm dark:drop-shadow-none"
+                )}
+              >
                 {video.title}
               </span>
             </span>
