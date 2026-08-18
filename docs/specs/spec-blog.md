@@ -92,7 +92,7 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
 
 ### Data
 
-- **Runtime source:** Published blog posts are **read from a database** (connection string / client in the app — e.g. Postgres via Supabase or the stack the project adopts). `/blog` and `/blog/[slug]` load **metadata and markdown body** from the DB, not only from files under `content/blog/` on each request.
+- **Runtime source:** Published blog posts are **read from a database** — same Postgres as [spec-data-auth.md](./spec-data-auth.md) (**P4**). `/blog` and `/blog/[slug]` load **metadata and markdown body** from the DB, not only from files under `content/blog/` on each request.
 - **Fields:** Persist the same concepts as the MVP schema (at minimum `slug`, `title`, `date`, `description`, markdown body, and optional `name`, `anons`, `heading`, `socialImage`, `readingTimeMinutes`, `author`; optional `category`, `editorsPick`, `tags` for filters and v3). **v2 listing:** optional **`featured`** (boolean) — when **true**, that post wins the **promo row** if published and matches the active topic filter; if **no** post is `featured`, use the **newest** post in the filtered set for the promo. At most **one** `featured` live post is assumed; if multiple, pick the **newest by date** among featured.
 - **Authoring / sync:** How posts get **into** the DB (migration from repo files, admin tool, CI job) is implementation-defined; v2 only requires that **production** listing and detail use DB reads. Development may keep a file fallback until cutover if documented.
 

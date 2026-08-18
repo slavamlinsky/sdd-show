@@ -43,7 +43,7 @@ The course is for people who **benefit from writing and reading specs** before o
 | Components           | shadcn/ui                                                                                             |
 | Hosting              | Vercel                                                                                                |
 | Repo                 | GitHub                                                                                                |
-| Backend / DB         | None for MVP; **Supabase** allowed later (e.g. lead form persistence)                                 |
+| Backend / DB         | **v2+:** **Supabase** (Postgres + **Supabase Auth**) — [spec-data-auth.md](./spec-data-auth.md). MVP had no DB. |
 | Git / deploy / tests | See [spec-workflow-ci.md](./spec-workflow-ci.md) (branching, Vercel timing, Playwright + Vitest/Jest) |
 
 
@@ -58,12 +58,13 @@ The course is for people who **benefit from writing and reading specs** before o
 | `/blog/[slug]` | Single article                                                                                      |
 | `/videos`      | Curated YouTube list with in-site playback                                                          |
 | `/course`      | Course CTA + structured placeholder + lead form                                                     |
-| `/sign-in`     | Stub page (“coming soon”) until auth — linked from header as **Sign in**; `/sign-up` redirects here |
+| `/sign-in`     | Auth: email + password when [spec-data-auth.md](./spec-data-auth.md) **P2** ships; until then stub. Header **Sign in**. |
+| `/sign-up`     | **P2:** create account (remove permanent redirect to `/sign-in`). Until then `/sign-up` → `/sign-in`. |
 
 
 ## Global layout
 
-- **Header:** **Site title / logo** (links to `/`); **primary nav** order: **Glossary → Videos → Courses → Blog** (no duplicate “Home”); nav **centered** on `md+` between logo and actions; **“Sign in”** (primary border + primary text, top-right, **Lucide `LogIn`**) links to `/sign-in` (stub until auth). **Mobile:** sheet menu for nav + **Sign in** stays visible next to the menu trigger.
+- **Header:** **Site title / logo** (links to `/`); **primary nav** order: **Glossary → Videos → Courses → Blog** (no duplicate “Home”); nav **centered** on `md+` between logo and actions; **logged out:** **“Sign in”** (primary border + primary text, top-right, **Lucide `LogIn`**) → `/sign-in`. **Logged in (auth P2):** account affordance + **Sign out**. **Mobile:** sheet menu for nav; Sign in / account stays reachable next to the menu trigger.
 - **Footer:** Short note + optional link to repo or contact (optional for MVP).
 - **App shell:** **Main content** uses one shared wrapper (max width, horizontal + vertical padding, default `h1` styling) in the root layout; routes use `full-bleed` only where a section must span the viewport. See **App shell (root layout)** in [spec-design-layout.md](./spec-design-layout.md).
 - **Design:** Light, simple, modern (AI-tool / edu style). **Responsive layout, spacing (“air”), structured blocks, CTAs, and image rules** are defined in [spec-design-layout.md](./spec-design-layout.md). Optional visual references may live in a future `design.md` — not blocking MVP.
@@ -79,7 +80,7 @@ Choose one approach and use it consistently for blog posts, glossary entries, an
 
 **v2:** topic browse — **categories and tags** (filters, badges) follow [spec-taxonomy.md](./spec-taxonomy.md) (shared across blog, videos, and course positioning). Not required for MVP.
 
-**v2:** **Blog** — **database**-backed published posts with **listing + detail** served from the DB; **small UI polish** on `/blog` and `/blog/[slug]` — [spec-blog.md](./spec-blog.md).
+**v2:** **Database + auth** — [spec-data-auth.md](./spec-data-auth.md) (Supabase Postgres + Supabase Auth). **Blog** listing/detail from DB when P4 ships — [spec-blog.md](./spec-blog.md).
 
 **v3:** **Blog** — home **carousel** (5–7 posts) with **pillar category** strip; article foot **Join Us CTA** + **two related posts** (same category: newest + popular rule) — [spec-blog.md](./spec-blog.md).
 
@@ -96,7 +97,7 @@ Choose one approach and use it consistently for blog posts, glossary entries, an
 - Full accessibility audit — no formal bar for MVP; still prefer semantic HTML and shadcn defaults
 - **Automated E2E (Playwright) and CI test gates** — add post-MVP per [spec-workflow-ci.md](./spec-workflow-ci.md); optional Vitest/Jest for units when useful
 - Real payments or course delivery
-- CMS, auth, comments
+- CMS, comments (auth + DB: [spec-data-auth.md](./spec-data-auth.md), not MVP)
 
 ## Success criteria (MVP)
 

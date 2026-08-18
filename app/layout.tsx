@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { FooterRegion } from "@/components/footer-region";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { LocaleInit } from "@/components/locale-init";
 import { ThemeProvider } from "@/components/theme-provider";
 import { baseKeywords } from "@/lib/seo-keywords";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
+import { getAuthUser } from "@/lib/supabase/server";
+import {
+  avatarUrlFromMetadata,
+  displayNameFromAuth,
+} from "@/lib/auth-display";
 
-const plusJakarta = Plus_Jakarta_Sans({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
@@ -27,20 +33,27 @@ export const metadata: Metadata = {
   keywords: [...baseKeywords, ...siteConfig.keywords],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await getAuthUser();
+  const userEmail = user?.email ?? null;
+  const meta = user?.user_metadata as Record<string, unknown> | undefined;
+  const userAvatarUrl = avatarUrlFromMetadata(meta);
+  const userDisplayName =
+    userEmail != null ? displayNameFromAuth(userEmail, meta) : null;
+
   return (
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${plusJakarta.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body
         className={cn(
-          plusJakarta.className,
+          inter.className,
           "min-h-full flex flex-col bg-background text-foreground"
         )}
       >
@@ -50,7 +63,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SiteHeader />
+          <LocaleInit />
+          <SiteHeader
+            userEmail={userEmail}
+            userDisplayName={userDisplayName}
+            userAvatarUrl={userAvatarUrl}
+          />
           <main
             id="main-content"
             className="min-w-0 flex-1 scroll-mt-16 outline-none w-full pt-16"

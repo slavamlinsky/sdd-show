@@ -31,13 +31,18 @@ function isNavActive(pathname: string, href: string) {
 
 type MobileNavDrawerProps = {
   headerRef: RefObject<HTMLElement | null>;
+  /** When false, theme lives in the signed-in account menu instead. */
+  showThemeInDrawer?: boolean;
 };
 
 /**
  * Mobile nav: ~70% drawer from the right, dimmed + blurred area only below the header
  * (header stays clear — avoids old iOS hit-testing issues on full-screen invisible layers).
  */
-export function MobileNavDrawer({ headerRef }: MobileNavDrawerProps) {
+export function MobileNavDrawer({
+  headerRef,
+  showThemeInDrawer = true,
+}: MobileNavDrawerProps) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(64);
@@ -134,7 +139,7 @@ export function MobileNavDrawer({ headerRef }: MobileNavDrawerProps) {
           aria-label="Main navigation"
           tabIndex={open ? -1 : undefined}
           className={cn(
-            "absolute right-0 top-0 z-10 flex h-full w-[70%] min-w-[13.5rem] flex-col border-l border-border bg-background text-foreground shadow-xl",
+            "absolute right-0 top-0 z-10 flex h-full w-[70%] min-w-[13.5rem] flex-col border-l border-border/60 bg-background/95 text-foreground shadow-2xl backdrop-blur-xl",
             "transform-gpu transition-transform duration-300 ease-out motion-reduce:transition-none",
             "[touch-action:manipulation] [-webkit-overflow-scrolling:touch]",
             open ? "translate-x-0" : "translate-x-full"
@@ -169,14 +174,16 @@ export function MobileNavDrawer({ headerRef }: MobileNavDrawerProps) {
                 );
               })}
             </nav>
-            <div className="mt-auto shrink-0 border-t border-border p-4">
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-sm font-medium text-muted-foreground">
-                  Theme
-                </span>
-                <ThemeToggle />
+            {showThemeInDrawer ? (
+              <div className="mt-auto shrink-0 border-t border-border/60 bg-muted/20 p-4">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-sm font-medium text-foreground">
+                    Theme
+                  </span>
+                  <ThemeToggle className="rounded-lg" />
+                </div>
               </div>
-            </div>
+            ) : null}
           </div>
         </div>
       </div>,
@@ -188,8 +195,9 @@ export function MobileNavDrawer({ headerRef }: MobileNavDrawerProps) {
       <button
         type="button"
         className={cn(
-          "md:hidden inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-background text-primary shadow-sm",
-          "hover:bg-muted [-webkit-tap-highlight-color:transparent] [touch-action:manipulation]"
+          "md:hidden inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full border border-border/60 bg-background/80 text-primary shadow-sm backdrop-blur-sm transition-all",
+          "hover:border-primary/30 hover:bg-muted/80 [-webkit-tap-highlight-color:transparent] [touch-action:manipulation]",
+          open && "border-primary/30 bg-muted/80 ring-2 ring-primary/15",
         )}
         aria-expanded={open}
         aria-controls="mobile-nav"
