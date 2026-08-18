@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { SignInForm } from "@/components/sign-in-form";
 import { getAuthUser } from "@/lib/supabase/server";
+import { searchParamString, type SearchParam } from "@/lib/search-params";
 import { safeNextPath } from "@/lib/supabase/safe-path";
 
 export const metadata: Metadata = {
@@ -11,12 +12,18 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  searchParams: Promise<{ error?: string; sent?: string; next?: string }>;
+  searchParams: Promise<{
+    error?: SearchParam;
+    sent?: SearchParam;
+    next?: SearchParam;
+  }>;
 };
 
 export default async function SignInPage({ searchParams }: Props) {
   const params = await searchParams;
-  const next = safeNextPath(params.next);
+  const next = safeNextPath(searchParamString(params.next));
+  const errorCode = searchParamString(params.error);
+  const sent = searchParamString(params.sent) === "1";
   const user = await getAuthUser();
   if (user) {
     redirect(next);
@@ -32,11 +39,7 @@ export default async function SignInPage({ searchParams }: Props) {
         get an account automatically.
       </p>
       <div className="mt-12 space-y-6 bg-accent rounded-lg p-6">
-        <SignInForm
-          errorCode={params.error}
-          sent={params.sent === "1"}
-          next={next}
-        />
+        <SignInForm errorCode={errorCode} sent={sent} next={next} />
       </div>
     </div>
   );

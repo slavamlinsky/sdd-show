@@ -24,6 +24,19 @@ create table if not exists public.glossary_terms (
   constraint glossary_terms_categories_shape check (
     cardinality(categories) between 1 and 3
     and categories <@ array['Product', 'Design', 'Build', 'Quality']::text[]
+    and (
+      cardinality(categories) = 1
+      or (
+        cardinality(categories) = 2
+        and categories[1] is distinct from categories[2]
+      )
+      or (
+        cardinality(categories) = 3
+        and categories[1] is distinct from categories[2]
+        and categories[1] is distinct from categories[3]
+        and categories[2] is distinct from categories[3]
+      )
+    )
   )
 );
 

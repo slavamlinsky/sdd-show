@@ -16,7 +16,9 @@ export type SuggestTermInput = {
   categories: string[];
 };
 
-export type SuggestTermResult = { ok: true } | { ok: false; error: string };
+export type SuggestTermResult =
+  | { ok: true }
+  | { ok: false; error: string; code: string };
 
 const TITLE_MIN = 2;
 const TITLE_MAX = 80;

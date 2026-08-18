@@ -43,7 +43,7 @@ export function GlossaryExplorer({ terms, initialPillars = null }: Props) {
   }, [query]);
 
   useEffect(() => {
-    if (!parsePillarsQuery(initialPillars)) {
+    if (!initialPillars?.trim()) {
       const fromHash = parsePillarHash(window.location.hash);
       if (fromHash) setPillarsOn(new Set([fromHash]));
     }

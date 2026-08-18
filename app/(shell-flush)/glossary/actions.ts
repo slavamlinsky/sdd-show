@@ -1,5 +1,6 @@
 "use server";
 
+import { after } from "next/server";
 import { displayNameFromAuth } from "@/lib/auth-display";
 import {
   parseSuggestTermInput,
@@ -22,6 +23,37 @@ type Payload = {
   website?: string;
 };
 
+const SUGGEST_ERROR = {
+  notConfigured: {
+    code: "glossary_not_configured",
+    message: "Suggestions aren’t available in this environment yet.",
+  },
+  authRequired: {
+    code: "glossary_auth_required",
+    message: "Please sign in to suggest a term.",
+  },
+  missingTable: {
+    code: "glossary_missing_table",
+    message:
+      "Glossary storage is not set up yet. Run supabase/migrations/20260818_glossary_terms.sql in the Supabase SQL Editor, or add RESEND_API_KEY + GLOSSARY_NOTIFY_EMAIL for email-only suggestions.",
+  },
+  noServiceRole: {
+    code: "glossary_no_service_role",
+    message:
+      "Could not save your suggestion. Add SUPABASE_SERVICE_ROLE_KEY to .env.local (Supabase → Settings → API), or configure Resend email — see README.",
+  },
+  insertFailed: {
+    code: "glossary_insert_failed",
+    message: "Could not save your suggestion. Try again in a moment.",
+  },
+} as const;
+
+type InsertFailure = {
+  ok: false;
+  code: typeof SUGGEST_ERROR.insertFailed.code | typeof SUGGEST_ERROR.missingTable.code;
+  missingTable?: boolean;
+};
+
 function isMissingTableError(message: string): boolean {
   const lower = message.toLowerCase();
   return (
@@ -30,6 +62,13 @@ function isMissingTableError(message: string): boolean {
       lower.includes("could not find the table") ||
       lower.includes("schema cache"))
   );
+}
+
+function insertFailureFromError(message: string): InsertFailure {
+  if (isMissingTableError(message)) {
+    return { ok: false, code: SUGGEST_ERROR.missingTable.code, missingTable: true };
+  }
+  return { ok: false, code: SUGGEST_ERROR.insertFailed.code };
 }
 
 async function insertSuggestion(
@@ -41,7 +80,7 @@ async function insertSuggestion(
     submitterName: string;
     submitterEmail: string;
   }
-): Promise<{ ok: true } | { ok: false; error: string; missingTable?: boolean }> {
+): Promise<{ ok: true } | InsertFailure> {
   const row = {
     slug: slugifySuggestionTitle(data.title),
     title: data.title,
@@ -60,9 +99,7 @@ async function insertSuggestion(
     const { error } = await service.from("glossary_terms").insert(row);
     if (!error) return { ok: true };
     console.error("[glossary-suggest/service]", error.message);
-    if (isMissingTableError(error.message)) {
-      return { ok: false, error: error.message, missingTable: true };
-    }
+    return insertFailureFromError(error.message);
   }
 
   const supabase = await createClient();
@@ -79,11 +116,13 @@ async function insertSuggestion(
   if (!error) return { ok: true };
 
   console.error("[glossary-suggest/user]", error.message);
-  return {
-    ok: false,
-    error: error.message,
-    missingTable: isMissingTableError(error.message),
-  };
+  return insertFailureFromError(error.message);
+}
+
+function fail(
+  spec: (typeof SUGGEST_ERROR)[keyof typeof SUGGEST_ERROR]
+): SuggestTermResult {
+  return { ok: false, error: spec.message, code: spec.code };
 }
 
 export async function suggestGlossaryTerm(raw: Payload): Promise<SuggestTermResult> {
@@ -92,19 +131,18 @@ export async function suggestGlossaryTerm(raw: Payload): Promise<SuggestTermResu
   }
 
   if (!isSupabaseConfigured()) {
-    return {
-      ok: false,
-      error: "Suggestions aren’t available in this environment yet.",
-    };
+    return fail(SUGGEST_ERROR.notConfigured);
   }
 
   const user = await getAuthUser();
   if (!user?.email) {
-    return { ok: false, error: "Please sign in to suggest a term." };
+    return fail(SUGGEST_ERROR.authRequired);
   }
 
   const parsed = parseSuggestTermInput(raw);
-  if (!parsed.ok) return parsed;
+  if (!parsed.ok) {
+    return { ok: false, error: parsed.error, code: "glossary_validation_failed" };
+  }
 
   const submitterName = displayNameFromAuth(
     user.email,
@@ -122,7 +160,12 @@ export async function suggestGlossaryTerm(raw: Payload): Promise<SuggestTermResu
 
   if (saved.ok) {
     if (isGlossaryEmailNotifyConfigured()) {
-      void sendGlossarySuggestionEmail(notifyPayload);
+      after(async () => {
+        const mailed = await sendGlossarySuggestionEmail(notifyPayload);
+        if (!mailed.ok) {
+          console.error("[glossary-suggest/notify]", mailed.error);
+        }
+      });
     }
     return { ok: true };
   }
@@ -135,23 +178,12 @@ export async function suggestGlossaryTerm(raw: Payload): Promise<SuggestTermResu
   }
 
   if (saved.missingTable) {
-    return {
-      ok: false,
-      error:
-        "Glossary storage is not set up yet. Run supabase/migrations/20260818_glossary_terms.sql in the Supabase SQL Editor, or add RESEND_API_KEY + GLOSSARY_NOTIFY_EMAIL for email-only suggestions.",
-    };
+    return fail(SUGGEST_ERROR.missingTable);
   }
 
   if (!createServiceClient()) {
-    return {
-      ok: false,
-      error:
-        "Could not save your suggestion. Add SUPABASE_SERVICE_ROLE_KEY to .env.local (Supabase → Settings → API), or configure Resend email — see README.",
-    };
+    return fail(SUGGEST_ERROR.noServiceRole);
   }
 
-  return {
-    ok: false,
-    error: "Could not save your suggestion. Try again in a moment.",
-  };
+  return fail(SUGGEST_ERROR.insertFailed);
 }

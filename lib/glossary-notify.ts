@@ -44,25 +44,31 @@ export async function sendGlossarySuggestionEmail(
     "Review in Table Editor → glossary_terms (status = pending) or your inbox.",
   ].join("\n");
 
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from,
-      to: [to],
-      subject: `Glossary suggestion: ${payload.title}`,
-      text: body,
-    }),
-  });
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to: [to],
+        subject: `Glossary suggestion: ${payload.title}`,
+        text: body,
+      }),
+      signal: AbortSignal.timeout(8000),
+    });
 
-  if (!res.ok) {
-    const detail = await res.text().catch(() => "");
-    console.error("[glossary-notify]", res.status, detail);
+    if (!res.ok) {
+      const detail = await res.text().catch(() => "");
+      console.error("[glossary-notify]", res.status, detail);
+      return { ok: false, error: "Could not send notification email." };
+    }
+
+    return { ok: true };
+  } catch (err) {
+    console.error("[glossary-notify]", err);
     return { ok: false, error: "Could not send notification email." };
   }
-
-  return { ok: true };
 }
