@@ -58,8 +58,8 @@ The course is for people who **benefit from writing and reading specs** before o
 | `/blog/[slug]` | Single article                                                                                      |
 | `/videos`      | Curated YouTube list with in-site playback                                                          |
 | `/course`      | Course CTA + structured placeholder + lead form                                                     |
-| `/sign-in`     | Auth: email + password when [spec-data-auth.md](./spec-data-auth.md) **P2** ships; until then stub. Header **Sign in**. |
-| `/sign-up`     | **P2:** create account (remove permanent redirect to `/sign-in`). Until then `/sign-up` → `/sign-in`. |
+| `/sign-in`     | Auth: **magic link** + **Google** when [spec-data-auth.md](./spec-data-auth.md) **P2** ships. No email/password. Header **Sign in**. |
+| `/sign-up`     | Redirect to `/sign-in` (first magic link or Google sign-in creates the account). |
 
 
 ## Global layout

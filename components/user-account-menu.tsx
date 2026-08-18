@@ -43,7 +43,7 @@ export function UserAccountMenu({ email, displayName, avatarUrl }: Props) {
       <DropdownMenuTrigger
         aria-label="Account menu"
         className={cn(
-          "flex size-[50px] shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-border/60 bg-muted/80 text-primary shadow-md ring-2 ring-background transition-all outline-none",
+          "flex size-12 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-border/60 bg-muted/80 text-primary shadow-md ring-2 ring-background transition-all outline-none",
           "hover:border-primary/30 hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
           "data-popup-open:border-primary/40 data-popup-open:ring-primary/20",
         )}
@@ -129,6 +129,15 @@ export function UserAccountMenu({ email, displayName, avatarUrl }: Props) {
           action="/auth/sign-out"
           method="post"
           hidden
+          onSubmit={async (event) => {
+            event.preventDefault();
+            const response = await fetch("/auth/sign-out", { method: "POST" });
+            if (!response.ok) {
+              window.alert("Could not sign out. Try again.");
+              return;
+            }
+            window.location.assign("/");
+          }}
         />
       </DropdownMenuContent>
     </DropdownMenu>

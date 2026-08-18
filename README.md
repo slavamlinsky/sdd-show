@@ -8,9 +8,9 @@ Postgres + Auth live in a [Supabase](https://supabase.com) project. Spec: [`docs
 2. Copy **Project URL** and **publishable** (anon) key from **Project Settings → API** (or **Connect**).
 3. `cp .env.example .env.local` and paste those values.
 4. Restart `npm run dev`. The app still builds **without** env vars; clients throw only when called without config.
-5. **Auth (P2):** In Supabase → **Authentication → URL configuration**, set **Site URL** to `http://localhost:3000` and add **Redirect URLs**: `http://localhost:3000/auth/callback` (plus your Vercel URL when deploying). Enable **Google** and **LinkedIn (OIDC)** under **Providers** if you want those buttons to work. Magic links use **Authentication → Email**.
+5. **Auth (P2):** In Supabase → **Authentication → URL configuration**, set **Site URL** to `http://localhost:3000` and add **Redirect URLs**: `http://localhost:3000/auth/callback` (plus your Vercel URL when deploying). Enable **Google** under **Providers** if you want that button to work. Magic links use **Authentication → Email**.
 
-Auth UI: `/sign-in` (magic link + Google + LinkedIn). Clients: `lib/supabase/client.ts` (browser), `lib/supabase/server.ts` (server). `proxy.ts` refreshes auth cookies when env is set.
+Auth UI: `/sign-in` (magic link + Google). Clients: `lib/supabase/client.ts` (browser), `lib/supabase/server.ts` (server). `proxy.ts` refreshes auth cookies when env is set.
 
 ## Getting Started
 

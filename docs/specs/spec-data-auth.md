@@ -13,7 +13,7 @@ Public pages stay readable **without** an account. Auth is for **identity**, **p
 | Layer | Choice | Why |
 | ----- | ------ | --- |
 | **Database** | **PostgreSQL** on **Supabase** | Dashboard, backups, Data API, pooler for Vercel. Already named in spec-main. |
-| **Auth** | **Supabase Auth** | Same project as the DB. **Google**, **LinkedIn (OIDC)**, and **email magic links** are first-class. Cookies via `@supabase/ssr`. |
+| **Auth** | **Supabase Auth** | Same project as the DB. **Google** and **email magic links** are first-class. Cookies via `@supabase/ssr`. |
 | **App client** | `@supabase/supabase-js` + `@supabase/ssr` | Official Next.js App Router pattern (browser + server clients). |
 
 **Do not add** Better Auth, Clerk, or Auth.js on top. One user store: `auth.users`.
@@ -40,9 +40,9 @@ Copy from [`.env.example`](../../.env.example). The app **must still build** whe
 | ------ | ----- |
 | **Magic link** | `signInWithOtp({ email })`. Configure Site URL + redirect allowlist. Custom **SMTP** for production mail. |
 | **Google** | Auth → Providers → Google. OAuth client in Google Cloud. `signInWithOAuth({ provider: 'google' })`. |
-| **LinkedIn** | Use **LinkedIn (OIDC)** (legacy LinkedIn provider is deprecated). `signInWithOAuth({ provider: 'linkedin_oidc' })`. |
+| **LinkedIn** | **Deferred** (not P2 UI). Optional later via **LinkedIn (OIDC)** — do not show a button until then. |
 
-Passwords are **optional** (not required for v1). PKCE callback route exchanges the code for a session (`exchangeCodeForSession`).
+Passwords are **out of scope** for v1 (magic link + Google only). PKCE callback route exchanges the code for a session (`exchangeCodeForSession`).
 
 ## Data model (phased)
 
@@ -78,13 +78,13 @@ Videos, newsletter, favorites — [spec-videos-v2-v3.md](./spec-videos-v2-v3.md)
 
 | Path | Behavior |
 | ---- | -------- |
-| `/sign-in` | Magic link (email) + **Google** + **LinkedIn** buttons. **`robots: noindex`**. |
+| `/sign-in` | Magic link (email) + **Google**. **`robots: noindex`**. |
 | `/auth/callback` | PKCE: exchange code, set cookies, redirect. |
 | Header | Logged out: **Sign in**. Logged in: email/avatar + **Sign out**. |
 
 Copy: sentence case. shadcn **Input**, **Label**, **Button**.
 
-`/sign-up` may stay a **redirect to `/sign-in`** (magic link + OAuth create the account).
+`/sign-up` **stays a redirect to `/sign-in`** (magic link or Google creates the account).
 
 ## Implementation phases
 
@@ -102,10 +102,10 @@ Feature branch per [spec-workflow-ci.md](./spec-workflow-ci.md). `npm run lint` 
 ### P2 — Auth layer
 
 1. Enable magic links (email templates / SMTP as needed).
-2. Enable Google + LinkedIn (OIDC) in the dashboard; redirect URLs include local + Vercel.
-3. `/sign-in` UI + `/auth/callback`; header session + sign out.
+2. Enable **Google** in the dashboard; redirect URLs include local + Vercel. Do not require LinkedIn for P2.
+3. `/sign-in` UI (magic link + Google only) + `/auth/callback`; header session + sign out.
 
-**Acceptance P2:** Magic link or OAuth → cookie session → header signed-in → sign out.
+**Acceptance P2:** Magic link or Google → cookie session → header signed-in → sign out.
 
 ### P3 — Course leads
 
@@ -131,7 +131,7 @@ Persist `/course` form to `course_leads` (RLS or server insert with user session
 
 - Specs name **Supabase Postgres + Supabase Auth**.
 - P1: clients + env template.
-- P2: Google, LinkedIn OIDC, magic links.
+- P2: Google, magic links.
 - P3: course leads in Postgres.
 
 ## Related
