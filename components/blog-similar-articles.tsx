@@ -43,7 +43,7 @@ export function BlogSimilarArticles({ posts, className }: Props) {
               <Reveal delay={i * 0.05} distance={12}>
                 <Link
                   href={`/blog/${meta.slug}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/60 shadow-none ring-1 ring-foreground/[0.03] transition-[border-color,transform] duration-200 hover:-translate-y-2 hover:border-border hover:shadow-none"
+                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/60 shadow-none ring-1 ring-foreground/3 transition-[border-color,transform] duration-200 hover:-translate-y-2 hover:border-border hover:shadow-none"
                 >
                   {thumb ? (
                     <div className="relative aspect-video w-full shrink-0 overflow-hidden border-b border-border/40 bg-muted/20">
@@ -56,7 +56,7 @@ export function BlogSimilarArticles({ posts, className }: Props) {
                       />
                     </div>
                   ) : (
-                    <div className="h-2 shrink-0 bg-gradient-to-r from-violet-500/15 via-transparent to-sky-500/15" aria-hidden />
+                    <div className="h-2 shrink-0 bg-linear-to-r from-violet-500/15 via-transparent to-sky-500/15" aria-hidden />
                   )}
                   <div className="flex min-w-0 flex-1 flex-col gap-2 p-4 sm:p-5">
                     <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-[11px] font-semibold text-muted-foreground">

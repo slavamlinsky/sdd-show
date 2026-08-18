@@ -10,18 +10,16 @@ const SHOW_AFTER_PX = 280;
 function getViewportScrollY(): number {
   if (typeof window === "undefined") return 0;
   const se = document.scrollingElement;
-  if (se) {
-    return se.scrollTop;
-  }
-  return Math.max(
-    window.scrollY ?? 0,
-    window.pageYOffset ?? 0,
-    document.documentElement?.scrollTop ?? 0,
-    document.body?.scrollTop ?? 0
-  );
+  if (se) return se.scrollTop;
+  return window.scrollY ?? 0;
+}
+
+function isDocumentScroller(el: HTMLElement): boolean {
+  return el === document.documentElement || el === document.body;
 }
 
 function isVerticallyScrollable(el: HTMLElement): boolean {
+  if (isDocumentScroller(el)) return false;
   const overflowY = getComputedStyle(el).overflowY;
   if (
     overflowY !== "auto" &&
@@ -30,10 +28,10 @@ function isVerticallyScrollable(el: HTMLElement): boolean {
   ) {
     return false;
   }
-  return el.scrollHeight > el.clientHeight;
+  return el.scrollHeight > el.clientHeight + 1;
 }
 
-/** Nearest scroll container first (sentinel → … → document), same list used for visibility and scroll-to-top. */
+/** Nested overflow panels only — html/body are the document scroller, handled separately. */
 function collectScrollableAncestors(start: HTMLElement | null): HTMLElement[] {
   const out: HTMLElement[] = [];
   if (!start || typeof window === "undefined") return out;
@@ -55,15 +53,68 @@ function getMaxVerticalScroll(sentinel: HTMLElement | null): number {
   return max;
 }
 
+function snapDocumentToOrigin() {
+  const html = document.documentElement;
+  const prev = html.style.scrollBehavior;
+  html.style.scrollBehavior = "auto";
+  const root = document.scrollingElement;
+  if (root) {
+    root.scrollTop = 0;
+    root.scrollLeft = 0;
+  } else {
+    window.scrollTo(0, 0);
+  }
+  html.style.scrollBehavior = prev;
+}
+
+function isDocumentScrollEndTarget(target: EventTarget | null): boolean {
+  return (
+    target === document.scrollingElement ||
+    target === document.documentElement ||
+    target === document.body ||
+    target === document ||
+    target === window
+  );
+}
+
 function scrollPageToTop(
   behavior: ScrollBehavior,
   sentinel: HTMLElement | null
 ) {
-  const opts: ScrollToOptions = { top: 0, left: 0, behavior };
+  const nestedOpts: ScrollToOptions = { top: 0, behavior };
   for (const el of collectScrollableAncestors(sentinel)) {
-    el.scrollTo(opts);
+    el.scrollTo(nestedOpts);
   }
-  window.scrollTo(opts);
+
+  const root = document.scrollingElement;
+  if (behavior === "auto") {
+    snapDocumentToOrigin();
+    return;
+  }
+
+  if (root) {
+    root.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  } else {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }
+
+  let done = false;
+  let tid = 0;
+  const finish = () => {
+    if (done) return;
+    done = true;
+    window.clearTimeout(tid);
+    root?.removeEventListener("scrollend", onEnd);
+    window.removeEventListener("scrollend", onEnd);
+    snapDocumentToOrigin();
+  };
+  const onEnd = (ev: Event) => {
+    if (!isDocumentScrollEndTarget(ev.target)) return;
+    finish();
+  };
+  root?.addEventListener("scrollend", onEnd);
+  window.addEventListener("scrollend", onEnd);
+  tid = window.setTimeout(finish, 1200);
 }
 
 export function ScrollToTop() {
@@ -129,7 +180,7 @@ export function ScrollToTop() {
       <div
         className={cn(
           /* Sits above footer link row + safe area — don’t cover GitHub / legal line */
-          "fixed bottom-28 right-4 z-[90] transition-opacity duration-200 sm:bottom-32 sm:right-8",
+          "fixed bottom-28 right-4 z-90 transition-opacity duration-200 sm:bottom-32 sm:right-8",
           visible ? "opacity-100" : "pointer-events-none opacity-0"
         )}
       >

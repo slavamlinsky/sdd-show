@@ -113,7 +113,7 @@ export function MobileNavDrawer({
     createPortal(
       <div
         className={cn(
-          "md:hidden fixed left-0 right-0 z-[45] [touch-action:manipulation]",
+          "md:hidden fixed left-0 right-0 z-45 [touch-action:manipulation]",
           open ? "pointer-events-auto" : "pointer-events-none"
         )}
         style={{

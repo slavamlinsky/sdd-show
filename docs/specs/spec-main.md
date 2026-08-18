@@ -17,21 +17,21 @@ Visitors who want **clearer specs and less rework** — primarily **learners and
 
 ## Course audience
 
-The course is for people who **benefit from writing and reading specs** before or while shipping (“who is this for?”). Segments (not mutually exclusive — copy should welcome overlap):
+The course (**Become an Intent-Driven Engineer**) is for people who **direct AI agents with written intent** and still want **engineering rigor**. **Four roles** on `/course` (overlap is fine):
 
 
-| Segment                          | Positioning (draft)                                                                                                                                                                                        |
-| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Students**                     | CS / software-engineering / design programs, **bootcamp grads**, or **serious self-learners** building a portfolio — *not* “anyone in school”; narrow to people who will ship code or technical artifacts. |
-| **Developers**                   | **Any level** for *habit change* (specs first): juniors learning discipline; mids/seniors who want less churn. Optional signpost: “junior-friendly, senior-useful”.                                        |
-| **QA / test engineers**          | Moving toward **delivery or automation engineering**, or who want specs that actually match what ships.                                                                                                    |
-| **Product / PM / technical ICs** | Who need **faster MVPs** with fewer misunderstood requirements — emphasis on **shared acceptance**, not replacing engineering.                                                                             |
-| **Founders / entrepreneurs**     | **Solo or tiny teams** validating ideas; language: **scope discipline** and **cheap experiments**, not enterprise process.                                                                                 |
+| Segment | Positioning |
+| ------- | ----------- |
+| **Solo founders** | You are the whole company. Specs let one human stay fast with agents. |
+| **Full-stack & lead developers** | The one-person army. A tight spec is the force multiplier in the AI age. |
+| **Technical leads** | Shared source of truth so AI work stays reviewable, scoped, and safe to merge. |
+| **Product / PM** | Precision on system behavior — **intent contracts**, not “PM 101”. |
 
+Architects and senior ICs map onto those seats. **Not the lead story:** intro-to-coding, certificates, or prompt-trick lists.
 
-**Explicit non-goals for positioning:** do not promise certifications, job placement, or “replace your PM” — keep promises aligned with **spec fluency** and **delivery quality**.
+**Explicit non-goals:** do not promise certifications, job placement, or “replace your PM”.
 
-**Where messaging lives:** summarized on **Home** ([spec-home](./spec-home.md)); expanded on **Course** ([spec-course](./spec-course.md)) + **Course FAQ** there — see phased rollout in **spec-course**.
+**Where messaging lives:** summarized on **Home** ([spec-home](./spec-home.md)); expanded on **Course** ([spec-course](./spec-course.md)).
 
 ## Technical stack (fixed for MVP)
 

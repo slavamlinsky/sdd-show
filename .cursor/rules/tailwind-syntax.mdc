@@ -1,0 +1,41 @@
+---
+description: Use Tailwind v4 utility syntax (opacity scale, linear gradients, named z-index)
+globs: **/*.{tsx,ts,css}
+alwaysApply: false
+---
+
+# Tailwind v4 class syntax
+
+This app uses **Tailwind CSS v4**. Prefer the current utility names the IDE/linter suggests. Do not invent arbitrary `[…]` values when a scale token exists.
+
+## Opacity (0–100)
+
+`/[0.03]` is 3% — write `/3`. Same for `/4`, `/10`, `/60`.
+
+```txt
+❌ ring-1 ring-foreground/[0.03]
+✅ ring-1 ring-foreground/3
+
+❌ bg-black/[0.1]
+✅ bg-black/10
+```
+
+## Gradients
+
+```txt
+❌ bg-gradient-to-br from-muted/20
+✅ bg-linear-to-br from-muted/20
+```
+
+(`to-r` / `to-b` / `to-t` / `to-br` stay; only the `bg-gradient-` prefix changes.)
+
+## z-index
+
+```txt
+❌ z-[90]  z-[100]
+✅ z-90    z-100
+```
+
+## When `[…]` is OK
+
+Keep arbitrary values with **no token**: `rounded-[1.75rem]`, `max-w-[calc(100%-2rem)]`, `bg-[radial-gradient(…)]`.

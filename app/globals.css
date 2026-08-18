@@ -123,13 +123,14 @@
   }
   body {
     @apply bg-background text-foreground;
-    overflow-x: hidden;
+    /* clip does not force overflow-y to auto (unlike hidden), so html/body stay the document scroller. */
+    overflow-x: clip;
   }
   html {
     @apply font-sans;
 
     font-feature-settings: "rlig" 1, "calt" 1;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -148,7 +149,7 @@
   /*
    * Break out of .page-shell for edge-to-edge backgrounds; inner row: mx-auto max-w-6xl px-4 sm:px-6
    * Do NOT use max-width: 100% here — percentage is against the shell and prevents a real breakout,
-   * which shifts the whole column left with empty space on the right. html/body overflow-x: hidden
+   * which shifts the whole column left with empty space on the right. html/body overflow-x: clip
    * contains any minor 100vw vs scrollbar overflow.
    */
   .full-bleed {

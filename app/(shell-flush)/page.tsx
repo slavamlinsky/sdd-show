@@ -152,7 +152,7 @@ export default function HomePage() {
 
       <section
         id="faq"
-        className="full-bleed border-y border-border/40 bg-gradient-to-b from-muted/25 via-background to-muted/15 text-foreground dark:from-muted/10 dark:to-muted/5"
+        className="full-bleed border-y border-border/40 bg-linear-to-b from-muted/25 via-background to-muted/15 text-foreground dark:from-muted/10 dark:to-muted/5"
       >
         <Reveal>
           <HomeFaq />

@@ -132,7 +132,7 @@ export function HomeLatestPostsCarousel({ items }: Props) {
                   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 )}
               >
-                <Card className="h-full overflow-hidden rounded-2xl border-border/70 pt-0 shadow-sm ring-1 ring-foreground/[0.03] transition-shadow group-hover:shadow-md group-hover:border-border">
+                <Card className="h-full overflow-hidden rounded-2xl border-border/70 pt-0 shadow-sm ring-1 ring-foreground/3 transition-shadow group-hover:shadow-md group-hover:border-border">
                   {item.imageSrc ? (
                     <div className="relative aspect-video w-full shrink-0 overflow-hidden border-b border-border/40 bg-muted/30">
                       <Image
@@ -145,7 +145,7 @@ export function HomeLatestPostsCarousel({ items }: Props) {
                     </div>
                   ) : (
                     <div
-                      className="h-1.5 shrink-0 bg-gradient-to-r from-violet-500/25 via-sky-500/20 to-emerald-500/25"
+                      className="h-1.5 shrink-0 bg-linear-to-r from-violet-500/25 via-sky-500/20 to-emerald-500/25"
                       aria-hidden
                     />
                   )}

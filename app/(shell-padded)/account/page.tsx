@@ -33,7 +33,7 @@ export default async function AccountPage() {
         later update.
       </p>
 
-      <dl className="mt-8 space-y-5 rounded-2xl border border-border/60 bg-card p-5 shadow-sm ring-1 ring-foreground/[0.03] sm:p-6">
+      <dl className="mt-8 space-y-5 rounded-2xl border border-border/60 bg-card p-5 shadow-sm ring-1 ring-foreground/3 sm:p-6">
         {avatarUrl ? (
           <div className="flex justify-center pb-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}

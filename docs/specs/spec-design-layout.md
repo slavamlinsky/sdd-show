@@ -56,7 +56,7 @@ Apply sentence case to:
 - **Scroll reveal (behavior):** Entrances stay **subtle** — typically **opacity + short vertical offset** (or equivalent), modest **duration** and **easing**, and **staggered** siblings (lists, grids) only where it aids scanability — not flashy or long-running.
 - **Reduced motion:** When `prefers-reduced-motion: reduce` is set, **skip** scroll-driven transforms and opacity ramps (Framer’s `useReducedMotion` or equivalent); render **static** final styles. Respect the same rule for any non–Framer Motion fallbacks.
 - **Page scroll:** Prefer `scroll-behavior: smooth` only when **not** `prefers-reduced-motion: reduce`.
-- **Scroll-to-top:** A **floating control** `ScrollToTop` appears after scrolling down; it uses smooth scroll (or instant if `prefers-reduced-motion`) and must restore the **same document scroll position as initial load** (`window` / root scroll `top: 0`, after resetting any nested `overflow: auto`/`scroll` ancestors). Do not rely on `scrollIntoView(main)` alone for the primary document — it can settle a few pixels off from first paint in some layouts.
+- **Scroll-to-top:** A **floating control** `ScrollToTop` appears after scrolling down; it uses smooth scroll (or instant if `prefers-reduced-motion`) and must restore the **same document scroll position as initial load**. Reset nested `overflow: auto`/`scroll` panels, then scroll **one** document root (`document.scrollingElement`, falling back to `window`). Do not also call `documentElement` + `body` + `window` together, and do not rely on `scrollIntoView(main)` — those can settle a few pixels off from first paint.
 
 ## Color, depth, and ornament
 
@@ -74,7 +74,7 @@ Apply sentence case to:
 ## UX practices (baseline)
 
 - **Skip link:** First focusable control skips to **main content** (`#main-content`); main landmark is focusable after skip for keyboard users.
-- **Scroll to top:** The floating control `ScrollToTop` first resets any **nested** scrollable panels (`overflow: auto` / `scroll`), then sets document scroll to `top: 0` on `window`, `document.documentElement`, and `document.body` so the result matches **first paint** (fixed header + `main` `pt-16` unchanged from a fresh navigation). **Skip link** still uses `#main-content` / focus; scroll-to-top targets the same visual top via `scrollY === 0`.
+- **Scroll to top:** The floating control `ScrollToTop` first resets any **nested** scrollable panels (`overflow: auto` / `scroll`), then sets the **document** scroller (`document.scrollingElement`) to `top: 0` so the result matches **first paint** (fixed header + `main` `pt-16` unchanged from a fresh navigation). After smooth scroll, snap to origin so engines that stop short still land on `0`. **Skip link** still uses `#main-content` / focus; scroll-to-top targets the same visual top via `scrollY === 0`.
 - **Focus:** Visible focus rings on interactive elements (buttons, links, sheet, dialog).
 - **CTAs:** Primary vs secondary styles are distinct; primary routes to **Course** where specs require.
 

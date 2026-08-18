@@ -40,7 +40,7 @@ export function HomePillars() {
     >
       {/* Soft diagonal wash — pale blue → lavender */}
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-sky-100/70 via-indigo-50/50 to-violet-100/65 dark:from-sky-950/25 dark:via-indigo-950/20 dark:to-violet-950/25"
+        className="pointer-events-none absolute inset-0 bg-linear-to-br from-sky-100/70 via-indigo-50/50 to-violet-100/65 dark:from-sky-950/25 dark:via-indigo-950/20 dark:to-violet-950/25"
         aria-hidden
       />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-10%,rgba(99,102,241,0.08),transparent_55%)]" aria-hidden />
@@ -69,7 +69,7 @@ export function HomePillars() {
                     )}
                   >
                     <span
-                      className="flex size-14 shrink-0 items-center justify-center rounded-lg p-2 bg-gradient-to-br from-violet-500/12 via-white to-sky-500/15 ring-1 ring-violet-500/15 dark:from-violet-500/20 dark:via-card dark:to-sky-500/20 dark:ring-violet-400/20"
+                      className="flex size-14 shrink-0 items-center justify-center rounded-lg p-2 bg-linear-to-br from-violet-500/12 via-white to-sky-500/15 ring-1 ring-violet-500/15 dark:from-violet-500/20 dark:via-card dark:to-sky-500/20 dark:ring-violet-400/20"
                       aria-hidden
                     >
                       <Icon className="size-12 text-violet-600 dark:text-sky-400" strokeWidth={1.65} />
