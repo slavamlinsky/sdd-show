@@ -10,31 +10,37 @@ Cover **SDD** plus vocabulary across the four pillars — **Product**, **Design*
 
 Each term should have:
 
-| Field | Required | Notes |
-| ----- | -------- | ----- |
-| `slug` | yes | Stable id for anchors; URL optional if single-page list |
-| `title` | yes | Term name — **sentence case** for multi-word terms unless the term is a proper noun or acronym; see [spec-design-layout.md — Naming & capitalization](./spec-design-layout.md#naming--capitalization). |
-| `shortDefinition` | yes | 1–3 sentences; **plain text only** (no Markdown); rendered at `text-sm` on the glossary page |
-| `categories` | yes | **1–3** labels from **Product \| Design \| Build \| Quality** — shadcn/ui `Badge` (outline, `xs`) on the glossary page. Optional `tags` in data may return later; not shown in MVP UI. |
+| Field             | Required | Notes                                                                                                                                                                                                  |
+| ----------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `slug`            | yes      | Stable id for anchors; URL optional if single-page list                                                                                                                                                |
+| `title`           | yes      | Term name — **sentence case** for multi-word terms unless the term is a proper noun or acronym; see [spec-design-layout.md — Naming & capitalization](./spec-design-layout.md#naming--capitalization). |
+| `shortDefinition` | yes      | 1–3 sentences; **plain text only** (no Markdown); rendered at `text-sm` on the glossary page                                                                                                           |
+| `categories`      | yes      | **1–3** labels from **Product \| Design \| Build \| Quality** — shadcn/ui `Badge` (outline, `xs`) on the glossary page. Optional `tags` in data may return later; not shown in MVP UI.                 |
 
 ## Page behavior (MVP)
 
 - Single page listing all terms as **collapsible cards** in a **two-column grid** on `md+` (one column on small viewports). Each card shows the **term title** and **chevron**; expanding that card reveals **pillar badges** and the **short definition**. Cards toggle **independently** (several may be open at once). Cards use a light **border**, **rounded corners**, and subtle **shadow** consistent with the FAQ-style reference.
 - **Layout:** See [spec-design-layout.md](./spec-design-layout.md).
-- **“Suggest something new”** — button in the hero row links to anchor `#suggest-term`; copy explains that **submission / moderation is v2** (stub band at bottom until then).
-- **No full-text search** in MVP (see **spec-main** — search may land in a later v2 wave). **Pillar-only filtering** is specified under **v2** below, not MVP.
+- **Client search + pillar filter** sit in a row **under the hero copy** (see **v2**). **“Suggest something new”** — button in the hero row links to `#suggest-term`. The band at the bottom is a **live suggestion form** that writes a **pending** row in Postgres.
 
-## v2 — Pillar filter (client-side)
+## v2 — Search + pillar filter (client-side)
 
-Narrow the visible term list using **four independent toggles** — **Product**, **Design**, **Build**, **Quality** — matching `categories` / on-card badges.
+Filter row **under the intro**, above the card grid: **search** (left) + **four pillar chips** (right). No extra submit buttons.
 
-### Behavior — multi-check
+### Search
 
-- **Four controls** (badge-style chips or checkable toggles), one per pillar, in a single row or wrapped row **above** the card grid.
-- **Default on load:** all **four are ON** (checked / active). That means **no pillar is excluded** — every term is eligible; equivalently the “included” set is all pillars.
-- **User action:** turn **OFF** one or more pillars to narrow the list. Any combination of **1–3** pillars ON is valid (only those pillars count toward visibility). **All four ON** again restores the full list.
-- **Visibility rule:** A term is **shown** if its `categories` **intersects** the set of pillars that are currently **ON** (checked). Stated as OR over the active pillars: the term must tag **at least one** pillar that is still checked.
-- **All four OFF:** must not happen in normal UX — **guard** it (e.g. turning off the last active pillar **re-enables** all four, or the last toggle is disabled until another is on). Alternatively a single **“Show all”** control resets to all four ON.
+- Single text field with a search icon; **debounced** (~250ms) as the user types; filters **title** and **short definition** (case-insensitive).
+- Client-side only; optional clear control on the field.
+- Search is **not** required in the share URL (pillars query/hash remain the shareable filter).
+
+### Pillar chips — multi-check
+
+Narrow the list using **four always-visible chips** — **Product**, **Design**, **Build**, **Quality** — not a dropdown (four options stay scannable). Visual language matches suggestion chips (icon + color).
+
+- **Four controls** in a single row (equal width on the chip group).
+- **Default on load:** all **four are ON**.
+- **User action:** turn **OFF** one or more pillars to narrow. Intersection rule: a term is **shown** if its `categories` **intersects** the ON set.
+- **All four OFF:** turning off the last ON pillar **re-enables all four**.
 - **Client-side only:** filter the in-memory list; **no** extra server request for filtering.
 - **Accordion state:** Filtering does not need to reset which cards are expanded; hiding a card removes it from the grid (implementation may collapse filtered-out items for simplicity).
 
@@ -68,14 +74,43 @@ Narrow the visible term list using **four independent toggles** — **Product**,
 - When the visible set changes, use a **subtle** transition — e.g. **opacity**, short **layout** animation, light **stagger** on cards.
 - Prefer **[Framer Motion](https://www.framer.com/motion/)** or **CSS transitions**, per [spec-design-layout.md](./spec-design-layout.md). When `prefers-reduced-motion: reduce`, skip motion and **show/hide instantly**.
 
-### Non-goals (pillar filter)
+### Non-goals (this filter row)
 
-- Full-text **search** (separate **spec-main** v2 item).
-- Server-side faceting or DB-backed filter APIs for this page.
+- Server-side faceting or DB-backed search APIs for this page.
 
-## v2 — Suggest a term (planned)
+## v2 — Suggest a term
 
-- **Suggest a term:** form or GitHub issue link, optional moderation queue, spam protection — align with [spec-taxonomy.md](./spec-taxonomy.md).
+Public **signed-in** form on `/glossary#suggest-term`. Guests see **Please sign in to add a term** + Sign in (return to `/glossary`). Submissions go to **Supabase Postgres** (`public.glossary_terms`) as **pending**. They are **not** shown in the accordion until an admin sets `status = published` (admin UI is a later slice).
+
+### Form fields
+
+| Field                  | Required     | Notes                                                                             |
+| ---------------------- | ------------ | --------------------------------------------------------------------------------- |
+| Term name (`title`)    | yes          | 2–80 characters; sentence case in copy guidance                                   |
+| Short definition       | yes          | 20–500 characters; **plain text**; 1–3 sentences; counter on the label row        |
+| Pillars (`categories`) | yes          | **1–3** of Product, Design, Build, Quality — equal-width colored chips with icons |
+| Tags                   | no (v2 form) | Column exists (`tags text[]`) for **admin** later                                 |
+
+Author is taken from the session: `submitted_by` = `auth.users.id` (trigger), plus `submitter_name` / `submitter_email` from Auth metadata. **No anonymous inserts** (RLS insert = `authenticated` only). Honeypot field on the form.
+
+### Statuses (moderation)
+
+| Status      | Meaning                                                                                                   |
+| ----------- | --------------------------------------------------------------------------------------------------------- |
+| `pending`   | New suggestion; not public                                                                                |
+| `published` | Visible on `/glossary` **once the listing reads from DB** (today listing is still `lib/glossary-data.ts`) |
+| `rejected`  | Declined suggestion                                                                                       |
+| `hidden`    | Was published; taken down without deleting                                                                |
+
+`source`: `suggestion` \| `seed` \| `admin`. Public inserts are forced to `suggestion` + `pending`.
+
+### Later (not this slice)
+
+- **Seed** hardcoded `glossaryTerms` into the same table as `source = seed`, `status = published`.
+- **Admin glossary manage:** edit title, definition, pillars, tags, visibility (`published` / `hidden`), review note; credit `submitted_by` / name.
+- Listing `/glossary` from DB (`status = published` only).
+
+SQL: [`supabase/migrations/20260818_glossary_terms.sql`](../../supabase/migrations/20260818_glossary_terms.sql).
 
 ## Content seed
 
@@ -86,8 +121,9 @@ Narrow the visible term list using **four independent toggles** — **Product**,
 ## Acceptance
 
 - **MVP:** All terms render from shared content source (same pattern as **spec-main** content storage). Each term exposes **pillar** `Badge`s (outline, `xs`); no tag row; no “see also” link row on cards.
-- **v2 (when pillar filter ships):** Four **multi-check** pillar toggles; default **all ON**; visibility = intersection of term `categories` with **ON** pillars; **no all-OFF** state without recovery; `?pillars=` (comma list) and `#product` / `#design` / `#build` / `#quality` prefilter with **query over hash** when both apply; `hashchange` updates filter when query did not set state; **reduced motion** honored; empty state when no terms match current ON set.
+- **v2 suggest:** signed-in users only; `/glossary#suggest-term` form persists a **pending** `glossary_terms` row (pillars 1–3, author from session); guests get a sign-in CTA; honeypot; no auto-publish.
+- **v2 filter row:** client search (debounced, title + definition) + four **multi-check** pillar chips; default **all ON**; last-off restores all; `?pillars=` and `#product` / `#design` / `#build` / `#quality` with **query over hash**; empty state when nothing matches.
 
 ## Non-goals
 
-- Version history of definitions, community edits, i18n.
+- Version history of definitions, community **direct** edits (suggestions are queued, not live edits), i18n.

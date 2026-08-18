@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { SignInForm } from "@/components/sign-in-form";
 import { getAuthUser } from "@/lib/supabase/server";
+import { safeNextPath } from "@/lib/supabase/safe-path";
 
 export const metadata: Metadata = {
   title: "Sign in",
@@ -10,24 +11,33 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  searchParams: Promise<{ error?: string; sent?: string }>;
+  searchParams: Promise<{ error?: string; sent?: string; next?: string }>;
 };
 
 export default async function SignInPage({ searchParams }: Props) {
+  const params = await searchParams;
+  const next = safeNextPath(params.next);
   const user = await getAuthUser();
   if (user) {
-    redirect("/");
+    redirect(next);
   }
-
-  const params = await searchParams;
 
   return (
     <div className="mx-auto max-w-md">
-      <h1 className="text-2xl font-semibold tracking-tight">Sign in</h1>
-      <p className="mt-3 text-muted-foreground">
-        Use a magic link or Google. New visitors get an account automatically.
+      <h1 className="text-3xl gradient-text-fill font-semibold tracking-tight">
+        Welcome to the community
+      </h1>
+      <p className="mt-6 text-muted-foreground">
+        You can sign in with a magic link or your Google account. New visitors
+        get an account automatically.
       </p>
-      <SignInForm errorCode={params.error} sent={params.sent === "1"} />
+      <div className="mt-12 space-y-6 bg-accent rounded-lg p-6">
+        <SignInForm
+          errorCode={params.error}
+          sent={params.sent === "1"}
+          next={next}
+        />
+      </div>
     </div>
   );
 }

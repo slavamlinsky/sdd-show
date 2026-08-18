@@ -2,7 +2,7 @@
 title: "Tickets vs. Specs: why your team is busy but not shipping."
 description: "Are you confusing project tracking with software engineering? Discover why relying solely on tickets creates rework, and how pairing specs with tasks aligns your team on what Done really means."
 slug: "tickets-vs-specs"
-date: "2026-04-25"
+date: "2026-07-15"
 name: "Tickets vs. specs"
 anons: "Tickets are great for tracking work, but they won't tell you if you're building the right thing. When you treat tickets like a strategy, you end up just guessing. The fix? Pair every ticket with a clear spec. It keeps your team aligned and ensures your board reflects reality, not just busywork."
 heading: "Why your team is busy but not shipping"

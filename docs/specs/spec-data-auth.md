@@ -54,6 +54,14 @@ Users live in **Supabase Auth**. App tables in **public** (or a dedicated schema
 | ----- | ------- |
 | `course_leads` | Unique **email**, optional **name**, `created_at`, optional `user_id` (uuid, FK to `auth.users`) when submitted while signed in. |
 
+### Glossary terms (suggestions now; catalog later)
+
+| Table | Purpose |
+| ----- | ------- |
+| `glossary_terms` | One catalog: **pending** community suggestions + future **published** terms. Columns: `slug`, `title`, `short_definition`, `categories` (1–3 pillars), `tags`, `status` (`pending` \| `published` \| `rejected` \| `hidden`), `source`, `submitted_by` (FK `auth.users`), `submitter_name` / `submitter_email`, `review_note`. SQL: `supabase/migrations/20260818_glossary_terms.sql`. |
+
+Public listing still uses `lib/glossary-data.ts` until a seed + admin manage slice. RLS: **authenticated** may **insert** pending suggestions; **select** published (and own rows if signed in). Anonymous cannot insert.
+
 ### P4 — blog
 
 See [spec-blog.md](./spec-blog.md) v2 data. Rows in Postgres; seed from `content/blog/` until cutover.
@@ -67,7 +75,7 @@ Videos, newsletter, favorites — [spec-videos-v2-v3.md](./spec-videos-v2-v3.md)
 | Actor | Can |
 | ----- | --- |
 | **Anonymous** | Read public content; submit course lead with email. |
-| **Signed-in user** | Same + session in header; later favorites. |
+| **Signed-in user** | Same + session in header; **suggest a glossary term** (pending, `submitted_by`); later favorites. |
 | **Admin** | Later. Seed via dashboard or allowlist email. **Not** in P2 UI. |
 
 **Session:** HTTP-only cookies from `@supabase/ssr`. Server: `getClaims()` / `getUser()` — **never** trust `getSession()` alone for authorization. Next **proxy** (`proxy.ts`) refreshes tokens.
@@ -119,7 +127,7 @@ Persist `/course` form to `course_leads` (RLS or server insert with user session
 
 - Second auth vendor.
 - Payments, CMS, comments, RSS.
-- Glossary in the DB for v1.
+- Auto-publishing community glossary edits (suggestions stay **pending** until review).
 
 ## Security notes
 
