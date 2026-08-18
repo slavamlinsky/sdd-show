@@ -60,6 +60,7 @@ export default async function RootLayout({
   return (
     <html
       lang={htmlLangForLocale(locale)}
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >

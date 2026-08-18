@@ -31,7 +31,8 @@ function isRemoteSrc(src: string): boolean {
 function isNextAllowedRemote(src: string): boolean {
   const u = parseRemoteUrl(src);
   if (!u || (u.protocol !== "http:" && u.protocol !== "https:")) return false;
-  if (u.hostname === "img.youtube.com" && u.pathname.startsWith("/vi/")) return true;
+  if (u.hostname === "img.youtube.com" && u.pathname.startsWith("/vi/"))
+    return true;
   if (u.hostname === "i.ytimg.com") return true;
   return false;
 }
@@ -47,7 +48,10 @@ const figureAspectVideo = "aspect-video";
 
 function figureAspectForSrc(src: string): string {
   const path = pathForExtension(src).toLowerCase();
-  if (path.includes("intent-driven-user") || path.includes("intent-driven-schema")) {
+  if (
+    path.includes("intent-driven-user") ||
+    path.includes("intent-driven-schema")
+  ) {
     return figureAspectVideo;
   }
   return figureAspectDefault;
@@ -57,25 +61,43 @@ const figureMediaClass = "h-full w-full object-cover object-center";
 
 const markdownComponents = {
   h2: ({ ...props }: React.ComponentPropsWithoutRef<"h2">) => (
-    <h2 className="mt-8 font-heading text-xl font-semibold tracking-tight first:mt-0" {...props} />
+    <h2
+      className="mt-8 font-heading text-xl font-semibold tracking-tight first:mt-0"
+      {...props}
+    />
   ),
   h3: ({ ...props }: React.ComponentPropsWithoutRef<"h3">) => (
-    <h3 className="mt-6 font-heading text-lg font-medium tracking-tight" {...props} />
+    <h3
+      className="mt-6 font-heading text-lg font-medium tracking-tight"
+      {...props}
+    />
   ),
   p: ({ ...props }: React.ComponentPropsWithoutRef<"p">) => (
-    <p className="text-[15px] leading-relaxed text-muted-foreground [&:not(:first-child)]:mt-4" {...props} />
+    <p
+      className="text-[15px] leading-relaxed text-muted-foreground not-first:mt-4"
+      {...props}
+    />
   ),
   ul: ({ ...props }: React.ComponentPropsWithoutRef<"ul">) => (
-    <ul className="mt-4 list-disc pl-5 text-[15px] leading-relaxed text-muted-foreground" {...props} />
+    <ul
+      className="mt-4 list-disc pl-5 text-[15px] leading-relaxed text-muted-foreground"
+      {...props}
+    />
   ),
   ol: ({ ...props }: React.ComponentPropsWithoutRef<"ol">) => (
-    <ol className="mt-4 list-decimal pl-5 text-[15px] leading-relaxed text-muted-foreground" {...props} />
+    <ol
+      className="mt-4 list-decimal pl-5 text-[15px] leading-relaxed text-muted-foreground"
+      {...props}
+    />
   ),
   li: ({ ...props }: React.ComponentPropsWithoutRef<"li">) => (
     <li className="mt-1 marker:text-foreground/60" {...props} />
   ),
   a: ({ ...props }: React.ComponentPropsWithoutRef<"a">) => (
-    <a className="font-medium text-foreground underline underline-offset-4 hover:text-foreground/80" {...props} />
+    <a
+      className="font-medium text-foreground underline underline-offset-4 hover:text-foreground/80"
+      {...props}
+    />
   ),
   strong: ({ ...props }: React.ComponentPropsWithoutRef<"strong">) => (
     <strong className="font-semibold text-foreground" {...props} />
@@ -87,23 +109,37 @@ const markdownComponents = {
     />
   ),
   code: ({ ...props }: React.ComponentPropsWithoutRef<"code">) => (
-    <code className="rounded bg-muted px-1 py-0.5 font-mono text-[0.9em] text-foreground" {...props} />
+    <code
+      className="rounded bg-muted px-1 py-0.5 font-mono text-[0.9em] text-foreground"
+      {...props}
+    />
   ),
   hr: () => <hr className="my-10 border-border/60" />,
   table: ({ ...props }: React.ComponentPropsWithoutRef<"table">) => (
     <div className="my-6 w-full overflow-x-auto rounded-lg border border-border/60 bg-muted/10">
-      <table className="w-full min-w-[18rem] border-collapse text-left text-[15px] text-muted-foreground" {...props} />
+      <table
+        className="w-full min-w-[18rem] border-collapse text-left text-[15px] text-muted-foreground"
+        {...props}
+      />
     </div>
   ),
   thead: ({ ...props }: React.ComponentPropsWithoutRef<"thead">) => (
-    <thead className="border-b border-border bg-muted/40 text-foreground" {...props} />
+    <thead
+      className="border-b border-border bg-muted/40 text-foreground"
+      {...props}
+    />
   ),
-  tbody: ({ ...props }: React.ComponentPropsWithoutRef<"tbody">) => <tbody {...props} />,
+  tbody: ({ ...props }: React.ComponentPropsWithoutRef<"tbody">) => (
+    <tbody {...props} />
+  ),
   tr: ({ ...props }: React.ComponentPropsWithoutRef<"tr">) => (
     <tr className="border-b border-border/50 last:border-b-0" {...props} />
   ),
   th: ({ ...props }: React.ComponentPropsWithoutRef<"th">) => (
-    <th className="px-3 py-2.5 align-top text-sm font-semibold tracking-tight" {...props} />
+    <th
+      className="px-3 py-2.5 align-top text-sm font-semibold tracking-tight"
+      {...props}
+    />
   ),
   td: ({ ...props }: React.ComponentPropsWithoutRef<"td">) => (
     <td className="px-3 py-2.5 align-top" {...props} />
@@ -147,7 +183,10 @@ const markdownComponents = {
 export function MarkdownContent({ markdown }: { markdown: string }) {
   return (
     <article className="prose-brand max-w-4xl">
-      <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        components={markdownComponents}
+      >
         {markdown}
       </ReactMarkdown>
     </article>

@@ -41,7 +41,9 @@ export default function BlogIndexPage() {
             Our <GradientText>AI-driven blog</GradientText>
           </h1>
           <p className="text-lg leading-relaxed text-muted-foreground">
-            Short posts and useful articles about modern software development. Ideal if you are learning the basics or pitching clearer practices to your team.
+            Short posts and useful articles about modern software development.
+            Ideal if you are learning the basics or pitching clearer practices
+            to your team.
           </p>
         </Reveal>
 
@@ -53,12 +55,12 @@ export default function BlogIndexPage() {
             return (
               <li key={meta.slug} className="list-none">
                 <Reveal delay={i * 0.05} distance={14}>
-                  <Card className="overflow-hidden px-4 md:px-6 rounded-2xl border-border/60 shadow-sm ring-1 ring-foreground/[0.04] transition-shadow hover:shadow-md sm:rounded-[1.75rem]">
+                  <Card className="overflow-hidden px-4 md:px-6 rounded-2xl border-border/60 shadow-sm ring-1 ring-foreground/4 transition-shadow hover:shadow-md sm:rounded-[1.75rem]">
                     <div className="flex flex-col sm:flex-row sm:items-stretch">
                       {previewSrc ? (
                         <Link
                           href={href}
-                          className="relative aspect-[4/3] w-full shrink-0 rounded-xl overflow-hidden bg-muted/40 outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring sm:aspect-auto sm:w-44 md:w-72 sm:min-h-[11rem]"
+                          className="relative aspect-4/3 w-full shrink-0 rounded-xl overflow-hidden bg-muted/40 outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring sm:aspect-auto sm:w-44 md:w-72 sm:min-h-44"
                           aria-label={`Open article: ${blogCardTitle(meta)}`}
                         >
                           <Image

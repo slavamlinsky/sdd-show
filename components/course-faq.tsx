@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import {
   Accordion,
   AccordionContent,
@@ -11,29 +10,34 @@ import { GradientText } from "@/components/gradient-text";
 
 const items = [
   {
-    id: "start",
-    q: "Where should I start on this site?",
-    a: "Skim the glossary, read one short blog post, then browse videos. When you want a structured path, use this course page and join the notify list.",
+    id: "who",
+    q: "Is this only for people who manage a team?",
+    a: "No. The four seats are solo founders, full-stack and lead developers (the one-person army), technical leads, and product managers. Architects and seniors fit those seats. It is not an intro-to-coding or prompt-tricks workshop.",
+  },
+  {
+    id: "vibe",
+    q: "I already prompt well. Why would I need specs?",
+    a: "Informal prompting is fast on greenfield toys. Complex systems punish missing sentences. Specs are how you keep agents aligned when the cost of a wrong edge case is real.",
+  },
+  {
+    id: "sdd-ide",
+    q: "How do SDD and intent-driven engineering differ?",
+    a: "Spec-driven work treats the specification as the source of truth, then plan, task, and implement. Intent-driven work goes further: you define outcomes and success criteria (the what) and let agents reason through the how inside those contracts.",
+  },
+  {
+    id: "tdd",
+    q: "How does this relate to TDD?",
+    a: "TDD uses tests to pin behavior before logic. SDD uses written specs (and often tests) so humans and agents share one contract. They stack: specs set scope; tests lock acceptance.",
+  },
+  {
+    id: "time",
+    q: "How much time will it take?",
+    a: "Hours per week are not locked until the first cohort. The landing syllabus is the map: six modules plus a Monday-morning habit — write one spec before your next code prompt.",
   },
   {
     id: "free",
     q: "Will the course be free?",
     a: "Pricing is still open. Joining the list only means we email you when enrollment options exist. No obligation.",
-  },
-  {
-    id: "notify",
-    q: "How do I hear about the course launch?",
-    a: "Use the form below. We only send emails about launch and big resource drops.",
-  },
-  {
-    id: "tdd",
-    q: "How does SDD relate to TDD?",
-    a: "TDD is tests driving code. SDD is written intent (specs) driving what you build and how you check it. They work together: specs set the scope; tests lock acceptance.",
-  },
-  {
-    id: "oss",
-    q: "Is this project open source?",
-    a: "Yes. You can browse and suggest changes on ",
   },
 ] as const;
 
@@ -53,31 +57,14 @@ export function CourseFaq() {
             Common <GradientText className="font-semibold">questions</GradientText>
           </h2>
           <p className="mt-3 text-lg text-muted-foreground">
-            A few answers before you join the list. More depth lives in the glossary and blog.
+            A few answers before you join the list. Depth lives in the glossary and blog.
           </p>
         </div>
         <Accordion className="mt-10 w-full" defaultValue={[items[0].id]}>
           {items.map((item) => (
             <AccordionItem key={item.id} value={item.id}>
               <AccordionTrigger>{item.q}</AccordionTrigger>
-              <AccordionContent>
-                {item.id === "oss" ? (
-                  <>
-                    {item.a}
-                    <Link
-                      href="https://github.com/slavamlinsky/sdd-show"
-                      className="font-medium text-primary underline-offset-4 hover:underline"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      GitHub
-                    </Link>
-                    .
-                  </>
-                ) : (
-                  item.a
-                )}
-              </AccordionContent>
+              <AccordionContent>{item.a}</AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

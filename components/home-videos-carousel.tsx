@@ -128,7 +128,7 @@ export function HomeVideosCarousel({ videos }: Props) {
                     "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   )}
                 >
-                  <Card className="h-full cursor-pointer gap-0 overflow-hidden rounded-2xl border-border/70 py-0 shadow-sm ring-1 ring-foreground/[0.03] transition-shadow group-hover:border-border group-hover:shadow-md">
+                  <Card className="h-full cursor-pointer gap-0 overflow-hidden rounded-2xl border-border/70 py-0 shadow-sm ring-1 ring-foreground/3 transition-shadow group-hover:border-border group-hover:shadow-md">
                     <div className="relative aspect-video w-full shrink-0 overflow-hidden border-b border-border/40 bg-muted/30">
                       <YoutubePoster
                         youtubeId={video.youtubeId}

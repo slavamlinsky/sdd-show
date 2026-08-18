@@ -71,7 +71,7 @@ const phases: Phase[] = [
 export function HomeEvolutionTimeline() {
   return (
     <section
-      className="full-bleed relative overflow-hidden border-y border-border/40 bg-gradient-to-b from-background via-muted/15 to-background py-16 sm:py-24"
+      className="full-bleed relative overflow-hidden border-y border-border/40 bg-linear-to-b from-background via-muted/15 to-background py-16 sm:py-24"
       aria-labelledby="evolution-timeline-heading"
     >
       <div
@@ -99,7 +99,7 @@ export function HomeEvolutionTimeline() {
         <div className="relative mx-auto mt-14 max-w-4xl md:mt-20">
           {/* Center axis — desktop */}
           <div
-            className="pointer-events-none absolute left-1/2 top-3 bottom-3 hidden w-px -translate-x-1/2 bg-gradient-to-b from-border via-primary/45 to-violet-500/50 md:block"
+            className="pointer-events-none absolute left-1/2 top-3 bottom-3 hidden w-px -translate-x-1/2 bg-linear-to-b from-border via-primary/45 to-violet-500/50 md:block"
             aria-hidden
           />
 
@@ -162,7 +162,7 @@ function PhaseCard({ phase, align }: { phase: Phase; align: "left" | "right" }) 
   return (
     <article
       className={cn(
-        "rounded-2xl border border-border/60 bg-card/95 p-4 shadow-sm ring-1 ring-foreground/[0.04] sm:p-5",
+        "rounded-2xl border border-border/60 bg-card/95 p-4 shadow-sm ring-1 ring-foreground/4 sm:p-5",
         align === "right" && "md:text-right"
       )}
     >

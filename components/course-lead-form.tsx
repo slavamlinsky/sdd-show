@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -16,13 +22,16 @@ export function CourseLeadForm() {
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!emailOk(email.trim())) return;
-    console.info("[course-lead]", { name: name.trim() || undefined, email: email.trim() });
+    console.info("[course-lead]", {
+      name: name.trim() || undefined,
+      email: email.trim(),
+    });
     setStatus("success");
   }
 
   if (status === "success") {
     return (
-      <Card className="mx-auto max-w-md border-border/80 shadow-sm ring-1 ring-foreground/[0.04]">
+      <Card className="mx-auto max-w-md border-border/80 shadow-sm ring-1 ring-foreground/4">
         <CardContent className="px-6 py-10 text-center sm:px-8" role="status">
           <p className="font-medium text-foreground">You are on the list.</p>
           <p className="mt-2 text-sm text-muted-foreground">
@@ -34,11 +43,14 @@ export function CourseLeadForm() {
   }
 
   return (
-    <Card className="mx-auto max-w-md border-border/80 shadow-md ring-1 ring-foreground/[0.06]">
+    <Card className="mx-auto max-w-md border-border/80 shadow-md ring-1 ring-foreground/6">
       <CardHeader className="space-y-1 px-6 pb-2 pt-6 sm:px-8 sm:pt-8">
-        <CardTitle className="font-heading text-lg">Join the notify list</CardTitle>
+        <CardTitle className="font-heading text-lg">
+          Join the notify list
+        </CardTitle>
         <CardDescription>
-          We ask for email so we can reach you when enrollment opens. Name is optional.
+          We ask for email so we can reach you when enrollment opens. Name is
+          optional.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-5 px-6 pb-8 sm:px-8">

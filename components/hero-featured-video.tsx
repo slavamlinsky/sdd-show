@@ -23,7 +23,7 @@ export function HeroFeaturedVideo({ video }: { video: VideoEntry }) {
           }
         }}
         className={cn(
-          "group relative block w-full overflow-hidden rounded-[2rem] border border-border/60 bg-card text-left shadow-xl shadow-foreground/5 ring-1 ring-foreground/[0.04]",
+          "group relative block w-full overflow-hidden rounded-[2rem] border border-border/60 bg-card text-left shadow-xl shadow-foreground/5 ring-1 ring-foreground/4",
           "aspect-video max-h-[min(100vw,22rem)] sm:max-h-none",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         )}
@@ -35,7 +35,7 @@ export function HeroFeaturedVideo({ video }: { video: VideoEntry }) {
           className="pointer-events-none object-cover transition-transform duration-300 scale-[1.02] group-hover:scale-[1.05]"
           sizes="(max-width: 1024px) 100vw, 33vw"
         />
-        <span className="pointer-events-none absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-foreground/50 via-foreground/10 to-transparent p-5 sm:p-6">
+        <span className="pointer-events-none absolute inset-0 flex flex-col justify-end bg-linear-to-t from-foreground/50 via-foreground/10 to-transparent p-5 sm:p-6">
           <span className="flex items-center gap-3">
             <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-background/95 shadow-md ring-1 ring-border">
               <PlayIcon className="size-6 text-foreground" aria-hidden />
