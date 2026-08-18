@@ -56,7 +56,7 @@ Audience positioning aligns with [spec-main.md](./spec-main.md) (**Course audien
     - Will there be certificates / job support? *(honest: only what you will offer)*
 5. **Lead form**
   - Fields: at minimum **email**; optional **name** (if included, keep optional or required consistently in one place).
-  - **Submit:** MVP may `console.log`, show success toast, or POST to a Next.js Route Handler that returns 200 — real persistence via **Supabase** later (**spec-main**).
+  - **Submit:** Persist to **Postgres** when [spec-data-auth.md](./spec-data-auth.md) **P3** ships (`course_leads`). Until then MVP may show an in-page success state or POST a stub Route Handler that does **not** log raw lead data (no email/name in application logs).
   - Optional: single checkbox “**I identify as:** student / developer / QA / product / founder” for segmentation — **only if** privacy copy is clear; else skip until analytics policy exists.
 6. **Trust row (optional)**
   - Link back to `/blog` or `/videos` as “free resources”.

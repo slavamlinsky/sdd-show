@@ -62,7 +62,7 @@ This matches **“update `main` through PR approvals”** and prevents accidenta
 - **Connect early:** Import the GitHub repo in Vercel as soon as the app `next build` succeeds locally.
 - **Production:** Deploy **production** from `main` (Vercel default).
 - **Previews:** Enable **preview deployments for pull requests** so every `feat/*` PR gets a **unique preview URL** before merging — highly recommended once development is active.
-- **Environment variables:** Document in README or Vercel project when Supabase or other secrets are added later.
+- **Environment variables:** See [spec-data-auth.md](./spec-data-auth.md) (`NEXT_PUBLIC_SUPABASE_URL`, publishable key). Document in README; set the same names in **Vercel** (Production + Preview).
 
 Nothing in the specs requires “push only from CI”; developers push **branches**; `main` updates via **merge**.
 

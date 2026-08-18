@@ -2,7 +2,7 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -10,13 +10,17 @@ type ThemeToggleProps = {
   className?: string;
 };
 
+const subscribeNoop = () => () => {};
+const getClientMounted = () => true;
+const getServerMounted = () => false;
+
 export function ThemeToggle({ className }: ThemeToggleProps) {
   const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(
+    subscribeNoop,
+    getClientMounted,
+    getServerMounted
+  );
 
   const isDark = resolvedTheme === "dark";
 
@@ -25,7 +29,10 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       type="button"
       variant="outline"
       size="icon"
-      className={cn("size-10 shrink-0 border-border/80 bg-background shadow-sm", className)}
+      className={cn(
+        "size-9 shrink-0 cursor-pointer rounded-full border-border/60 bg-background/80 shadow-sm backdrop-blur-sm",
+        className
+      )}
       disabled={!mounted}
       aria-label={
         mounted

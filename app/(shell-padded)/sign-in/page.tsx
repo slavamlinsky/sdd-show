@@ -1,23 +1,33 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
+import { SignInForm } from "@/components/sign-in-form";
+import { getAuthUser } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Sign in",
-  description: "Account sign-in — coming soon.",
+  description: "Sign in with email or Google.",
   robots: { index: false, follow: false },
 };
 
-export default function SignInPage() {
+type Props = {
+  searchParams: Promise<{ error?: string; sent?: string }>;
+};
+
+export default async function SignInPage({ searchParams }: Props) {
+  const user = await getAuthUser();
+  if (user) {
+    redirect("/");
+  }
+
+  const params = await searchParams;
+
   return (
-    <div className="mx-auto max-w-lg text-center">
+    <div className="mx-auto max-w-md">
       <h1 className="text-2xl font-semibold tracking-tight">Sign in</h1>
       <p className="mt-3 text-muted-foreground">
-        Authentication isn’t wired up yet. Check back later, or continue exploring the site.
+        Use a magic link or Google. New visitors get an account automatically.
       </p>
-      <Button nativeButton={false} className="mt-8" render={<Link href="/" />}>
-        Back to home
-      </Button>
+      <SignInForm errorCode={params.error} sent={params.sent === "1"} />
     </div>
   );
 }

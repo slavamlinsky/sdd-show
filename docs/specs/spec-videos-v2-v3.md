@@ -2,7 +2,7 @@
 
 Supersedes nothing: **[spec-videos.md](./spec-videos.md)** remains the **MVP / current** contract. This document captures **planned** capabilities once data moves off static files.
 
-**Stack assumption:** **Supabase** (or equivalent Postgres + API) for persisted videos, categories, tags, user prefs, and TTL logic — aligned with [spec-main](./spec-main.md) (“Supabase allowed later”).
+**Stack assumption:** **Supabase** (Postgres + Auth) — [spec-data-auth.md](./spec-data-auth.md).
 
 **Category and tag slugs** (when browse/filter UX ships) must follow **[spec-taxonomy.md](./spec-taxonomy.md)** so `/videos` and `/blog` share one vocabulary (blog carousel strip: **blog v3** in [spec-blog.md](./spec-blog.md)).
 
