@@ -2,7 +2,7 @@
 title: "The rise of Intent-Driven Engineering (AI development)."
 description: "From prompt hacks to specs and now to intent. Why the next shift is about architecting outcomes, not writing longer instructions."
 slug: "intent-driven-engineering"
-date: "2026-05-07"
+date: "2026-08-11"
 name: "Intent-driven engineering"
 anons: "Writing longer prompts isn't the same as engineering a better outcome. If you are tired of managing vague tickets and endless instruction loops, it’s time for a change. We’re moving toward a world where your job isn't to provide the steps, but to architect the intent. It is time to move from being 'prompt engineers' to being 'outcome architects'."
 heading: "The rise of Intent-Driven Engineering"
@@ -11,7 +11,7 @@ socialImage: "/images/intent-driven-user.png"
 
 For the last few years, we have obsessed over how to give AI better instructions. We called it **prompt engineering**. Then we asked for **structure** so behavior stayed reliable — and **spec-driven development (SDD)** gave the machine something testable to implement.
 
-The next step is not “longer prompts” or “more pages of requirements”. It is **Intent-Driven Engineering** — where **IDE** means *Intent-Driven Engineering* here, not “Integrated Development Environment”. The human becomes the **architect of intent**, not the scribe of tickets.
+The next step is not “longer prompts” or “more pages of requirements”. It is **Intent-Driven Engineering** — where **IDE** means _Intent-Driven Engineering_ here, not “Integrated Development Environment”. The human becomes the **architect of intent**, not the scribe of tickets.
 
 ---
 
@@ -32,7 +32,7 @@ That is the compelling shift: from teaching the machine to **code line-by-line**
 
 ## The pillars of intent
 
-In an intent-driven model, you worry less about *how* every line is written and more about *what* must be true when the work is done. The same four pillars you use to organize learning still apply — but the emphasis moves **upstream**:
+In an intent-driven model, you worry less about _how_ every line is written and more about _what_ must be true when the work is done. The same four pillars you use to organize learning still apply — but the emphasis moves **upstream**:
 
 - **Product** — The north star: who it is for, what success means, and which outcomes are non-negotiable.
 - **Design** — Constraints on experience: accessibility, tone, flows, and visual language the solution must respect.
@@ -60,7 +60,7 @@ The machine can broaden the **middle** of the workflow; it does not remove accou
 The developer of the future looks more like an **intent architect** than a wall of manual syntax:
 
 1. **Define intent** — Express the business goal and user outcome in clear language.
-2. **Set guardrails** — Encode constraints that define a high-quality, *allowable* build.
+2. **Set guardrails** — Encode constraints that define a high-quality, _allowable_ build.
 3. **Monitor execution** — Watch agents and automation work the middle layer; intervene when drift appears.
 4. **Verify and ship** — Audit against success criteria and intent; release when the bar is met.
 

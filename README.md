@@ -8,7 +8,8 @@ Postgres + Auth live in a [Supabase](https://supabase.com) project. Spec: [`docs
 2. Copy **Project URL** and **publishable** (anon) key from **Project Settings → API** (or **Connect**).
 3. `cp .env.example .env.local` and paste those values.
 4. Restart `npm run dev`. The app still builds **without** env vars; clients throw only when called without config.
-5. **Auth (P2):** In Supabase → **Authentication → URL configuration**, set **Site URL** to `http://localhost:3000` and add **Redirect URLs**: `http://localhost:3000/auth/callback` (plus your Vercel URL when deploying). Enable **Google** under **Providers** if you want that button to work. Magic links use **Authentication → Email**.
+5. **Auth (P2):** In Supabase → **Authentication → URL configuration**, set **Site URL** to your production origin (e.g. `https://sdd-show.vercel.app`) and add **Redirect URLs**: `http://localhost:3000/auth/callback`, `https://sdd-show.vercel.app/auth/callback` (plus preview wildcards). Enable **Google** under **Providers** if you want that button to work. Magic links use **Authentication → Email**.
+6. **Glossary suggestions:** run [`supabase/migrations/20260818_glossary_terms.sql`](supabase/migrations/20260818_glossary_terms.sql) in the Supabase **SQL Editor**. Add **`SUPABASE_SERVICE_ROLE_KEY`** to `.env.local` (Settings → API) so signed-in submits work reliably from Server Actions. Optional: **`RESEND_API_KEY`** + **`GLOSSARY_NOTIFY_EMAIL`** to get an email for each suggestion before the admin UI exists.
 
 Auth UI: `/sign-in` (magic link + Google). Clients: `lib/supabase/client.ts` (browser), `lib/supabase/server.ts` (server). `proxy.ts` refreshes auth cookies when env is set.
 

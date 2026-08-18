@@ -9,32 +9,38 @@ import { createClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 
 function authCallbackUrl(next = "/") {
-  return `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
+  const base = `${window.location.origin}/auth/callback`;
+  if (!next || next === "/") return base;
+  return `${base}?next=${encodeURIComponent(next)}`;
 }
 
 export function SignInForm({
   errorCode,
   sent,
+  next = "/",
 }: {
   errorCode?: string;
   sent?: boolean;
+  next?: string;
 }) {
   const [email, setEmail] = useState("");
   const [pending, setPending] = useState<"email" | Provider | null>(null);
   const [message, setMessage] = useState<string | null>(
-    sent ? "Check your email for a sign-in link." : null
+    sent ? "Check your email for a sign-in link." : null,
   );
   const [formError, setFormError] = useState<string | null>(() => {
-    if (errorCode === "oauth") return "Social sign-in was cancelled or failed. Try again.";
-    if (errorCode === "auth") return "Could not complete sign-in. Request a new link or try again.";
+    if (errorCode === "oauth")
+      return "Social sign-in was cancelled or failed. Try again.";
+    if (errorCode === "auth")
+      return "Could not complete sign-in. Request a new link or try again.";
     return null;
   });
 
   if (!isSupabaseConfigured()) {
     return (
       <p className="mt-3 text-muted-foreground">
-        Authentication isn’t configured in this environment. Add Supabase keys to{" "}
-        <code className="text-sm">.env.local</code>.
+        Authentication isn’t configured in this environment. Add Supabase keys
+        to <code className="text-sm">.env.local</code>.
       </p>
     );
   }
@@ -49,7 +55,7 @@ export function SignInForm({
       const { error } = await supabase.auth.signInWithOtp({
         email: email.trim(),
         options: {
-          emailRedirectTo: authCallbackUrl(),
+          emailRedirectTo: authCallbackUrl(next),
           shouldCreateUser: true,
         },
       });
@@ -59,7 +65,9 @@ export function SignInForm({
       }
       setMessage("Check your email for a sign-in link.");
     } catch (err) {
-      setFormError(err instanceof Error ? err.message : "Something went wrong.");
+      setFormError(
+        err instanceof Error ? err.message : "Something went wrong.",
+      );
     } finally {
       setPending(null);
     }
@@ -73,20 +81,22 @@ export function SignInForm({
       const supabase = createClient();
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
-        options: { redirectTo: authCallbackUrl() },
+        options: { redirectTo: authCallbackUrl(next) },
       });
       if (error) {
         setFormError(error.message);
         setPending(null);
       }
     } catch (err) {
-      setFormError(err instanceof Error ? err.message : "Something went wrong.");
+      setFormError(
+        err instanceof Error ? err.message : "Something went wrong.",
+      );
       setPending(null);
     }
   }
 
   return (
-    <div className="mt-8 space-y-6 text-left">
+    <div className="space-y-6 text-left">
       <form onSubmit={sendMagicLink} className="space-y-3">
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
@@ -99,10 +109,14 @@ export function SignInForm({
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
-            className="h-10"
+            className="h-10 bg-background"
           />
         </div>
-        <Button type="submit" className="h-10 w-full" disabled={pending !== null}>
+        <Button
+          type="submit"
+          className="h-10 w-full"
+          disabled={pending !== null}
+        >
           {pending === "email" ? "Sending…" : "Email me a sign-in link"}
         </Button>
       </form>
@@ -111,7 +125,7 @@ export function SignInForm({
         <div className="absolute inset-0 flex items-center" aria-hidden>
           <span className="w-full border-t border-border" />
         </div>
-        <p className="relative mx-auto w-fit bg-background px-2 text-xs text-muted-foreground">
+        <p className="relative mx-auto w-fit bg-accent px-2 text-xs text-muted-foreground">
           Or continue with
         </p>
       </div>
@@ -139,11 +153,6 @@ export function SignInForm({
           {formError}
         </p>
       ) : null}
-
-      <p className="text-xs leading-relaxed text-muted-foreground">
-        Google must be enabled in the Supabase dashboard (Authentication → Providers).
-        Magic links use your project’s email settings.
-      </p>
     </div>
   );
 }
