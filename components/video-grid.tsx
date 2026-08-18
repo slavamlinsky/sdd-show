@@ -5,11 +5,7 @@ import { PlayIcon } from "lucide-react";
 import type { VideoEntry } from "@/lib/videos-data";
 import { YoutubePoster } from "@/components/youtube-poster";
 import { cn } from "@/lib/utils";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 export function VideoGrid({ videos }: { videos: VideoEntry[] }) {
   const [active, setActive] = useState<VideoEntry | null>(null);
@@ -26,7 +22,7 @@ export function VideoGrid({ videos }: { videos: VideoEntry[] }) {
               "group flex h-full min-h-0 flex-col text-left",
               "rounded-3xl border border-border/70 bg-card ring-1 ring-foreground/4 transition-all duration-300",
               "motion-safe:hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/5 hover:ring-foreground/10",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             )}
           >
             <span className="relative block aspect-video w-full shrink-0 overflow-hidden rounded-t-3xl bg-muted">
@@ -51,10 +47,10 @@ export function VideoGrid({ videos }: { videos: VideoEntry[] }) {
                   {video.category}
                 </span>
               ) : null}
-              <span className="line-clamp-2 min-h-[2.75rem] font-heading text-sm font-medium leading-snug text-foreground">
+              <span className="line-clamp-2 min-h-11 font-heading text-sm font-medium leading-snug text-foreground">
                 {video.title}
               </span>
-              <span className="mt-auto min-h-[1.25rem] shrink-0 text-xs leading-tight text-muted-foreground">
+              <span className="mt-auto min-h-5 shrink-0 text-xs leading-tight text-muted-foreground">
                 {video.channelTitle}
               </span>
             </span>

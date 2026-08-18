@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { GradientText } from "@/components/gradient-text";
-import {
-  avatarUrlFromMetadata,
-  displayNameFromAuth,
-} from "@/lib/auth-display";
+import { avatarUrlFromMetadata, displayNameFromAuth } from "@/lib/auth-display";
 import { getAuthUser } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
@@ -29,8 +26,8 @@ export default async function AccountPage() {
         User <GradientText className="font-semibold">profile</GradientText>
       </h1>
       <p className="mt-3 text-muted-foreground">
-        Account details from your sign-in provider. Editing your display name will come in a
-        later update.
+        Account details from your sign-in provider. Editing your display name
+        will come in a later update.
       </p>
 
       <dl className="mt-8 space-y-5 rounded-2xl border border-border/60 bg-card p-5 shadow-sm ring-1 ring-foreground/3 sm:p-6">
@@ -49,7 +46,9 @@ export default async function AccountPage() {
           <dt className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
             Name
           </dt>
-          <dd className="mt-1 text-base font-medium text-foreground">{displayName}</dd>
+          <dd className="mt-1 text-base font-medium text-foreground">
+            {displayName}
+          </dd>
         </div>
         <div>
           <dt className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">

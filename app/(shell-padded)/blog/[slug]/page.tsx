@@ -30,8 +30,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const { title, description, date, keywords: fmKeywords } = post.meta;
   const path = `/blog/${slug}`;
-  const ogImage = blogShareImagePath(post, siteConfig.defaultBlogShareImage).trim();
-  const keywords = [...new Set([...keywordsForPage("blog", "SDD", post.meta.slug.replace(/-/g, " ")), ...(fmKeywords ?? [])])];
+  const ogImage = blogShareImagePath(
+    post,
+    siteConfig.defaultBlogShareImage,
+  ).trim();
+  const keywords = [
+    ...new Set([
+      ...keywordsForPage("blog", "SDD", post.meta.slug.replace(/-/g, " ")),
+      ...(fmKeywords ?? []),
+    ]),
+  ];
 
   return {
     title,
@@ -69,7 +77,7 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <div className="relative mx-auto w-full max-w-4xl">
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-[320px] bg-[radial-gradient(ellipse_70%_55%_at_30%_-30%,rgba(99,102,241,0.07),transparent_65%)]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(ellipse_70%_55%_at_30%_-30%,rgba(99,102,241,0.07),transparent_65%)]"
         aria-hidden
       />
       <Reveal>
@@ -81,19 +89,22 @@ export default async function BlogPostPage({ params }: Props) {
           Back to blog
         </Link>
         <article className="relative mt-10">
-            <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-xs font-semibold tracking-wide text-muted-foreground">
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-xs font-semibold tracking-wide text-muted-foreground">
             <time dateTime={post.meta.date} className="text-muted-foreground">
-                {new Date(post.meta.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </time>
-              <BlogReadingTime minutes={blogReadingTimeMinutes(post)} className="text-muted-foreground" />
-            </div>
-            <h1 className="mt-4 text-balance sm:text-prettier">
-              {blogPageHeading(post.meta)}
-            </h1>
+              {new Date(post.meta.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </time>
+            <BlogReadingTime
+              minutes={blogReadingTimeMinutes(post)}
+              className="text-muted-foreground"
+            />
+          </div>
+          <h1 className="mt-4 text-balance sm:text-prettier">
+            {blogPageHeading(post.meta)}
+          </h1>
           <div className="pt-12">
             <MarkdownContent markdown={post.content} />
           </div>

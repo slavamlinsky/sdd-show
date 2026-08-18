@@ -41,7 +41,9 @@ export default function BlogIndexPage() {
             Our <GradientText>AI-driven blog</GradientText>
           </h1>
           <p className="text-lg leading-relaxed text-muted-foreground">
-            Short posts and useful articles about modern software development. Ideal if you are learning the basics or pitching clearer practices to your team.
+            Short posts and useful articles about modern software development.
+            Ideal if you are learning the basics or pitching clearer practices
+            to your team.
           </p>
         </Reveal>
 
@@ -58,7 +60,7 @@ export default function BlogIndexPage() {
                       {previewSrc ? (
                         <Link
                           href={href}
-                          className="relative aspect-[4/3] w-full shrink-0 rounded-xl overflow-hidden bg-muted/40 outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring sm:aspect-auto sm:w-44 md:w-72 sm:min-h-[11rem]"
+                          className="relative aspect-4/3 w-full shrink-0 rounded-xl overflow-hidden bg-muted/40 outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring sm:aspect-auto sm:w-44 md:w-72 sm:min-h-44"
                           aria-label={`Open article: ${blogCardTitle(meta)}`}
                         >
                           <Image
