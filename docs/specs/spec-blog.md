@@ -1,6 +1,6 @@
 # Feature spec — Blog (`/blog`, `/blog/[slug]`)
 
-**Revisions:** **MVP** is file-backed markdown under `content/blog/`. **v2** introduces a **database** as the runtime source for published posts (listing + detail) and **small UI polish** on `/blog` and `/blog/[slug]`. **v3** adds the **home** carousel + **pillar category** strip and **article-foot** extras (Join Us CTA + category-based related posts); those depend on **primary `category`** per [spec-taxonomy.md](./spec-taxonomy.md).
+**Revisions:** **MVP** is file-backed markdown under `content/blog/`. **v2** expands **`/blog` UX**: **topic filter**, a **single-row featured promo** (newest or flagged post), a **subscribe / social** band, then a **paginated card grid** for the rest; **production** may read posts from a **database** (listing + detail) with the same editorial schema. **v3** adds the **home** carousel + **pillar category** strip and **article-foot** extras (Join Us CTA + category-based related posts); those depend on **primary `category`** per [spec-taxonomy.md](./spec-taxonomy.md).
 
 ## Intent
 
@@ -22,6 +22,7 @@ Publish **short, educational articles** about SDD; start with **3** posts. **MVP
 | `author`             | no       | Omit or static “Slava” for MVP                                                                                                                                                                                                                                                                                                                                          |
 | `category`           | no       | **Exactly one** of **Product | Design | Build | Quality** when present — **required** for v3 home filters and related-articles rules; optional in MVP / v2 for forward-compatible columns or frontmatter                                                                                                                                                                |
 | `readingTimeMinutes` | no       | Optional **override** (positive integer). If omitted, **reading time is estimated** from the markdown body via `lib/blog.ts` (**~200 wpm** baseline × `**READING_TIME_DISPLAY_MULTIPLIER`**, currently **2**, so the shown minutes are **~twice** naive word-count ÷ 200), displayed as a **small clock icon + “Nmin”** — see `**BlogReadingTime`**.                    |
+| `featured`           | no       | **v2 listing:** when `true`, prefer this post for the **promo row** (if it matches the active topic filter); ties / multiples → **newest by `date`** among featured; if none flagged, promo = **newest** in filtered set.                                                                                                                                                                                                                |
 | `editorsPick`        | no       | **v3** optional boolean — used to pick the **“popular”** related-articles slot when analytics are absent (see v3 below)                                                                                                                                                                                                                                                 |
 
 
@@ -31,9 +32,10 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
 
 ## Listing page (`/blog`)
 
-- Reverse chronological (newest first).
+- Reverse chronological (newest first) for the full archive.
+- **MVP / current:** Card or row per post (see below). **v2 target:** filter strip → **one** featured promo row → subscribe band → **paginated** card grid — see **[v2 — `/blog` layout](#v2--blog-layout)**.
 - Card or row per post: **`name`** (link text), **`anons`** (excerpt), date, **reading time** (clock icon + **Nmin**), “Read more” → `/blog/[slug]`. Falls back to `title` / `description` when `name` / `anons` absent.
-- **v2:** **Left cover** when **`blogCardPreviewImage`** resolves to an image; otherwise **no** thumbnail column (text-only row). **No** large outer tinted/bordered wrapper around the whole list — see **v2** below; **Implementation status** marks what is **Done** in this repo vs DB work still **Not started**.
+- **Transitional (pre–full v2 layout):** **Left cover** when **`blogCardPreviewImage`** resolves to an image; otherwise **no** thumbnail column (text-only row). **No** large outer tinted/bordered wrapper around the whole list — see **v2** below; **Implementation status** marks **Done** vs **Not started**.
 
 ## Detail page (`/blog/[slug]`)
 
@@ -80,9 +82,9 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
 
 - RSS (optional nice-to-have), comments.
 
-## Taxonomy (v3)
+## Taxonomy (listing filter vs home)
 
-**Categories** and **tags** — filters, chips, and listing badges on the **home carousel** and elsewhere — follow **[spec-taxonomy.md](./spec-taxonomy.md)** (same model as videos and course). **Not in MVP or v2.** Optional `category` / `tags` in frontmatter (or DB columns) before v3 only if the team wants data prep; **no taxonomy UI** until v3.
+**Categories** and **tags** follow **[spec-taxonomy.md](./spec-taxonomy.md)**. **MVP:** optional `category` / `tags` in data only; **no** browse UI. **`/blog` v2:** horizontal **topic filter** (pillars + **All**) on the **listing page**. **Home `/` v3:** category strip + carousel filter — separate section **v3 — Home page blog band** later in this doc; not required for v2 listing work.
 
 ---
 
@@ -91,39 +93,71 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
 ### Data
 
 - **Runtime source:** Published blog posts are **read from a database** (connection string / client in the app — e.g. Postgres via Supabase or the stack the project adopts). `/blog` and `/blog/[slug]` load **metadata and markdown body** from the DB, not only from files under `content/blog/` on each request.
-- **Fields:** Persist the same concepts as the MVP schema (at minimum `slug`, `title`, `date`, `description`, markdown body, and optional `name`, `anons`, `heading`, `socialImage`, `readingTimeMinutes`, `author`; optional `category`, `editorsPick`, `tags` for forward compatibility with v3).
+- **Fields:** Persist the same concepts as the MVP schema (at minimum `slug`, `title`, `date`, `description`, markdown body, and optional `name`, `anons`, `heading`, `socialImage`, `readingTimeMinutes`, `author`; optional `category`, `editorsPick`, `tags` for filters and v3). **v2 listing:** optional **`featured`** (boolean) — when **true**, that post wins the **promo row** if published and matches the active topic filter; if **no** post is `featured`, use the **newest** post in the filtered set for the promo. At most **one** `featured` live post is assumed; if multiple, pick the **newest by date** among featured.
 - **Authoring / sync:** How posts get **into** the DB (migration from repo files, admin tool, CI job) is implementation-defined; v2 only requires that **production** listing and detail use DB reads. Development may keep a file fallback until cutover if documented.
 
-### UI (small improvements)
+### v2 — `/blog` layout (target)
 
-- **`/blog` listing**
-  - **Cover thumbnail (left):** When **`blogCardPreviewImage`** resolves to an image (`socialImage` or first local inline in the body), show a **small cover on the left** and text + actions on the right (responsive: may stack on narrow viewports). If there is **no** image, **omit** the thumbnail column entirely — **no** empty placeholder block. Use a modest fixed aspect (e.g. ~**4:3** on small screens) and cropped (`object-cover`) so the column stays calm; not a full-bleed hero.
-  - **Listing shell:** Remove the MVP pattern of a **single large tinted/bordered wrapper** around the entire post `<ul>` (the rose-tint gradient + heavy radius “card around all items”). Prefer a **plain vertical stack** (gap between items) or **light dividers**; keep per-post cards/rows as the main surface. No second “outer card” framing the list of article links.
-  - Otherwise: clearer hierarchy, spacing and typography per [spec-design-layout.md](./spec-design-layout.md), sensible hover/focus, **empty and error** states if the DB is unavailable — **reverse chronological** and same content fields as MVP (title, excerpt, date, reading time, link).
-- **`/blog/[slug]`:** Minor alignment with layout tokens and meta row; no **Join Us** band or **category-based related** slots (those are **v3**).
+Vertical order on **`/blog`** (reference pattern: “resources hub” — filter, **one** hero row, conversion band, archive grid):
+
+1. **Topic filter**
+   - Horizontal row of **pill / chip** controls below the page title (and optional subtitle).
+   - **All** — shows every post (subject to pagination below).
+   - **One chip per pillar** — **Product**, **Design**, **Build**, **Quality** — labels and meaning per **[spec-taxonomy.md](./spec-taxonomy.md)**. Filtering uses the post’s **primary `category`** when present; posts **without** `category` appear only under **All** (or as a product rule: hide until categorized — implementation choice, document in PR).
+   - **Behavior:** **Client-side** filter is acceptable for v2; **optional** `?category=` (slug) on the URL for shareable filtered views + SSR alignment when using DB.
+   - **Active** chip state is visually obvious (e.g. filled pill vs outline), keyboard-focusable, per [spec-design-layout.md](./spec-design-layout.md).
+
+2. **Featured promo (single full-width row)**
+   - **One** post — not a carousel — as the **lead** item: **two columns from `md+`**: **left** — small **category** label (if any), **headline** (`name` preferred for display), **lead** (`anons` or fallback to `description`), bottom **meta row** (author avatar/name if available, **date**, **reading time**); **right** — **large** cover (`blogCardPreviewImage` / `socialImage` / first inline figure) in a rounded frame, `object-cover`, sensible **aspect** (e.g. 16:9 or 4:3). **&lt; md:** **stack** (image below copy or above — pick one implementation; default **image after** copy so title is first).
+   - **Which post:** If **`featured: true`** exists in the filtered set, use the **newest such** post by `date`; else use the **single newest** post in the filtered set.
+   - **Dedup:** The promo post **must not** repeat in the **paginated grid** on the same page load.
+
+3. **Subscribe / follow band**
+   - **Placement:** Between the promo and the card grid.
+   - **Primary:** **Email capture** for followers / newsletter — headline + short value prop, email field, submit (stub API or external ESP integration later); accessible labels and error state.
+   - **Secondary:** **Social links** (optional row): use **site-wide** config or a small dedicated list (X, LinkedIn, GitHub, etc.) — icon + text or icon-only with `aria-label`, theme-aware contrast.
+
+4. **Article grid + pagination**
+   - **Grid** of **cards** for **all other** posts (same filter as above), **newest first**, excluding the promo post.
+   - **Card:** cover thumb (when available), **date**, **reading time**, **title**, **one-line** excerpt (`anons`), whole card links to `/blog/[slug]`; hover/focus per design spec.
+   - **Pagination:** **Page-based** listing for SEO — e.g. **`?page=`** or path segment, with **prev/next** and page numbers (implementation choice). **Page size** target **9–12** posts per page (tune to grid columns). **Empty** filter state: clear message + link to **All**.
+
+### `/blog` — transitional layout (until full v2 band ships)
+
+Until the **promo + subscribe + grid + pagination** slice lands, the listing may keep the current **vertical rows**:
+
+- **Cover thumbnail (left):** When **`blogCardPreviewImage`** resolves, **small** left cover + text; if **no** image, **omit** the thumb — **no** empty block; ~**4:3** crop on small screens.
+- **Shell:** **No** single large tinted/bordered wrapper around the entire `<ul>` — **plain** stack or light dividers between rows.
+
+### `/blog/[slug]` (v2)
+
+Minor alignment with layout tokens and meta row; **no** **Join Us** band or **two-slot category related** rail (those remain **v3**).
 
 ### Implementation status (this repo)
 
-What matches **v2 UI** today vs what remains **v2 data** work:
-
 | Area | Status |
 |------|--------|
-| **`/blog`:** left cover from **`blogCardPreviewImage`** when present; **no** thumbnail column (and **no** placeholder) when there is no image | **Done** — `app/(shell-flush)/blog/page.tsx` |
-| **`/blog`:** plain vertical list (**no** outer rose/tint bordered wrapper around the post `<ul>`) | **Done** |
-| **`/blog` + `/blog/[slug]`:** runtime reads from **DB** in production | **Not started** — posts still load from `content/blog` via `getAllPosts()` |
+| **`/blog`:** left cover from **`blogCardPreviewImage`** when present; **no** placeholder when absent | **Done** — transitional row layout — `app/(shell-flush)/blog/page.tsx` |
+| **`/blog`:** plain list shell (**no** outer rose/tint wrapper) | **Done** |
+| **`/blog`:** topic **filter** strip (pillars + **All**) | **Not started** |
+| **`/blog`:** **featured promo** row (split layout + dedupe from grid) | **Not started** |
+| **`/blog`:** **subscribe** + **social** band | **Not started** |
+| **`/blog`:** **card grid** + **pagination** | **Not started** |
+| **`/blog` + `/blog/[slug]`:** optional **`featured`** in frontmatter / DB | **Not started** |
+| **`/blog` + `/blog/[slug]`:** runtime reads from **DB** in production | **Not started** — posts still from `content/blog` via `getAllPosts()` |
 
 ### Non-goals (v2)
 
-- Home **carousel**, **category strip**, **Join Us** CTA, and **two-slot related** rules (all **v3**).
+- Home **carousel** band and its **category strip** (those are **v3** — see below); v2 listing filter is **independent** of home.
+- Article **Join Us** CTA + **two-slot related** rules (**v3** detail).
 - Full **CMS** or in-browser authoring (optional later).
 
 ### Acceptance (v2)
 
-- **Repo today:** Listing **UI** (left cover + plain list shell) is **Done**; **DB** runtime is **Not started** — see **Implementation status** above.
-- **Target — data:** In **production**, every post shown on `/blog` and `/blog/[slug]` is backed by **DB rows** (not direct file reads for published content).
-- **Target — behavior:** Listing and detail behavior matches MVP semantics (ordering, fallbacks for `name` / `anons`, reading time, share preview, **similar-articles** rail) unless explicitly superseded by a follow-up spec note.
-- **Target — listing:** Rows with a preview image include a **left cover** per **`blogCardPreviewImage`**; rows **without** an image are **text-only** (no placeholder). The list is **not** wrapped in a large tinted outer panel — only per-post surfaces + normal page padding.
-- Listing UI otherwise satisfies the **small improvements** bullets above.
+- **Target — layout:** `/blog` implements **in order**: topic filter → **one** promo row → subscribe/social band → **paginated** card grid; promo post **omitted** from the grid; filter respects **primary `category`** + **All**.
+- **Target — data:** **Production** listing + detail backed by **DB** when the team cuts over; until then file-backed data may drive the same UI.
+- **Target — behavior:** Detail page and share previews match MVP semantics; **similar-articles** rail unchanged until v3 related rules.
+- **Repo today:** Only the **transitional** row list + shell items in **Implementation status** are **Done**; promo, filter, subscribe, grid pagination, **`featured`**, and **DB** are **Not started**.
 
 ---
 

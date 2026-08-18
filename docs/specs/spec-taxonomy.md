@@ -2,10 +2,10 @@
 
 ## Version / scope
 
-- **Target:** **v2+** — category/tag **filters**, listing **badges**, and browse-by-topic UX are **out of scope for MVP** (exact **phase** per surface: e.g. **blog v3** for home carousel + strip; videos per [spec-videos-v2-v3.md](./spec-videos-v2-v3.md)).
-- **MVP:** content may ship **without** `category` / `tags` in frontmatter or static data. Optional early **data-only** fields (same slugs as below) are allowed if useful for copy audits; no UI requirement until the relevant surface ships taxonomy UX.
+- **Target:** **v2+** — **`/blog` listing** topic filter (pillars + All) is specified in **[spec-blog.md](./spec-blog.md)** (**v2**). **Home `/`** carousel **category strip** and other browse UI phases remain per surface (e.g. **blog v3** home band; videos per [spec-videos-v2-v3.md](./spec-videos-v2-v3.md)).
+- **MVP:** content may ship **without** `category` / `tags` in frontmatter or static data. Optional early **data-only** fields (same slugs as below) are allowed if useful for copy audits; **no taxonomy UI** until **blog v2 listing** (or another surface) ships per **[spec-blog.md](./spec-blog.md)** and related specs.
 
-This doc is the **shared vocabulary and rules** so **blog articles**, **videos**, and **course** positioning use **one** model when browse UI lands (Markdown frontmatter, Supabase columns, etc., as chosen per route — **blog v2** may already persist these fields in the DB without exposing taxonomy UI).
+This doc is the **shared vocabulary and rules** so **blog articles**, **videos**, and **course** positioning use **one** model when browse UI lands (Markdown frontmatter, Supabase columns, etc., as chosen per route). **Blog `/blog` v2** uses pillars for the **listing** topic filter; data can be prepared before that UI ships.
 
 ---
 
@@ -40,7 +40,7 @@ Use these **four** labels only — keep the set **fixed** so filters stay scanna
 
 | Mechanism             | Role                                                                                                      | Cardinality                                |
 | --------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| **Category** (pillar) | Primary shelf for browse — **exactly one** per blog post / video / course slice where filters/shelves apply (e.g. **blog v3** home strip; videos per their spec).                    | **One of** Product, Build, Quality, Design |
+| **Category** (pillar) | Primary shelf for browse — **exactly one** per blog post / video / course slice where filters/shelves apply (**blog v2** `/blog` listing filter; **blog v3** home strip; videos per their spec).                    | **One of** Product, Build, Quality, Design |
 | **Tags**              | Tools, domains, themes — **AI**, **API**, **methodology**, **growth**, **CRO**, **ROI** (as topics), etc. | **Zero or more**                           |
 
 
