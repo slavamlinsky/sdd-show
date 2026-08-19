@@ -2,7 +2,7 @@
 
 ## Intent
 
-Orient visitors, explain SDD in one screenful, and funnel toward **Course** while surfacing **Glossary**, **Blog**, and **Videos**.
+Orient visitors, explain SDD in one screenful, and funnel toward **Course** while surfacing **Glossary**, **Ecosystem**, **Blog**, and **Videos**.
 
 Follow [spec-design-layout.md](./spec-design-layout.md) for **responsive bands**, **spacing**, **CTA styling**, **images** (MVP placeholders OK), and **[naming & capitalization](./spec-design-layout.md#naming--capitalization)** (sentence case for hero, FAQ, and cards; taxonomy pillar labels unchanged).
 
@@ -30,6 +30,9 @@ Follow [spec-design-layout.md](./spec-design-layout.md) for **responsive bands**
    - **Carousel** of up to **four** curated entries (the **`videos`** list **after** the hero featured item): same snap / arrows / dots behavior as the blog carousel; **one** slide on **&lt; md**, **two** from **`md`** to **`lg`**, **three** from **`lg`** (viewport breakpoints). Each **card**: YouTube poster, title, optional category + channel; **tap** opens in-site **modal player** (same as `/videos`).
 7. **“Who it’s for” (course audience — compact)** — *optional / phased; see [spec-course](./spec-course.md)*
   - **Small band** on home (optional): short heading + **2–4 bullets or chips** mapping to [course audience in spec-main](./spec-main.md#course-audience). Full detail and bullets may live primarily on `/course` hero.
+8. **Explore the ecosystem** — *P1; see [spec-ecosystem.md](./spec-ecosystem.md)*
+  - Heading + lead: understand the tools, approaches, and standards shaping intent-driven engineering.
+  - Three links: **Tools** (What can I use?) · **Approaches** (How should I work?) · **Standards** (How does it fit together?) → `/ecosystem#…`.
 
 ## Acceptance
 

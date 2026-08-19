@@ -53,6 +53,7 @@ Architects and senior ICs map onto those seats. **Not the lead story:** intro-to
 | Path           | Page                                                                                                |
 | -------------- | --------------------------------------------------------------------------------------------------- |
 | `/`            | Home                                                                                                |
+| `/ecosystem`   | Map of tools, approaches, and standards ([spec-ecosystem.md](./spec-ecosystem.md))                  |
 | `/glossary`    | Term definitions (SDD + related terms)                                                              |
 | `/blog`        | Article listing                                                                                     |
 | `/blog/[slug]` | Single article                                                                                      |
@@ -64,7 +65,7 @@ Architects and senior ICs map onto those seats. **Not the lead story:** intro-to
 
 ## Global layout
 
-- **Header:** **Site title / logo** (links to `/`); **primary nav** order: **Glossary → Videos → Courses → Blog** (no duplicate “Home”); nav **centered** on `md+` between logo and actions; **logged out:** **“Sign in”** (primary border + primary text, top-right, **Lucide `LogIn`**) → `/sign-in`. **Logged in (auth P2):** account affordance + **Sign out**. **Mobile:** sheet menu for nav; Sign in / account stays reachable next to the menu trigger.
+- **Header:** **Site title / logo** (links to `/`); **primary nav** order: **Glossary → Ecosystem → Videos → Course → Blog** (no duplicate “Home”); nav **centered** on `md+` between logo and actions; **logged out:** **“Sign in”** (primary border + primary text, top-right, **Lucide `LogIn`**) → `/sign-in`. **Logged in (auth P2):** account affordance + **Sign out**. **Mobile:** sheet menu for nav; Sign in / account stays reachable next to the menu trigger.
 - **Footer:** Short note + optional link to repo or contact (optional for MVP).
 - **App shell:** **Main content** uses one shared wrapper (max width, horizontal + vertical padding, default `h1` styling) in the root layout; routes use `full-bleed` only where a section must span the viewport. See **App shell (root layout)** in [spec-design-layout.md](./spec-design-layout.md).
 - **Design:** Light, simple, modern (AI-tool / edu style). **Responsive layout, spacing (“air”), structured blocks, CTAs, and image rules** are defined in [spec-design-layout.md](./spec-design-layout.md). Optional visual references may live in a future `design.md` — not blocking MVP.
