@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "Intent Driven Development Community",
+  name: "Intent Driven Engineering Community",
   title: "Intent-Driven Engineering — Beyond Spec-Driven Development.",
   description:
     "Intent-driven engineering extends spec-driven development with shared intent, outcome-focused execution, and AI-assisted workflows.",

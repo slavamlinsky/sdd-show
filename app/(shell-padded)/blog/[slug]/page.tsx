@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BlogReadingTime } from "@/components/blog-reading-time";
 import { BlogSimilarArticles } from "@/components/blog-similar-articles";
+import { JsonLd } from "@/components/json-ld";
+import { PageBreadcrumbs } from "@/components/page-breadcrumbs";
 import { MarkdownContent } from "@/components/markdown-content";
 import { Reveal } from "@/components/reveal";
 import {
@@ -13,9 +14,9 @@ import {
   getPostBySlug,
   getSimilarPosts,
 } from "@/lib/blog";
+import { articleJsonLd, breadcrumbJsonLd } from "@/lib/json-ld";
 import { keywordsForPage } from "@/lib/seo-keywords";
 import { siteConfig } from "@/lib/site-config";
-import { ArrowLeftIcon } from "lucide-react";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -73,22 +74,28 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   const similarPosts = getSimilarPosts(slug);
+  const heading = blogPageHeading(post.meta);
+  const path = `/blog/${slug}`;
 
   return (
     <div className="relative mx-auto w-full max-w-4xl">
+      <JsonLd data={articleJsonLd(post)} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/blog" },
+          { name: heading, path },
+        ])}
+      />
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(ellipse_70%_55%_at_30%_-30%,rgba(99,102,241,0.07),transparent_65%)]"
         aria-hidden
       />
       <Reveal>
-        <Link
-          href="/blog"
-          className="relative inline-flex items-center gap-1.5 rounded-md text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-        >
-          <ArrowLeftIcon className="size-4" />
-          Back to blog
-        </Link>
-        <article className="relative mt-10">
+        <PageBreadcrumbs
+          items={[{ name: "Blog", href: "/blog" }, { name: heading }]}
+        />
+        <article className="relative mt-6">
           <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-xs font-semibold tracking-wide text-muted-foreground">
             <time dateTime={post.meta.date} className="text-muted-foreground">
               {new Date(post.meta.date).toLocaleDateString("en-US", {
@@ -102,9 +109,7 @@ export default async function BlogPostPage({ params }: Props) {
               className="text-muted-foreground"
             />
           </div>
-          <h1 className="mt-4 text-balance sm:text-prettier">
-            {blogPageHeading(post.meta)}
-          </h1>
+          <h1 className="mt-4 text-balance sm:text-pretty">{heading}</h1>
           <div className="pt-12">
             <MarkdownContent markdown={post.content} />
           </div>

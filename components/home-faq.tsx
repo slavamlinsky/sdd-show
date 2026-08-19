@@ -31,7 +31,7 @@ const items = [
   },
   {
     id: "who",
-    q: "Who can use intent-driven development?",
+    q: "Who can use intent-driven approach?",
     a: "Any team building software can use it, including product managers, designers, engineers, QA, founders, and agencies. If people need shared clarity before building, this approach fits.",
   },
 ] as const;
@@ -44,10 +44,16 @@ export function HomeFaq() {
         Frequently asked questions
       </h2>
       <p className="mx-auto mt-4 max-w-3xl text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
-        Quick answers. For deeper dives, visit the glossary and blog. Course questions are answered on the course page. You can also explore our key videos to see the ideas in action.
+        Quick answers. For deeper dives, visit the glossary and blog. Course
+        questions are answered on the course page. You can also explore our key
+        videos to see the ideas in action.
       </p>
 
-      <Accordion multiple defaultValue={[]} className="mt-12 w-full border-t border-border">
+      <Accordion
+        multiple
+        defaultValue={[]}
+        className="mt-12 w-full border-t border-border"
+      >
         {items.map((item) => (
           <AccordionItem
             key={item.id}
@@ -58,7 +64,7 @@ export function HomeFaq() {
               className={cn(
                 "rounded-none border-0 py-5 text-left text-base font-medium text-foreground sm:py-6 sm:text-lg",
                 "hover:no-underline focus-visible:ring-ring focus-visible:ring-offset-background",
-                "[&_svg]:mt-0.5 [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground"
+                "[&_svg]:mt-0.5 [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
               )}
             >
               {item.q}
@@ -66,7 +72,7 @@ export function HomeFaq() {
             <AccordionContent
               className={cn(
                 "px-0 pb-5 pt-0 text-left text-sm leading-relaxed text-muted-foreground sm:text-[15px]",
-                "[&>div]:px-0 [&>div]:pb-0 [&>div]:pt-0"
+                "[&>div]:px-0 [&>div]:pb-0 [&>div]:pt-0",
               )}
             >
               {item.a}

@@ -157,7 +157,7 @@ export const courseModules: {
     lede: "A decision framework for when to move fast and when to measure twice.",
     points: [
       "Risk and longevity checks: money, security, or a year of maintenance → SDD.",
-      "When vibe coding is fine for prototypes — and when real systems need a spec (OpenSpec on brownfield, Spec Kit when many agents share one repo, Kiro when the team lives in that IDE).",
+      "When vibe coding is fine for prototypes — and when real systems need a spec (OpenSpec on existing systems, Spec Kit for multi-agent greenfield, Kiro when the team lives in that IDE).",
     ],
     icon: Scale,
   },

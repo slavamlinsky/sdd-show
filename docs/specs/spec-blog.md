@@ -41,7 +41,9 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
 
 - Render full article.
 - `**generateMetadata`:** `title` + `description` for `<title>` / basic meta; also `**openGraph`** / `**twitter**` with preview image from `**blogShareImagePath**` (`**socialImage**` → first local inline image → `**defaultBlogShareImage**`). `**alternates.canonical**` uses `metadataBase` from the root layout for absolute URLs.
-- **Header:** Meta row (date + reading time); `**<h1>`** from `**heading**` (then `name`, then `title`); lead from `**anons**` (then `description`). **No** full-bleed hero image in the header—figures appear only inside the article markdown body.
+- **JSON-LD:** `schema.org/Article` via `articleJsonLd` (`lib/json-ld.ts`) on the detail page, plus `schema.org/BreadcrumbList` (`breadcrumbJsonLd`: Home → Blog → article heading). Site-wide `WebSite` JSON-LD lives in the root layout.
+- **Internal links:** Prefer **1–2** in-body links per post to `/glossary`, `/ecosystem`, and `/course` when the sentence already belongs there. Related posts stay in `**BlogSimilarArticles**`. Do not keyword-stuff the homepage; a brand link to `/` is optional and last.
+- **Header:** Breadcrumbs **Home → Blog →** article heading (current page, not a link; not a “Back to blog” control). Meta row (date + reading time); `<h1>` from `heading` (then `name`, then `title`); lead from `anons` (then `description`). **No** full-bleed hero image in the header—figures appear only inside the article markdown body.
 - **Similar articles (MVP / v2):** Immediately **after** the `</article>` body, render `**BlogSimilarArticles`**: up to **three** other posts (**newest first**), excluding the current slug (`getSimilarPosts` in `**lib/blog.ts`**; default limit **3**). **Layout:** **two** cards on **&lt; md** viewports; **three** in a row from **`md`**. Cards: optional cover thumb, date, `**BlogReadingTime**`, title, one-line `**anons**`, whole card links to `/blog/[slug]` — internal links for UX + SEO. **Hover:** **~8px** upward translate (`**-translate-y-2`**) + border emphasis; **no** shadow lift (`**shadow-none`** on the link). **v3** may replace this rail with category-based **Related** rules (below) where `category` exists.
 
 ## Share preview (Open Graph and social links)
@@ -66,7 +68,7 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
   - `**/images/intent-driven-user.png`** — after “The evolution of the lifecycle” (human / intent-architect framing). **16:9** in the frame.
   - `**/images/intent-driven-schema.png`** — after “Where does control live?” (workflow / guardrails schema). **16:9** in the frame.
   - `**/images/intent-driven-role-shift.jpg`** — after the ambiguity line in “From scribe to architect” (upstream role metaphor). Uses the **default ~16:9** blog figure aspect unless a future change aligns it to 16:9.
-- **Spec frameworks article (`spec-kit-openspec-kiro`):** Assets:
+- **Spec frameworks article (`sdd-tools-and-frameworks`):** Assets:
   - **`/images/spec-sdd-frameworks-cover.png`** — **`socialImage`** / link-preview and first inline figure (spec as hub, three tool paths).
   - **`/images/spec-sdd-frameworks-why.png`** — after “Why spec-driven development frameworks exist” (chat noise vs one contract).
   - **`/images/spec-sdd-frameworks-compare.png`** — under “Spec Kit vs OpenSpec vs Kiro” (three visual lanes).

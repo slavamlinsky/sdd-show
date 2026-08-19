@@ -104,7 +104,7 @@ const markdownComponents = {
   ),
   blockquote: ({ ...props }: React.ComponentPropsWithoutRef<"blockquote">) => (
     <blockquote
-      className="border-l-2 border-border pl-4 italic text-muted-foreground"
+      className="mx-auto my-6 w-[90%] rounded-xl border border-border/50 bg-muted/30 px-4 py-4 not-italic leading-relaxed text-muted-foreground sm:px-5 [&_p]:mt-0 [&_p+p]:mt-3"
       {...props}
     />
   ),
