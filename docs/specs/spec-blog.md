@@ -66,6 +66,11 @@ Body: MD/MDX supported by the chosen content pipeline. Start body with `## …` 
   - `**/images/intent-driven-user.png`** — after “The evolution of the lifecycle” (human / intent-architect framing). **16:9** in the frame.
   - `**/images/intent-driven-schema.png`** — after “Where does control live?” (workflow / guardrails schema). **16:9** in the frame.
   - `**/images/intent-driven-role-shift.jpg`** — after the ambiguity line in “From scribe to architect” (upstream role metaphor). Uses the **default ~16:9** blog figure aspect unless a future change aligns it to 16:9.
+- **Spec frameworks article (`spec-kit-openspec-kiro`):** Assets:
+  - **`/images/spec-sdd-frameworks-cover.png`** — **`socialImage`** / link-preview and first inline figure (spec as hub, three tool paths).
+  - **`/images/spec-sdd-frameworks-why.png`** — after “Why spec-driven development frameworks exist” (chat noise vs one contract).
+  - **`/images/spec-sdd-frameworks-compare.png`** — under “Spec Kit vs OpenSpec vs Kiro” (three visual lanes).
+  Cross-links: `/ecosystem#tools`, `/blog/what-is-spec-driven-development`, `/course#syllabus`.
 - **Implementation:** Paths `**intent-driven-user`** and `**intent-driven-schema**` use `**aspect-video` (16:9)** in the markdown renderer; other post images (including `**intent-driven-role-shift`**) keep **~16:9**. Export **user** and **schema** at **16:9** for predictable crops.
 
 ## MVP content
