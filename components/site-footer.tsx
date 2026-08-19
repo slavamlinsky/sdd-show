@@ -9,6 +9,9 @@ export function SiteFooter() {
           © {new Date().getFullYear()} {siteConfig.name}. Built with specs first.
         </p>
         <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
+          <Link className="text-muted-foreground hover:text-foreground" href="/ecosystem">
+            Ecosystem
+          </Link>
           <Link className="text-muted-foreground hover:text-foreground" href="/course">
             Course
           </Link>

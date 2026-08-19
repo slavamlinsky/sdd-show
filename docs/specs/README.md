@@ -14,5 +14,6 @@ Read in this order:
   - [spec-videos.md](./spec-videos.md) — MVP
   - [spec-videos-v2-v3.md](./spec-videos-v2-v3.md) — videos roadmap (DB, suggest, TTL, favorites)
   - [spec-course.md](./spec-course.md)
+  - [spec-ecosystem.md](./spec-ecosystem.md)
 
 Implementation should satisfy **spec-main**, **spec-design-layout**, **spec-workflow-ci**, and each relevant feature spec. **spec-taxonomy** applies when implementing **v2** topic browse (categories/tags); not a gate for MVP. **spec-data-auth** applies when adding database or sign-in.
