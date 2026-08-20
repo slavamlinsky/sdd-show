@@ -48,7 +48,7 @@ You need spec-driven development tools when:
 - The codebase is already large and a “full rewrite of the spec” would rot immediately.
 - You are tired of reviewing code that never matched the conversation you thought you had.
 
-You do not need a framework to try SDD. A markdown file `\*.spec.md` next to the PR still beats vibe coding. Reach for a kit when the process is what keeps breaking.
+You do not need a framework to try SDD. A markdown file `*.spec.md` next to the PR still beats vibe coding. Reach for a kit when the process is what keeps breaking.
 
 ## Spec-driven development tools overview
 
@@ -68,7 +68,7 @@ Spec Kit is GitHub’s open-source toolkit for spec-driven work. It is agent-agn
 
 OpenSpec (Fission-AI) is the lightweight, brownfield-first cousin among spec-driven development tools. Instead of regenerating a complete architecture doc for every change, you write a delta: what is different from today’s system.
 
-> A typical OpenSpec flow is propose → apply → sync → archive. You propose the change, implement it, sync it into the current specs, then keep the history.
+> A typical OpenSpec flow is propose → apply → archive, with an optional sync. You propose the change, implement it, optionally sync it into the current specs, then keep the history.
 >
 > That matches how real products evolve. Most work is not a blank repo. It is “this checkout already exists; we need refunds on failed captures.” Delta specs stay small. `openspec/specs/` remains the growing source of truth; archived changes preserve what already shipped.
 >
@@ -86,7 +86,7 @@ Kiro is AWS’s spec-driven product: an agentic IDE (VS Code–shaped), a CLI, a
 >
 > Use it when the team wants SDD as a product experience (IDE, CLI, or web), you already work in that stack, or AWS-shaped greenfield work is the default.
 >
-> Skip it when you want a vendor-neutral markdown kit in the repo (Spec Kit or OpenSpec) and you do not want Kiro’s agent or `.kiro` conventions. Staying in Cursor or Neovim is not, by itself, a reason to skip. The CLI and web run the spec loop without switching everyone to the Kiro IDE.
+> Skip it when you want a vendor-neutral markdown kit in the repo (Spec Kit or OpenSpec) and you do not want Kiro’s agent or `.kiro` conventions. Staying in Cursor or Neovim is not, by itself, a reason to skip. The CLI and web run the spec loop without switching everyone to the Kiro IDE. Kiro Web is currently in Preview and may require a paid subscription, a connected GitHub account, and region or organization setup.
 
 ## Spec Kit vs OpenSpec vs Kiro
 
@@ -98,7 +98,7 @@ A compact spec-driven development tools comparison:
 | ------------------------ | ------------------------------------------ | ------------------------------------------------------- | ------------------------------------------------ |
 | Shape                    | CLI + templates in the repo                | CLI + delta specs in the repo                           | IDE, CLI, and web. Spec workflow on each         |
 | Home turf                | Greenfield, multi-agent teams              | Brownfield, incremental change                          | Productized spec loop (IDE, CLI, web)            |
-| Weight                   | Fuller specify → plan → tasks loop         | Thinner propose → apply → archive                       | Productized, less DIY                            |
+| Weight                   | Fuller specify → plan → tasks loop         | Thinner propose → apply → (optional sync) → archive     | Productized, less DIY                            |
 | Lock-in                  | Low (markdown + your agents)               | Low (markdown + your agents)                            | Higher (Kiro agent and config, not only an IDE)  |
 | Best question it answers | How do we run SDD the same way everywhere? | How do we spec this change without rewriting the world? | How do we practice SDD without assembling a kit? |
 
@@ -112,7 +112,7 @@ Start with the work, not the brand.
 > 2. Existing product, weekly changes. Default to OpenSpec. Delta specs match how the system already exists.
 > 3. New surface with several moving parts, mixed agents. Default to Spec Kit. You want one constitution and a loop every agent can enter.
 > 4. Team wants the loop on rails in Kiro’s product. Try Kiro (IDE, CLI, or web). If you need a portable kit every agent already in the repo can follow, use Spec Kit or OpenSpec instead of forcing the Kiro IDE on Cursor or Neovim holdouts.
-> 5. Money, identity, or a public contract. Use a spec-driven development framework and a human review of the spec before implement. The kit does not replace the [risk check](/course#syllabus) we use on the course: if it will still matter in a year, measure twice.
+> 5. Money, identity, or a public contract. Use a spec-driven development framework and a human review of the spec before implementation. The kit does not replace the [risk check](/course#syllabus) we use on the course: if it will still matter in a year, measure twice.
 
 Pick the lightest SDD tool that keeps the spec as the source of truth. Frameworks are how you stop re-litigating the process. They are not how you avoid writing the spec.
 

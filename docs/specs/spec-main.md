@@ -89,7 +89,7 @@ Choose one approach and use it consistently for blog posts, glossary entries, an
 
 - Per-route `metadata` (title, description).
 - Sensible defaults for `/blog/[slug]` from post frontmatter (**Open Graph / Twitter** preview: `**socialImage`**, else first body image, else `**siteConfig.defaultBlogShareImage**` — see [spec-blog.md — Share preview](./spec-blog.md#share-preview-open-graph-and-social-links)).
-- **Article JSON-LD** on `/blog/[slug]` (`schema.org/Article`) plus **BreadcrumbList** (Home → Blog → article); **WebSite** JSON-LD in the root layout.
+- **Article JSON-LD** on `/blog/[slug]` (`schema.org/Article`) plus **BreadcrumbList** (Home → Blog → article in structured data; **visible** trail is **Blog →** article — no Home crumb, logo already links `/`; see [spec-blog.md](./spec-blog.md)); **WebSite** JSON-LD in the root layout.
 - **`/sitemap.xml`** (`app/sitemap.ts`) lists public pages and posts. **`/robots.txt`** allows search and AI crawlers (GPTBot, Google-Extended, ClaudeBot, PerplexityBot, Applebot-Extended, CCBot) and disallows `/sign-in`, `/account`, `/auth/`.
 - **`/llms.txt`** lists primary URLs and blog posts for humans and LLM crawlers (`lib/llms-txt.ts`).
 - In-article markdown should include **1–2 contextual links** to `/glossary`, `/ecosystem`, and `/course` where the sentence already fits. Homepage (`/`) is optional and last, not a keyword dump.

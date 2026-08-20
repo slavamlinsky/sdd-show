@@ -110,6 +110,7 @@ export default async function BlogPostPage({ params }: Props) {
             />
           </div>
           <h1 className="mt-4 text-balance sm:text-pretty">{heading}</h1>
+          <p className="mt-4 text-lg text-muted-foreground">{lead}</p>
           <div className="pt-12">
             <MarkdownContent markdown={post.content} />
           </div>

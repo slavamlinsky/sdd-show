@@ -148,7 +148,7 @@ export default function HomePage() {
                 </GradientText>
               </h2>
               <p className="max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                Short talks on AI-driven engineering, and modern development
+                Short talks on AI-driven engineering and modern development
                 workflows.
               </p>
             </div>

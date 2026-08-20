@@ -31,7 +31,7 @@ const items = [
   },
   {
     id: "who",
-    q: "Who can use intent-driven approach?",
+    q: "Who can use this intent-driven approach?",
     a: "Any team building software can use it, including product managers, designers, engineers, QA, founders, and agencies. If people need shared clarity before building, this approach fits.",
   },
 ] as const;

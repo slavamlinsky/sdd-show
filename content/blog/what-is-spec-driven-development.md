@@ -67,11 +67,11 @@ This shows up in chat:
 
 That is a ping, not a spec. A minimal SDD-style slice could look like this.
 
-> Intent: an account admin exporting usage for billing. Pain: exports above about 50k rows time out or freeze the tab. Success: for accounts up to 200k rows, CSV download starts within 3 seconds and finishes without killing the tab. Server or worker is fine.
+> Intent: an account admin exporting usage for billing. Pain: exports above about 50k rows time out or freeze the tab. Success: for exports up to 200k rows, CSV download starts within 3 seconds and finishes without killing the tab. Server or worker is fine.
 >
 > Scope in: CSV export for the usage report only, accounts up to 200k rows. Out: PDF, scheduled email, other reports. Those earn their own slices later.
 >
-> Acceptance: 60k rows, user chooses Export CSV, download starts within 3 seconds, file opens in Sheets without repair. 250k rows, UI shows too large, contact support, no silent failure. Export running: refresh does not start a second job for the same user.
+> Acceptance: 60k rows, user chooses Export CSV, download starts within 3 seconds, file opens in Sheets without repair. 200k rows, download completes without killing the tab. 250k rows, UI shows too large, contact support, no silent failure. Export running: refresh does not start a second job for the same user.
 
 You are still near one page. Fast has a number. Big has a cap. The scary edges have names.
 
