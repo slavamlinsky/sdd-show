@@ -136,6 +136,7 @@ export const courseModules: {
     lede: "The specification — not the code — is the primary artifact.",
     points: [
       "Specify → plan → task → implement, as a repeatable loop.",
+      "Run that loop with GitHub Spec Kit, OpenSpec, or Kiro — greenfield vs brownfield vs IDE.",
       "Case study: a login or payment flow designed so agents cannot invent the edge cases.",
     ],
     icon: ListChecks,
@@ -156,7 +157,7 @@ export const courseModules: {
     lede: "A decision framework for when to move fast and when to measure twice.",
     points: [
       "Risk and longevity checks: money, security, or a year of maintenance → SDD.",
-      "When vibe coding is fine for prototypes — and when real systems need a spec.",
+      "When vibe coding is fine for prototypes — and when real systems need a spec (OpenSpec on existing systems, Spec Kit for multi-agent greenfield, Kiro when the team lives in that IDE).",
     ],
     icon: Scale,
   },

@@ -54,12 +54,19 @@ export default function HomePage() {
             <Reveal className="min-w-0 flex-1 space-y-8" distance={28}>
               <h1 className="text-balance leading-[1.15] sm:leading-[1.12]">
                 Ship software from{" "}
-                <GradientText className="font-semibold">clear and strong specs</GradientText>
-                {" "}not vague tickets
+                <GradientText className="font-semibold">
+                  clear and strong specs
+                </GradientText>{" "}
+                not vague tickets
               </h1>
               <div className="max-w-[65ch] space-y-8 text-pretty text-base leading-[1.7] text-muted-foreground lg:max-w-none">
                 <p>
-                  <span className="font-medium">Intent-driven engineering (IDE)</span> focuses on defining the desired outcomes before implementation, ensuring clear requirements drive development decisions rather than simply following predefined tasks.
+                  <span className="font-medium">
+                    Intent-driven engineering (IDE)
+                  </span>{" "}
+                  focuses on defining the desired outcomes before
+                  implementation, ensuring clear requirements drive development
+                  decisions rather than simply following predefined tasks.
                 </p>
               </div>
               <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center">
@@ -67,7 +74,7 @@ export default function HomePage() {
                   href="/course"
                   className={cn(
                     buttonVariants({ size: "lg" }),
-                    "inline-flex h-12 gap-2 rounded-md px-8 text-base shadow-md shadow-primary/15"
+                    "inline-flex h-12 gap-2 rounded-md px-8 text-base shadow-md shadow-primary/15",
                   )}
                 >
                   View course
@@ -77,14 +84,18 @@ export default function HomePage() {
                   href="/glossary"
                   className={cn(
                     buttonVariants({ variant: "outline", size: "lg" }),
-                    "h-12 rounded-md border-border/80 px-8 text-base justify-center sm:min-w-[10rem]"
+                    "h-12 rounded-md border-border/80 px-8 text-base justify-center sm:min-w-[10rem]",
                   )}
                 >
                   Open glossary
                 </Link>
               </div>
             </Reveal>
-            <Reveal className="relative w-full shrink-0 lg:max-w-lg" delay={0.08} distance={24}>
+            <Reveal
+              className="relative w-full shrink-0 lg:max-w-lg"
+              delay={0.08}
+              distance={24}
+            >
               <HeroFeaturedVideo video={featuredHeroVideo} />
             </Reveal>
           </div>
@@ -102,17 +113,21 @@ export default function HomePage() {
           <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="space-y-3">
               <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
-                Most popular from <GradientText className="font-semibold">our content hub</GradientText>
+                Most popular from{" "}
+                <GradientText className="font-semibold">
+                  our content hub
+                </GradientText>
               </h2>
               <p className="max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                Articles about software best practices, SDLC and development workflows.
+                Articles about software best practices, SDLC and development
+                workflows.
               </p>
             </div>
             <Link
               href="/blog"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
-                "self-start rounded-md sm:self-auto"
+                "self-start rounded-md sm:self-auto",
               )}
             >
               All articles
@@ -127,17 +142,21 @@ export default function HomePage() {
           <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="space-y-3">
               <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
-                Curated videos from <GradientText className="font-semibold">our video library</GradientText>
+                Curated videos from{" "}
+                <GradientText className="font-semibold">
+                  our video library
+                </GradientText>
               </h2>
               <p className="max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                Short talks on intent-driven engineering, and modern development workflows.
+                Short talks on AI-driven engineering and modern development
+                workflows.
               </p>
             </div>
             <Link
               href="/videos"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
-                "self-start rounded-md sm:self-auto"
+                "self-start rounded-md sm:self-auto",
               )}
             >
               All videos

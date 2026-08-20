@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { FooterRegion } from "@/components/footer-region";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { LocaleInit } from "@/components/locale-init";
+import { JsonLd } from "@/components/json-ld";
 import { ThemeProvider } from "@/components/theme-provider";
 import {
   avatarUrlFromMetadata,
@@ -17,6 +18,7 @@ import {
   isLocaleCode,
   LOCALE_COOKIE,
 } from "@/lib/locale";
+import { websiteJsonLd } from "@/lib/json-ld";
 import { baseKeywords } from "@/lib/seo-keywords";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
@@ -70,6 +72,7 @@ export default async function RootLayout({
           "min-h-full flex flex-col bg-background text-foreground"
         )}
       >
+        <JsonLd data={websiteJsonLd()} />
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

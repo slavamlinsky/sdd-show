@@ -90,7 +90,7 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0); 
+  --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -129,7 +129,9 @@
   html {
     @apply font-sans;
 
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
     overflow-x: clip;
   }
 
@@ -141,7 +143,7 @@
 
   /* Default page title; :where() keeps specificity low so utilities (e.g. text-2xl) can override. */
   :where(.page-shell) h1 {
-    @apply mt-6 font-heading text-4xl font-semibold tracking-tight sm:mt-8 sm:text-5xl;
+    @apply mt-6 font-heading text-3xl font-semibold tracking-tight sm:mt-8 sm:text-4xl;
   }
 }
 
@@ -170,7 +172,9 @@
     -webkit-text-fill-color: currentColor;
   }
   .gradient-text-fill.gradient-text-fill--on-dark {
-    color: rgb(221 214 254); /* indigo-200: fallback on dark modals / scorebg-style sections */
+    color: rgb(
+      221 214 254
+    ); /* indigo-200: fallback on dark modals / scorebg-style sections */
     -webkit-text-fill-color: currentColor;
   }
   .dark .gradient-text-fill {
@@ -196,11 +200,11 @@
       ); */
       background-image: linear-gradient(
         to right,
-        #974adc, /* Deep Purple */
-        #6236b5, /* Muted Purple/Blue transition */
-        #005ff2, /* Your Base Blue */
-        #00c2f2, /* Cyan */
-        #00e676  /* Vibrant Green */
+        #974adc,
+        /* Deep Purple */ #6236b5,
+        /* Muted Purple/Blue transition */ #005ff2,
+        /* Your Base Blue */ #00c2f2,
+        /* Cyan */ #00e676 /* Vibrant Green */
       );
       color: rgb(0 0 0 / 0);
       -webkit-text-fill-color: transparent;
