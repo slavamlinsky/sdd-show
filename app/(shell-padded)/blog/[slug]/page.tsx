@@ -7,6 +7,7 @@ import { PageBreadcrumbs } from "@/components/page-breadcrumbs";
 import { MarkdownContent } from "@/components/markdown-content";
 import { Reveal } from "@/components/reveal";
 import {
+  blogCardAnons,
   blogPageHeading,
   blogReadingTimeMinutes,
   blogShareImagePath,
@@ -75,6 +76,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   const similarPosts = getSimilarPosts(slug);
   const heading = blogPageHeading(post.meta);
+  const lead = blogCardAnons(post.meta);
   const path = `/blog/${slug}`;
 
   return (
