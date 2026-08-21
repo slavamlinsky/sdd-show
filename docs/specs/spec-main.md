@@ -87,7 +87,9 @@ Choose one approach and use it consistently for blog posts, glossary entries, an
 
 ## SEO baseline
 
-- Per-route `metadata` (title, description).
+Full contract: [spec-seo-meta.md](./spec-seo-meta.md) (Phase 1 metadata + Phase 2 keyword/content plan). Cursor: [`.cursor/rules/seo-meta.mdc`](../../.cursor/rules/seo-meta.mdc).
+
+- Per-route metadata from `lib/seo-page-meta.ts` (title, description, canonical, Open Graph, Twitter).
 - Sensible defaults for `/blog/[slug]` from post frontmatter (**Open Graph / Twitter** preview: `**socialImage`**, else first body image, else `**siteConfig.defaultBlogShareImage**` — see [spec-blog.md — Share preview](./spec-blog.md#share-preview-open-graph-and-social-links)).
 - **Article JSON-LD** on `/blog/[slug]` (`schema.org/Article`) plus **BreadcrumbList** (Home → Blog → article in structured data; **visible** trail is **Blog →** article — no Home crumb, logo already links `/`; see [spec-blog.md](./spec-blog.md)); **WebSite** JSON-LD in the root layout.
 - **`/sitemap.xml`** (`app/sitemap.ts`) lists public pages and posts. **`/robots.txt`** allows search and AI crawlers (GPTBot, Google-Extended, ClaudeBot, PerplexityBot, Applebot-Extended, CCBot) and disallows `/sign-in`, `/account`, `/auth/`.

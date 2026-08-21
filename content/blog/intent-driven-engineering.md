@@ -1,6 +1,6 @@
 ---
-title: "The rise of Intent-Driven Engineering (AI development)."
-description: "From prompt hacks to specs and now to intent. Why the next shift is about architecting outcomes, not writing longer instructions."
+title: "After SDD: how intent-driven engineering changes your job."
+description: "Prompts got us snippets. Specs made behavior testable. Intent-driven engineering is next: you architect outcomes, and agents handle more of the middle."
 slug: "intent-driven-engineering"
 date: "2026-08-02"
 name: "Intent-driven engineering"

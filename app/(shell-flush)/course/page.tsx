@@ -16,21 +16,10 @@ import {
   courseOutro,
   coursePromises,
 } from "@/lib/course-data";
-import { keywordsForPage } from "@/lib/seo-keywords";
+import { metadataFromPageSeo, pageSeo } from "@/lib/seo-page-meta";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  title: "Course",
-  description:
-    "Become an Intent-Driven Engineer. Stop prompting, start directing. Join the list for launch updates.",
-  keywords: keywordsForPage(
-    "SDD course",
-    "intent-driven engineering",
-    "spec-driven development",
-    "AI agents",
-    "intent-driven engineer",
-  ),
-};
+export const metadata: Metadata = metadataFromPageSeo(pageSeo.course);
 
 const iconChipClass = cn(
   "flex size-11 shrink-0 items-center justify-center rounded-xl",

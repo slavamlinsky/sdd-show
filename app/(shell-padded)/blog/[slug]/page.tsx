@@ -16,6 +16,10 @@ import {
   getSimilarPosts,
 } from "@/lib/blog";
 import { articleJsonLd, breadcrumbJsonLd } from "@/lib/json-ld";
+import {
+  clustersForPostSlug,
+  shareMetadata,
+} from "@/lib/seo-page-meta";
 import { keywordsForPage } from "@/lib/seo-keywords";
 import { siteConfig } from "@/lib/site-config";
 
@@ -36,36 +40,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     post,
     siteConfig.defaultBlogShareImage,
   ).trim();
-  const keywords = [
-    ...new Set([
-      ...keywordsForPage("blog", "SDD", post.meta.slug.replace(/-/g, " ")),
-      ...(fmKeywords ?? []),
-    ]),
-  ];
+  const keywords = keywordsForPage(
+    clustersForPostSlug(slug),
+    ...(fmKeywords ?? []),
+  );
 
   return {
     title,
     description,
     keywords,
-    alternates: {
-      canonical: path,
-    },
-    openGraph: {
-      type: "article",
-      locale: "en_US",
-      url: path,
-      siteName: siteConfig.name,
+    ...shareMetadata({
       title,
       description,
+      path,
+      image: ogImage,
+      ogType: "article",
       publishedTime: date,
-      images: [{ url: ogImage }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [ogImage],
-    },
+    }),
   };
 }
 

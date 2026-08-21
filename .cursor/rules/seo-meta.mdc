@@ -1,0 +1,43 @@
+---
+description: SEO and social meta (titles, descriptions, OG, keyword clusters) for this site
+globs: "{app/**/page.tsx,lib/seo*.ts,lib/site-config.ts,content/blog/*.md,docs/specs/spec-seo-meta.md}"
+alwaysApply: false
+---
+
+# SEO and meta
+
+Full contract: [`docs/specs/spec-seo-meta.md`](docs/specs/spec-seo-meta.md).
+
+## When you add or edit a public page
+
+1. Put **title, description, path, OG image, keyword clusters** in `lib/seo-page-meta.ts` (`pageSeo`).
+2. In the route file, export `metadataFromPageSeo(pageSeo.<id>)` only. Do not copy title strings into the page.
+3. Indexable pages get canonical + `openGraph` + Twitter via `shareMetadata`. Auth pages: `index: false`.
+
+## Titles and descriptions
+
+- Write like a person, not a keyword template. Mix openers (question, promise, contrast). Do **not** start every title with the same phrase.
+- Home and course may lead with **intent-driven engineering** / **intent-driven engineer**. Other URLs can lead with SDD, Spec Kit, Jira, videos, etc.
+- **Title:** one glanceable line, **50–58 characters** (`SEO_TITLE_MIN`–`SEO_TITLE_MAX`). **Ends with a period.** No brand suffix. Auth pages (`/sign-in`, `/account`) are **`noindex`**: still end with a period and use **Intent-Driven Community** in title and description; the 50–58 / 140–155 rules do not apply.
+- **Description:** **140–155 characters** (`SEO_DESC_MIN`–`SEO_DESC_MAX`). One thought that matches the title. Not a comma-separated keyword list.
+- Sentence case; named terms stay (**SDD**, **Spec Kit**, **OpenSpec**, **Kiro**).
+- Post `heading` / `name` can stay reader-facing; `title` and `description` are the search snippet.
+
+## Keywords
+
+Clusters live in `lib/seo-keywords.ts` (`sddCore`, `intent`, `ticketsAndSpecs`, `practice`, `tools`, `agents`, `course`, `ecosystem`).
+
+- One URL, **one or two primary clusters**.
+- New blog post: add `clustersForPostSlug` plus frontmatter `title` / `description` / `socialImage`.
+- Do not stuff the homepage or body with every cluster.
+
+## Images
+
+- Default share art: `siteConfig.defaultShareImage` (`/images/og-home.png`). Hub pages use `/images/og-*.png` (**16:9**, 1280×720). Never use the logo as `og:image`.
+- Blog: `socialImage` → first local body image → `/images/og-default.png`.
+
+## Do not
+
+- Duplicate meta objects in `page.tsx` when `pageSeo` already has them.
+- Create thin tag/keyword URLs (see Phase 2 in the spec).
+- Keyword-stuff H1s or in-article links.

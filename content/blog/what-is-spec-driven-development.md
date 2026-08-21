@@ -1,8 +1,8 @@
 ---
-title: "Spec-Driven Development (SDD): Learn the Basics."
+title: "What spec-driven development means when you really build."
 slug: "what-is-spec-driven-development"
 date: "2026-05-09"
-description: "Learn what spec-driven development (SDD) means: specifications as the driver for software delivery, how specs differ from Jira tickets, and a copy-paste example with acceptance-style checks. Plain language for engineers and leads."
+description: "Spec-driven development means intent, behavior, and done live in one place you can check. See how that differs from tickets, plus a slice you can copy."
 name: "What is spec-driven development?"
 anons: "SDD means intent, behavior, and done live in one checkable place, not only in ticket titles. Here is the short definition, a ticket vs spec compare, and an example you can reuse."
 heading: "What is spec-driven development (SDD)?"

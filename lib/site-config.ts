@@ -1,20 +1,11 @@
 export const siteConfig = {
   name: "Intent Driven Engineering Community",
-  title: "Intent-Driven Engineering — Beyond Spec-Driven Development.",
+  title: "Intent-driven engineering: write the outcome, then build.",
   description:
-    "Intent-driven engineering extends spec-driven development with shared intent, outcome-focused execution, and AI-assisted workflows.",
+    "Intent-driven engineering is how you leave vague prompts behind: shared intent, specs an agent can follow, and a clear done. Start here, then the course.",
   url: "https://sdd-show.vercel.app",
-  /** Site-level SEO keywords merged with `baseKeywords` in root layout metadata. */
-  keywords: [
-    "intent-driven engineering",
-    "software intent",
-    "outcome-driven development",
-    "delivery alignment",
-    "living specifications",
-    "engineering leadership",
-  ] as const,
-  /**
-   * When a post has no `socialImage` and no local inline figure, link previews use this asset (path from site root).
-   */
-  defaultBlogShareImage: "/logo-ai-driven.png",
+  /** Default Open Graph / Twitter image (16:9, site-root path). */
+  defaultShareImage: "/images/og-home.png",
+  /** Blog post preview fallback when a post has no `socialImage` or inline figure. */
+  defaultBlogShareImage: "/images/og-default.png",
 } as const;
