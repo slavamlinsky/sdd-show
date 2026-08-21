@@ -22,12 +22,24 @@ export type PageSeoId =
   | "signIn"
   | "account";
 
+/** Zero (auth/`noindex`), one, or two primary keyword clusters per URL. */
+export type PrimaryKeywordClusters =
+  | readonly []
+  | readonly [KeywordClusterId]
+  | readonly [KeywordClusterId, KeywordClusterId];
+
 export type PageSeo = {
-  /** Document and OG title. Human sentence; `SEO_TITLE_MIN`–`SEO_TITLE_MAX`; ends with a period. No brand suffix. */
+  /**
+   * Document and OG title. Ends with a period. No brand suffix.
+   * Indexable pages: human sentence; `SEO_TITLE_MIN`–`SEO_TITLE_MAX`.
+   * Auth pages (`signIn`, `account`): `noindex`; use “Intent-Driven Community” in
+   * title and description; exempt from `SEO_TITLE_MIN`/`SEO_TITLE_MAX` and the
+   * corresponding `SEO_DESC_MIN`/`SEO_DESC_MAX` length rules.
+   */
   title: string;
   description: string;
   path: string;
-  clusters: readonly KeywordClusterId[];
+  clusters: PrimaryKeywordClusters;
   extraKeywords?: readonly string[];
   ogImage: string;
   /** Open Graph / Twitter title when it should differ from `title`. */
@@ -41,7 +53,7 @@ export const pageSeo: Record<PageSeoId, PageSeo> = {
     title: siteConfig.title,
     description: siteConfig.description,
     path: "/",
-    clusters: ["sddCore", "intent", "practice"],
+    clusters: ["sddCore", "intent"],
     ogImage: siteConfig.defaultShareImage,
     ogType: "website",
   },
@@ -50,7 +62,7 @@ export const pageSeo: Record<PageSeoId, PageSeo> = {
     description:
       "Practical writing on tickets vs specs, SDD workflows, Spec Kit and friends, and intent-driven engineering. Short pieces you can use on Monday.",
     path: "/blog",
-    clusters: ["sddCore", "ticketsAndSpecs", "practice", "tools"],
+    clusters: ["sddCore", "ticketsAndSpecs"],
     extraKeywords: ["SDD blog", "spec driven development articles"],
     ogImage: "/images/og-blog.png",
   },
@@ -59,7 +71,7 @@ export const pageSeo: Record<PageSeoId, PageSeo> = {
     description:
       "Become an intent-driven engineer: direct AI agents with written intent and specs, not longer prompts. For software developers, founders, leads, and PMs.",
     path: "/course",
-    clusters: ["course", "intent", "agents", "sddCore"],
+    clusters: ["course", "intent"],
     ogImage: "/images/og-course.png",
   },
   ecosystem: {
@@ -67,7 +79,7 @@ export const pageSeo: Record<PageSeoId, PageSeo> = {
     description:
       "See how Spec Kit, OpenSpec, Kiro, and MCP sit together: tools you can use, ways of working, and standards around spec-driven and intent-driven practice.",
     path: "/ecosystem",
-    clusters: ["tools", "ecosystem", "sddCore", "intent"],
+    clusters: ["tools", "ecosystem"],
     ogImage: "/images/og-ecosystem.png",
   },
   glossary: {
@@ -75,7 +87,7 @@ export const pageSeo: Record<PageSeoId, PageSeo> = {
     description:
       "A compact glossary for spec-driven development: specs, acceptance criteria, living docs, intent, and related terms across product, design, and quality.",
     path: "/glossary",
-    clusters: ["sddCore", "intent", "ticketsAndSpecs"],
+    clusters: ["sddCore", "intent"],
     extraKeywords: ["SDD glossary", "spec driven development terms"],
     ogImage: "/images/og-glossary.png",
   },
@@ -84,7 +96,7 @@ export const pageSeo: Record<PageSeoId, PageSeo> = {
     description:
       "Hand-picked talks on AI-driven development, agents, and specs. Play them on this page when you want a walkthrough instead of another article.",
     path: "/videos",
-    clusters: ["agents", "sddCore", "intent"],
+    clusters: ["agents", "sddCore"],
     extraKeywords: ["AI engineering videos", "spec driven development videos"],
     ogImage: "/images/og-videos.png",
   },
@@ -108,15 +120,15 @@ export const pageSeo: Record<PageSeoId, PageSeo> = {
   },
 };
 
-const postClusters: Record<string, readonly KeywordClusterId[]> = {
+const postClusters: Record<string, PrimaryKeywordClusters> = {
   "what-is-spec-driven-development": ["sddCore", "ticketsAndSpecs"],
   "tickets-vs-specs": ["ticketsAndSpecs", "sddCore"],
   "sdd-workflow-for-small-teams": ["practice", "sddCore"],
-  "intent-driven-engineering": ["intent", "agents", "sddCore"],
-  "sdd-tools-and-frameworks": ["tools", "sddCore", "ecosystem"],
+  "intent-driven-engineering": ["intent", "agents"],
+  "sdd-tools-and-frameworks": ["tools", "ecosystem"],
 };
 
-export function clustersForPostSlug(slug: string): readonly KeywordClusterId[] {
+export function clustersForPostSlug(slug: string): PrimaryKeywordClusters {
   return postClusters[slug] ?? ["sddCore"];
 }
 

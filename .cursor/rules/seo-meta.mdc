@@ -6,12 +6,12 @@ alwaysApply: false
 
 # SEO and meta
 
-Full contract: [`docs/specs/spec-seo-meta.md`](docs/specs/spec-seo-meta.md).
+Full contract: [`spec-seo-meta.md`](../../docs/specs/spec-seo-meta.md).
 
 ## When you add or edit a public page
 
-1. Put **title, description, path, OG image, keyword clusters** in `lib/seo-page-meta.ts` (`pageSeo`).
-2. In the route file, export `metadataFromPageSeo(pageSeo.<id>)` only. Do not copy title strings into the page.
+1. For fixed public pages, put **title, description, path, OG image, keyword clusters** in `lib/seo-page-meta.ts` (`pageSeo`).
+2. For fixed hub routes, export `metadataFromPageSeo(pageSeo.<id>)` only. Dynamic blog detail routes use frontmatter metadata and `shareMetadata`.
 3. Indexable pages get canonical + `openGraph` + Twitter via `shareMetadata`. Auth pages: `index: false`.
 
 ## Titles and descriptions
