@@ -5,21 +5,10 @@ import { GradientText } from "@/components/gradient-text";
 import { Reveal } from "@/components/reveal";
 import { SectionBackdrop } from "@/components/section-backdrop";
 import { ecosystemCategories, ecosystemMeta } from "@/lib/ecosystem-data";
-import { keywordsForPage } from "@/lib/seo-keywords";
+import { metadataFromPageSeo, pageSeo } from "@/lib/seo-page-meta";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  title: "Ecosystem",
-  description: ecosystemMeta.lead,
-  keywords: keywordsForPage(
-    "ecosystem",
-    "spec kit",
-    "OpenSpec",
-    "MCP",
-    "intent-driven engineering",
-    "spec-driven development",
-  ),
-};
+export const metadata: Metadata = metadataFromPageSeo(pageSeo.ecosystem);
 
 const iconChipClass = cn(
   "flex size-11 shrink-0 items-center justify-center rounded-xl",

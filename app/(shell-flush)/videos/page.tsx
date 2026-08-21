@@ -3,21 +3,10 @@ import { Reveal } from "@/components/reveal";
 import { SectionBackdrop } from "@/components/section-backdrop";
 import { GradientText } from "@/components/gradient-text";
 import { VideoGrid } from "@/components/video-grid";
-import { keywordsForPage } from "@/lib/seo-keywords";
+import { metadataFromPageSeo, pageSeo } from "@/lib/seo-page-meta";
 import { videos } from "@/lib/videos-data";
 
-export const metadata: Metadata = {
-  title: "Videos",
-  description:
-    "Hand-picked YouTube videos on AI in software: agents, intent, tools, and how teams ship — wider than specs alone. Play in page with one click.",
-  keywords: keywordsForPage(
-    "videos",
-    "AI engineering",
-    "LLM agents",
-    "AI-assisted development",
-    "YouTube",
-  ),
-};
+export const metadata: Metadata = metadataFromPageSeo(pageSeo.videos);
 
 export default function VideosPage() {
   return (

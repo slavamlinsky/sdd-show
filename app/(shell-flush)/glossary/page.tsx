@@ -8,22 +8,11 @@ import { Reveal } from "@/components/reveal";
 import { SectionBackdrop } from "@/components/section-backdrop";
 import { buttonVariants } from "@/components/ui/button";
 import { glossaryTerms } from "@/lib/glossary-data";
-import { keywordsForPage } from "@/lib/seo-keywords";
+import { metadataFromPageSeo, pageSeo } from "@/lib/seo-page-meta";
 import { getAuthUser } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  title: "Glossary & Core Concepts",
-  description:
-    "Foundational vocabulary for the AI-driven product lifecycle: Product, Design, Build, and Quality. Short definitions; deep-dive narratives on the blog, videos for visual insights, and courses for end-to-end workflow.",
-  keywords: keywordsForPage(
-    "glossary",
-    "SDD",
-    "AI development",
-    "prompt engineering",
-    "product marketing",
-  ),
-};
+export const metadata: Metadata = metadataFromPageSeo(pageSeo.glossary);
 
 export default async function GlossaryPage({
   searchParams,

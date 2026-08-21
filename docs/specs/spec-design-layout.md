@@ -33,8 +33,8 @@ Applies to **all routes** unless a feature spec narrows further. Visual directio
 Apply sentence case to:
 
 - **Page and section headings** (`h1`–`h3`), **FAQ questions**, **card titles** (except where a title is a single taxonomy label; see below).
-- **Blog frontmatter** `title` (SEO), `name` (cards / links), `heading` (article `<h1>`), `anons`, and **body `##` headings**.
-- **Site chrome** strings from `siteConfig` (e.g. browser title, footer brand line) unless a legal or partner string dictates otherwise.
+- **Blog frontmatter** `title` (SEO), `name` (cards / links), `heading` (article `<h1>`), `anons`, and **body `##` headings**. SEO `title` **ends with a period**; `name` / `heading` do not unless the line is already a full sentence.
+- **Site chrome** strings from `siteConfig` (e.g. browser title, footer brand line) unless a legal or partner string dictates otherwise. The default document **`<title>`** ends with a period per [spec-seo-meta.md](./spec-seo-meta.md).
 
 **Reserve non–sentence-case styling for:**
 

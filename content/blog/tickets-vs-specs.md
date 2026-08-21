@@ -1,6 +1,6 @@
 ---
-title: "Tickets vs. Specs: why your team is busy but not shipping."
-description: "Are you confusing project tracking with software engineering? Discover why relying solely on tickets creates rework, and how pairing specs with tasks aligns your team on what Done really means."
+title: "Why your Jira board is moving and the product isn't."
+description: "Tickets track who is busy. Specs say what done means. If the board moves and the product does not, you are shipping effort, not behavior. Here is the fix."
 slug: "tickets-vs-specs"
 date: "2026-07-05"
 name: "Tickets vs. specs"

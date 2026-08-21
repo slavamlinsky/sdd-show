@@ -19,7 +19,8 @@ import {
   LOCALE_COOKIE,
 } from "@/lib/locale";
 import { websiteJsonLd } from "@/lib/json-ld";
-import { baseKeywords } from "@/lib/seo-keywords";
+import { keywordsFromClusters } from "@/lib/seo-keywords";
+import { shareMetadata } from "@/lib/seo-page-meta";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 import { getAuthUser } from "@/lib/supabase/server";
@@ -39,7 +40,13 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: siteConfig.title,
   description: siteConfig.description,
-  keywords: [...baseKeywords, ...siteConfig.keywords],
+  keywords: keywordsFromClusters("sddCore", "intent"),
+  ...shareMetadata({
+    title: siteConfig.title,
+    description: siteConfig.description,
+    path: "/",
+    image: siteConfig.defaultShareImage,
+  }),
 };
 
 export default async function RootLayout({

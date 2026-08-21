@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { GradientText } from "@/components/gradient-text";
+import { metadataFromPageSeo, pageSeo } from "@/lib/seo-page-meta";
 import { avatarUrlFromMetadata, displayNameFromAuth } from "@/lib/auth-display";
 import { getAuthUser } from "@/lib/supabase/server";
 
-export const metadata: Metadata = {
-  title: "User profile",
-  description: "Your account on Intent Driven Development Community.",
-  robots: { index: false, follow: false },
-};
+export const metadata: Metadata = metadataFromPageSeo(pageSeo.account);
 
 export default async function AccountPage() {
   const user = await getAuthUser();

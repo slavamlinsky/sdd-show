@@ -1,8 +1,8 @@
 ---
-title: "Spec-driven development tools and frameworks: Spec Kit vs OpenSpec vs Kiro"
+title: "Spec Kit vs OpenSpec vs Kiro: pick the kit you need."
 slug: "sdd-tools-and-frameworks"
 date: "2026-08-20"
-description: "Spec-driven development tools and frameworks overview: why SDD frameworks exist, how GitHub Spec Kit, OpenSpec, and Kiro differ, and which spec-driven development framework developers should use."
+description: "GitHub Spec Kit, OpenSpec, and Kiro all do spec-driven development. Why the kits exist, how they differ, and which one fits the change in front of you."
 name: "SDD tools and frameworks compared"
 anons: "A spec-driven development tools and frameworks comparison: why kits exist, a short overview of Spec Kit, OpenSpec, and Kiro, and when to pick each."
 heading: "Spec-driven development tools and frameworks"

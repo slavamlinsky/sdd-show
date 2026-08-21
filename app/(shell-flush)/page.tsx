@@ -18,16 +18,11 @@ import {
   blogReadingTimeMinutes,
   getAllPosts,
 } from "@/lib/blog";
-import { keywordsForPage } from "@/lib/seo-keywords";
-import { siteConfig } from "@/lib/site-config";
+import { metadataFromPageSeo, pageSeo } from "@/lib/seo-page-meta";
 import { featuredHeroVideo, videos } from "@/lib/videos-data";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  title: { absolute: siteConfig.title },
-  description: siteConfig.description,
-  keywords: keywordsForPage("software engineering", "documentation", "agile"),
-};
+export const metadata: Metadata = metadataFromPageSeo(pageSeo.home);
 
 export default function HomePage() {
   const posts = getAllPosts().slice(0, 4);
@@ -84,7 +79,7 @@ export default function HomePage() {
                   href="/glossary"
                   className={cn(
                     buttonVariants({ variant: "outline", size: "lg" }),
-                    "h-12 rounded-md border-border/80 px-8 text-base justify-center sm:min-w-[10rem]",
+                    "h-12 rounded-md border-border/80 px-8 text-base justify-center sm:min-w-40",
                   )}
                 >
                   Open glossary

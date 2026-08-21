@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { SignInForm } from "@/components/sign-in-form";
+import { metadataFromPageSeo, pageSeo } from "@/lib/seo-page-meta";
 import { getAuthUser } from "@/lib/supabase/server";
 import { searchParamString, type SearchParam } from "@/lib/search-params";
 import { safeNextPath } from "@/lib/supabase/safe-path";
 
-export const metadata: Metadata = {
-  title: "Sign in",
-  description: "Sign in with email or Google.",
-  robots: { index: false, follow: false },
-};
+export const metadata: Metadata = metadataFromPageSeo(pageSeo.signIn);
 
 type Props = {
   searchParams: Promise<{
