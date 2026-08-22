@@ -79,7 +79,7 @@ function isDocumentScrollEndTarget(target: EventTarget | null): boolean {
 
 function scrollPageToTop(
   behavior: ScrollBehavior,
-  sentinel: HTMLElement | null
+  sentinel: HTMLElement | null,
 ) {
   const nestedOpts: ScrollToOptions = { top: 0, behavior };
   for (const el of collectScrollableAncestors(sentinel)) {
@@ -155,7 +155,10 @@ export function ScrollToTop() {
     refreshScrollableListeners();
 
     window.addEventListener("scroll", update, { passive: true });
-    document.addEventListener("scroll", update, { capture: true, passive: true });
+    document.addEventListener("scroll", update, {
+      capture: true,
+      passive: true,
+    });
     window.addEventListener("resize", onResize, { passive: true });
     window.addEventListener("pageshow", update);
 
@@ -180,8 +183,8 @@ export function ScrollToTop() {
       <div
         className={cn(
           /* Sits above footer link row + safe area — don’t cover GitHub / legal line */
-          "fixed bottom-28 right-4 z-90 transition-opacity duration-200 sm:bottom-32 sm:right-8",
-          visible ? "opacity-100" : "pointer-events-none opacity-0"
+          "fixed bottom-32 right-4 z-90 transition-opacity duration-200 sm:bottom-36 sm:right-8",
+          visible ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       >
         <button
@@ -197,7 +200,7 @@ export function ScrollToTop() {
             "bg-primary/25 text-primary shadow-none backdrop-blur-sm",
             "transition-colors hover:bg-primary/35 active:bg-primary/40",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-            "disabled:pointer-events-none disabled:opacity-40"
+            "disabled:pointer-events-none disabled:opacity-40",
           )}
           onClick={() => {
             if (!visible) return;
@@ -208,7 +211,11 @@ export function ScrollToTop() {
             scrollPageToTop(behavior, sentinelRef.current);
           }}
         >
-          <ChevronUpIcon className="size-5 shrink-0" strokeWidth={2.25} aria-hidden />
+          <ChevronUpIcon
+            className="size-5 shrink-0"
+            strokeWidth={2.25}
+            aria-hidden
+          />
         </button>
       </div>
     </>

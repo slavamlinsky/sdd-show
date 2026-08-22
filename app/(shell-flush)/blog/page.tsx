@@ -35,7 +35,7 @@ export default function BlogIndexPage() {
           <h1>
             Our <GradientText>AI-driven blog</GradientText>
           </h1>
-          <p className="text-lg leading-relaxed text-muted-foreground">
+          <p className="leading-relaxed text-muted-foreground">
             Short posts and useful articles about modern software development.
             Ideal if you are learning the basics or pitching clearer practices
             to your team.

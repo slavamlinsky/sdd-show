@@ -3,8 +3,10 @@ import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 import { HomeFaq } from "@/components/home-faq";
 import { HeroFeaturedVideo } from "@/components/hero-featured-video";
+import { HomeCourseCta } from "@/components/home-course-cta";
 import { HomeEvolutionTimeline } from "@/components/home-evolution-timeline";
 import { HomeIntentPillars } from "@/components/home-intent-pillars";
+import { HomeIntentpoweredLoop } from "@/components/home-intentpowered-loop";
 import { HomeLatestPostsCarousel } from "@/components/home-latest-posts-carousel";
 import { HomePillars } from "@/components/home-pillars";
 import { HomeVideosCarousel } from "@/components/home-videos-carousel";
@@ -19,6 +21,7 @@ import {
   getAllPosts,
 } from "@/lib/blog";
 import { metadataFromPageSeo, pageSeo } from "@/lib/seo-page-meta";
+import { INTENTPOWERED_LOOP_ID } from "@/lib/intentpowered-loop";
 import { featuredHeroVideo, videos } from "@/lib/videos-data";
 import { cn } from "@/lib/utils";
 
@@ -44,24 +47,20 @@ export default function HomePage() {
           className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-35%,rgba(99,102,241,0.16),transparent_55%),radial-gradient(ellipse_70%_50%_at_100%_0%,rgba(14,165,233,0.1),transparent_50%)]"
           aria-hidden
         />
-        <div className="relative flex mx-auto w-full max-w-6xl px-4 pt-6 pb-12 sm:px-6 sm:pt-12 sm:pb-16">
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-12">
+        <div className="relative mx-auto w-full max-w-6xl px-4 pt-6 pb-8 sm:px-6 sm:pt-12 sm:pb-12">
+          <div className="flex w-full flex-col gap-8 lg:flex-row lg:items-center lg:gap-10">
             <Reveal className="min-w-0 flex-1 space-y-8" distance={28}>
               <h1 className="text-balance leading-[1.15] sm:leading-[1.12]">
-                Ship software from{" "}
                 <GradientText className="font-semibold">
-                  clear and strong specs
-                </GradientText>{" "}
-                not vague tickets
+                  Build software from intent
+                </GradientText>
+                , not tickets or instructions.
               </h1>
               <div className="max-w-[65ch] space-y-8 text-pretty text-base leading-[1.7] text-muted-foreground lg:max-w-none">
                 <p>
-                  <span className="font-medium">
-                    Intent-driven engineering (IDE)
-                  </span>{" "}
-                  focuses on defining the desired outcomes before
-                  implementation, ensuring clear requirements drive development
-                  decisions rather than simply following predefined tasks.
+                  Start with the outcome you want to get. Turn that intent into
+                  clear specs, build and ship fast, then validate it with real
+                  users.
                 </p>
               </div>
               <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center">
@@ -76,13 +75,13 @@ export default function HomePage() {
                   <ArrowRightIcon className="size-4" />
                 </Link>
                 <Link
-                  href="/glossary"
+                  href={`#${INTENTPOWERED_LOOP_ID}`}
                   className={cn(
                     buttonVariants({ variant: "outline", size: "lg" }),
                     "h-12 rounded-md border-border/80 px-8 text-base justify-center sm:min-w-40",
                   )}
                 >
-                  Open glossary
+                  Explore the framework
                 </Link>
               </div>
             </Reveal>
@@ -97,13 +96,17 @@ export default function HomePage() {
         </div>
       </section>
 
+      <HomeIntentpoweredLoop />
+
       <HomeIntentPillars />
 
       <HomeEvolutionTimeline />
 
       <HomePillars />
 
-      <div className="flex w-full flex-col gap-20 py-20 sm:gap-28 sm:py-28">
+      <HomeCourseCta />
+
+      <div className="flex w-full flex-col gap-20 py-8 sm:gap-28 sm:py-12">
         <section className="space-y-8">
           <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="space-y-3">

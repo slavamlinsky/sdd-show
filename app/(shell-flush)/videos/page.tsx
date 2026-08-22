@@ -13,14 +13,17 @@ export default function VideosPage() {
     <div className="full-bleed relative overflow-hidden">
       <SectionBackdrop tone="emerald" />
       <div className="relative mx-auto w-full max-w-6xl px-4 pt-6 sm:px-6 sm:pt-12">
-        <Reveal className="relative max-w-2xl space-y-4">
+        <Reveal className="relative max-w-3xl space-y-4">
           <h1>
-            Curated <GradientText className="font-semibold">videos</GradientText>
+            Curated{" "}
+            <GradientText className="font-semibold">videos</GradientText>
           </h1>
-          <p className="text-lg leading-relaxed text-muted-foreground">
-            Explainers and keynotes on AI tools, agent workflows, and engineering practice — not only spec-driven
-            development. Click a card to play in a modal — swap the list in the codebase when you find better
-            references.
+          <p className="leading-relaxed text-muted-foreground">
+            Hand-picked videos on software development, and building better
+            products. Learn from practical explainers, expert talks, and
+            real-world examples. Discover new AI tools, modern workflows,
+            methodologies, and useful ideas for launching, and improving
+            products.
           </p>
         </Reveal>
         <Reveal className="relative mt-14" delay={0.06}>

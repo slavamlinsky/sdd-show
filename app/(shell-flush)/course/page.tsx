@@ -288,7 +288,7 @@ export default function CoursePage() {
           <div className="mt-10">
             <CourseLeadForm />
           </div>
-          <p className="mt-10 text-center text-sm text-muted-foreground">
+          <p className="mt-10 text-balance text-center text-sm text-muted-foreground">
             Prefer reading first?{" "}
             <Link
               href="/blog"

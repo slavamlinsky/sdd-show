@@ -39,7 +39,7 @@ const items = [
 /** FAQ accordion — typography and borders follow theme (light / dark). */
 export function HomeFaq() {
   return (
-    <div className="mx-auto w-full max-w-5xl px-6 py-16 md:py-24 lg:px-16 lg:py-24 xl:px-20">
+    <div className="mx-auto w-full max-w-5xl px-6 py-8 md:py-12 lg:px-16 lg:py-12 lg:pb-16 xl:px-20">
       <h2 className="text-center font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
         Frequently asked questions
       </h2>

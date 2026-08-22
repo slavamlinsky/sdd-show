@@ -143,7 +143,7 @@
 
   /* Default page title; :where() keeps specificity low so utilities (e.g. text-2xl) can override. */
   :where(.page-shell) h1 {
-    @apply mt-6 font-heading text-3xl font-semibold tracking-tight sm:mt-8 sm:text-4xl;
+    @apply mt-6 font-heading text-3xl font-semibold tracking-tight sm:mt-8 sm:text-[2.5rem];
   }
 }
 

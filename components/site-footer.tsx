@@ -1,12 +1,18 @@
 import Link from "next/link";
-import { siteConfig } from "@/lib/site-config";
 
 export function SiteFooter() {
   return (
     <footer className="mt-auto border-t border-border/80 bg-muted/30">
       <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <p className="text-sm text-muted-foreground">
-          © {new Date().getFullYear()} {siteConfig.name}. Built with specs first.
+          © {new Date().getFullYear()}{" "}
+          <Link
+            href="/"
+            className="text-foreground/80 hover:text-foreground"
+          >
+            IntentPowered
+          </Link>
+          . Ideas are hypotheses. Ship and find out.
         </p>
         <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
           <Link className="text-muted-foreground hover:text-foreground" href="/ecosystem">
