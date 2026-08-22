@@ -99,11 +99,16 @@ function scrollPageToTop(
   }
 
   let done = false;
-  let tid = 0;
+  let raf = 0;
+  let lastY = getViewportScrollY();
+  let lastChange = performance.now();
+  let sawMotion = false;
+  const started = performance.now();
+
   const finish = () => {
     if (done) return;
     done = true;
-    window.clearTimeout(tid);
+    cancelAnimationFrame(raf);
     root?.removeEventListener("scrollend", onEnd);
     window.removeEventListener("scrollend", onEnd);
     snapDocumentToOrigin();
@@ -112,9 +117,33 @@ function scrollPageToTop(
     if (!isDocumentScrollEndTarget(ev.target)) return;
     finish();
   };
+
+  const tick = (now: number) => {
+    if (done) return;
+    const y = getViewportScrollY();
+    if (y <= 1) {
+      finish();
+      return;
+    }
+    if (y !== lastY) {
+      sawMotion = true;
+      lastY = y;
+      lastChange = now;
+    } else if (sawMotion && now - lastChange >= 80) {
+      // Smooth scroll has stopped (often a few px short). Snap the rest.
+      finish();
+      return;
+    }
+    if (now - started > 8000) {
+      finish();
+      return;
+    }
+    raf = requestAnimationFrame(tick);
+  };
+
   root?.addEventListener("scrollend", onEnd);
   window.addEventListener("scrollend", onEnd);
-  tid = window.setTimeout(finish, 1200);
+  raf = requestAnimationFrame(tick);
 }
 
 export function ScrollToTop() {
@@ -183,7 +212,7 @@ export function ScrollToTop() {
       <div
         className={cn(
           /* Sits above footer link row + safe area — don’t cover GitHub / legal line */
-          "fixed bottom-32 right-4 z-90 transition-opacity duration-200 sm:bottom-36 sm:right-8",
+          "fixed bottom-24 right-4 z-90 transition-opacity duration-200 sm:bottom-32 sm:right-8",
           visible ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       >

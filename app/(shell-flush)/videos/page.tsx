@@ -19,11 +19,10 @@ export default function VideosPage() {
             <GradientText className="font-semibold">videos</GradientText>
           </h1>
           <p className="leading-relaxed text-muted-foreground">
-            Hand-picked videos on software development, and building better
+            Hand-picked videos on software development and building better
             products. Learn from practical explainers, expert talks, and
             real-world examples. Discover new AI tools, modern workflows,
-            methodologies, and useful ideas for launching, and improving
-            products.
+            methodologies, and useful ideas for building and launching startups.
           </p>
         </Reveal>
         <Reveal className="relative mt-14" delay={0.06}>

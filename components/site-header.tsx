@@ -52,13 +52,13 @@ export function SiteHeader({
           <Image
             src={headerLogo}
             alt={siteConfig.name}
-            className="h-12 w-auto dark:hidden sm:h-16 lg:h-20"
+            className="h-10 w-auto dark:hidden sm:h-12 lg:h-14"
             priority
           />
           <Image
             src={headerLogoWhite}
             alt=""
-            className="hidden h-12 w-auto dark:block sm:h-16 lg:h-20"
+            className="hidden h-10 w-auto dark:block sm:h-12 lg:h-14"
             priority
           />
         </Link>

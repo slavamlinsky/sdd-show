@@ -39,7 +39,7 @@ export function HomeIntentpoweredLoop() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_20%_-10%,rgba(139,92,246,0.1),transparent_55%),radial-gradient(ellipse_60%_45%_at_90%_10%,rgba(14,165,233,0.08),transparent_50%)]"
         aria-hidden
       />
-      <div className="relative mx-auto w-full max-w-6xl px-4 pt-4 sm:px-6 sm:pt-8">
+      <div className="relative mx-auto w-full max-w-6xl px-4 pt-2 sm:px-6 sm:pt-4">
         <div className="flex w-full flex-col items-center gap-4 lg:flex-row lg:items-center lg:gap-8">
           <Reveal
             className="w-full min-w-0 lg:w-[45%] lg:shrink-0"
@@ -85,19 +85,24 @@ export function HomeIntentpoweredLoop() {
                   ))}
                 </div>
               </div>
-              <div className="relative min-h-28">
+              <div className={cn("relative", motion ? "min-h-28" : "space-y-5")}>
                 {intentpoweredLoopStages.map((item, i) => {
                   const Icon = intentpoweredLoopIcons[item.id];
+                  const on = i === active;
                   return (
                     <div
                       key={item.id}
-                      className={cn(
-                        "absolute inset-x-0 top-0 transition-opacity duration-700 ease-out",
-                        i === active
-                          ? "opacity-100"
-                          : "pointer-events-none opacity-0",
-                      )}
-                      aria-hidden={i !== active}
+                      className={
+                        motion
+                          ? cn(
+                              "absolute inset-x-0 top-0 transition-opacity duration-700 ease-out",
+                              on
+                                ? "opacity-100"
+                                : "pointer-events-none opacity-0",
+                            )
+                          : undefined
+                      }
+                      aria-hidden={motion ? !on : undefined}
                     >
                       <div className="flex items-start gap-3.5">
                         <span
