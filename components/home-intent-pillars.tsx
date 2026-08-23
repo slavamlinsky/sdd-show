@@ -8,31 +8,35 @@ import { GradientText } from "./gradient-text";
 const intentIconChipClass = cn(
   "flex size-14 p-2 shrink-0 items-center justify-center rounded-lg",
   "bg-linear-to-br from-violet-500/12 via-white to-sky-500/15 ring-1 ring-violet-500/15",
-  "dark:from-violet-500/20 dark:via-card dark:to-sky-500/20 dark:ring-violet-400/20"
+  "dark:from-violet-500/20 dark:via-card dark:to-sky-500/20 dark:ring-violet-400/20",
 );
 
 const pillars = [
   {
     title: "Outcome clarity",
-    description: "Define the destination using specific numbers, scope, and deadlines. Remove ambiguity so everyone understands what “done” truly means.",
+    description:
+      "Define the destination using specific numbers, scope, and deadlines. Remove ambiguity so everyone understands what “done” truly means.",
     icon: Target,
     glossarySlug: "outcome-clarity",
   },
   {
     title: "Success metrics",
-    description: "Decide in advance how success will be measured and validated. If the outcome cannot be measured, it cannot be optimized.",
+    description:
+      "Decide in advance how success will be measured and validated. If the outcome cannot be measured, it cannot be optimized.",
     icon: BarChart3,
     glossarySlug: "success-metrics",
   },
   {
     title: "Constraints & guards",
-    description: "Clearly state boundaries, limitations, and what is off-limits. Strong constraints prevent wasted effort and guide better decisions.",
+    description:
+      "Clearly state boundaries, limitations, and what is off-limits. Strong constraints prevent wasted effort and guide better decisions.",
     icon: Ban,
     glossarySlug: "constraints-and-guards",
   },
   {
     title: "Delegation & trust",
-    description: 'Describe the desired result instead of prescribing the process. Focus on the what and allow flexibility in the how.',
+    description:
+      "Describe the desired result instead of prescribing the process. Focus on the what and allow flexibility in the how.",
     icon: Handshake,
     glossarySlug: "delegation",
   },
@@ -41,20 +45,30 @@ const pillars = [
 export function HomeIntentPillars() {
   return (
     <section
-      className="border-b border-border/40 bg-linear-to-b from-muted/20 via-background to-background pb-16 pt-6 sm:pb-20 sm:pt-8"
+      className="full-bleed relative overflow-hidden border-y border-border/30 pt-6 sm:pt-8"
       aria-labelledby="intent-pillars-heading"
     >
-      <div className="mx-auto w-full max-w-6xl px-5 sm:px-8 lg:px-10">
-        <Reveal className="mx-auto max-w-2xl text-center" distance={16}>
+      <div
+        className="pointer-events-none absolute inset-0 bg-linear-to-br from-sky-100/70 via-indigo-50/50 to-violet-100/65 dark:from-sky-950/25 dark:via-indigo-950/20 dark:to-violet-950/25"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-10%,rgba(99,102,241,0.08),transparent_55%)]"
+        aria-hidden
+      />
+      <div className="relative mx-auto w-full max-w-6xl px-5 pb-16 pt-6 sm:px-8 sm:pb-20 sm:pt-8 lg:px-10">
+        <Reveal className="mx-auto max-w-3xl text-center" distance={16}>
           <h2
             id="intent-pillars-heading"
             className="font-heading text-2xl text-balance font-semibold leading-tight tracking-tight sm:text-3xl"
           >
-            Four core principles <GradientText>for intent-driven work</GradientText>
+            Four core principles{" "}
+            <GradientText>for intent-driven work</GradientText>
           </h2>
-          <p className="mt-8 max-w-[62ch] mx-auto text-sm text-muted-foreground">
-          You can learn how to translate high-level intent into a complete, workable system design. Master the ideas,
-          vocabulary, and a repeatable workflow you can use on real-world projects.  
+          <p className="mt-8 mx-auto text-muted-foreground">
+            You can learn how to translate high-level intent into a complete,
+            workable system design. Master the ideas, vocabulary, and a
+            repeatable workflow you can use on real-world projects.
           </p>
         </Reveal>
         <ul className="mt-12 grid list-none grid-cols-1 gap-6 p-0 sm:grid-cols-2 lg:gap-8">

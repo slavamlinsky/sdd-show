@@ -19,7 +19,7 @@ export function VideoGrid({ videos }: { videos: VideoEntry[] }) {
             type="button"
             onClick={() => setActive(video)}
             className={cn(
-              "group flex h-full min-h-0 flex-col text-left",
+              "group cursor-pointer flex h-full min-h-0 flex-col text-left",
               "rounded-3xl border border-border/70 bg-card ring-1 ring-foreground/4 transition-all duration-300",
               "motion-safe:hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/5 hover:ring-foreground/10",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",

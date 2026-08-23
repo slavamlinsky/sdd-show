@@ -18,7 +18,7 @@ export const courseMeta = {
   titleAccent: "Intent-Driven Engineer",
   tagline: "Stop prompting. Start directing.",
   pitch:
-    "Turn your intent into specs AI agents can execute. Build faster, coordinate more complex systems, and keep the output reliable. Whether you are a one-person engineering team or leading one.",
+    "Turn your intent into specs AI agents can execute. Build faster, coordinate complex systems, and keep the output reliable. Whether you are a one-person engineering team or leading one.",
 } as const;
 
 export const courseAudienceChips: {

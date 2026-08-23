@@ -27,7 +27,8 @@ const phases: Phase[] = [
     range: "2020-2022",
     title: "Test-driven",
     subtitle: "the disciplined era",
-    process: "Write the test first, then the code. Behavior is agreed before implementation lands.",
+    process:
+      "Write the test first, then the code. Behavior is agreed before implementation lands.",
     note: {
       label: "Challenge",
       text: "Can feel redundant when AI can draft code and tests at once, unless tests still anchor intent.",
@@ -35,13 +36,13 @@ const phases: Phase[] = [
   },
   {
     range: "2023-2024",
-    title: 'Prompt engineering',
+    title: "Prompt engineering",
     subtitle: "vibe coding era",
     process:
       "Natural-language prompts in chat produce huge diffs in minutes and iteration looks fast on the surface.",
     note: {
       label: "Issue",
-      text: 'Speed without direction: teams babysit hallucinations and one-shot code that never matched a contract.',
+      text: "Speed without direction: teams babysit hallucinations and one-shot code that never matched a contract.",
     },
   },
   {
@@ -71,7 +72,7 @@ const phases: Phase[] = [
 export function HomeEvolutionTimeline() {
   return (
     <section
-      className="full-bleed relative overflow-hidden border-y border-border/40 bg-linear-to-b from-background via-muted/15 to-background py-16 sm:py-24"
+      className="full-bleed relative overflow-hidden border-y border-border/40 bg-linear-to-b from-background via-muted/15 to-background py-8 sm:py-12"
       aria-labelledby="evolution-timeline-heading"
     >
       <div
@@ -79,24 +80,21 @@ export function HomeEvolutionTimeline() {
         aria-hidden
       />
       <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6">
-        <Reveal className="mx-auto max-w-2xl text-center" distance={18}>
-          <p className="text-xs font-semibold tracking-wide text-primary uppercase">How we got here</p>
+        <Reveal className="mx-auto max-w-3xl text-center" distance={18}>
           <h2
             id="evolution-timeline-heading"
             className="mt-2 font-heading text-2xl font-semibold text-balance tracking-tight sm:text-3xl"
           >
-            From manual friction{" "}
-            <GradientText>
-              to AI-driven speed
-            </GradientText>
+            From manual friction <GradientText>to AI-driven speed</GradientText>
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            A vertical journey through the evolution of the software development lifecycle. From documents and manual
-            testing, to prompts, and now to intent and executable specs as the new leverage.
+          <p className="mt-3 leading-relaxed text-muted-foreground">
+            A vertical journey through the evolution of the software development
+            lifecycle. From documents and manual testing, to prompts, and now to
+            intent and executable specs as the new leverage.
           </p>
         </Reveal>
 
-        <div className="relative mx-auto mt-14 max-w-4xl md:mt-20">
+        <div className="relative mx-auto mt-6 max-w-4xl md:mt-12">
           {/* Center axis — desktop */}
           <div
             className="pointer-events-none absolute left-1/2 top-3 bottom-3 hidden w-px -translate-x-1/2 bg-linear-to-b from-border via-primary/45 to-violet-500/50 md:block"
@@ -107,7 +105,10 @@ export function HomeEvolutionTimeline() {
             {phases.map((phase, i) => {
               const onRight = i % 2 === 0;
               return (
-                <li key={phase.range} className="relative pb-4 last:pb-0 md:last:pb-4">
+                <li
+                  key={phase.range}
+                  className="relative pb-4 last:pb-0 md:last:pb-4"
+                >
                   {/* Mobile: rail + card */}
                   <Reveal delay={i * 0.07} distance={18} className="contents">
                     <div className="flex flex-col gap-4 md:hidden [&>*:first-child]:hidden">
@@ -125,10 +126,14 @@ export function HomeEvolutionTimeline() {
                       <div
                         className={cn(
                           "min-w-0",
-                          onRight ? "col-start-1 invisible" : "col-start-1 justify-self-end text-right"
+                          onRight
+                            ? "col-start-1 invisible"
+                            : "col-start-1 justify-self-end text-right",
                         )}
                       >
-                        {!onRight ? <PhaseCard phase={phase} align="right" /> : null}
+                        {!onRight ? (
+                          <PhaseCard phase={phase} align="right" />
+                        ) : null}
                       </div>
 
                       <div className="relative col-start-2 flex flex-col items-center justify-center">
@@ -141,10 +146,14 @@ export function HomeEvolutionTimeline() {
                       <div
                         className={cn(
                           "min-w-0",
-                          onRight ? "col-start-3 justify-self-start text-left" : "col-start-3 invisible"
+                          onRight
+                            ? "col-start-3 justify-self-start text-left"
+                            : "col-start-3 invisible",
                         )}
                       >
-                        {onRight ? <PhaseCard phase={phase} align="left" /> : null}
+                        {onRight ? (
+                          <PhaseCard phase={phase} align="left" />
+                        ) : null}
                       </div>
                     </div>
                   </Reveal>
@@ -158,15 +167,23 @@ export function HomeEvolutionTimeline() {
   );
 }
 
-function PhaseCard({ phase, align }: { phase: Phase; align: "left" | "right" }) {
+function PhaseCard({
+  phase,
+  align,
+}: {
+  phase: Phase;
+  align: "left" | "right";
+}) {
   return (
     <article
       className={cn(
         "rounded-2xl border border-border/60 bg-card/95 p-4 shadow-sm ring-1 ring-foreground/4 sm:p-5",
-        align === "right" && "md:text-right"
+        align === "right" && "md:text-right",
       )}
     >
-      <p className="text-xs font-semibold tabular-nums tracking-wide text-primary">{phase.range}</p>
+      <p className="text-xs font-semibold tabular-nums tracking-wide text-primary">
+        {phase.range}
+      </p>
       <h3 className="mt-1 font-heading text-xl font-semibold tracking-tight text-primary sm:text-2xl">
         {phase.title}
       </h3>
@@ -181,10 +198,12 @@ function PhaseCard({ phase, align }: { phase: Phase; align: "left" | "right" }) 
         <p
           className={cn(
             "mt-3 border-t border-border/50 pt-3 text-sm leading-relaxed text-muted-foreground",
-            align === "right" && "md:text-right"
+            align === "right" && "md:text-right",
           )}
         >
-          <span className="font-semibold text-foreground/85">{phase.note.label}: </span>
+          <span className="font-semibold text-foreground/85">
+            {phase.note.label}:{" "}
+          </span>
           {phase.note.text}
         </p>
       ) : null}

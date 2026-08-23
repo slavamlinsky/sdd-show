@@ -79,7 +79,7 @@ function isDocumentScrollEndTarget(target: EventTarget | null): boolean {
 
 function scrollPageToTop(
   behavior: ScrollBehavior,
-  sentinel: HTMLElement | null
+  sentinel: HTMLElement | null,
 ) {
   const nestedOpts: ScrollToOptions = { top: 0, behavior };
   for (const el of collectScrollableAncestors(sentinel)) {
@@ -99,22 +99,104 @@ function scrollPageToTop(
   }
 
   let done = false;
-  let tid = 0;
+  let interrupted = false;
+  let raf = 0;
+  let lastY = getViewportScrollY();
+  let lastChange = performance.now();
+  let sawMotion = false;
+  let lastTouchY: number | null = null;
+  const started = performance.now();
+  const wheelOpts: AddEventListenerOptions = { passive: true };
+  const touchOpts: AddEventListenerOptions = { passive: true, capture: true };
+
+  const stopListening = () => {
+    cancelAnimationFrame(raf);
+    root?.removeEventListener("scrollend", onEnd);
+    window.removeEventListener("scrollend", onEnd);
+    window.removeEventListener("wheel", onWheel, wheelOpts);
+    window.removeEventListener("touchstart", onTouchStart, touchOpts);
+    window.removeEventListener("touchmove", onTouchMove, touchOpts);
+  };
+
   const finish = () => {
     if (done) return;
     done = true;
-    window.clearTimeout(tid);
-    root?.removeEventListener("scrollend", onEnd);
-    window.removeEventListener("scrollend", onEnd);
-    snapDocumentToOrigin();
+    stopListening();
+    if (!interrupted) {
+      snapDocumentToOrigin();
+    }
   };
   const onEnd = (ev: Event) => {
     if (!isDocumentScrollEndTarget(ev.target)) return;
     finish();
   };
+  const interruptAwayFromTarget = () => {
+    if (done) return;
+    interrupted = true;
+    const y = getViewportScrollY();
+    const html = document.documentElement;
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    if (root) {
+      root.scrollTo({ top: y, left: root.scrollLeft, behavior: "auto" });
+    } else {
+      window.scrollTo({ top: y, left: window.scrollX, behavior: "auto" });
+    }
+    html.style.scrollBehavior = prev;
+    finish();
+  };
+  const onWheel = (ev: WheelEvent) => {
+    if (ev.ctrlKey || ev.deltaY <= 0) return;
+    interruptAwayFromTarget();
+  };
+  const onTouchStart = (ev: TouchEvent) => {
+    lastTouchY = ev.touches[0]?.clientY ?? null;
+  };
+  const onTouchMove = (ev: TouchEvent) => {
+    const clientY = ev.touches[0]?.clientY;
+    if (lastTouchY != null && clientY != null && clientY < lastTouchY - 1) {
+      interruptAwayFromTarget();
+    }
+    if (clientY != null) lastTouchY = clientY;
+  };
+
+  const tick = (now: number) => {
+    if (done) return;
+    const y = getViewportScrollY();
+    if (interrupted) {
+      finish();
+      return;
+    }
+    if (y <= 1) {
+      finish();
+      return;
+    }
+    if (y > lastY + 1) {
+      interruptAwayFromTarget();
+      return;
+    }
+    if (y !== lastY) {
+      sawMotion = true;
+      lastY = y;
+      lastChange = now;
+    } else if (sawMotion && now - lastChange >= 80) {
+      // Smooth scroll has stopped (often a few px short). Snap the rest.
+      finish();
+      return;
+    }
+    if (now - started > 8000) {
+      finish();
+      return;
+    }
+    raf = requestAnimationFrame(tick);
+  };
+
   root?.addEventListener("scrollend", onEnd);
   window.addEventListener("scrollend", onEnd);
-  tid = window.setTimeout(finish, 1200);
+  window.addEventListener("wheel", onWheel, wheelOpts);
+  window.addEventListener("touchstart", onTouchStart, touchOpts);
+  window.addEventListener("touchmove", onTouchMove, touchOpts);
+  raf = requestAnimationFrame(tick);
 }
 
 export function ScrollToTop() {
@@ -155,7 +237,10 @@ export function ScrollToTop() {
     refreshScrollableListeners();
 
     window.addEventListener("scroll", update, { passive: true });
-    document.addEventListener("scroll", update, { capture: true, passive: true });
+    document.addEventListener("scroll", update, {
+      capture: true,
+      passive: true,
+    });
     window.addEventListener("resize", onResize, { passive: true });
     window.addEventListener("pageshow", update);
 
@@ -180,8 +265,8 @@ export function ScrollToTop() {
       <div
         className={cn(
           /* Sits above footer link row + safe area — don’t cover GitHub / legal line */
-          "fixed bottom-28 right-4 z-90 transition-opacity duration-200 sm:bottom-32 sm:right-8",
-          visible ? "opacity-100" : "pointer-events-none opacity-0"
+          "fixed bottom-24 right-4 z-90 transition-opacity duration-200 sm:bottom-32 sm:right-8",
+          visible ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       >
         <button
@@ -197,7 +282,7 @@ export function ScrollToTop() {
             "bg-primary/25 text-primary shadow-none backdrop-blur-sm",
             "transition-colors hover:bg-primary/35 active:bg-primary/40",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-            "disabled:pointer-events-none disabled:opacity-40"
+            "disabled:pointer-events-none disabled:opacity-40",
           )}
           onClick={() => {
             if (!visible) return;
@@ -208,7 +293,11 @@ export function ScrollToTop() {
             scrollPageToTop(behavior, sentinelRef.current);
           }}
         >
-          <ChevronUpIcon className="size-5 shrink-0" strokeWidth={2.25} aria-hidden />
+          <ChevronUpIcon
+            className="size-5 shrink-0"
+            strokeWidth={2.25}
+            aria-hidden
+          />
         </button>
       </div>
     </>

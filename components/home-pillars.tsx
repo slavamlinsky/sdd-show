@@ -43,16 +43,21 @@ export function HomePillars() {
         className="pointer-events-none absolute inset-0 bg-linear-to-br from-sky-100/70 via-indigo-50/50 to-violet-100/65 dark:from-sky-950/25 dark:via-indigo-950/20 dark:to-violet-950/25"
         aria-hidden
       />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-10%,rgba(99,102,241,0.08),transparent_55%)]" aria-hidden />
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-10%,rgba(99,102,241,0.08),transparent_55%)]"
+        aria-hidden
+      />
 
-      <div className="relative mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-24 lg:px-10">
+      <div className="relative mx-auto w-full max-w-6xl px-5 py-8 sm:px-8 sm:py-12 lg:px-10">
         <Reveal className="mx-auto max-w-3xl text-center" distance={18}>
           <h2
             id="home-pillars-heading"
             className="font-heading text-3xl text-balance font-semibold leading-tight tracking-tight text-foreground sm:text-4xl"
           >
             Fundamentals of{" "}
-            <GradientText className="font-semibold whitespace-nowrap">intent-driven engineering</GradientText>
+            <GradientText className="font-semibold whitespace-nowrap">
+              intent-driven engineering
+            </GradientText>
           </h2>
         </Reveal>
 
@@ -65,20 +70,25 @@ export function HomePillars() {
                   <div
                     className={cn(
                       "flex h-full gap-5 rounded-xl bg-card p-8 shadow-sm hover:-translate-y-1",
-                      "ring-1 ring-border/50 dark:shadow-[0_12px_40px_-12px_rgba(0,0,0,0.35)]"
+                      "ring-1 ring-border/50 dark:shadow-[0_12px_40px_-12px_rgba(0,0,0,0.35)]",
                     )}
                   >
                     <span
                       className="flex size-14 shrink-0 items-center justify-center rounded-lg p-2 bg-linear-to-br from-violet-500/12 via-white to-sky-500/15 ring-1 ring-violet-500/15 dark:from-violet-500/20 dark:via-card dark:to-sky-500/20 dark:ring-violet-400/20"
                       aria-hidden
                     >
-                      <Icon className="size-12 text-violet-600 dark:text-sky-400" strokeWidth={1.65} />
+                      <Icon
+                        className="size-12 text-violet-600 dark:text-sky-400"
+                        strokeWidth={1.65}
+                      />
                     </span>
                     <div className="min-w-0 flex-1">
                       <h3 className="font-heading text-xl font-semibold leading-snug tracking-tight text-foreground">
                         {item.title}
                       </h3>
-                      <p className="mt-3 text-[15px] leading-[1.7] text-muted-foreground">{item.description}</p>
+                      <p className="mt-3 text-[15px] leading-[1.7] text-muted-foreground">
+                        {item.description}
+                      </p>
                     </div>
                   </div>
                 </Reveal>
@@ -92,7 +102,7 @@ export function HomePillars() {
             href="/glossary"
             className={cn(
               buttonVariants({ variant: "outline", size: "lg" }),
-              "h-12 rounded-xl border-primary/25 bg-background/80 px-8 text-sm font-semibold shadow-sm backdrop-blur-sm hover:bg-background"
+              "h-12 rounded-xl border-primary/25 bg-background/80 px-8 text-sm font-semibold shadow-sm backdrop-blur-sm hover:bg-background",
             )}
           >
             Open glossary &amp; core concepts

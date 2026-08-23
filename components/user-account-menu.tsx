@@ -27,7 +27,7 @@ const menuItemClass =
   "flex w-full cursor-pointer items-center gap-2.5 rounded-md px-2 py-2 text-sm font-normal tracking-normal text-foreground";
 
 const menuPrefRowClass =
-  "flex items-center justify-between gap-3 rounded-md px-2 py-1.5";
+  "flex items-center justify-between gap-3 rounded-md px-2";
 
 const menuPrefLabelClass =
   "flex items-center gap-2.5 text-sm font-normal tracking-normal text-foreground";
@@ -98,9 +98,9 @@ export function UserAccountMenu({ email, displayName, avatarUrl }: Props) {
               />
               Theme
             </span>
-            <ThemeToggle className="size-8 rounded-md" />
+            <ThemeToggle variant="switch" />
           </div>
-          <div className={menuPrefRowClass}>
+          {/* <div className={menuPrefRowClass}>
             <span className={menuPrefLabelClass}>
               <Languages
                 className="size-4 shrink-0 text-muted-foreground"
@@ -109,7 +109,7 @@ export function UserAccountMenu({ email, displayName, avatarUrl }: Props) {
               Language
             </span>
             <LocaleSelector />
-          </div>
+          </div> */}
         </div>
 
         <DropdownMenuSeparator />

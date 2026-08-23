@@ -2,47 +2,69 @@
 
 ## Intent
 
-Orient visitors, explain SDD in one screenful, and funnel toward **Course** while surfacing **Glossary**, **Ecosystem**, **Blog**, and **Videos**.
+Orient visitors around **modern product engineering in the AI era**: how small teams build the right product faster. **Intent-driven engineering** is the central method (intent sits above the spec); SDD, agents, MVPs, and hypotheses live inside that question. Funnel toward **Course** after the idea is clear, while surfacing **Glossary**, **Ecosystem**, **Blog**, and **Videos**.
 
-Follow [spec-design-layout.md](./spec-design-layout.md) for **responsive bands**, **spacing**, **CTA styling**, **images** (MVP placeholders OK), and **[naming & capitalization](./spec-design-layout.md#naming--capitalization)** (sentence case for hero, FAQ, and cards; taxonomy pillar labels unchanged).
+**Hierarchy:** IntentPowered (brand) → product loop (how we learn after shipping) → Intent-Driven Engineering (how we start) → Course / Glossary / Blog / Videos (content).
 
-## Sections (MVP)
+Follow [spec-design-layout.md](./spec-design-layout.md) for **responsive bands**, **spacing**, **CTA styling**, **images** (placeholders OK), and **[naming & capitalization](./spec-design-layout.md#naming--capitalization)**.
 
-1. **Hero**
-  - Headline: what SDD is in plain language (one line + optional subline).
-  - Short supporting text (2–4 sentences max).
-  - **Visual:** Hero **image or illustration** on desktop (side-by-side or tasteful background treatment); stack **image above or below** copy on mobile. Use **placeholder** art until final assets (ChatGPT / FreePik / etc.).
-  - **Primary CTA:** button/link to `/course`.
-  - **Secondary CTA:** button/link to `/glossary` or “Explore” anchored to the next section (either is fine; pick one implementation).
-2. **Four pillars of intent**
-  - Short band: heading + **four cards** (title, Lucide icon, one-line description) — outcome clarity, success metrics, constraints, delegation — responsive **2×2** from `sm` up, **single column** on the smallest widths. Card titles link to matching anchors on `/glossary` where terms exist.
-3. **Evolution timeline**
-  - **Vertical** band (full-bleed): copy explains progression **from manual friction to AI-driven speed**. Five **eras** (2018–20 → 2026+) with **process** and optional **friction/challenge/issue** lines. **Desktop:** centered axis with **alternating** cards (first era on the **right**); **mobile:** left rail with dots and stacked cards.
-4. **Q&A (single FAQ block on home)**
-  - **3–5** questions and short answers (accordion or static blocks).
-  - Topics: what SDD is, how it differs from “just tickets”, when it helps, tools optional.
-  - **Do not** duplicate a second full FAQ below the footer; **course-specific** FAQ lives on `/course` ([spec-course](./spec-course.md)).
-5. **Blog preview**
-   - **MVP:** **Carousel** of up to **4** newest posts (title, date, reading time, excerpt, **cover** from post `**socialImage**` or first local inline figure). **Layout:** about **one** card on **&lt; md**, **two** from **`md`** up to **`lg`**, **three** from **`lg`** (viewport breakpoints so tablets stay two-up; horizontal snap + arrows + dot indicators). Entire **card** is one link to `/blog/[slug]`; **All articles** → `/blog`.
-   - **v3:** Optional **pillar category** strip between header and carousel; richer related rules on `/blog` — see [spec-blog.md](./spec-blog.md).
-6. **Video library strip**
-   - Same band pattern as blog preview: **heading** (e.g. **Fresh from our** + gradient **video library**) + short description + **All videos** → `/videos`.
-   - **Carousel** of up to **four** curated entries (the **`videos`** list **after** the hero featured item): same snap / arrows / dots behavior as the blog carousel; **one** slide on **&lt; md**, **two** from **`md`** to **`lg`**, **three** from **`lg`** (viewport breakpoints). Each **card**: YouTube poster, title, optional category + channel; **tap** opens in-site **modal player** (same as `/videos`).
-7. **“Who it’s for” (course audience — compact)** — *optional / phased; see [spec-course](./spec-course.md)*
-  - **Small band** on home (optional): short heading + **2–4 bullets or chips** mapping to [course audience in spec-main](./spec-main.md#course-audience). Full detail and bullets may live primarily on `/course` hero.
-8. **Explore the ecosystem** — *P1; see [spec-ecosystem.md](./spec-ecosystem.md)*
-  - Heading + lead: understand the tools, approaches, and standards shaping intent-driven engineering.
-  - Three links: **Tools** (What can I use?) · **Approaches** (How should I work?) · **Standards** (How does it fit together?) → `/ecosystem#…`.
+Do **not** call this “IntentPowered Methodology”. Prefer **The IntentPowered Loop** or **How intent-driven engineering works**.
+
+## Sections (current)
+
+1. **Hero** — _why / where we start_
+
+- Headline: **Build software from intent, not tickets or instructions.** Keep it. This is the change of starting point, not the product cycle.
+- Supporting line: start with the outcome; turn intent into specs; build and ship fast; validate with real users. This should set up the loop without retelling it.
+- **Visual:** existing featured video (or similar) on desktop; stack on mobile. The **framework diagram does not live in the hero**.
+- **CTAs:** **Explore the framework** → `#intentpowered-loop`. **View course** → `/course`.
+
+2. **The IntentPowered Loop** (`#intentpowered-loop`) — _how the product cycle runs after we start_
+
+- Pair with the hero: hero = don’t start from tickets; loop = don’t stop at shipping.
+- Layout from `lg`: **diagram** (~45%) + copy (**55%**). Heading: **Ship early. Learn fast.** / **Focus on what matters.** Body `text-base`. Section uses the site theme (not a forced dark band).
+- Lead: **intent-powered product development** as a continuous loop; smallest useful version; learning can reshape the next hypothesis and sometimes the **intent itself**.
+- Five stages (not eight): **Intent → Build → Ship → Learn → Refine ↻**. Outcome, spec, AI, quality, and measure live _inside_ these stages, not as extra nodes.
+  - Intent: what we are trying to achieve (outcome, hypothesis, success metrics).
+  - Build: spec, plan, AI execution, quality.
+  - Ship: MVP / smallest useful version.
+  - Learn: feedback, analytics, measurement.
+  - Refine: iteration, new hypothesis, adjusted intent.
+- **Diagram:** a **circle**, not ∞. Thin violet→cyan gradient stroke, five icon nodes, empty centre (AI is an accelerator inside Build, not the hub). Active node glow + traveling highlight stay in sync with a **copy slider** on the right (~5s per stage). `prefers-reduced-motion`: static list, no motion.
+- Do not fold the framework into the site **logo**.
+
+3. **Four core principles**
+
+- Outcome clarity / Success metrics / Constraints & guards / Delegation & trust — after the whole loop, so principles explain the framework.
+
+4. **Evolution timeline**
+
+- Requirements → TDD → Prompt → SDD → Intent. Why IDE showed up.
+
+5. **Fundamentals**
+
+- Product → Design → Build → Quality.
+
+6. **Course CTA**
+
+- **Learn Intent-Driven Engineering** + short pitch + **View course**. Idea first, then the course.
+
+7. **Blog preview** — carousel of newest posts; **All articles** → `/blog`.
+8. **Video library strip** — curated videos; **All videos** → `/videos`.
+9. **Q&A (single FAQ on home)** — 3–5 items. Course-specific FAQ stays on `/course`.
+
+Optional later: compact “who it’s for” chips; ecosystem strip per [spec-ecosystem.md](./spec-ecosystem.md).
 
 ## Acceptance
 
-- Hero + Q&A + blog preview + video teaser are visible without relying on client-only rendering for core copy where feasible (SEO-friendly).
-- CTAs match **spec-main** (primary → course) and **spec-design-layout.md** (visual hierarchy).
-- **Responsive:** Sections stack with clear separation; hero image does not break layout at mobile and desktop widths.
-- **Motion:** Home bands (hero, pillars, timeline, blog row, etc.) follow **spec-design-layout.md** — **Framer Motion** for block/element entrance where used, with `prefers-reduced-motion` respected.
-- **v3 (when shipped):** Blog band matches [spec-blog.md](./spec-blog.md) (carousel, category strip, related rules on article pages are blog spec).
+- Order is hero → loop → principles → evolution → fundamentals → course → content → videos → FAQ.
+- Loop is reachable from the hero without scrolling guesswork (`#intentpowered-loop`, offset for the fixed header).
+- Hero + loop + FAQ + carousels stay readable without client-only copy for core text.
+- CTAs: framework explore in hero; primary course conversion in hero **and** the course band.
+- **Motion:** bands follow [spec-design-layout.md](./spec-design-layout.md); `prefers-reduced-motion` respected. Loop: traveling arc highlight + active node; static fallback.
+- **Responsive:** 55/45 stacks on small screens (copy readable; diagram scales, no horizontal page scroll).
 
 ## Non-goals
 
-- Blog content authoring on this page; posts live under `/blog`.
-
+- Replacing the header logo with the full loop.
+- Blog authoring on this page; posts live under `/blog`.

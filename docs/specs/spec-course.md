@@ -14,13 +14,13 @@ Audience positioning aligns with [spec-main.md](./spec-main.md) (**Course audien
 
 ## Course identity
 
-| Field | Copy (source of truth for `/course`) |
-| ----- | ------------------------------------ |
-| **Headline** | Become an Intent-Driven Engineer |
-| **Tagline** | Stop prompting. Start directing. |
-| **Pitch** | Turn your intent into specs AI agents can execute. Build faster, coordinate more complex systems, and keep the output reliable — whether you are a one-person engineering team or leading one. |
-| **Objective** | Move beyond vibe coding and master structured workflows for complex, reliable software with AI agents. |
-| **Shift** | From prompting to directing intent: specs as the contract agents execute. |
+| Field         | Copy (source of truth for `/course`)                                                                                                                                                      |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Headline**  | Become an Intent-Driven Engineer                                                                                                                                                          |
+| **Tagline**   | Stop prompting. Start directing.                                                                                                                                                          |
+| **Pitch**     | Turn your intent into specs AI agents can execute. Build faster, coordinate complex systems, and keep the output reliable — whether you are a one-person engineering team or leading one. |
+| **Objective** | Move beyond vibe coding and master structured workflows for complex, reliable software with AI agents.                                                                                    |
+| **Shift**     | From prompting to directing intent: specs as the contract agents execute.                                                                                                                 |
 
 ---
 
@@ -41,12 +41,12 @@ Architects and senior ICs map onto those seats. **Not the lead story:** intro-to
 
 ## Phased rollout (content & UX)
 
-| Phase    | Scope                                                                                                    | Status                                  |
-| -------- | -------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| **P0**   | Hero, syllabus, lead form, trust links                                                                   | Done.                                   |
-| **P1**   | Audience + FAQ on `/course` | Done. |
-| **P1.1** | Intent-Driven Engineer hero + syllabus | Current. |
-| **P2**   | Home: optional compact “who it’s for” (see [spec-home](./spec-home.md))                                  | Optional / later.                       |
+| Phase    | Scope                                                                   | Status            |
+| -------- | ----------------------------------------------------------------------- | ----------------- |
+| **P0**   | Hero, syllabus, lead form, trust links                                  | Done.             |
+| **P1**   | Audience + FAQ on `/course`                                             | Done.             |
+| **P1.1** | Intent-Driven Engineer hero + syllabus                                  | Current.          |
+| **P2**   | Home: optional compact “who it’s for” (see [spec-home](./spec-home.md)) | Optional / later. |
 
 **P2 Home** stays shorter than `/course`.
 
@@ -83,15 +83,15 @@ Architects and senior ICs map onto those seats. **Not the lead story:** intro-to
 
 Source copy lives in `lib/course-data.ts`. Sense of each module (not a transcript):
 
-| Module                           | Sense                                                                                                                                                                                         |
-| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **1. The great evolution**       | Five eras: requirement-driven PRDs → TDD → Scrum fragments → prompt / vibe coding → spec and intent as source of truth. Code is no longer the bottleneck; **ambiguity** is.                   |
-| **2. The complexity trough**     | U-shaped productivity: beginners feel huge speed; professionals stall on complex systems. Vibe vs spec. Cost of a missing requirement sentence.                                               |
-| **3. Deep dive: SDD**            | Spec is the primary artifact. Lifecycle: **specify → plan → task → implement**. Operationalize with **GitHub Spec Kit**, **OpenSpec**, or **Kiro**. Case: secure login or payments. |
-| **4. Intent-Driven Engineering** | Outcomes and success criteria, not step-by-step. Alignment across long sessions and tools. **Intent contracts**: you own what; agents reason how.                                             |
+| Module                           | Sense                                                                                                                                                                                                         |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. The great evolution**       | Five eras: requirement-driven PRDs → TDD → Scrum fragments → prompt / vibe coding → spec and intent as source of truth. Code is no longer the bottleneck; **ambiguity** is.                                   |
+| **2. The complexity trough**     | U-shaped productivity: beginners feel huge speed; professionals stall on complex systems. Vibe vs spec. Cost of a missing requirement sentence.                                                               |
+| **3. Deep dive: SDD**            | Spec is the primary artifact. Lifecycle: **specify → plan → task → implement**. Operationalize with **GitHub Spec Kit**, **OpenSpec**, or **Kiro**. Case: secure login or payments.                           |
+| **4. Intent-Driven Engineering** | Outcomes and success criteria, not step-by-step. Alignment across long sessions and tools. **Intent contracts**: you own what; agents reason how.                                                             |
 | **5. Strategic implementation**  | Decision framework: money/security → SDD; year of maintenance → SDD; prototypes may vibe. Tool pick: OpenSpec on existing systems, Spec Kit for multi-agent greenfield, Kiro when the team lives in that IDE. |
-| **6. The future team**           | Strategic Architect (engineering intent). Intent Architect (PM precision) — including when that is the same person. SDD as leverage for a one-person army, and alignment once the team grows. |
-| **Outro**                        | Clarity is scarce. Cleaner, safer, less surprising software. Challenge: one spec before the next prompt.                                                                                      |
+| **6. The future team**           | Strategic Architect (engineering intent). Intent Architect (PM precision) — including when that is the same person. SDD as leverage for a one-person army, and alignment once the team grows.                 |
+| **Outro**                        | Clarity is scarce. Cleaner, safer, less surprising software. Challenge: one spec before the next prompt.                                                                                                      |
 
 Intro framing on the page (hero + who-for) covers: transition from implementation to orchestration; audience; stop babysitting, start directing.
 

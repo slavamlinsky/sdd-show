@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { GradientText } from "@/components/gradient-text";
+import { cn } from "@/lib/utils";
 
 const items = [
   {
@@ -60,11 +61,34 @@ export function CourseFaq() {
             A few answers before you join the list. Depth lives in the glossary and blog.
           </p>
         </div>
-        <Accordion className="mt-10 w-full" defaultValue={[items[0].id]}>
+        <Accordion
+          multiple
+          defaultValue={[]}
+          className="mt-12 w-full border-t border-border"
+        >
           {items.map((item) => (
-            <AccordionItem key={item.id} value={item.id}>
-              <AccordionTrigger>{item.q}</AccordionTrigger>
-              <AccordionContent>{item.a}</AccordionContent>
+            <AccordionItem
+              key={item.id}
+              value={item.id}
+              className="border-0 border-b border-border bg-transparent px-0"
+            >
+              <AccordionTrigger
+                className={cn(
+                  "rounded-none border-0 py-5 text-left text-base font-medium text-foreground sm:py-6 sm:text-lg",
+                  "hover:no-underline focus-visible:ring-ring focus-visible:ring-offset-background",
+                  "[&_svg]:mt-0.5 [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
+                )}
+              >
+                {item.q}
+              </AccordionTrigger>
+              <AccordionContent
+                className={cn(
+                  "px-0 pb-5 pt-0 text-left text-sm leading-relaxed text-muted-foreground sm:text-[15px]",
+                  "[&>div]:px-0 [&>div]:pb-0 [&>div]:pt-0",
+                )}
+              >
+                {item.a}
+              </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

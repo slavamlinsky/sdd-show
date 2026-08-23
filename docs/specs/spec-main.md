@@ -2,7 +2,7 @@
 
 ## Purpose
 
-A small public website that explains **spec driven development (SDD)** to **students and developers**, with clear navigation and room to grow content.
+A small public website about **modern product engineering in the AI era**: how small teams build the right product faster. **Intent-driven engineering** and **spec-driven development (SDD)** sit inside that question. The **IntentPowered Loop** is the home visual model (**Intent → Build → Ship → Learn → Refine**).
 
 **Copy convention:** Headings, marketing lines, and blog metadata follow **sentence case**; formal terms, acronyms, proper nouns, and fixed taxonomy labels are exceptions — see [spec-design-layout.md — Naming & capitalization](./spec-design-layout.md#naming--capitalization).
 
@@ -66,7 +66,7 @@ Architects and senior ICs map onto those seats. **Not the lead story:** intro-to
 ## Global layout
 
 - **Header:** **Site title / logo** (links to `/`); **primary nav** order: **Glossary → Ecosystem → Videos → Course → Blog** (no duplicate “Home”); nav **centered** on `md+` between logo and actions; **logged out:** **“Sign in”** (primary border + primary text, top-right, **Lucide `LogIn`**) → `/sign-in`. **Logged in (auth P2):** account affordance + **Sign out**. **Mobile:** sheet menu for nav; Sign in / account stays reachable next to the menu trigger.
-- **Footer:** Short note + optional link to repo or contact (optional for MVP).
+- **Footer:** Short brand line (**IntentPowered** + the hypotheses/ship note) + links (Ecosystem, Course, Blog, GitHub). No logo duplicate; extra socials only when there is a real profile URL.
 - **App shell:** **Main content** uses one shared wrapper (max width, horizontal + vertical padding, default `h1` styling) in the root layout; routes use `full-bleed` only where a section must span the viewport. See **App shell (root layout)** in [spec-design-layout.md](./spec-design-layout.md).
 - **Design:** Light, simple, modern (AI-tool / edu style). **Responsive layout, spacing (“air”), structured blocks, CTAs, and image rules** are defined in [spec-design-layout.md](./spec-design-layout.md). Optional visual references may live in a future `design.md` — not blocking MVP.
 

@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef } from "react";
 import { LogIn } from "lucide-react";
+import headerLogo from "@/public/logo.png";
+import headerLogoWhite from "@/public/logo-white.png";
 import { mainNav } from "@/lib/navigation";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
@@ -48,11 +50,15 @@ export function SiteHeader({
           className="flex shrink-0 items-center rounded-md outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           <Image
-            src="/logo.png"
+            src={headerLogo}
             alt={siteConfig.name}
-            width={260}
-            height={70}
-            className="h-12 w-auto sm:h-16"
+            className="h-10 w-auto dark:hidden sm:h-12 lg:h-14"
+            priority
+          />
+          <Image
+            src={headerLogoWhite}
+            alt=""
+            className="hidden h-10 w-auto dark:block sm:h-12 lg:h-14"
             priority
           />
         </Link>
@@ -102,7 +108,10 @@ export function SiteHeader({
             </Button>
           )}
 
-          <MobileNavDrawer headerRef={headerRef} showThemeInDrawer={!isSignedIn} />
+          <MobileNavDrawer
+            headerRef={headerRef}
+            showThemeInDrawer={!isSignedIn}
+          />
         </div>
       </div>
     </header>

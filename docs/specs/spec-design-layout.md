@@ -74,7 +74,7 @@ Apply sentence case to:
 ## UX practices (baseline)
 
 - **Skip link:** First focusable control skips to **main content** (`#main-content`); main landmark is focusable after skip for keyboard users.
-- **Scroll to top:** The floating control `ScrollToTop` first resets any **nested** scrollable panels (`overflow: auto` / `scroll`), then sets the **document** scroller (`document.scrollingElement`) to `top: 0` so the result matches **first paint** (fixed header + `main` `pt-16` unchanged from a fresh navigation). After smooth scroll, snap to origin so engines that stop short still land on `0`. **Skip link** still uses `#main-content` / focus; scroll-to-top targets the same visual top via `scrollY === 0`.
+- **Scroll to top:** The floating control `ScrollToTop` first resets any **nested** scrollable panels (`overflow: auto` / `scroll`), then sets the **document** scroller (`document.scrollingElement`) to `top: 0` so the result matches **first paint** (fixed header + `main` `pt-16` unchanged from a fresh navigation). After the **smooth animation finishes** (`scrollend` or scroll position stable), snap to origin so engines that stop a few pixels short still land on `0`. Do not snap on a short timeout while the animation is still running. **Skip link** still uses `#main-content` / focus; scroll-to-top targets the same visual top via `scrollY === 0`.
 - **Focus:** Visible focus rings on interactive elements (buttons, links, sheet, dialog).
 - **CTAs:** Primary vs secondary styles are distinct; primary routes to **Course** where specs require.
 
