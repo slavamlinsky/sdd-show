@@ -98,7 +98,7 @@ export function GlossaryExplorer({ terms, initialPillars = null }: Props) {
         id="glossary-filters"
         className="flex flex-col gap-3 lg:gap-8 lg:flex-row lg:items-center"
       >
-        <div className="relative min-w-0 w-1/2">
+        <div className="relative min-w-0 w-full lg:w-1/2">
           <Search
             className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground"
             aria-hidden

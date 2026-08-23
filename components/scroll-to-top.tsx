@@ -99,30 +99,80 @@ function scrollPageToTop(
   }
 
   let done = false;
+  let interrupted = false;
   let raf = 0;
   let lastY = getViewportScrollY();
   let lastChange = performance.now();
   let sawMotion = false;
+  let lastTouchY: number | null = null;
   const started = performance.now();
+  const wheelOpts: AddEventListenerOptions = { passive: true };
+  const touchOpts: AddEventListenerOptions = { passive: true, capture: true };
+
+  const stopListening = () => {
+    cancelAnimationFrame(raf);
+    root?.removeEventListener("scrollend", onEnd);
+    window.removeEventListener("scrollend", onEnd);
+    window.removeEventListener("wheel", onWheel, wheelOpts);
+    window.removeEventListener("touchstart", onTouchStart, touchOpts);
+    window.removeEventListener("touchmove", onTouchMove, touchOpts);
+  };
 
   const finish = () => {
     if (done) return;
     done = true;
-    cancelAnimationFrame(raf);
-    root?.removeEventListener("scrollend", onEnd);
-    window.removeEventListener("scrollend", onEnd);
-    snapDocumentToOrigin();
+    stopListening();
+    if (!interrupted) {
+      snapDocumentToOrigin();
+    }
   };
   const onEnd = (ev: Event) => {
     if (!isDocumentScrollEndTarget(ev.target)) return;
     finish();
   };
+  const interruptAwayFromTarget = () => {
+    if (done) return;
+    interrupted = true;
+    const y = getViewportScrollY();
+    const html = document.documentElement;
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    if (root) {
+      root.scrollTo({ top: y, left: root.scrollLeft, behavior: "auto" });
+    } else {
+      window.scrollTo({ top: y, left: window.scrollX, behavior: "auto" });
+    }
+    html.style.scrollBehavior = prev;
+    finish();
+  };
+  const onWheel = (ev: WheelEvent) => {
+    if (ev.ctrlKey || ev.deltaY <= 0) return;
+    interruptAwayFromTarget();
+  };
+  const onTouchStart = (ev: TouchEvent) => {
+    lastTouchY = ev.touches[0]?.clientY ?? null;
+  };
+  const onTouchMove = (ev: TouchEvent) => {
+    const clientY = ev.touches[0]?.clientY;
+    if (lastTouchY != null && clientY != null && clientY < lastTouchY - 1) {
+      interruptAwayFromTarget();
+    }
+    if (clientY != null) lastTouchY = clientY;
+  };
 
   const tick = (now: number) => {
     if (done) return;
     const y = getViewportScrollY();
+    if (interrupted) {
+      finish();
+      return;
+    }
     if (y <= 1) {
       finish();
+      return;
+    }
+    if (y > lastY + 1) {
+      interruptAwayFromTarget();
       return;
     }
     if (y !== lastY) {
@@ -143,6 +193,9 @@ function scrollPageToTop(
 
   root?.addEventListener("scrollend", onEnd);
   window.addEventListener("scrollend", onEnd);
+  window.addEventListener("wheel", onWheel, wheelOpts);
+  window.addEventListener("touchstart", onTouchStart, touchOpts);
+  window.addEventListener("touchmove", onTouchMove, touchOpts);
   raf = requestAnimationFrame(tick);
 }
 

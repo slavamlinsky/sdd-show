@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Pause, Play } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { IntentpoweredLoopDiagram } from "@/components/intentpowered-loop-diagram";
 import { GradientText } from "@/components/gradient-text";
+import { Button } from "@/components/ui/button";
 import {
   INTENTPOWERED_LOOP_ID,
   intentpoweredLoopCopy,
@@ -18,8 +20,10 @@ export function HomeIntentpoweredLoop() {
   const { headingLead, headingAccent, lead } = intentpoweredLoopCopy;
   const [tick, setTick] = useState(0);
   const [motion, setMotion] = useState(true);
+  const [paused, setPaused] = useState(false);
   const active = tick % STAGE_COUNT;
   const stage = intentpoweredLoopStages[active];
+  const advancing = motion && !paused;
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -48,6 +52,7 @@ export function HomeIntentpoweredLoop() {
             <IntentpoweredLoopDiagram
               active={tick}
               motion={motion}
+              paused={!advancing}
               onActiveChange={setTick}
             />
           </Reveal>
@@ -71,18 +76,40 @@ export function HomeIntentpoweredLoop() {
                   {String(active + 1).padStart(2, "0")} /{" "}
                   {String(STAGE_COUNT).padStart(2, "0")}
                 </p>
-                <div className="flex items-center gap-1.5" aria-hidden>
-                  {intentpoweredLoopStages.map((item, i) => (
-                    <span
-                      key={item.id}
-                      className={cn(
-                        "h-1.5 rounded-full transition-all duration-500",
-                        i === active
-                          ? "w-6 bg-violet-500 dark:bg-sky-400"
-                          : "w-1.5 bg-border",
+                <div className="flex items-center gap-3">
+                  {motion ? (
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon-xs"
+                      aria-pressed={paused}
+                      aria-label={
+                        paused
+                          ? "Resume IntentPowered Loop animation"
+                          : "Pause IntentPowered Loop animation"
+                      }
+                      onClick={() => setPaused((value) => !value)}
+                    >
+                      {paused ? (
+                        <Play className="size-3.5" aria-hidden />
+                      ) : (
+                        <Pause className="size-3.5" aria-hidden />
                       )}
-                    />
-                  ))}
+                    </Button>
+                  ) : null}
+                  <div className="flex items-center gap-1.5" aria-hidden>
+                    {intentpoweredLoopStages.map((item, i) => (
+                      <span
+                        key={item.id}
+                        className={cn(
+                          "h-1.5 rounded-full transition-all duration-500",
+                          i === active
+                            ? "w-6 bg-violet-500 dark:bg-sky-400"
+                            : "w-1.5 bg-border",
+                        )}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
               <div className={cn("relative", motion ? "min-h-28" : "space-y-5")}>

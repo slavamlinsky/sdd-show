@@ -43,6 +43,7 @@ function activeIndexForTail(tail: number, count: number, dashLen: number) {
 type IntentpoweredLoopDiagramProps = {
   active: number;
   motion: boolean;
+  paused?: boolean;
   onActiveChange: (index: number) => void;
 };
 
@@ -53,26 +54,31 @@ type IntentpoweredLoopDiagramProps = {
 export function IntentpoweredLoopDiagram({
   active,
   motion,
+  paused = false,
   onActiveChange,
 }: IntentpoweredLoopDiagramProps) {
   const uid = useId().replace(/:/g, "");
   const stroke = `ip-ring-${uid}`;
   const glow = `ip-glow-${uid}`;
   const highlightRef = useRef<SVGCircleElement>(null);
+  const elapsedRef = useRef(0);
   const { cx, cy, r, viewBox } = INTENTPOWERED_RING;
   const count = intentpoweredLoopStages.length;
   const dashLen = 1 / count;
 
   useEffect(() => {
     if (!motion) {
+      elapsedRef.current = 0;
       highlightRef.current?.setAttribute("stroke-dashoffset", "0");
       return;
     }
-    const started = performance.now();
+    if (paused) return;
+    const started = performance.now() - elapsedRef.current;
     let frame = 0;
     let last = -1;
     const tick = (now: number) => {
       const elapsed = now - started;
+      elapsedRef.current = elapsed;
       const cycle = INTENTPOWERED_LOOP_STEP_MS * count;
       // t=0: nose sits on Intent. Tail trails one segment behind.
       const raw = wrap01(elapsed / cycle);
@@ -87,7 +93,7 @@ export function IntentpoweredLoopDiagram({
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [motion, count, dashLen, onActiveChange]);
+  }, [motion, paused, count, dashLen, onActiveChange]);
 
   return (
     <figure className="relative mx-auto aspect-square w-full max-w-lg overflow-visible lg:max-w-none">
