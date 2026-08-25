@@ -1,5 +1,5 @@
 -- Glossary catalog + suggestions (one table).
--- Paste into Supabase Dashboard → SQL Editor, then Run.
+-- Applied by `npx supabase db push` / the GitHub Action on merge to main.
 -- Later: seed published rows from lib/glossary-data.ts; admin UI updates status / copy / tags.
 
 create table if not exists public.glossary_terms (

@@ -1,6 +1,6 @@
 # Videos — roadmap (`/videos`) v2 & v3
 
-Supersedes nothing: **[spec-videos.md](./spec-videos.md)** remains the **MVP / current** contract. This document captures **planned** capabilities once data moves off static files.
+Supersedes nothing: **[spec-videos.md](./spec-videos.md)** remains the **MVP / current** contract. Search, topic filter, suggest-a-video, and subscribe now ship against the static list plus suggestion/subscription tables. This document still tracks the **catalog-in-Postgres**, sort/pagination, TTL, favorites, and badges.
 
 **Stack assumption:** **Supabase** (Postgres + Auth) — [spec-data-auth.md](./spec-data-auth.md).
 
@@ -31,18 +31,18 @@ Admin/curation flow (who approves suggestions) is **out of scope** for this road
 
 ### “Suggest a video” (UI + delivery)
 
-- **Button** on `/videos` (e.g. secondary): **“Suggest a video”**.
+- **Button** on `/videos` (header, premium): **“Suggest a video”**. **Shipped** (modal; YouTube URL + why it matters + optional topics, multi-select).
 - **Modal** (or drawer) **form** with:
   - **YouTube URL** (required) — validate host / id shape server-side.
-  - **Category** (required or optional with default) — align with category taxonomy.
+  - **Topics** (optional, multi-select) — Product / Design / Build / Quality per [spec-taxonomy.md](./spec-taxonomy.md).
   - **Why it is useful** (free text, required) — short paragraph.
 - **Submit behavior (v2 first slice):** POST to a **Route Handler** that sends email to you (e.g. Resend, SES, or Supabase Edge + mail). Store a row in Supabase as **“pending”** when DB exists so nothing is lost if mail fails.
 - **Spam / abuse:** rate limit, honeypot, or CAPTCHA TBD before public launch at scale.
 
 ### Listing: search, filters, sort, pagination
 
-- **Search:** full-text or `ILIKE` over title, description, tags (database indices).
-- **Filter:** **category** (required filter surface once categories exist).
+- **Search:** **Shipped** client-side over the static list (title, channel, category). Database `ILIKE` when the catalog moves to Postgres.
+- **Filter:** **Shipped** — category/pillar chips (same UX as Glossary).
 - **Sort:** e.g. newest, most saved (once saves exist), title A–Z.
 - **Pagination:** offset/limit or cursor — avoid loading full list for large catalogs.
 

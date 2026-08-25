@@ -9,9 +9,54 @@ Postgres + Auth live in a [Supabase](https://supabase.com) project. Spec: [`docs
 3. `cp .env.example .env.local` and paste those values.
 4. Restart `npm run dev`. The app still builds **without** env vars; clients throw only when called without config.
 5. **Auth (P2):** In Supabase → **Authentication → URL configuration**, set **Site URL** to your production origin (e.g. `https://sdd-show.vercel.app`) and add **Redirect URLs**: `http://localhost:3000/auth/callback`, `https://sdd-show.vercel.app/auth/callback` (plus preview wildcards). Enable **Google** under **Providers** if you want that button to work. Magic links use **Authentication → Email**.
-6. **Glossary suggestions:** run [`supabase/migrations/20260818_glossary_terms.sql`](supabase/migrations/20260818_glossary_terms.sql) in the Supabase **SQL Editor**. Add **`SUPABASE_SERVICE_ROLE_KEY`** to `.env.local` (Settings → API) so signed-in submits work reliably from Server Actions. Optional: **`RESEND_API_KEY`** + **`GLOSSARY_NOTIFY_EMAIL`** to get an email for each suggestion before the admin UI exists.
+6. **Schema:** add GitHub Actions secrets and let [Database migrations](#database-migrations) apply `supabase/migrations/` (do not paste SQL into the dashboard for routine work). Add **`SUPABASE_SERVICE_ROLE_KEY`** to `.env.local` and Vercel (Settings → API) so signed-in glossary/video submits work from Server Actions. Optional: **`RESEND_API_KEY`** + **`GLOSSARY_NOTIFY_EMAIL`** (and **`VIDEO_NOTIFY_EMAIL`**) for email-only suggestions if tables are not applied yet.
+7. **Videos:** signed-in users can toggle a subscribe flag; guests are sent to sign-in. Suggestions persist as pending rows (or email-only if Resend is configured).
 
 Auth UI: `/sign-in` (magic link + Google). Clients: `lib/supabase/client.ts` (browser), `lib/supabase/server.ts` (server). `proxy.ts` refreshes auth cookies when env is set.
+
+## Database migrations
+
+SQL in [`supabase/migrations/`](supabase/migrations/) is applied by the [Supabase CLI](https://supabase.com/docs/guides/local-development/cli/getting-started). History lives in `supabase_migrations.schema_migrations` (created by the CLI — do not invent a second table). Vercel deploys the Next.js app only; it does **not** run SQL.
+
+**On merge to `main`:** [`.github/workflows/supabase-migrations.yml`](.github/workflows/supabase-migrations.yml) verifies every file on a fresh local Postgres, then runs `supabase db push` against production.
+
+**Pull requests** that touch `supabase/` run the same local apply (`supabase db start`) so broken SQL fails before merge.
+
+### One-time GitHub secrets
+
+Repo **Settings → Secrets and variables → Actions**:
+
+| Secret | Where to get it |
+| ------ | --------------- |
+| `SUPABASE_ACCESS_TOKEN` | [Account → Access Tokens](https://supabase.com/dashboard/account/tokens) |
+| `PRODUCTION_PROJECT_ID` | Dashboard URL: `https://supabase.com/dashboard/project/<project-id>` |
+| `PRODUCTION_DB_PASSWORD` | Project **Settings → Database** (the database password, not the service role key) |
+
+Until these are set, the deploy job **skips** `db push` (the verify job still runs). After adding secrets, run **Actions → Supabase migrations → Run workflow** on `main`, or merge the next migration.
+
+### Already applied in the SQL Editor?
+
+The CLI only skips files recorded in `schema_migrations`. If you pasted a file by hand, mark **that version only** as applied so the first `db push` does not re-run it:
+
+```bash
+npx supabase login
+npx supabase link --project-ref <project-id>
+npx supabase migration list
+# Example: glossary SQL already ran in the dashboard
+npx supabase migration repair --status applied 20260818000000
+```
+
+Do **not** repair versions you never ran — `db push` (or the Action) should apply those. After repair (if needed): `npx supabase db push`.
+
+### Local commands
+
+```bash
+npx supabase migration new short_description   # or npm run migration:new -- short_description
+npx supabase db start                          # Docker: apply all files on a local Postgres
+npx supabase db push                           # apply pending files to the linked remote
+```
+
+SQL Editor remains an emergency fallback only.
 
 ## Getting Started
 

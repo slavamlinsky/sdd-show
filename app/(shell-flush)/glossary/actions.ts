@@ -35,7 +35,7 @@ const SUGGEST_ERROR = {
   missingTable: {
     code: "glossary_missing_table",
     message:
-      "Glossary storage is not set up yet. Run supabase/migrations/20260818_glossary_terms.sql in the Supabase SQL Editor, or add RESEND_API_KEY + GLOSSARY_NOTIFY_EMAIL for email-only suggestions.",
+      "Glossary storage is not set up yet. Apply pending migrations (see README), or add RESEND_API_KEY + GLOSSARY_NOTIFY_EMAIL for email-only suggestions.",
   },
   noServiceRole: {
     code: "glossary_no_service_role",

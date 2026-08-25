@@ -25,6 +25,9 @@ Curated **YouTube** videos about SDD (or close topics), presented as **cards** w
 ## Sourcing
 
 - Hand-curated list in content data (no YouTube API required for MVP).
+- **Search + topic filters** on `/videos`, same interaction as Glossary (query + Product / Design / Build / Quality chips, `?pillars=` in the URL). Listing remains static (`lib/videos-data.ts`) until the catalog moves to Postgres.
+- **Suggest a video** (header): modal with YouTube URL + why it matters + optional topics (multi-select pillars). Guests and signed-in users may submit. Persist `video_suggestions` (pending) when the migration is applied; email via Resend when configured.
+- **Subscribe to updates** (header): signed-in users toggle `video_update_subscriptions.subscribed` (button becomes “You're subscribed”). Guests get a sign-in dialog (`/sign-in?next=/videos?subscribe=1`), then the flag is set on return.
 
 ## Acceptance
 
@@ -37,4 +40,4 @@ Curated **YouTube** videos about SDD (or close topics), presented as **cards** w
 
 ## Roadmap (v2 / v3)
 
-Planned capabilities (Supabase, suggest-video form, categories, search, TTL, favorites, badges) live in **[spec-videos-v2-v3.md](./spec-videos-v2-v3.md)** so this file stays the **current / MVP** checklist.
+Catalog-in-Postgres, sort/pagination, TTL, favorites, and badges remain in **[spec-videos-v2-v3.md](./spec-videos-v2-v3.md)**. Search, topic filter, suggest-a-video, and auth-backed subscribe on the static list are **current**.

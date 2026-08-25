@@ -74,7 +74,7 @@ export default function HomePage() {
                   View course
                   <ArrowRightIcon className="size-4" />
                 </Link>
-                <Link
+                <a
                   href={`#${INTENTPOWERED_LOOP_ID}`}
                   className={cn(
                     buttonVariants({ variant: "outline", size: "lg" }),
@@ -82,7 +82,7 @@ export default function HomePage() {
                   )}
                 >
                   Explore the framework
-                </Link>
+                </a>
               </div>
             </Reveal>
             <Reveal

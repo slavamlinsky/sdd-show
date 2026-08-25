@@ -53,7 +53,7 @@ This matches **“update `main` through PR approvals”** and prevents accidenta
 
 - **Title:** Imperative, concise (e.g. `feat: add scroll-to-top on home`).
 - **Body:** What changed, why; link to spec section if relevant (`docs/specs/...`).
-- **Checks before merge:** Branch includes latest `origin/main` (per **Keep the feature branch current before merge** above); `npm run lint` and `npm run build` pass locally (or via CI when added).
+- **Checks before merge:** Branch includes latest `origin/main` (per **Keep the feature branch current before merge** above); `npm run lint` and `npm run build` pass locally (or via CI when added). Schema PRs also need the **Supabase migrations** workflow green (`supabase db start`).
 - **Approval:** Per branch protection; do not merge your own PR until required reviews pass (unless policy explicitly allows admin bypass for solo work).
 - **Merge:** Squash merge is fine for a linear history; merge commit is OK if you prefer preserving branch commits.
 
@@ -77,9 +77,13 @@ Nothing in the specs requires “push only from CI”; developers push **branche
 
 **Clarification:** **Playwright** is for **browser E2E** (real pages). **Vitest / Jest** are for **unit or integration** tests, not a substitute for E2E. Do not conflate them.
 
-## CI (later)
+## CI
 
-- **GitHub Actions** (or Vercel checks): run `npm run lint`, `npm run build`, and eventually `playwright test` on **pull requests** targeting `main`.
+- **Supabase schema:** [`.github/workflows/supabase-migrations.yml`](../../.github/workflows/supabase-migrations.yml) runs when `supabase/` or that workflow file changes.
+  - **Pull requests:** `supabase db start` applies every file in `supabase/migrations/` on a fresh local Postgres (Docker on the runner). This catches SQL errors before merge. It does **not** touch production.
+  - **Merge to `main`:** after that verify job passes, `supabase db push` applies **pending** migrations to the production project. Requires GitHub Actions secrets `SUPABASE_ACCESS_TOKEN`, `PRODUCTION_PROJECT_ID`, `PRODUCTION_DB_PASSWORD` (see [README](../../README.md#database-migrations)). If secrets are missing, deploy is skipped with a warning.
+  - History is `supabase_migrations.schema_migrations` (CLI-managed). Do not paste routine DDL into the SQL Editor; use a new file from `npx supabase migration new`.
+- **App checks (later):** run `npm run lint`, `npm run build`, and eventually `playwright test` on **pull requests** targeting `main`.
 - Playwright in CI usually needs **browser install** step and can run against **Vercel preview URL** or **local `next start`** — choose one approach when implementing.
 
 ## What to add to the repo when E2E lands
