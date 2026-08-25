@@ -32,7 +32,7 @@ Repo **Settings → Secrets and variables → Actions**:
 | `PRODUCTION_PROJECT_ID` | Dashboard URL: `https://supabase.com/dashboard/project/<project-id>` |
 | `PRODUCTION_DB_PASSWORD` | Project **Settings → Database** (the database password, not the service role key) |
 
-Until these are set, the deploy job **skips** `db push` (the verify job still runs). After adding secrets, run **Actions → Supabase migrations → Run workflow** on `main`, or merge the next migration.
+Until these are set, a **push** to `main` **fails** the deploy job (the verify job still runs). A **manual** run warns and skips `db push`. After adding secrets, run **Actions → Supabase migrations → Run workflow** on `main`, or merge the next migration.
 
 ### Already applied in the SQL Editor?
 

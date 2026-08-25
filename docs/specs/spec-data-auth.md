@@ -68,7 +68,7 @@ Public listing still uses `lib/glossary-data.ts` until a seed + admin manage sli
 
 | Table | Purpose |
 | ----- | ------- |
-| `video_suggestions` | Pending community YouTube links. Columns: `youtube_url`, `youtube_id`, `why_it_matters`, optional `categories` (0–4 pillars), `status` (`pending` \| `accepted` \| `rejected`), `submitted_by`, `submitter_name` / `submitter_email`. SQL: `supabase/migrations/20260824000000_video_suggestions_and_subscriptions.sql`. Guests can submit via service role or email-only fallback. |
+| `video_suggestions` | Pending community YouTube links. Columns: `youtube_url`, `youtube_id`, `why_it_matters`, `categories` (1–4 pillars), `status` (`pending` \| `accepted` \| `rejected`), `submitted_by`, `submitter_name` / `submitter_email`. SQL: `supabase/migrations/20260824000000_video_suggestions_and_subscriptions.sql`. Guests can submit via service role or email-only fallback. |
 | `video_update_subscriptions` | One row per Auth user. `subscribed` boolean (UI toggle). Mailer later. RLS: user manages own row. |
 
 Public `/videos` listing still uses `lib/videos-data.ts`.

@@ -81,7 +81,7 @@ Nothing in the specs requires “push only from CI”; developers push **branche
 
 - **Supabase schema:** [`.github/workflows/supabase-migrations.yml`](../../.github/workflows/supabase-migrations.yml) runs when `supabase/` or that workflow file changes.
   - **Pull requests:** `supabase db start` applies every file in `supabase/migrations/` on a fresh local Postgres (Docker on the runner). This catches SQL errors before merge. It does **not** touch production.
-  - **Merge to `main`:** after that verify job passes, `supabase db push` applies **pending** migrations to the production project. Requires GitHub Actions secrets `SUPABASE_ACCESS_TOKEN`, `PRODUCTION_PROJECT_ID`, `PRODUCTION_DB_PASSWORD` (see [README](../../README.md#database-migrations)). If secrets are missing, deploy is skipped with a warning.
+  - **Merge to `main`:** after that verify job passes, `supabase db push` applies **pending** migrations to the production project. Requires GitHub Actions secrets `SUPABASE_ACCESS_TOKEN`, `PRODUCTION_PROJECT_ID`, `PRODUCTION_DB_PASSWORD` (see [README](../../README.md#database-migrations)). If secrets are missing on **push**, the deploy job **fails**; a **manual** run still skips `db push` with a warning.
   - History is `supabase_migrations.schema_migrations` (CLI-managed). Do not paste routine DDL into the SQL Editor; use a new file from `npx supabase migration new`.
 - **App checks (later):** run `npm run lint`, `npm run build`, and eventually `playwright test` on **pull requests** targeting `main`.
 - Playwright in CI usually needs **browser install** step and can run against **Vercel preview URL** or **local `next start`** — choose one approach when implementing.

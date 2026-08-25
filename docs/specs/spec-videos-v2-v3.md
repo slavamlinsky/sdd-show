@@ -31,12 +31,12 @@ Admin/curation flow (who approves suggestions) is **out of scope** for this road
 
 ### “Suggest a video” (UI + delivery)
 
-- **Button** on `/videos` (header, premium): **“Suggest a video”**. **Shipped** (modal; YouTube URL + why it matters + optional topics, multi-select).
+- **Button** on `/videos` (header, premium): **“Suggest a video”**. **Shipped** (modal; YouTube URL + why it matters + topics, multi-select, at least one).
 - **Modal** (or drawer) **form** with:
   - **YouTube URL** (required) — validate host / id shape server-side.
-  - **Topics** (optional, multi-select) — Product / Design / Build / Quality per [spec-taxonomy.md](./spec-taxonomy.md).
+  - **Topics** (required, multi-select, 1–4) — Product / Design / Build / Quality per [spec-taxonomy.md](./spec-taxonomy.md).
   - **Why it is useful** (free text, required) — short paragraph.
-- **Submit behavior (v2 first slice):** POST to a **Route Handler** that sends email to you (e.g. Resend, SES, or Supabase Edge + mail). Store a row in Supabase as **“pending”** when DB exists so nothing is lost if mail fails.
+- **Submit behavior (v2 first slice):** **Shipped** as the **`suggestVideo` Server Action** (`app/(shell-flush)/videos/actions.ts`) — not a Route Handler. Persist a `video_suggestions` row as **pending** when the table exists so nothing is lost if mail fails; send email (Resend) when configured. Email-only fallback when DB is unavailable.
 - **Spam / abuse:** rate limit, honeypot, or CAPTCHA TBD before public launch at scale.
 
 ### Listing: search, filters, sort, pagination

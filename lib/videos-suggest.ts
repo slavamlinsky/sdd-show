@@ -11,7 +11,7 @@ export const SUGGEST_VIDEO_WHY_MAX = 500;
 const youtubeMessage =
   "Paste a YouTube link (watch, youtu.be, Shorts) or an 11-character video id.";
 const whyMessage = `Tell us why it matters in ${SUGGEST_VIDEO_WHY_MIN}–${SUGGEST_VIDEO_WHY_MAX} characters.`;
-const categoriesMessage = `Pick any of: ${PILLARS.join(", ")}.`;
+const categoriesMessage = `Pick at least one topic: ${PILLARS.join(", ")}.`;
 
 export const suggestVideoSchema = z.object({
   youtubeUrl: z
@@ -26,6 +26,7 @@ export const suggestVideoSchema = z.object({
     .max(SUGGEST_VIDEO_WHY_MAX, whyMessage),
   categories: z
     .array(z.enum(PILLARS, { message: categoriesMessage }))
+    .min(1, categoriesMessage)
     .max(PILLARS.length, categoriesMessage)
     .refine((items) => new Set(items).size === items.length, {
       message: categoriesMessage,

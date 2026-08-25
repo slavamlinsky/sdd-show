@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -51,6 +51,7 @@ const suggestFormDefaults: SuggestVideoFormValues = {
 type Props = {
   signedIn: boolean;
   initiallySubscribed: boolean;
+  subscribeIntent?: boolean;
 };
 
 function FieldError({ id, message }: { id: string; message?: string }) {
@@ -62,7 +63,23 @@ function FieldError({ id, message }: { id: string; message?: string }) {
   );
 }
 
-export function VideosHeaderActions({ signedIn, initiallySubscribed }: Props) {
+function stripSubscribeQueryParam() {
+  const url = new URL(window.location.href);
+  if (!url.searchParams.has("subscribe")) return;
+  url.searchParams.delete("subscribe");
+  const query = url.searchParams.toString();
+  window.history.replaceState(
+    null,
+    "",
+    `${url.pathname}${query ? `?${query}` : ""}${url.hash}`,
+  );
+}
+
+export function VideosHeaderActions({
+  signedIn,
+  initiallySubscribed,
+  subscribeIntent = false,
+}: Props) {
   const [suggestOpen, setSuggestOpen] = useState(false);
   const [guestSubscribeOpen, setGuestSubscribeOpen] = useState(false);
   const [subscribed, setSubscribed] = useState(initiallySubscribed);
@@ -87,6 +104,46 @@ export function VideosHeaderActions({ signedIn, initiallySubscribed }: Props) {
   const categories = watch("categories") ?? [];
   const youtubeUrlError = errors.youtubeUrl?.message;
   const whyItMattersError = errors.whyItMatters?.message;
+  const categoriesError = errors.categories?.message;
+
+  useEffect(() => {
+    if (!signedIn || !subscribeIntent) return;
+
+    if (initiallySubscribed) {
+      stripSubscribeQueryParam();
+      return;
+    }
+
+    let cancelled = false;
+
+    async function subscribeFromQuery() {
+      setSubscribeError(null);
+      setSubscribePending(true);
+      try {
+        const result = await setVideoUpdatesSubscription(true);
+        if (cancelled) return;
+        if (!result.ok) {
+          setSubscribeError(result.error);
+          return;
+        }
+        setSubscribed(result.subscribed);
+      } catch {
+        if (!cancelled) {
+          setSubscribeError("Could not update your subscription. Try again.");
+        }
+      } finally {
+        if (!cancelled) {
+          setSubscribePending(false);
+          stripSubscribeQueryParam();
+        }
+      }
+    }
+
+    void subscribeFromQuery();
+    return () => {
+      cancelled = true;
+    };
+  }, [signedIn, subscribeIntent, initiallySubscribed]);
 
   function resetSuggest() {
     reset(suggestFormDefaults);
@@ -274,16 +331,15 @@ export function VideosHeaderActions({ signedIn, initiallySubscribed }: Props) {
               </div>
 
               <fieldset className="space-y-2">
-                <legend className="text-sm font-medium">
-                  Topics{" "}
-                  <span className="font-normal text-muted-foreground">
-                    (optional)
-                  </span>
-                </legend>
+                <legend className="text-sm font-medium">Topics</legend>
                 <div
                   className="grid grid-cols-4 gap-2 pt-1"
                   role="group"
                   aria-label="Topics"
+                  aria-invalid={Boolean(categoriesError)}
+                  aria-describedby={
+                    categoriesError ? "video-topics-error" : undefined
+                  }
                 >
                   {PILLAR_FILTER_ORDER.map((pillar) => {
                     const on = categories.includes(pillar);
@@ -314,6 +370,10 @@ export function VideosHeaderActions({ signedIn, initiallySubscribed }: Props) {
                     );
                   })}
                 </div>
+                <FieldError
+                  id="video-topics-error"
+                  message={categoriesError}
+                />
               </fieldset>
 
               <div

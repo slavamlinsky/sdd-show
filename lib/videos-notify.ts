@@ -69,8 +69,12 @@ export async function sendVideoSuggestionEmail(
     });
 
     if (!res.ok) {
-      const detail = await res.text().catch(() => "");
-      console.error("[videos-notify]", res.status, detail);
+      const detail = (await res.text().catch(() => "")).slice(0, 200);
+      console.error(
+        "[videos-notify]",
+        res.status,
+        detail ? "(detail redacted)" : "",
+      );
       return { ok: false, error: "Could not send notification email." };
     }
 

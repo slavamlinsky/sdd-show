@@ -30,8 +30,11 @@ begin
       drop column category;
 
     alter table public.video_suggestions
+      alter column categories drop default;
+
+    alter table public.video_suggestions
       add constraint video_suggestions_categories_ok check (
-        cardinality(categories) <= 4
+        cardinality(categories) between 1 and 4
         and categories <@ array['Product', 'Design', 'Build', 'Quality']::text[]
       );
   end if;

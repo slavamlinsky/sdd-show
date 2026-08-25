@@ -80,7 +80,6 @@ export async function persistVideoUpdatesSubscription(
   const { error } = await supabase.from("video_update_subscriptions").upsert(
     {
       user_id: user.id,
-      email: user.email ?? null,
       subscribed,
     },
     { onConflict: "user_id" },

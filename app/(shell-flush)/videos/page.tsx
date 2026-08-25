@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
 import { Reveal } from "@/components/reveal";
 import { SectionBackdrop } from "@/components/section-backdrop";
 import { GradientText } from "@/components/gradient-text";
@@ -8,10 +7,7 @@ import { VideosHeaderActions } from "@/components/videos-header-actions";
 import { metadataFromPageSeo, pageSeo } from "@/lib/seo-page-meta";
 import { getAuthUser } from "@/lib/supabase/server";
 import { videos } from "@/lib/videos-data";
-import {
-  getVideoUpdatesSubscription,
-  persistVideoUpdatesSubscription,
-} from "@/lib/videos-subscribe";
+import { getVideoUpdatesSubscription } from "@/lib/videos-subscribe";
 
 export const metadata: Metadata = metadataFromPageSeo(pageSeo.videos);
 
@@ -23,13 +19,7 @@ export default async function VideosPage({
   const { pillars, subscribe } = await searchParams;
   const user = await getAuthUser();
   const signedIn = Boolean(user?.email);
-
-  if (subscribe === "1" && signedIn) {
-    await persistVideoUpdatesSubscription(true);
-    const next = new URLSearchParams();
-    if (pillars) next.set("pillars", pillars);
-    redirect(next.size ? `/videos?${next.toString()}` : "/videos");
-  }
+  const subscribeIntent = signedIn && subscribe === "1";
 
   const initiallySubscribed = signedIn
     ? await getVideoUpdatesSubscription()
@@ -57,6 +47,7 @@ export default async function VideosPage({
             <VideosHeaderActions
               signedIn={signedIn}
               initiallySubscribed={initiallySubscribed}
+              subscribeIntent={subscribeIntent}
             />
           </Reveal>
         </div>

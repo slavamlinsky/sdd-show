@@ -42,7 +42,11 @@ export function VideosExplorer({ videos, initialPillars = null }: Props) {
     const serialized = serializePillarsQuery(pillarsOn);
     if (serialized) url.searchParams.set("pillars", serialized);
     else url.searchParams.delete("pillars");
-    window.history.replaceState(null, "", `${url.pathname}${url.search}`);
+    window.history.replaceState(
+      null,
+      "",
+      `${url.pathname}${url.search}${url.hash}`,
+    );
   }, [pillarsOn]);
 
   function togglePillar(pillar: Pillar) {

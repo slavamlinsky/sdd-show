@@ -6,7 +6,7 @@ create table if not exists public.video_suggestions (
   youtube_url text not null,
   youtube_id text not null,
   why_it_matters text not null,
-  categories text[] not null default '{}',
+  categories text[] not null,
   status text not null default 'pending'
     check (status in ('pending', 'accepted', 'rejected')),
   submitted_by uuid references auth.users (id) on delete set null,
@@ -18,7 +18,7 @@ create table if not exists public.video_suggestions (
     char_length(btrim(why_it_matters)) between 20 and 500
   ),
   constraint video_suggestions_categories_ok check (
-    cardinality(categories) <= 4
+    cardinality(categories) between 1 and 4
     and categories <@ array['Product', 'Design', 'Build', 'Quality']::text[]
   )
 );
@@ -91,6 +91,11 @@ begin
   if auth.role() = 'authenticated' then
     new.user_id := auth.uid();
   end if;
+  -- Always take the address from Auth; never trust a client-supplied email.
+  select au.email
+    into new.email
+    from auth.users as au
+    where au.id = new.user_id;
   return new;
 end;
 $$;

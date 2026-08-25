@@ -26,7 +26,7 @@ Curated **YouTube** videos about SDD (or close topics), presented as **cards** w
 
 - Hand-curated list in content data (no YouTube API required for MVP).
 - **Search + topic filters** on `/videos`, same interaction as Glossary (query + Product / Design / Build / Quality chips, `?pillars=` in the URL). Listing remains static (`lib/videos-data.ts`) until the catalog moves to Postgres.
-- **Suggest a video** (header): modal with YouTube URL + why it matters + optional topics (multi-select pillars). Guests and signed-in users may submit. Persist `video_suggestions` (pending) when the migration is applied; email via Resend when configured.
+- **Suggest a video** (header): modal with YouTube URL + why it matters + topics (1–4 pillars). Guests and signed-in users may submit. Persist `video_suggestions` (pending) when the migration is applied; email via Resend when configured.
 - **Subscribe to updates** (header): signed-in users toggle `video_update_subscriptions.subscribed` (button becomes “You're subscribed”). Guests get a sign-in dialog (`/sign-in?next=/videos?subscribe=1`), then the flag is set on return.
 
 ## Acceptance
