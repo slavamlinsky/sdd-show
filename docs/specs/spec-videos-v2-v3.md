@@ -1,6 +1,6 @@
 # Videos — roadmap (`/videos`) v2 & v3
 
-Supersedes nothing: **[spec-videos.md](./spec-videos.md)** remains the **MVP / current** contract. Search, topic filter, suggest-a-video, and subscribe now ship against the static list plus suggestion/subscription tables. This document still tracks the **catalog-in-Postgres**, sort/pagination, TTL, favorites, and badges.
+Supersedes nothing: **[spec-videos.md](./spec-videos.md)** remains the **MVP / current** contract. Search, topic filter, sort, pagination, suggest-a-video (with link preview — **v2.5**), and subscribe ship against the static list plus suggestion/subscription tables. This document still tracks the **catalog-in-Postgres**, TTL, favorites, and badges.
 
 **Stack assumption:** **Supabase** (Postgres + Auth) — [spec-data-auth.md](./spec-data-auth.md).
 
@@ -33,7 +33,7 @@ Admin/curation flow (who approves suggestions) is **out of scope** for this road
 
 - **Button** on `/videos` (header, premium): **“Suggest a video”**. **Shipped** (modal; YouTube URL + why it matters + topics, multi-select, at least one).
 - **Modal** (or drawer) **form** with:
-  - **YouTube URL** (required) — validate host / id shape server-side.
+  - **YouTube URL** (required) — validate host / id shape server-side. **Live preview** (title + thumbnail) — see **v2.5** below.
   - **Topics** (required, multi-select, 1–4) — Product / Design / Build / Quality per [spec-taxonomy.md](./spec-taxonomy.md).
   - **Why it is useful** (free text, required) — short paragraph.
 - **Submit behavior (v2 first slice):** **Shipped** as the **`suggestVideo` Server Action** (`app/(shell-flush)/videos/actions.ts`) — not a Route Handler. Persist a `video_suggestions` row as **pending** when the table exists so nothing is lost if mail fails; send email (Resend) when configured. Email-only fallback when DB is unavailable.
@@ -43,13 +43,26 @@ Admin/curation flow (who approves suggestions) is **out of scope** for this road
 
 - **Search:** **Shipped** client-side over the static list (title, channel, category). Database `ILIKE` when the catalog moves to Postgres.
 - **Filter:** **Shipped** — category/pillar chips (same UX as Glossary).
-- **Sort:** e.g. newest, most saved (once saves exist), title A–Z.
-- **Pagination:** offset/limit or cursor — avoid loading full list for large catalogs.
+- **Sort:** **Shipped** on the static list — **Featured** (curated order), **Newest** (reverse curated order until `published_at` exists in Postgres), **Title A–Z**, **Title Z–A**. `?sort=` in the URL. **Most saved** waits for v3 favorites.
+- **Pagination:** **Shipped** client-side — page size **12 / 24 / 48** (`?per=`), page index `?page=` (1-based). Count line shows range (e.g. “1–12 of 24”). Prev/next controls; page resets when search, filter, sort, or page size changes.
 
 ### Infrastructure
 
 - Move from static `**lib/videos-data.ts`** (or content files) to **Supabase** (or API backed by Postgres).
 - **Auth:** not required for v2 public listing; **favorites** (v3) imply **anonymous or authenticated** identity (see v3).
+
+---
+
+## v2.5 — suggest modal: YouTube link preview
+
+**Shipped.** Confirm the pasted link before submit — no YouTube Data API key required.
+
+- **Trigger:** debounced lookup when the YouTube URL field parses to a valid id (`lib/videos-youtube.ts`).
+- **Loading:** spinner under the URL field while the server fetches metadata.
+- **Preview card:** thumbnail, **title**, channel (`author_name` from oEmbed). Shown on success so the user can verify the right video.
+- **Fetch:** server-side **YouTube oEmbed** (`https://www.youtube.com/oembed?url=…&format=json`) via **`lookupYoutubePreview`** Server Action (`app/(shell-flush)/videos/actions.ts`). Thumbnail falls back to `img.youtube.com/vi/{id}/hqdefault.jpg`.
+- **Errors:** invalid id (client validation), not found / not embeddable (oEmbed 404), or network failure — inline message; submit still allowed when the id shape is valid (preview is confirmatory).
+- **Non-goals:** persisting preview title on `video_suggestions` (optional later for moderators).
 
 ---
 
@@ -91,7 +104,8 @@ Admin/curation flow (who approves suggestions) is **out of scope** for this road
 | Release | Focus                                                                                                                                  |
 | ------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | **MVP** | Static list, modal embed — [spec-videos.md](./spec-videos.md)                                                                          |
-| **v2**  | Supabase (or DB), categories, tags, stats + related article, suggest-video flow, email intake, **search / filter / sort / pagination** |
+| **v2**  | **Search / filter / sort / pagination** (static list); suggest-video + email intake; Postgres catalog (categories, tags, stats, related article) **remaining** |
+| **v2.5** | Suggest modal **YouTube link preview** (oEmbed, no API key)                                                                                                        |
 | **v3**  | TTL + favorites + badges + extended sorting                                                                                            |
 
 

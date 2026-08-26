@@ -12,7 +12,7 @@ export function VideoGrid({ videos }: { videos: VideoEntry[] }) {
 
   return (
     <>
-      <div className="mb-12 grid gap-6 sm:mb-16 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mb-0 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {videos.map((video) => (
           <button
             key={video.id}

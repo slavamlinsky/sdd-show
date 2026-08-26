@@ -14,9 +14,14 @@ export const metadata: Metadata = metadataFromPageSeo(pageSeo.videos);
 export default async function VideosPage({
   searchParams,
 }: {
-  searchParams: Promise<{ pillars?: string; subscribe?: string }>;
+  searchParams: Promise<{
+    pillars?: string;
+    subscribe?: string;
+    page?: string;
+    per?: string;
+  }>;
 }) {
-  const { pillars, subscribe } = await searchParams;
+  const { pillars, subscribe, page, per } = await searchParams;
   const user = await getAuthUser();
   const signedIn = Boolean(user?.email);
   const subscribeIntent = signedIn && subscribe === "1";
@@ -52,7 +57,12 @@ export default async function VideosPage({
           </Reveal>
         </div>
         <Reveal className="relative" delay={0.06}>
-          <VideosExplorer videos={videos} initialPillars={pillars ?? null} />
+          <VideosExplorer
+            videos={videos}
+            initialPillars={pillars ?? null}
+            initialPage={page ?? null}
+            initialPer={per ?? null}
+          />
         </Reveal>
       </div>
     </div>

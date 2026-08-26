@@ -61,3 +61,10 @@ export function parseYoutubeId(input: string): string | null {
 export function canonicalYoutubeWatchUrl(youtubeId: string): string {
   return `https://www.youtube.com/watch?v=${youtubeId}`;
 }
+
+export function youtubeThumbnailUrl(
+  youtubeId: string,
+  quality: "hqdefault" | "mqdefault" = "hqdefault",
+): string {
+  return `https://img.youtube.com/vi/${youtubeId}/${quality}.jpg`;
+}

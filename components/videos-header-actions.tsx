@@ -33,6 +33,7 @@ import {
   suggestVideoFormSchema,
   type SuggestVideoFormValues,
 } from "@/lib/videos-suggest";
+import { SuggestYoutubePreview } from "@/components/suggest-youtube-preview";
 import { cn } from "@/lib/utils";
 
 const suggestBtnClass =
@@ -101,6 +102,7 @@ export function VideosHeaderActions({
   });
 
   const whyItMatters = watch("whyItMatters");
+  const youtubeUrl = watch("youtubeUrl") ?? "";
   const categories = watch("categories") ?? [];
   const youtubeUrlError = errors.youtubeUrl?.message;
   const whyItMattersError = errors.whyItMatters?.message;
@@ -190,20 +192,7 @@ export function VideosHeaderActions({
 
   return (
     <>
-      <div className="flex flex-col gap-2 items-end">
-        <Button
-          type="button"
-          variant="outline"
-          size="lg"
-          className={suggestBtnClass}
-          onClick={() => {
-            resetSuggest();
-            setSuggestOpen(true);
-          }}
-        >
-          <Video className="size-4 shrink-0" aria-hidden />
-          Suggest a video
-        </Button>
+      <div className="flex w-full flex-col gap-2 sm:w-auto sm:items-end lg:flex-row lg:items-center">
         {signedIn ? (
           <Button
             type="button"
@@ -238,6 +227,19 @@ export function VideosHeaderActions({
             Subscribe
           </Button>
         )}
+        <Button
+          type="button"
+          variant="outline"
+          size="lg"
+          className={suggestBtnClass}
+          onClick={() => {
+            resetSuggest();
+            setSuggestOpen(true);
+          }}
+        >
+          <Video className="size-4 shrink-0" aria-hidden />
+          Suggest a video
+        </Button>
       </div>
       {subscribeError && signedIn ? (
         <p className="mt-2 text-sm text-destructive lg:text-right" role="alert">
@@ -259,8 +261,9 @@ export function VideosHeaderActions({
           <DialogHeader>
             <DialogTitle>Suggest a video</DialogTitle>
             <DialogDescription>
-              Paste a YouTube link and tell us why it belongs here. We review
-              every suggestion before it appears in the library.
+              {suggestDone
+                ? ""
+                : "Paste any interesting YouTube link and tell us why it belongs here. We carefully review every suggestion before it appears in the library."}
             </DialogDescription>
           </DialogHeader>
 
@@ -271,7 +274,7 @@ export function VideosHeaderActions({
                 aria-hidden
               />
               <p className="mt-3 font-heading text-base font-semibold">
-                Thanks — we received your video.
+                Thanks! We received your video.
               </p>
               <p className="mt-2 text-sm text-muted-foreground">
                 It sits in a review queue. Nothing is published automatically.
@@ -302,6 +305,10 @@ export function VideosHeaderActions({
                   id="video-youtube-error"
                   message={youtubeUrlError}
                 />
+                <SuggestYoutubePreview
+                  youtubeUrl={youtubeUrl}
+                  disabled={isSubmitting}
+                />
               </div>
 
               <div className="space-y-2">
@@ -315,7 +322,7 @@ export function VideosHeaderActions({
                   id="video-why"
                   maxLength={SUGGEST_VIDEO_WHY_MAX}
                   rows={4}
-                  placeholder="What you liked — a workflow, a demo, a framing that would help others here."
+                  placeholder="What you liked: a workflow, a demo, a framing that would help others here."
                   className={fieldClass}
                   aria-invalid={Boolean(whyItMattersError)}
                   aria-describedby={
@@ -324,10 +331,7 @@ export function VideosHeaderActions({
                   {...register("whyItMatters")}
                   disabled={isSubmitting}
                 />
-                <FieldError
-                  id="video-why-error"
-                  message={whyItMattersError}
-                />
+                <FieldError id="video-why-error" message={whyItMattersError} />
               </div>
 
               <fieldset className="space-y-2">
@@ -370,10 +374,7 @@ export function VideosHeaderActions({
                     );
                   })}
                 </div>
-                <FieldError
-                  id="video-topics-error"
-                  message={categoriesError}
-                />
+                <FieldError id="video-topics-error" message={categoriesError} />
               </fieldset>
 
               <div
