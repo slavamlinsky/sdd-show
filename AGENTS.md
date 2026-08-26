@@ -18,7 +18,7 @@ When you add a real agent, document it in a **subsection** using:
 ### Related: how tools use this repo (not agents)
 
 - **Cursor / IDE:** [`CLAUDE.md`](./CLAUDE.md) defers to this file (`@AGENTS.md`); implementation lives in the IDE, not in this codebase. Tailwind class names: [`.cursor/rules/tailwind-syntax.mdc`](./.cursor/rules/tailwind-syntax.mdc).
-- **Scripts:** [`package.json`](./package.json) → `scripts`: `dev` → `next dev`, `build` → `next build`, `start` → `next start`, `lint` → `eslint`.
+- **Scripts:** [`package.json`](./package.json) → `scripts`: `dev` → `next dev`, `build` → `next build`, `start` → `next start`, `lint` → `eslint`, `test`; `db:start` / `db:push` / `migration:new` wrap the Supabase CLI (`npx supabase`). Schema deploys: [README](./README.md#database-migrations).
 - **Team Git / CI:** [`docs/specs/spec-workflow-ci.md`](./docs/specs/spec-workflow-ci.md).
 
 ## Git — before push / before merge

@@ -110,7 +110,7 @@ Author is taken from the session: `submitted_by` = `auth.users.id` (trigger), pl
 - **Admin glossary manage:** edit title, definition, pillars, tags, visibility (`published` / `hidden`), review note; credit `submitted_by` / name.
 - Listing `/glossary` from DB (`status = published` only).
 
-SQL: [`supabase/migrations/20260818_glossary_terms.sql`](../../supabase/migrations/20260818_glossary_terms.sql).
+SQL: [`supabase/migrations/20260818000000_glossary_terms.sql`](../../supabase/migrations/20260818000000_glossary_terms.sql).
 
 ## Content seed
 

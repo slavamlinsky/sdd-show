@@ -18,7 +18,9 @@ Public pages stay readable **without** an account. Auth is for **identity**, **p
 
 **Do not add** Better Auth, Clerk, or Auth.js on top. One user store: `auth.users`.
 
-**Query style:** v1 uses the **Supabase client** (and SQL in the dashboard / migrations). **Drizzle** is optional later if typed SQL migrations become painful — not required for P1–P3.
+**Query style:** v1 uses the **Supabase client** (and SQL in `supabase/migrations/`). **Drizzle** is optional later if typed SQL migrations become painful — not required for P1–P3.
+
+**Schema deploys:** merge to `main` runs [`.github/workflows/supabase-migrations.yml`](../../.github/workflows/supabase-migrations.yml) (`supabase db push`). Vercel does not apply SQL. See [README](../../README.md#database-migrations) and [spec-workflow-ci.md](./spec-workflow-ci.md).
 
 **RLS:** Enable on app tables when they exist (P3+). Until then, do not expose service-role keys to the browser.
 
@@ -58,9 +60,18 @@ Users live in **Supabase Auth**. App tables in **public** (or a dedicated schema
 
 | Table | Purpose |
 | ----- | ------- |
-| `glossary_terms` | One catalog: **pending** community suggestions + future **published** terms. Columns: `slug`, `title`, `short_definition`, `categories` (1–3 pillars), `tags`, `status` (`pending` \| `published` \| `rejected` \| `hidden`), `source`, `submitted_by` (FK `auth.users`), `submitter_name` / `submitter_email`, `review_note`. SQL: `supabase/migrations/20260818_glossary_terms.sql`. |
+| `glossary_terms` | One catalog: **pending** community suggestions + future **published** terms. Columns: `slug`, `title`, `short_definition`, `categories` (1–3 pillars), `tags`, `status` (`pending` \| `published` \| `rejected` \| `hidden`), `source`, `submitted_by` (FK `auth.users`), `submitter_name` / `submitter_email`, `review_note`. SQL: `supabase/migrations/20260818000000_glossary_terms.sql`. |
 
 Public listing still uses `lib/glossary-data.ts` until a seed + admin manage slice. RLS: **authenticated** may **insert** pending suggestions; **select** published (and own rows if signed in). Anonymous cannot insert.
+
+### Videos (suggest + subscribe; catalog still static)
+
+| Table | Purpose |
+| ----- | ------- |
+| `video_suggestions` | Pending community YouTube links. Columns: `youtube_url`, `youtube_id`, `why_it_matters`, `categories` (1–4 pillars), `status` (`pending` \| `accepted` \| `rejected`), `submitted_by`, `submitter_name` / `submitter_email`. SQL: `supabase/migrations/20260824000000_video_suggestions_and_subscriptions.sql`. Guests can submit via service role or email-only fallback. |
+| `video_update_subscriptions` | One row per Auth user. `subscribed` boolean (UI toggle). Mailer later. RLS: user manages own row. |
+
+Public `/videos` listing still uses `lib/videos-data.ts`.
 
 ### P4 — blog
 
@@ -68,14 +79,14 @@ See [spec-blog.md](./spec-blog.md) v2 data. Rows in Postgres; seed from `content
 
 ### Later
 
-Videos, newsletter, favorites — [spec-videos-v2-v3.md](./spec-videos-v2-v3.md).
+Video **catalog** in Postgres, newsletter send, favorites — [spec-videos-v2-v3.md](./spec-videos-v2-v3.md). Suggest-video intake and subscribe flag are in the videos tables above.
 
 ## Authorization (app rules)
 
 | Actor | Can |
 | ----- | --- |
-| **Anonymous** | Read public content; submit course lead with email. |
-| **Signed-in user** | Same + session in header; **suggest a glossary term** (pending, `submitted_by`); later favorites. |
+| **Anonymous** | Read public content; submit course lead with email; **suggest a video** (pending, or email-only). Sign-in required to subscribe to video updates. |
+| **Signed-in user** | Same + session in header; **suggest a glossary term** (pending, `submitted_by`); **subscribe to video updates** (`video_update_subscriptions`); later favorites. |
 | **Admin** | Later. Seed via dashboard or allowlist email. **Not** in P2 UI. |
 
 **Session:** HTTP-only cookies from `@supabase/ssr`. Server: `getClaims()` / `getUser()` — **never** trust `getSession()` alone for authorization. Next **proxy** (`proxy.ts`) refreshes tokens.

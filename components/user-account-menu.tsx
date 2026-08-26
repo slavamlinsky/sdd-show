@@ -89,7 +89,7 @@ export function UserAccountMenu({ email, displayName, avatarUrl }: Props) {
 
         <DropdownMenuSeparator />
 
-        <div className="space-y-0.5 py-0.5">
+        <div className="space-y-0.5 py-1.5">
           <div className={menuPrefRowClass}>
             <span className={menuPrefLabelClass}>
               <SunMoon
