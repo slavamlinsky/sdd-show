@@ -39,12 +39,12 @@ Admin/curation flow (who approves suggestions) is **out of scope** for this road
 - **Submit behavior (v2 first slice):** **Shipped** as the **`suggestVideo` Server Action** (`app/(shell-flush)/videos/actions.ts`) — not a Route Handler. Persist a `video_suggestions` row as **pending** when the table exists so nothing is lost if mail fails; send email (Resend) when configured. Email-only fallback when DB is unavailable.
 - **Spam / abuse:** rate limit, honeypot, or CAPTCHA TBD before public launch at scale.
 
-### Listing: search, filters, sort, pagination
+### Listing: search, filters, pagination
 
 - **Search:** **Shipped** client-side over the static list (title, channel, category). Database `ILIKE` when the catalog moves to Postgres.
 - **Filter:** **Shipped** — category/pillar chips (same UX as Glossary).
-- **Sort:** **Shipped** on the static list — **Featured** (curated order), **Newest** (reverse curated order until `published_at` exists in Postgres), **Title A–Z**, **Title Z–A**. `?sort=` in the URL. **Most saved** waits for v3 favorites.
-- **Pagination:** **Shipped** client-side — page size **12 / 24 / 48** (`?per=`), page index `?page=` (1-based). Count line shows range (e.g. “1–12 of 24”). Prev/next controls; page resets when search, filter, sort, or page size changes.
+- **Sort:** **Newest first** on the static list (reverse curated order via `DEFAULT_VIDEO_SORT` in `lib/videos-list.ts`). **No sort UI** or `?sort=` param for now — featured / title / user-selectable sort deferred until Postgres `published_at` or product asks for it. **Most saved** waits for v3 favorites.
+- **Pagination:** **Shipped** client-side — page size **12 / 24 / 48** (`?per=`), page index `?page=` (1-based). Count line shows range (e.g. “1–12 of 24”). Prev/next controls; page resets when search, filter, or page size changes.
 
 ### Infrastructure
 
@@ -93,7 +93,7 @@ Admin/curation flow (who approves suggestions) is **out of scope** for this road
 
 ### Filtering / sorting (carry-over + extension)
 
-- v2 **search + category + sort + pagination** still apply.
+- v2 **search + category + pagination** still apply; user-selectable sort when added.
 - Additional sort: **expiring soon**, **most saved**.
 
 ---
@@ -104,7 +104,7 @@ Admin/curation flow (who approves suggestions) is **out of scope** for this road
 | Release | Focus                                                                                                                                  |
 | ------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | **MVP** | Static list, modal embed — [spec-videos.md](./spec-videos.md)                                                                          |
-| **v2**  | **Search / filter / sort / pagination** (static list); suggest-video + email intake; Postgres catalog (categories, tags, stats, related article) **remaining** |
+| **v2**  | **Search / filter / pagination** (static list, newest-first); suggest-video + email intake; user sort UI + Postgres catalog **remaining** |
 | **v2.5** | Suggest modal **YouTube link preview** (oEmbed, no API key)                                                                                                        |
 | **v3**  | TTL + favorites + badges + extended sorting                                                                                            |
 

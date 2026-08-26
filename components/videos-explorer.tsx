@@ -24,6 +24,7 @@ import {
 import {
   buildVideoOrderIndex,
   DEFAULT_VIDEO_PAGE_SIZE,
+  DEFAULT_VIDEO_SORT,
   paginateVideos,
   parseVideoPageQuery,
   parseVideoPageSizeQuery,
@@ -126,7 +127,7 @@ export function VideosExplorer({
   );
 
   const sorted = useMemo(
-    () => sortVideos(filtered, "newest", orderIndex),
+    () => sortVideos(filtered, DEFAULT_VIDEO_SORT, orderIndex),
     [filtered, orderIndex],
   );
 

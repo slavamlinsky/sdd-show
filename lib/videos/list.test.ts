@@ -23,9 +23,9 @@ test("parseVideoSortQuery falls back to newest", () => {
   assert.equal(parseVideoSortQuery("title-asc"), "title-asc");
 });
 
-test("parseVideoPageSizeQuery accepts 6, 12, 24, 48 only", () => {
-  assert.equal(parseVideoPageSizeQuery("6"), 6);
+test("parseVideoPageSizeQuery accepts 12, 24, 48 only", () => {
   assert.equal(parseVideoPageSizeQuery("24"), 24);
+  assert.equal(parseVideoPageSizeQuery("6"), 12);
   assert.equal(parseVideoPageSizeQuery("99"), 12);
 });
 

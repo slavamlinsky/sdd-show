@@ -1,6 +1,6 @@
 import type { VideoEntry } from "@/lib/videos-data";
 
-export const VIDEO_PAGE_SIZES = [6, 12, 24, 48] as const;
+export const VIDEO_PAGE_SIZES = [12, 24, 48] as const;
 export type VideoPageSize = (typeof VIDEO_PAGE_SIZES)[number];
 export const DEFAULT_VIDEO_PAGE_SIZE: VideoPageSize = 12;
 
