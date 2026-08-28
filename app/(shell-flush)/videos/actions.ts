@@ -6,6 +6,7 @@ import {
   parseSuggestVideoInput,
   type SuggestVideoResult,
 } from "@/lib/videos-suggest";
+import { fetchYoutubeOembed } from "@/lib/videos-oembed";
 import {
   isVideoEmailNotifyConfigured,
   sendVideoSuggestionEmail,
@@ -206,4 +207,22 @@ export async function setVideoUpdatesSubscription(
   subscribed: boolean,
 ): Promise<VideoSubscribeResult> {
   return persistVideoUpdatesSubscription(subscribed);
+}
+
+export type YoutubePreviewResult =
+  | {
+      ok: true;
+      youtubeId: string;
+      title: string;
+      channelTitle: string;
+      thumbnailUrl: string;
+    }
+  | { ok: false; error: string };
+
+export async function lookupYoutubePreview(
+  youtubeUrl: string,
+): Promise<YoutubePreviewResult> {
+  const result = await fetchYoutubeOembed(youtubeUrl);
+  if (!result.ok) return result;
+  return { ok: true, ...result.preview };
 }

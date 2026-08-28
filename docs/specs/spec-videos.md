@@ -25,8 +25,8 @@ Curated **YouTube** videos about SDD (or close topics), presented as **cards** w
 ## Sourcing
 
 - Hand-curated list in content data (no YouTube API required for MVP).
-- **Search + topic filters** on `/videos`, same interaction as Glossary (query + Product / Design / Build / Quality chips, `?pillars=` in the URL). Listing remains static (`lib/videos-data.ts`) until the catalog moves to Postgres.
-- **Suggest a video** (header): modal with YouTube URL + why it matters + topics (1–4 pillars). Guests and signed-in users may submit. Persist `video_suggestions` (pending) when the migration is applied; email via Resend when configured.
+- **Search + topic filters** on `/videos`, same interaction as Glossary (query + Product / Design / Build / Quality chips, `?pillars=` in the URL). Listing is **newest first** (reverse curated order; no sort control). **Pagination** (12 / 24 / 48 per page, `?page=` / `?per=`) ships on the static list. Catalog-in-Postgres remains in [spec-videos-v2-v3.md](./spec-videos-v2-v3.md).
+- **Suggest a video** (header): modal with YouTube URL + **live preview** (title + thumbnail via oEmbed), why it matters, and topics (1–4 pillars). Guests and signed-in users may submit. Persist `video_suggestions` (pending) when the migration is applied; email via Resend when configured.
 - **Subscribe to updates** (header): signed-in users toggle `video_update_subscriptions.subscribed` (button becomes “You're subscribed”). Guests get a sign-in dialog (`/sign-in?next=/videos?subscribe=1`), then the flag is set on return.
 
 ## Acceptance
@@ -40,4 +40,4 @@ Curated **YouTube** videos about SDD (or close topics), presented as **cards** w
 
 ## Roadmap (v2 / v3)
 
-Catalog-in-Postgres, sort/pagination, TTL, favorites, and badges remain in **[spec-videos-v2-v3.md](./spec-videos-v2-v3.md)**. Search, topic filter, suggest-a-video, and auth-backed subscribe on the static list are **current**.
+TTL, favorites, badges, and Postgres catalog remain in **[spec-videos-v2-v3.md](./spec-videos-v2-v3.md)**. Search, topic filter, pagination, suggest-a-video (with link preview), and auth-backed subscribe on the static list are **current**. User-facing sort controls are **deferred** (listing uses newest-first only).
