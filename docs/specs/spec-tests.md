@@ -321,7 +321,7 @@ Title shape (50–58 characters, ends with a period), description 140–155 — 
 
 Draft (adjust to length at implement time):
 
-- Title: **Self-checks on SDD, specs, and software intent.**
+- Title: **Short self-checks on SDD, specs, and software intent.**
 - Description: **Take a short quiz on spec-driven development and intent-driven engineering. Random questions, no timer, optional leaderboard if you sign in.**
 
 ---

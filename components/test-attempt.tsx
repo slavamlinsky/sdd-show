@@ -132,6 +132,7 @@ export function TestAttempt({ slug }: { slug: string }) {
                 htmlFor={inputId}
                 className={cn(
                   "flex cursor-pointer items-start gap-3 rounded-2xl border p-4 text-[15px] leading-relaxed shadow-sm ring-1 transition-all",
+                  "focus-within:ring-2 focus-within:ring-ring",
                   selected
                     ? "border-violet-400/50 bg-linear-to-r from-violet-500/10 to-sky-500/10 ring-violet-500/20"
                     : "border-border/60 bg-card/80 ring-foreground/3 hover:border-border hover:bg-card hover:shadow-md",

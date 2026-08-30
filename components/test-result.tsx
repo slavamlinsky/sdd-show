@@ -89,6 +89,10 @@ export function TestResult({
       }
       inflightKey.current = null;
       setSaveMessage(result.error);
+    }).catch(() => {
+      if (cancelled) return;
+      inflightKey.current = null;
+      setSaveMessage("Could not save your score. Try again in a moment.");
     });
     return () => {
       cancelled = true;

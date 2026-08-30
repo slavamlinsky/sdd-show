@@ -11,7 +11,9 @@ import { getAuthUser } from "@/lib/supabase/server";
 type Props = { params: Promise<{ slug: string }> };
 
 export const metadata: Metadata = {
-  title: "Test result.",
+  title: "This sitting's result is a self-check, not a certificate.",
+  description:
+    "See your score, time, and a short review for this sitting. It is a self-check, not a certificate. Sign in if you want this score on the leaderboard.",
   robots: { index: false, follow: false },
 };
 

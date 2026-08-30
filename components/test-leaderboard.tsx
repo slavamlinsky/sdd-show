@@ -51,9 +51,17 @@ export function TestLeaderboard({
               Finish a test to appear here.
             </>
           ) : signedIn ? (
-            "Be the first to post a score.<br />Finish a test to appear here."
+            <>
+              Be the first to post a score.
+              <br />
+              Finish a test to appear here.
+            </>
           ) : (
-            "Be the first to post a score.<br />Sign in and finish a test."
+            <>
+              Be the first to post a score.
+              <br />
+              Sign in and finish a test.
+            </>
           )}
         </p>
       ) : (

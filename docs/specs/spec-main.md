@@ -59,9 +59,18 @@ Architects and senior ICs map onto those seats. **Not the lead story:** intro-to
 | `/blog/[slug]` | Single article                                                                                      |
 | `/videos`      | Curated YouTube list with in-site playback                                                          |
 | `/course`      | Course CTA + structured placeholder + lead form                                                     |
-| `/tests`       | **Pilot** — inner quizzes + outer test cards ([spec-tests.md](./spec-tests.md)). Not MVP.           |
 | `/sign-in`     | Auth: **magic link** + **Google** when [spec-data-auth.md](./spec-data-auth.md) **P2** ships. No email/password. Header **Sign in**. |
 | `/sign-up`     | Redirect to `/sign-in` (first magic link or Google sign-in creates the account). |
+
+
+## Routes (pilot)
+
+Not part of MVP acceptance. See [spec-tests.md](./spec-tests.md).
+
+
+| Path     | Page                                                                                      |
+| -------- | ----------------------------------------------------------------------------------------- |
+| `/tests` | Inner quizzes + outer test cards. Nested intro, attempt, and result. Leaderboard is **P2**. |
 
 
 ## Global layout
