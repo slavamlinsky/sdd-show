@@ -1,6 +1,6 @@
 # Feature spec — Tests (`/tests`)
 
-**Status:** Pilot. Spec-first on `feature/testing-pilot`. Implementation follows this contract.
+**Status:** Pilot. P2 (leaderboard) in progress on `feature/testing-pilot`.
 
 Complements [spec-main.md](./spec-main.md), [spec-glossary.md](./spec-glossary.md), [spec-course.md](./spec-course.md), [spec-ecosystem.md](./spec-ecosystem.md), [spec-data-auth.md](./spec-data-auth.md).
 
@@ -30,13 +30,13 @@ Course remains the conversion path ([spec-course.md](./spec-course.md)). Tests s
 
 [ISTQB](https://www.istqb.org/) exams are a familiar pattern: a **large question bank**, a **random subset** per sitting, **multiple choice** with one best answer. We copy that **mechanics**, not their syllabus or trademark.
 
-| ISTQB-like rule | Our rule |
-| --------------- | -------- |
-| Large bank per syllabus | **50–100** items per inner test |
-| Sitting is a sample | Show **40–50%** of the bank, drawn at random per attempt |
-| Four options on screen | Always **four** visible choices: **one correct** + **three distractors** |
-| Extra wrong answers exist | Bank stores **5–6 distractors** per item so options **rotate** across attempts |
-| Timed exam | **No countdown** during the sitting. Record elapsed time; show it **only on the result screen** |
+| ISTQB-like rule           | Our rule                                                                                        |
+| ------------------------- | ----------------------------------------------------------------------------------------------- |
+| Large bank per syllabus   | **50–100** items per inner test                                                                 |
+| Sitting is a sample       | Show **40–50%** of the bank, drawn at random per attempt                                        |
+| Four options on screen    | Always **four** visible choices: **one correct** + **three distractors**                        |
+| Extra wrong answers exist | Bank stores **5–6 distractors** per item so options **rotate** across attempts                  |
+| Timed exam                | **No countdown** during the sitting. Record elapsed time; show it **only on the result screen** |
 
 ---
 
@@ -80,15 +80,15 @@ A list (card grid on `md+`) of **published** inner tests.
 
 Each card:
 
-| Field | Required | Notes |
-| ----- | -------- | ----- |
-| Title | yes | Sentence case; named methods stay |
-| Level | yes | Badge: **Basic** \| **Advanced** \| **Pro** |
-| Blurb | yes | One or two sentences |
-| Bank size | yes | e.g. “60 questions in the bank” |
-| Sitting size | yes | e.g. “~30 questions per attempt” (derived from sample %) |
-| Estimated time | no | Soft hint only (“about 15–20 minutes”) — **not** a timer |
-| CTA | yes | **Start** → `/tests/[slug]` |
+| Field          | Required | Notes                                                    |
+| -------------- | -------- | -------------------------------------------------------- |
+| Title          | yes      | Sentence case; named methods stay                        |
+| Level          | yes      | Badge: **Basic** \| **Advanced** \| **Pro**              |
+| Blurb          | yes      | One or two sentences                                     |
+| Bank size      | yes      | e.g. “60 questions in the bank”                          |
+| Sitting size   | yes      | e.g. “~30 questions per attempt” (derived from sample %) |
+| Estimated time | no       | Soft hint only (“about 15–20 minutes”) — **not** a timer |
+| CTA            | yes      | **Start** → `/tests/[slug]`                              |
 
 **Pilot:** one card — **Basic welcome** (`welcome-basic`). Advanced and Pro cards may appear as **Coming soon** (disabled, no fake Start) so the page does not look empty of a roadmap.
 
@@ -100,29 +100,29 @@ Cards: name, one-line blurb, publisher, **external** link (`target="_blank"`, `r
 
 **P0 seed catalog** (URLs may be updated if vendors move pages; keep official docs):
 
-| Name | Publisher | Sense | Link (canonical at implement time) |
-| ---- | --------- | ----- | ---------------------------------- |
-| Anthropic courses | Anthropic | Official learning on Claude, prompting, and working with their models. | [anthropic.com/learn](https://www.anthropic.com/learn) |
-| Azure AI Fundamentals (AI-900) | Microsoft | Vendor exam on cloud AI concepts, not SDD. Useful baseline for AI literacy. | [Microsoft Learn — AI-900](https://learn.microsoft.com/credentials/certifications/azure-ai-fundamentals/) |
-| Google AI Essentials | Google | Short course on using generative AI at work. | [Grow with Google — AI Essentials](https://grow.google/ai-essentials/) |
-| Hugging Face LLM course | Hugging Face | Hands-on NLP / LLM track with chapter quizzes. | [huggingface.co/learn/llm-course](https://huggingface.co/learn/llm-course) |
-| OpenAI prompting guide | OpenAI | Practical prompting for their API — contrast with writing specs. | [Prompt engineering](https://platform.openai.com/docs/guides/prompt-engineering) |
+| Name                           | Publisher    | Sense                                                                       | Link (canonical at implement time)                                                                        |
+| ------------------------------ | ------------ | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Anthropic courses              | Anthropic    | Official learning on Claude, prompting, and working with their models.      | [anthropic.com/learn](https://www.anthropic.com/learn)                                                    |
+| Azure AI Fundamentals (AI-900) | Microsoft    | Vendor exam on cloud AI concepts, not SDD. Useful baseline for AI literacy. | [Microsoft Learn — AI-900](https://learn.microsoft.com/credentials/certifications/azure-ai-fundamentals/) |
+| Google AI Essentials           | Google       | Short course on using generative AI at work.                                | [Grow with Google — AI Essentials](https://grow.google/ai-essentials/)                                    |
+| Hugging Face LLM course        | Hugging Face | Hands-on NLP / LLM track with chapter quizzes.                              | [huggingface.co/learn/llm-course](https://huggingface.co/learn/llm-course)                                |
+| OpenAI prompting guide         | OpenAI       | Practical prompting for their API — contrast with writing specs.            | [Prompt engineering](https://platform.openai.com/docs/guides/prompt-engineering)                          |
 
 Blurb copy must say these measure **vendor or general AI literacy**, not our glossary. Prefer **descriptive** cards over logos-as-endorsement.
 
 ### 4. Leaderboard teaser
 
-On the hub: top **5–10** rows for the default test (`welcome-basic`) when P2 exists; otherwise a short empty state: **Sign in and finish a test to appear here**. Guests see the board **read-only**. Full list: `/tests/leaderboard`.
+On the hub: top **5–10** rows per published inner test (best score per signed-in user). Guests see the board **read-only**. Same ranking on each test intro. Dedicated `/tests/leaderboard` is optional for later.
 
 ---
 
 ## Difficulty levels
 
-| Level | Meaning | Audience |
-| ----- | ------- | -------- |
-| **Basic** | Definitions, contrasts, “what is true here” — glossary and course intro. | First visit, welcome test |
-| **Advanced** | Trade-offs, workflow, “what would you write in the spec”. | After blog / course modules 1–3 |
-| **Pro** | Ambiguous stems, multi-constraint scenarios, agent + quality evals. | Later; not in this pilot |
+| Level        | Meaning                                                                  | Audience                        |
+| ------------ | ------------------------------------------------------------------------ | ------------------------------- |
+| **Basic**    | Definitions, contrasts, “what is true here” — glossary and course intro. | First visit, welcome test       |
+| **Advanced** | Trade-offs, workflow, “what would you write in the spec”.                | After blog / course modules 1–3 |
+| **Pro**      | Ambiguous stems, multi-constraint scenarios, agent + quality evals.      | Later; not in this pilot        |
 
 One **level per test**, not mixed inside a sitting. Future: an “advanced SDD” test, not mixed Basic+Pro items in one bank.
 
@@ -134,29 +134,29 @@ Source of truth: TypeScript modules under `lib/tests/` (or `content/tests/`) —
 
 ### Test (`InnerTest`)
 
-| Field | Notes |
-| ----- | ----- |
-| `slug` | Stable URL id (`welcome-basic`) |
-| `title` | Card and intro H1 |
-| `level` | `basic` \| `advanced` \| `pro` |
-| `blurb` | Hub card |
-| `topic` | Short label, e.g. “AI-first development, SDD, Intent-Driven Engineering” |
-| `bank` | Array of questions, **50–100** items when published |
+| Field         | Notes                                                                                                                                |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `slug`        | Stable URL id (`welcome-basic`)                                                                                                      |
+| `title`       | Card and intro H1                                                                                                                    |
+| `level`       | `basic` \| `advanced` \| `pro`                                                                                                       |
+| `blurb`       | Hub card                                                                                                                             |
+| `topic`       | Short label, e.g. “AI-first development, SDD, Intent-Driven Engineering”                                                             |
+| `bank`        | Array of questions, **50–100** items when published                                                                                  |
 | `sampleRatio` | **0.40–0.50** inclusive. Sitting size = `round(bank.length * sampleRatio)`, clamped so sitting is at least **20** and at most **50** |
-| `passPercent` | Educational bar, default **70**. UI may say “solid grasp” not “certified” |
-| `published` | If false, omit from hub or show Coming soon |
+| `passPercent` | Educational bar, default **70**. UI may say “solid grasp” not “certified”                                                            |
+| `published`   | If false, omit from hub or show Coming soon                                                                                          |
 
 ### Question (`InnerQuestion`)
 
-| Field | Notes |
-| ----- | ----- |
-| `id` | Stable string (`wb-01`) — used in review and analytics |
-| `stem` | Question text. Plain text (or light markdown later). One idea per item |
-| `correct` | Exactly **one** correct option string |
-| `distractors` | **5 or 6** wrong answers (aim for 6). Must be plausible, not joke-only |
-| `explain` | 1–3 sentences after submit; may link `/glossary#slug` |
-| `glossarySlug` | Optional; review “See also” |
-| `tags` | Optional topic tags for authoring balance (not shown in MVP UI) |
+| Field          | Notes                                                                  |
+| -------------- | ---------------------------------------------------------------------- |
+| `id`           | Stable string (`wb-01`) — used in review and analytics                 |
+| `stem`         | Question text. Plain text (or light markdown later). One idea per item |
+| `correct`      | Exactly **one** correct option string                                  |
+| `distractors`  | **5 or 6** wrong answers (aim for 6). Must be plausible, not joke-only |
+| `explain`      | 1–3 sentences after submit; may link `/glossary#slug`                  |
+| `glossarySlug` | Optional; review “See also”                                            |
+| `tags`         | Optional topic tags for authoring balance (not shown in MVP UI)        |
 
 **On screen:** shuffle `correct` + **3** distractors drawn at random from the 5–6. Never show two identical strings. Never omit the correct answer.
 
@@ -221,7 +221,7 @@ Refresh / close: warn that the attempt is lost unless P2 persistence exists. P1 
 ## Pilot content — Basic welcome
 
 **Slug:** `welcome-basic`  
-**Title:** Basic welcome: AI-first, SDD, and intent  
+**Title:** Welcome test: AI-first, SDD, and intent  
 **Level:** Basic  
 **Bank:** **60** questions  
 **Sample ratio:** **0.50** → **30** questions per sitting  
@@ -232,13 +232,13 @@ Align stems with [lib/glossary-data.ts](../../lib/glossary-data.ts), [spec-cours
 
 ### Topic mix (60 items)
 
-| Tag | Count | What to test |
-| --- | ----- | ------------ |
-| `ai-first` | 12 | Ambiguity as bottleneck; vibe vs spec; prompting ≠ directing; code is cheap, clarity is scarce |
-| `sdd` | 14 | Spec as source of truth; living document; tickets vs specs; specify → plan → task → implement; acceptance vs requirements |
-| `ide` | 12 | IDE = Intent-Driven Engineering here; intent / guardrails / validation; human owns edges; agents in the middle |
-| `glossary` | 16 | Terms from the live glossary (see list below) |
-| `ecosystem-lite` | 6 | Awareness only: Spec Kit / OpenSpec / Kiro as tools; AGENTS.md; MCP — no vendor trivia |
+| Tag              | Count | What to test                                                                                                              |
+| ---------------- | ----- | ------------------------------------------------------------------------------------------------------------------------- |
+| `ai-first`       | 12    | Ambiguity as bottleneck; vibe vs spec; prompting ≠ directing; code is cheap, clarity is scarce                            |
+| `sdd`            | 14    | Spec as source of truth; living document; tickets vs specs; specify → plan → task → implement; acceptance vs requirements |
+| `ide`            | 12    | IDE = Intent-Driven Engineering here; intent / guardrails / validation; human owns edges; agents in the middle            |
+| `glossary`       | 16    | Terms from the live glossary (see list below)                                                                             |
+| `ecosystem-lite` | 6     | Awareness only: Spec Kit / OpenSpec / Kiro as tools; AGENTS.md; MCP — no vendor trivia                                    |
 
 **Glossary stems should cover (at least once):** spec-driven development, specification, acceptance criteria, requirements, living document, traceability, test-driven development (contrast with SDD), prompt engineering, context window, hallucination rate, ownership, outcome clarity, MVP, PRD, velocity, constraints and guards.
 
@@ -282,19 +282,20 @@ Suggested tables (names can shift in the migration; intent stays):
 
 ### `test_attempts`
 
-| Column | Notes |
-| ------ | ----- |
-| `id` | uuid PK |
-| `user_id` | FK `auth.users`, **not null** for ranked rows |
-| `test_slug` | text, e.g. `welcome-basic` |
-| `question_ids` | text[] sitting order |
-| `answers` | jsonb (chosen option per id) |
-| `correct_count` | int |
-| `total_count` | int |
-| `percent` | numeric, 0–100 |
-| `started_at` / `finished_at` | timestamptz |
-| `elapsed_ms` | int, derived |
-| `created_at` | timestamptz |
+| Column                       | Notes                                         |
+| ---------------------------- | --------------------------------------------- |
+| `id`                         | uuid PK                                       |
+| `user_id`                    | FK `auth.users`, **not null** for ranked rows |
+| `test_slug`                  | text, e.g. `welcome-basic`                    |
+| `question_ids`               | text[] sitting order                          |
+| `answers`                    | jsonb (chosen option per id)                  |
+| `correct_count`              | int                                           |
+| `total_count`                | int                                           |
+| `percent`                    | numeric, 0–100                                |
+| `started_at` / `finished_at` | timestamptz                                   |
+| `elapsed_ms`                 | int, derived                                  |
+| `display_name`               | snapshot from Auth metadata or email local-part; **never** full email |
+| `created_at`                 | timestamptz                                   |
 
 **RLS:** `authenticated` insert **own** rows; select own rows. Leaderboard **select**: either a `test_leaderboard` view of **best row per user per slug** with a policy that allows `select` of those columns to `anon` + `authenticated`, or a security-definer function. Do not expose emails.
 
@@ -306,13 +307,13 @@ App builds **without** Supabase env; leaderboard no-ops / empty state when unset
 
 ## SEO and crawl
 
-| Path | Index? | Notes |
-| ---- | ------ | ----- |
-| `/tests` | yes | `pageSeo.tests` in `lib/seo-page-meta.ts`; clusters `sddCore` + `course` or `intent` |
-| `/tests/[slug]` | yes for published slugs | Intro only; no answer key in metadata |
-| `/tests/[slug]/attempt` | **noindex** | Sitting UI |
-| `/tests/[slug]/result` | **noindex** | Per-attempt |
-| `/tests/leaderboard` | optional noindex | Thin / user-generated; prefer **noindex** in pilot |
+| Path                    | Index?                  | Notes                                                                                |
+| ----------------------- | ----------------------- | ------------------------------------------------------------------------------------ |
+| `/tests`                | yes                     | `pageSeo.tests` in `lib/seo-page-meta.ts`; clusters `sddCore` + `course` or `intent` |
+| `/tests/[slug]`         | yes for published slugs | Intro only; no answer key in metadata                                                |
+| `/tests/[slug]/attempt` | **noindex**             | Sitting UI                                                                           |
+| `/tests/[slug]/result`  | **noindex**             | Per-attempt                                                                          |
+| `/tests/leaderboard`    | optional noindex        | Thin / user-generated; prefer **noindex** in pilot                                   |
 
 Add `/tests` to `app/sitemap.ts` and `lib/llms-txt.ts` when the hub ships. OG: `/images/og-tests.png` (16:9, 1280×720) or fallback `siteConfig.defaultShareImage` until art exists.
 
@@ -327,12 +328,12 @@ Draft (adjust to length at implement time):
 
 ## Phased rollout
 
-| Phase | Scope | Status |
-| ----- | ----- | ------ |
-| **P0** | This spec; hub copy and data contracts; welcome test rules and topic mix | Done |
-| **P1** | Routes, nav/footer, hub UI, `welcome-basic` **full bank**, sitting + result, no DB | **Current** |
-| **P2** | `test_attempts` + RLS, leaderboard, sign-in CTA on result | After P1 |
-| **P3** | Advanced / Pro inner tests; hide-from-board; home teaser; instant-feedback practice mode | Later |
+| Phase  | Scope                                                                                    | Status      |
+| ------ | ---------------------------------------------------------------------------------------- | ----------- |
+| **P0** | This spec; hub copy and data contracts; welcome test rules and topic mix                 | Done        |
+| **P1** | Routes, nav/footer, hub UI, `welcome-basic` **full bank**, sitting + result, no DB       | Done        |
+| **P2** | `test_attempts` + RLS, leaderboard, sign-in CTA on result                                | **Current** |
+| **P3** | Advanced / Pro inner tests; hide-from-board; home teaser; instant-feedback practice mode | Later       |
 
 P0 acceptance is **documentation + agreed contracts**, not a live quiz.
 
@@ -340,14 +341,14 @@ P0 acceptance is **documentation + agreed contracts**, not a live quiz.
 
 ## Relationship to other routes
 
-| Route | Tests must |
-| ----- | ---------- |
-| `/glossary` | Link terms; do not duplicate the accordion catalog |
-| `/course` | Result / intro may CTA to the course; no fake certificate |
+| Route        | Tests must                                                                                    |
+| ------------ | --------------------------------------------------------------------------------------------- |
+| `/glossary`  | Link terms; do not duplicate the accordion catalog                                            |
+| `/course`    | Result / intro may CTA to the course; no fake certificate                                     |
 | `/ecosystem` | Outer cards are **exams/courses elsewhere**; ecosystem remains tools / approaches / standards |
-| `/blog` | Explanations can cite posts; questions stay short |
-| `/videos` | Unchanged |
-| `/sign-in` | Return to `/tests` or result after auth |
+| `/blog`      | Explanations can cite posts; questions stay short                                             |
+| `/videos`    | Unchanged                                                                                     |
+| `/sign-in`   | Return to `/tests` or result after auth                                                       |
 
 ---
 

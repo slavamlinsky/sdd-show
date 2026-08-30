@@ -81,14 +81,14 @@ See [spec-blog.md](./spec-blog.md) v2 data. Rows in Postgres; seed from `content
 
 Video **catalog** in Postgres, newsletter send, favorites — [spec-videos-v2-v3.md](./spec-videos-v2-v3.md). Suggest-video intake and subscribe flag are in the videos tables above.
 
-**Tests (leaderboard):** `test_attempts` for signed-in sittings — [spec-tests.md](./spec-tests.md) **P2**. RLS: insert own rows; public leaderboard must not expose emails.
+**Tests (leaderboard):** `test_attempts` for signed-in sittings — [spec-tests.md](./spec-tests.md) **P2**. RLS: insert own rows; public `test_leaderboard_rows` RPC (no emails).
 
 ## Authorization (app rules)
 
 | Actor | Can |
 | ----- | --- |
 | **Anonymous** | Read public content; submit course lead with email; **suggest a video** (pending, or email-only). Sign-in required to subscribe to video updates. |
-| **Signed-in user** | Same + session in header; **suggest a glossary term** (pending, `submitted_by`); **subscribe to video updates** (`video_update_subscriptions`); later favorites; **save test attempts** to the leaderboard when [spec-tests.md](./spec-tests.md) P2 ships. |
+| **Signed-in user** | Same + session in header; **suggest a glossary term** (pending, `submitted_by`); **subscribe to video updates** (`video_update_subscriptions`); later favorites; **save test attempts** to the leaderboard ([spec-tests.md](./spec-tests.md) P2). |
 | **Admin** | Later. Seed via dashboard or allowlist email. **Not** in P2 UI. |
 
 **Session:** HTTP-only cookies from `@supabase/ssr`. Server: `getClaims()` / `getUser()` — **never** trust `getSession()` alone for authorization. Next **proxy** (`proxy.ts`) refreshes tokens.

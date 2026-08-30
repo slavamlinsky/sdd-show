@@ -3,12 +3,16 @@ import { notFound } from "next/navigation";
 import { PageBreadcrumbs } from "@/components/page-breadcrumbs";
 import { Reveal } from "@/components/reveal";
 import { SectionBackdrop } from "@/components/section-backdrop";
+import { TestLeaderboard } from "@/components/test-leaderboard";
 import { TestStartButton } from "@/components/test-start-button";
 import { Badge } from "@/components/ui/badge";
 import { getInnerTest, publishedInnerTests } from "@/lib/tests/catalog";
 import { sittingSize } from "@/lib/tests/engine";
+import { fetchLeaderboardRows } from "@/lib/tests/fetch-leaderboard";
+import { displayNameFromAuth } from "@/lib/auth-display";
 import { shareMetadata } from "@/lib/seo-page-meta";
 import { siteConfig } from "@/lib/site-config";
+import { getAuthUser } from "@/lib/supabase/server";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -49,6 +53,14 @@ export default async function TestIntroPage({ params }: Props) {
   if (!test?.published) notFound();
 
   const n = sittingSize(test.bank.length, test.sampleRatio);
+  const user = await getAuthUser();
+  const currentUserName = user?.email
+    ? displayNameFromAuth(
+        user.email,
+        user.user_metadata as Record<string, unknown>,
+      )
+    : null;
+  const leaderboard = await fetchLeaderboardRows({ slug: test.slug, limit: 10 });
 
   return (
     <div className="full-bleed relative overflow-hidden">
@@ -71,7 +83,7 @@ export default async function TestIntroPage({ params }: Props) {
             </li>
             <li>Four choices each time, one correct. Options rotate between attempts.</li>
             <li>
-              Aim for {test.passPercent}% for a solid grasp — not a certificate.
+              Aim for {test.passPercent}% for a solid grasp. Not a certificate.
             </li>
             <li>
               There is no timer on screen. We only record how long you take.
@@ -84,6 +96,22 @@ export default async function TestIntroPage({ params }: Props) {
             <TestStartButton slug={test.slug} />
           </div>
         </Reveal>
+        <section
+          aria-labelledby="test-leaders-heading"
+          className="mt-16 scroll-mt-24"
+        >
+          <Reveal>
+            <TestLeaderboard
+              rows={leaderboard}
+              currentUserId={user?.id}
+              currentUserName={currentUserName}
+              signedIn={Boolean(user?.email)}
+              signInNext={`/tests/${test.slug}`}
+              headingId="test-leaders-heading"
+              title="Leaders"
+            />
+          </Reveal>
+        </section>
       </div>
     </div>
   );

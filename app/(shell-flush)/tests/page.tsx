@@ -1,19 +1,30 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, ClipboardList, Lock } from "lucide-react";
+import {
+  ArrowUpRight,
+  ClipboardList,
+  Clock3,
+  Layers,
+  ListChecks,
+  Lock,
+} from "lucide-react";
 import { GradientText } from "@/components/gradient-text";
 import { Reveal } from "@/components/reveal";
 import { SectionBackdrop } from "@/components/section-backdrop";
+import { TestLeaderboard } from "@/components/test-leaderboard";
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
 import {
   comingSoonInnerTests,
   outerTests,
   publishedInnerTests,
 } from "@/lib/tests/catalog";
 import { sittingSize } from "@/lib/tests/engine";
+import { testGradientCta } from "@/lib/tests/chrome";
 import type { TestLevel } from "@/lib/tests/types";
 import { metadataFromPageSeo, pageSeo } from "@/lib/seo-page-meta";
+import { displayNameFromAuth } from "@/lib/auth-display";
+import { fetchLeaderboardRows } from "@/lib/tests/fetch-leaderboard";
+import { getAuthUser } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = metadataFromPageSeo(pageSeo.tests);
@@ -37,27 +48,40 @@ const iconChipClass = cn(
   "dark:from-violet-500/20 dark:via-card dark:to-sky-500/20 dark:ring-violet-400/20",
 );
 
-export default function TestsPage() {
+export default async function TestsPage() {
   const published = publishedInnerTests();
   const soon = comingSoonInnerTests();
+  const user = await getAuthUser();
+  const signedIn = Boolean(user?.email);
+  const currentUserName = user?.email
+    ? displayNameFromAuth(
+        user.email,
+        user.user_metadata as Record<string, unknown>,
+      )
+    : null;
+  const leaderboard = await fetchLeaderboardRows({ limit: 10 });
 
   return (
     <div className="full-bleed relative overflow-hidden">
       <SectionBackdrop tone="emerald" />
       <div className="relative mx-auto w-full max-w-6xl px-4 pt-6 pb-16 sm:px-6 sm:pt-12 sm:pb-24">
-        <Reveal className="max-w-2xl space-y-4">
+        <Reveal className="max-w-4xl space-y-4">
           <h1>
-            Check how well you know SDD and{" "}
-            <GradientText className="font-semibold">intent</GradientText>
+            Check your{" "}
+            <GradientText className="font-semibold">
+              software development skills
+            </GradientText>
           </h1>
           <p className="leading-relaxed text-muted-foreground">
             Short self-checks on AI-first development, spec-driven work, and
-            Intent-Driven Engineering. Not a certificate.
+            Intent-Driven Engineering.
           </p>
-          <p className="text-sm leading-relaxed text-muted-foreground sm:text-[15px]">
-            Guests can take any inner test. Sign in later to save a score on the
-            leaderboard.
-          </p>
+          {!signedIn ? (
+            <p className="text-sm leading-relaxed text-muted-foreground sm:text-[15px]">
+              Guests can take any inner test. Sign in later to save a score on
+              the leaderboard.
+            </p>
+          ) : null}
         </Reveal>
 
         <section
@@ -76,7 +100,7 @@ export default function TestsPage() {
               timer while you work.
             </p>
           </Reveal>
-          <ul className="mt-8 grid list-none grid-cols-1 gap-4 p-0 md:grid-cols-2">
+          <ul className="mt-8 grid list-none grid-cols-1 gap-4 p-0 md:grid-cols-2 lg:grid-cols-3">
             {published.map((test, i) => {
               const n = sittingSize(test.bank.length, test.sampleRatio);
               return (
@@ -90,7 +114,9 @@ export default function TestsPage() {
                             strokeWidth={1.75}
                           />
                         </span>
-                        <Badge variant="primary">{levelLabel[test.level]}</Badge>
+                        <Badge variant="primary">
+                          {levelLabel[test.level]}
+                        </Badge>
                       </div>
                       <h3 className="mt-4 font-heading text-xl font-semibold tracking-tight">
                         {test.title}
@@ -98,17 +124,34 @@ export default function TestsPage() {
                       <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
                         {test.blurb}
                       </p>
-                      <p className="mt-4 text-sm text-muted-foreground">
-                        {test.bank.length} questions in the bank · ~{n} per
-                        attempt
-                        {test.estimatedMinutes ? ` · ${test.estimatedMinutes}` : ""}
-                      </p>
+                      <ul className="mt-4 space-y-2 text-left text-sm text-muted-foreground/90">
+                        <li className="flex items-center gap-2">
+                          <Layers
+                            className="size-4 shrink-0 text-muted-foreground/70"
+                            aria-hidden
+                          />
+                          {test.bank.length} questions in the bank
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <ListChecks
+                            className="size-4 shrink-0 text-muted-foreground/70"
+                            aria-hidden
+                          />
+                          ~{n} per attempt
+                        </li>
+                        {test.estimatedMinutes ? (
+                          <li className="flex items-center gap-2">
+                            <Clock3
+                              className="size-4 shrink-0 text-muted-foreground/70"
+                              aria-hidden
+                            />
+                            {test.estimatedMinutes}
+                          </li>
+                        ) : null}
+                      </ul>
                       <Link
                         href={`/tests/${test.slug}`}
-                        className={cn(
-                          buttonVariants({ size: "lg" }),
-                          "mt-5 h-11 w-full rounded-xl sm:w-auto",
-                        )}
+                        className={cn(testGradientCta, "mt-5 w-full sm:w-auto")}
                       >
                         Start
                       </Link>
@@ -119,7 +162,10 @@ export default function TestsPage() {
             })}
             {soon.map((test, i) => (
               <li key={test.slug}>
-                <Reveal delay={(published.length + i) * 0.05} className="h-full">
+                <Reveal
+                  delay={(published.length + i) * 0.05}
+                  className="h-full"
+                >
                   <article className="flex h-full flex-col rounded-3xl border border-dashed border-border/70 bg-card/40 p-6 ring-1 ring-foreground/3">
                     <div className="flex items-start justify-between gap-3">
                       <span className={iconChipClass} aria-hidden>
@@ -158,8 +204,8 @@ export default function TestsPage() {
               Tests and courses elsewhere
             </h2>
             <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-muted-foreground">
-              We do not run these. They measure vendor or general AI literacy, not
-              this site’s glossary.
+              We do not run these. They measure vendor or general AI literacy,
+              not this site’s glossary.
             </p>
           </Reveal>
           <ul className="mt-8 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
@@ -200,27 +246,14 @@ export default function TestsPage() {
           className="mt-20 scroll-mt-24"
         >
           <Reveal>
-            <div className="rounded-[1.75rem] border border-border/60 bg-linear-to-br from-primary/6 via-muted/30 to-sky-500/5 px-6 py-10 shadow-sm ring-1 ring-foreground/4 sm:px-10">
-              <h2
-                id="leaderboard-heading"
-                className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl"
-              >
-                Leaderboard
-              </h2>
-              <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
-                Sign in and finish a test to appear here. Scores are not saved
-                for guests yet.
-              </p>
-              <Link
-                href="/sign-in?next=/tests"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "mt-6 inline-flex h-11 rounded-xl",
-                )}
-              >
-                Sign in
-              </Link>
-            </div>
+            <TestLeaderboard
+              rows={leaderboard}
+              currentUserId={user?.id}
+              currentUserName={currentUserName}
+              signedIn={signedIn}
+              showTestTitle
+              signInNext="/tests"
+            />
           </Reveal>
         </section>
       </div>

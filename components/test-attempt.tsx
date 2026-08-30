@@ -3,8 +3,9 @@
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { getInnerTest } from "@/lib/tests/catalog";
+import { testGradientCta, testOutlineCta } from "@/lib/tests/chrome";
 import { allAnswered } from "@/lib/tests/engine";
 import {
   getSittingServerSnapshot,
@@ -13,6 +14,8 @@ import {
   subscribeSitting,
 } from "@/lib/tests/attempt-storage";
 import { cn } from "@/lib/utils";
+
+const OPTION_LETTERS = ["A", "B", "C", "D"] as const;
 
 function useHydrated() {
   return useSyncExternalStore(
@@ -62,13 +65,10 @@ export function TestAttempt({ slug }: { slug: string }) {
     return (
       <div className="max-w-xl space-y-4">
         <p className="text-muted-foreground">
-          No active sitting in this browser tab. Start from the intro so we can
-          pick a random set of questions.
+          No active sitting in this tab. Start from the intro so we can pick a
+          random set of questions.
         </p>
-        <Link
-          href={`/tests/${slug}`}
-          className={cn(buttonVariants({ size: "lg" }), "rounded-xl")}
-        >
+        <Link href={`/tests/${slug}`} className={testGradientCta}>
           Go to the intro
         </Link>
       </div>
@@ -99,15 +99,20 @@ export function TestAttempt({ slug }: { slug: string }) {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <p className="text-sm font-medium text-muted-foreground">
-        Question {index + 1} of {total}
-      </p>
+      <div className="flex items-end justify-between gap-4">
+        <p className="text-sm font-medium text-muted-foreground">
+          Question {index + 1} of {total}
+        </p>
+        <p className="text-sm tabular-nums text-muted-foreground">
+          {Math.round(((index + 1) / total) * 100)}%
+        </p>
+      </div>
       <div
-        className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted"
+        className="mt-3 h-2 overflow-hidden rounded-full bg-muted/80 ring-1 ring-foreground/5"
         aria-hidden
       >
         <div
-          className="h-full rounded-full bg-primary transition-[width] duration-300"
+          className="h-full rounded-full bg-linear-to-r from-violet-600 to-sky-500 transition-[width] duration-300"
           style={{ width: `${((index + 1) / total) * 100}%` }}
         />
       </div>
@@ -120,15 +125,16 @@ export function TestAttempt({ slug }: { slug: string }) {
           {options.map((option, optionIndex) => {
             const selected = chosen === option;
             const inputId = `${questionId}-opt-${optionIndex}`;
+            const letter = OPTION_LETTERS[optionIndex] ?? "A";
             return (
               <label
                 key={option}
                 htmlFor={inputId}
                 className={cn(
-                  "flex cursor-pointer items-start gap-3 rounded-2xl border p-4 text-sm leading-relaxed shadow-sm ring-1 ring-foreground/3 transition-colors",
+                  "flex cursor-pointer items-start gap-3 rounded-2xl border p-4 text-[15px] leading-relaxed shadow-sm ring-1 transition-all",
                   selected
-                    ? "border-primary/50 bg-primary/8 ring-primary/15"
-                    : "border-border/60 bg-card/80 hover:border-border hover:bg-card",
+                    ? "border-violet-400/50 bg-linear-to-r from-violet-500/10 to-sky-500/10 ring-violet-500/20"
+                    : "border-border/60 bg-card/80 ring-foreground/3 hover:border-border hover:bg-card hover:shadow-md",
                 )}
               >
                 <input
@@ -137,7 +143,7 @@ export function TestAttempt({ slug }: { slug: string }) {
                   name={questionId}
                   value={option}
                   checked={selected}
-                  className="mt-1 size-4 shrink-0 accent-primary"
+                  className="sr-only"
                   onChange={() =>
                     saveSitting({
                       ...sitting,
@@ -145,32 +151,47 @@ export function TestAttempt({ slug }: { slug: string }) {
                     })
                   }
                 />
-                <span>{option}</span>
+                <span
+                  className={cn(
+                    "mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-xl text-xs font-semibold",
+                    selected
+                      ? "bg-linear-to-br from-violet-600 to-sky-500 text-white"
+                      : "bg-muted text-muted-foreground",
+                  )}
+                  aria-hidden
+                >
+                  {letter}
+                </span>
+                <span className="pt-1">{option}</span>
               </label>
             );
           })}
         </div>
       </fieldset>
 
-      <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
-        <Button
-          variant="outline"
-          className="rounded-xl"
+      <div className="mt-10 flex flex-wrap items-center justify-between gap-3">
+        <button
+          type="button"
+          className={testOutlineCta}
           disabled={index === 0}
           onClick={() => setIndex((i) => Math.max(0, i - 1))}
         >
+          <ArrowLeft className="size-5" aria-hidden />
           Back
-        </Button>
+        </button>
         {index < total - 1 ? (
-          <Button
-            className="rounded-xl"
+          <button
+            type="button"
+            className={testGradientCta}
             onClick={() => setIndex((i) => Math.min(total - 1, i + 1))}
           >
             Next
-          </Button>
+            <ArrowRight className="size-5" aria-hidden />
+          </button>
         ) : (
-          <Button
-            className="rounded-xl"
+          <button
+            type="button"
+            className={testGradientCta}
             disabled={!canSubmit}
             onClick={() => {
               saveSitting({ ...sitting, finishedAt: Date.now() });
@@ -178,12 +199,13 @@ export function TestAttempt({ slug }: { slug: string }) {
             }}
           >
             Submit
-          </Button>
+            <Check className="size-5" aria-hidden />
+          </button>
         )}
       </div>
       {index === total - 1 && !canSubmit ? (
         <p className="mt-3 text-sm text-muted-foreground">
-          Answer all questions first. Use Back to fill any you skipped.
+          Answer every question first. Use Back if you skipped any.
         </p>
       ) : null}
     </div>

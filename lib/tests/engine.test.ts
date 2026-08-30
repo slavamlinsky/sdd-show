@@ -40,6 +40,15 @@ test("welcome bank has 60 items with required mix and option pools", () => {
     assert.ok(q.distractors.length === 5 || q.distractors.length === 6, q.id);
     assert.ok(!q.distractors.includes(q.correct), q.id);
     assert.equal(new Set(q.distractors).size, q.distractors.length, q.id);
+    const blob = [q.stem, q.correct, q.explain, ...q.distractors].join(" ");
+    assert.equal(blob.includes("\u2014"), false, `${q.id} has an em dash`);
+    const minLen = Math.min(48, Math.floor(q.correct.length * 0.7));
+    for (const d of q.distractors) {
+      assert.ok(
+        d.length >= minLen,
+        `${q.id} distractor too short (${d.length} < ${minLen}): ${d}`,
+      );
+    }
   }
 });
 
