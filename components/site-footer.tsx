@@ -18,6 +18,9 @@ export function SiteFooter() {
           <Link className="text-muted-foreground hover:text-foreground" href="/ecosystem">
             Ecosystem
           </Link>
+          <Link className="text-muted-foreground hover:text-foreground" href="/tests">
+            Tests
+          </Link>
           <Link className="text-muted-foreground hover:text-foreground" href="/course">
             Course
           </Link>

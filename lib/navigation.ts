@@ -2,6 +2,7 @@
 export const mainNav = [
   { href: "/glossary", label: "Glossary" },
   { href: "/ecosystem", label: "Ecosystem" },
+  { href: "/tests", label: "Tests" },
   { href: "/videos", label: "Videos" },
   { href: "/course", label: "Course" },
   { href: "/blog", label: "Blog" },

@@ -329,8 +329,8 @@ Draft (adjust to length at implement time):
 
 | Phase | Scope | Status |
 | ----- | ----- | ------ |
-| **P0** | This spec; hub copy and data contracts; welcome test rules and topic mix | **Current** |
-| **P1** | Routes, nav/footer, hub UI, `welcome-basic` **full bank**, sitting + result, no DB | Next |
+| **P0** | This spec; hub copy and data contracts; welcome test rules and topic mix | Done |
+| **P1** | Routes, nav/footer, hub UI, `welcome-basic` **full bank**, sitting + result, no DB | **Current** |
 | **P2** | `test_attempts` + RLS, leaderboard, sign-in CTA on result | After P1 |
 | **P3** | Advanced / Pro inner tests; hide-from-board; home teaser; instant-feedback practice mode | Later |
 

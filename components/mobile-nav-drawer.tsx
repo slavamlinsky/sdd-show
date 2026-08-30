@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 import type { LucideIcon } from "lucide-react";
 import {
   BookOpen,
+  ClipboardList,
   GraduationCap,
   MenuIcon,
   Newspaper,
@@ -22,6 +23,7 @@ import { cn } from "@/lib/utils";
 const NAV_ICONS: Record<(typeof mainNav)[number]["href"], LucideIcon> = {
   "/glossary": BookOpen,
   "/ecosystem": Puzzle,
+  "/tests": ClipboardList,
   "/videos": Video,
   "/course": GraduationCap,
   "/blog": Newspaper,

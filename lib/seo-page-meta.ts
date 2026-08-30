@@ -19,6 +19,7 @@ export type PageSeoId =
   | "ecosystem"
   | "glossary"
   | "videos"
+  | "tests"
   | "signIn"
   | "account";
 
@@ -99,6 +100,15 @@ export const pageSeo: Record<PageSeoId, PageSeo> = {
     clusters: ["agents", "sddCore"],
     extraKeywords: ["AI engineering videos", "spec driven development videos"],
     ogImage: "/images/og-videos.png",
+  },
+  tests: {
+    title: "Short self-checks on SDD, specs, and software intent.",
+    description:
+      "Take a short quiz on spec-driven development and intent-driven engineering. Random questions, no timer, optional leaderboard if you sign in.",
+    path: "/tests",
+    clusters: ["sddCore", "intent"],
+    extraKeywords: ["SDD quiz", "intent-driven engineering quiz"],
+    ogImage: siteConfig.defaultShareImage,
   },
   signIn: {
     title: "Sign in to the Intent-Driven Community.",

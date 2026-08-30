@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
+import { publishedInnerTests } from "@/lib/tests/catalog";
 import { absoluteUrl } from "@/lib/absolute-url";
 
 const STATIC_PATHS = [
@@ -9,6 +10,7 @@ const STATIC_PATHS = [
   "/ecosystem",
   "/glossary",
   "/videos",
+  "/tests",
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -25,5 +27,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...pages, ...posts];
+  const tests: MetadataRoute.Sitemap = publishedInnerTests().map((test) => ({
+    url: absoluteUrl(`/tests/${test.slug}`),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...pages, ...tests, ...posts];
 }
