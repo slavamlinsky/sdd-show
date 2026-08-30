@@ -53,7 +53,7 @@ Do **not** call this “IntentPowered Methodology”. Prefer **The IntentPowered
 8. **Video library strip** — curated videos; **All videos** → `/videos`.
 9. **Q&A (single FAQ on home)** — 3–5 items. Course-specific FAQ stays on `/course`.
 
-Optional later: compact “who it’s for” chips; ecosystem strip per [spec-ecosystem.md](./spec-ecosystem.md).
+Optional later: compact “who it’s for” chips; ecosystem strip per [spec-ecosystem.md](./spec-ecosystem.md); Tests teaser per [spec-tests.md](./spec-tests.md) (not in this pilot).
 
 ## Acceptance
 

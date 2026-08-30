@@ -135,6 +135,7 @@ Layout: **flush shell** (same as glossary / course): `full-bleed` hero atmospher
 | `/course` | Course remains the **path**; ecosystem is the **map**. Hero/course copy may mention tools without duplicating the catalog. |
 | `/blog` | Comparisons (e.g. Spec Kit vs OpenSpec) live on the blog, not as fake product pages. |
 | `/videos` | Unchanged; optional later “related video” on an item page. |
+| `/tests` | Unchanged map. Tests may mention tools; **outer exam cards** live on `/tests`, not here ([spec-tests.md](./spec-tests.md)). |
 
 ---
 
