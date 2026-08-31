@@ -15,6 +15,7 @@ Read in this order:
   - [spec-videos-v2-v3.md](./spec-videos-v2-v3.md) — videos roadmap (DB, suggest, TTL, favorites)
   - [spec-course.md](./spec-course.md)
   - [spec-ecosystem.md](./spec-ecosystem.md)
+  - [spec-tests.md](./spec-tests.md) — inner quizzes + outer test cards, welcome test, leaderboard
   - [spec-seo-meta.md](./spec-seo-meta.md) — titles, OG, keyword clusters, 3–6 month content plan
 
 Implementation should satisfy **spec-main**, **spec-design-layout**, **spec-workflow-ci**, and each relevant feature spec. **spec-taxonomy** applies when implementing **v2** topic browse (categories/tags); not a gate for MVP. **spec-data-auth** applies when adding database or sign-in.

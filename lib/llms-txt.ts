@@ -24,6 +24,11 @@ const PRIMARY_PAGES: { path: string; label: string; note: string }[] = [
     note: "Shared terms for specs, SDD, and intent-driven engineering",
   },
   {
+    path: "/tests",
+    label: "Tests",
+    note: "Self-checks on spec-driven development and intent-driven engineering",
+  },
+  {
     path: "/videos",
     label: "Videos",
     note: "Walkthroughs and talks",

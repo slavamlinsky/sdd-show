@@ -1,7 +1,17 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
 
-const allowAll = { userAgent: "*", allow: "/", disallow: ["/sign-in", "/account", "/auth/"] };
+const allowAll = {
+  userAgent: "*",
+  allow: "/",
+  disallow: [
+    "/sign-in",
+    "/account",
+    "/auth/",
+    "/tests/*/attempt",
+    "/tests/*/result",
+  ],
+};
 
 const aiCrawlers = [
   "GPTBot",
@@ -19,7 +29,13 @@ export default function robots(): MetadataRoute.Robots {
       ...aiCrawlers.map((userAgent) => ({
         userAgent,
         allow: "/",
-        disallow: ["/sign-in", "/account", "/auth/"],
+        disallow: [
+          "/sign-in",
+          "/account",
+          "/auth/",
+          "/tests/*/attempt",
+          "/tests/*/result",
+        ],
       })),
     ],
     sitemap: `${siteConfig.url.replace(/\/$/, "")}/sitemap.xml`,

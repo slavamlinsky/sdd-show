@@ -45,6 +45,7 @@ Hub pages export `metadataFromPageSeo(pageSeo.<id>)`. **Do not** duplicate title
 | `/ecosystem` | A field guide to Spec Kit, OpenSpec, Kiro, and MCP. | `/images/og-ecosystem.png` |
 | `/glossary` | A short glossary for SDD, specs, and software intent. | `/images/og-glossary.png` |
 | `/videos` | Talks and walkthroughs on AI-driven development work. | `/images/og-videos.png` |
+| `/tests` | Short self-checks on SDD, specs, and software intent. | `siteConfig.defaultShareImage` until `/images/og-tests.png` exists |
 | `/blog/[slug]` | Frontmatter `title` (ends with a period) + `description` (140–155) | `socialImage` → body image → `/images/og-default.png` |
 | `/sign-in` | Sign in to the Intent-Driven Community. | `noindex` |
 | `/account` | Your Intent-Driven Community account. | `noindex` |
